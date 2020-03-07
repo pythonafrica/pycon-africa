@@ -1,0 +1,150 @@
+{% load staticfiles %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Title -->
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+    
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700,800">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="{% static '2020/vendor/bootstrap/bootstrap.min.css' %}">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="{% static '2020/vendor/icon-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '2020/vendor/icon-line/css/simple-line-icons.css' %}">
+    <link rel="stylesheet" href="{% static '2020/vendor/icon-hs/style.css' %}">
+    <link rel="stylesheet" href="{% static '2020/vendor/hamburgers/hamburgers.min.css' %}">
+    <link rel="stylesheet" href="{% static '2020/vendor/animate.css' %}">
+    <link rel="stylesheet" href="{% static '2020/vendor/slick-carousel/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static '2020/vendor/fancybox/jquery.fancybox.css' %}">
+
+    <!-- CSS Template -->
+    <link rel="stylesheet" href="{% static '2020/css/styles.op-event.css' %}">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" href="{% static '2020/css/custom.css' %}">
+  </head>
+
+
+  <body>
+
+
+
+
+  {% include 'navbar.html' %}
+
+
+<main>
+
+    {% include 'navbar.html' %}   
+  <!-- Body -->
+  {% block content %}
+  
+  {% endblock %}
+  <!-- /Body -->
+
+</main>
+
+
+
+    <!-- JS Global Compulsory -->
+    <script src="{% static '2020/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '2020/vendor/jquery-migrate/jquery-migrate.min.js' %}"></script>
+    <script src="{% static '2020/vendor/popper.js/popper.min.js' %}"></script>
+    <script src="{% static '2020/vendor/bootstrap/bootstrap.min.js' %}"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="{% static '2020/vendor/appear.js' %}"></script>
+    <script src="{% static '2020/vendor/masonry/dist/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static '2020/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static '2020/vendor/jquery.countdown.min.js' %}"></script>
+    <script src="{% static '2020/vendor/fancybox/jquery.fancybox.js' %}"></script>
+    <script src="{% static '2020/vendor/slick-carousel/slick/slick.js' %}"></script>
+    <script src="{% static '2020/vendor/gmaps/gmaps.min.js' %}"></script>
+
+    <!-- JS Unify -->
+    <script src="{% static '2020/js/hs.core.js' %}"></script>
+    <script src="{% static '2020/js/components/hs.header.js' %}"></script>
+    <script src="{% static '2020/js/helpers/hs.hamburgers.js' %}"></script>
+    <script src="{% static '2020/js/components/hs.scroll-nav.js' %}"></script>
+    <script src="{% static '2020/js/components/hs.tabs.js' %}"></script>
+    <script src="{% static '2020/js/components/hs.countdown.js' %}"></script>
+    <script src="{% static '2020/js/components/hs.carousel.js' %}"></script>
+    <script src="{% static '2020/js/components/gmap/hs.map.js' %}"></script>
+    <script src="{% static '2020/js/components/hs.go-to.js' %}"></script>
+
+    <!-- JS Customization -->
+    <script src="{% static '2020/js/custom.js' %}"></script>
+
+    <!-- JS Plugins Init. -->
+    <script>
+      // initialization of google map
+      function initMap() {
+        $.HSCore.components.HSGMap.init('.js-g-map');
+      }
+
+      $(document).on('ready', function () {
+        // initialization of carousel
+        $.HSCore.components.HSCarousel.init('.js-carousel');
+
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#js-header'));
+        $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+        // initialization of tabs
+        $.HSCore.components.HSTabs.init('[role="tablist"]');
+
+        // initialization of go to section
+        $.HSCore.components.HSGoTo.init('.js-go-to');
+
+        // initialization of countdowns
+        var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+          yearsElSelector: '.js-cd-years',
+          monthElSelector: '.js-cd-month',
+          daysElSelector: '.js-cd-days',
+          hoursElSelector: '.js-cd-hours',
+          minutesElSelector: '.js-cd-minutes',
+          secondsElSelector: '.js-cd-seconds'
+        });
+      });
+
+      $(window).on('load', function() {
+        // initialization of HSScrollNav
+        $.HSCore.components.HSScrollNav.init($('#js-scroll-nav'), {
+          duration: 700
+        });
+
+        // initialization of masonry.js
+        $('.masonry-grid').imagesLoaded().then(function () {
+          $('.masonry-grid').masonry({
+            columnWidth: '.masonry-grid-sizer',
+            itemSelector: '.masonry-grid-item',
+            percentPosition: true
+          });
+        });
+      });
+
+      $(window).on('resize', function () {
+        setTimeout(function () {
+          $.HSCore.components.HSTabs.init('[role="tablist"]');
+        }, 200);
+      });
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtt1z99GtrHZt_IcnK-wryNsQ30A112J0&callback=initMap" async></script>
+ 
+
+</body>
+</html>

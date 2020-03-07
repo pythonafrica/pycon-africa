@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Home | PyCon Africa 20" %}{% endif %}{% endblock %}
+
+
+
+
+
+{% block content %}
+  
+
+      <!-- Section Content -->
+      <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/header.png' %});">
+        <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
+          <!-- Countdown v4 -->
+          <div class="js-countdown text-center text-uppercase u-countdown-v4 g-mb-40 g-mb-70--md"
+               data-end-date="2020/08/11"
+               data-month-format="%m"
+               data-days-format="%D"
+               data-hours-format="%H"
+               data-minutes-format="%M"
+               data-seconds-format="%S">
+            <div class="d-inline-block g-font-size-12 g-px-10 g-px-50--md g-py-15">
+              <div class="js-cd-days g-font-size-20 g-font-size-40--md g-font-weight-700 g-line-height-1 g-mb-5">12</div>
+              <span>Days</span>
+            </div>
+
+            <div class="d-inline-block g-font-size-12 g-brd-left g-brd-white-opacity-0_4 g-px-10 g-px-60--md g-py-15">
+              <div class="js-cd-hours g-font-size-20 g-font-size-40--md g-font-weight-700 g-line-height-1 g-mb-5">01</div>
+              <span>Hours</span>
+            </div>
+
+            <div class="d-inline-block g-font-size-12 g-brd-left g-brd-white-opacity-0_4 g-px-10 g-px-60--md g-py-15">
+              <div class="js-cd-minutes g-font-size-20 g-font-size-40--md g-font-weight-700 g-line-height-1 g-mb-5">52</div>
+              <span>Minutes</span>
+            </div>
+
+            <div class="d-inline-block g-font-size-12 g-brd-left g-brd-white-opacity-0_4 g-px-10 g-px-50--md g-py-15">
+              <div class="js-cd-seconds g-font-size-20 g-font-size-40--md g-font-weight-700 g-line-height-1 g-mb-5">52</div>
+              <span>Seconds</span>
+            </div>
+          </div>
+          <!-- End Countdown v4 -->
+
+          <h2 class="text-center text-uppercase h2 g-font-weight-700 g-font-size-40 g-font-size-60--md g-color-white g-mb-30 g-mb-70--md">PyCon Africa</h2>
+
+          <div class="row">
+            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-left d-flex align-self-center g-hidden-sm-down g-mr-20">
+                  <i class="fa fa-calendar g-font-size-27 g-color-white-opacity-0_5"></i>
+                </div>
+
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">When</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-white mb-0">4th - 8th Aug, 2020</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-8 col-md-5 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-left d-flex align-self-center g-hidden-sm-down g-mr-20">
+                  <i class="fa fa-map-marker g-font-size-27 g-color-white-opacity-0_5"></i>
+                </div>
+
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-14 g-color-white-opacity-0_5">Where</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-white mb-0">Accra, Ghana</h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container u-bg-overlay__inner g-bottom-minus-70 px-0">
+          <div class="row u-shadow-v23 g-theme-bg-blue-dark-v2 mx-0">
+            <div class="col-md-6 px-0">
+              <div class="js-carousel text-center u-carousel-v5 g-overflow-hidden h-100 g-max-height-50vh"
+                   data-infinite="true"
+                   data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-40 g-height-40 g-font-size-20 g-color-white g-color-primary--hover g-bg-primary g-bg-white--hover g-transition-0_2 g-transition--ease-in"
+                   data-arrow-left-classes="fa fa-angle-left g-left-0"
+                   data-arrow-right-classes="fa fa-angle-right g-right-0">
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/1.jpg' %});"></div>
+
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/2.jpg' %});"></div>
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/3.jpg' %});"></div>
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/4.jpg' %});"></div>
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/5.jpg' %});"></div>
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/6.jpg' %});"></div>
+                <div class="js-slide g-bg-img-hero g-min-height-50vh" style="background-image: url({% static '2020/img/7.jpg' %});"></div>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex g-min-height-50vh g-theme-color-gray-dark-v1 g-px-50 g-py-80 g-py-50--md g-py-20--lg">
+              <div class="align-self-center w-100">
+                <h2 class="text-uppercase g-font-weight-700 g-font-size-30 g-color-white g-mb-10">About PyCon Africa</h2>
+                <h3 class="text-uppercase g-font-weight-500 g-font-size-13 g-color-white g-mb-20">PyCon Africa is the gathering of the Pan African Python Community.</h3>
+                <p class="g-font-size-14">We had the very first edition in 2019 and would be having......</p>
+                <p class="g-font-size-14 mb-0">.................</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Section Content -->
+
+      <!-- Timeline -->
+      <section class="g-pt-150 g-pb-90 g-pb-170--md">
+        <div class="container">
+          <div class="text-center g-mb-70">
+            <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">Important
+              <span class="g-font-weight-400 g-font-size-40">|</span>
+              <span class="g-color-primary">Timelines</span></h2>
+
+              
+          <div class="row">
+
+            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-left d-flex align-self-center g-hidden-sm-down g-color-black g-mr-20">
+                  <i class="fa fa-calendar g-font-size-27 "></i>
+                </div>
+
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">CFP Opens</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">23<sup>rd</sup> XXX</h3>
+               
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Fin-Aid Opens</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">23<sup>rd</sup> XXX</h3>
+               </div>
+              </div>
+            </div>
+           
+            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">CFP Closes</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">23<sup>rd</sup> XXX</h3>
+               
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Accepted talks announced</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">23<sup>rd</sup> XXX</h3>
+                
+                  </div>
+              </div>
+            </div>
+           
+            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Fin-Aid Closes</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">23<sup>rd</sup> XXX</h3>
+                
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Fin-Aid announced</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">23<sup>rd</sup> XXX</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+            
+
+          </div>
+          </div>
+      </section>
+      <!-- End Timeline -->
+
+
+      <!-- Section Content -->
+      <section class="u-bg-overlay g-bg-img-hero g-bg-darkblue-opacity-0_4--after g-py-100" style="background-image: url({% static '2020/img/body.png' %});">
+        <div class="container u-bg-overlay__inner">
+          <div class="text-center g-mb-70">
+            <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">2019
+              <span class="g-font-weight-400 g-font-size-40">|</span>
+              <span class="g-color-primary">Highlights</span></h2>
+
+            <p class="g-color-black g-font-size-18">PyCon Africa 2019 was the first-ever pan-African meeting of the Python programming community, 
+              and took place in Accra, Ghana from the 6th - 10th August. It included five days of workshops, talks, sprints and events 
+              such as a Django Girls tutorial.</p>
+          </div>
+
+          <div class="embed-responsive embed-responsive-16by9 event-video-effect">
+            <iframe width="530" height="300" src="https://www.youtube.com/embed/43wJnYZ6Zd0" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          
+        </div>
+      </section>
+      <!-- End Section Content -->
+
+
+      {% include 'footer.html' %}
+
+
+
+      <a class="js-go-to rounded-0 u-go-to-v1" href="#"
+         data-type="fixed"
+         data-position='{
+           "bottom": 15,
+           "right": 15
+         }'
+         data-offset-top="400"
+         data-compensation="#js-header"
+         data-show-effect="zoomIn">
+        <i class="hs-icon hs-icon-arrow-top"></i>
+      </a>
+
+{% endblock %}
+
+
+
+
+
+
+
