@@ -5,5 +5,5 @@ myvenv
 db.sqlite3
 .DS_Store
 secrets.py
-static
+#static
 media
