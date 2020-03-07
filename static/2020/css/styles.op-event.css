@@ -49330,21 +49330,21 @@ h6, .h6 {
 
 /* Main navigation */
 .light-theme .nav-item .nav-link {
-  color: rgba(255, 255, 255, 0.8);
+  color: #eef4fbd0; 
 }
 
 .light-theme .nav-item .nav-link:hover,
 .light-theme .nav-item.active .nav-link {
-  color: #3b77a7ff;
+  color: #3b77a7ff; border-bottom: 1px solid #fee11bfc;
 }
 
-.dark-theme .nav-item .nav-link {
-  color: rgba(0, 0, 0, 0.8);
+.dark-theme .nav-item .nav-link  {
+  color: #090955fe; 
 }
 
 .dark-theme .nav-item .nav-link:hover,
 .dark-theme .nav-item.active .nav-link {
-  color: #090955fe;
+  color: #7979a2fe; border-bottom: 1px solid #3b77a7ff;
 }r
 
 /* Colors */

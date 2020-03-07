@@ -4,4 +4,15 @@ from . import views
 app_name = 'pyconafrica2019'
 urlpatterns = [
     path('', view=views.home19, name='home19'),
+    path('about/', view=views.about, name='about'),
+    path('schedule/', view=views.schedule, name='schedule'),
+    path('conduct/', view=views.conduct, name='conduct'),
+    path('sponsor-us/', view=views.sponsor_us, name='sponsor_us'),
+    path('our-sponsors/', view=views.sponsors, name='sponsors'),
+    path('register/', view=views.register, name='register'),
+    path('travel/', view=views.traveladvice, name='traveladvice'),
+    path('fin-aid/', view=views.fin_aid, name='fin_aid'),
+    path('team/', view=views.team, name='team'),
+    path('report/', view=views.report, name='report'),
 ]
+
