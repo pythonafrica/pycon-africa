@@ -25,6 +25,16 @@ def conduct(request):
     template = 'conduct/conduct19.html'
     return render(request, template, context)
 
+def guidelines(request):
+    context = {}
+    template = 'conduct/guidelines.html'
+    return render(request, template, context)
+
+def eporting(request):
+    context = {}
+    template = 'conduct/eporting-guidelines/eporting-guidelines.html'
+    return render(request, template, context)
+
 def sponsor_us(request):
     context = {}
     template = 'sponsor/sponsor19.html'
