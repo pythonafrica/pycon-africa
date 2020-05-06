@@ -13,7 +13,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
+    <link rel="shortcut icon" href="{% static '2020/img/favicon.png' %}">
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700,800">
@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="{% static '2020/vendor/animate.css' %}">
     <link rel="stylesheet" href="{% static '2020/vendor/slick-carousel/slick/slick.css' %}">
     <link rel="stylesheet" href="{% static '2020/vendor/fancybox/jquery.fancybox.css' %}">
-
+    <link  rel="stylesheet" href="{% static '2020/vendor/animate.css' %}">
+    <link  rel="stylesheet" href="{% static '2020/vendor/custombox/custombox.min.css' %}">
     <!-- CSS Template -->
     <link rel="stylesheet" href="{% static '2020/css/styles.op-event.css' %}">
 
@@ -53,6 +54,8 @@
   
   {% endblock %}
   <!-- /Body -->
+
+
 
 </main>
 
@@ -145,5 +148,20 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtt1z99GtrHZt_IcnK-wryNsQ30A112J0&callback=initMap" async></script>
  
 
+                    <script  src="{% static '2020/vendor/appear.js' %}"></script>
+                    <script  src="{% static '2020/vendor/custombox/custombox.min.js' %}"></script>
+
+                    <!-- JS Unify -->
+                    <script  src="{% static '2020/js/components/hs.modal-window.js' %}"></script>
+
+                    <!-- JS Plugins Init. -->
+                    <script >
+                      $(document).on('ready', function () {
+                        // initialization of autonomous popups
+                        $.HSCore.components.HSModalWindow.init('.js-autonomous-popup', {
+                          autonomous: true
+                        });
+                      });
+                    </script>
 </body>
 </html>
