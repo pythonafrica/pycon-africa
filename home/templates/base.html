@@ -31,6 +31,11 @@
     <link rel="stylesheet" href="{% static '2020/vendor/fancybox/jquery.fancybox.css' %}">
     <link  rel="stylesheet" href="{% static '2020/vendor/animate.css' %}">
     <link  rel="stylesheet" href="{% static '2020/vendor/custombox/custombox.min.css' %}">
+
+    <link  rel="stylesheet" href="{% static '2020/vendor/dzsparallaxer/dzsparallaxer.css' %}">
+    <link  rel="stylesheet" href="{% static '2020/vendor/dzsparallaxer/dzsscroller/scroller.css' %}">
+    <link  rel="stylesheet" href="{% static '2020/vendor/dzsparallaxer/advancedscroller/plugin.css' %}">
+    <link  rel="stylesheet" href="{% static '2020/vendor/slick-carousel/slick/slick.css' %}">
     <!-- CSS Template -->
     <link rel="stylesheet" href="{% static '2020/css/styles.op-event.css' %}">
 
@@ -87,6 +92,12 @@
     <script src="{% static '2020/js/components/gmap/hs.map.js' %}"></script>
     <script src="{% static '2020/js/components/hs.go-to.js' %}"></script>
 
+
+
+
+    <script  src="{% static '2020/vendor/dzsparallaxer/dzsparallaxer.js' %}"></script>
+    <script  src="{% static '2020/vendor/dzsparallaxer/dzsscroller/scroller.js' %}"></script>
+    <script  src="{% static '2020/vendor/dzsparallaxer/advancedscroller/plugin.js' %}"></script>
     <!-- JS Customization -->
     <script src="{% static '2020/js/custom.js' %}"></script>
 
@@ -163,5 +174,21 @@
                         });
                       });
                     </script>
+
+
+
+  <!-- JS Implementing Plugins -->
+  <script  src="{% static '2020/vendor/appear.js' %}"></script>
+
+  <!-- JS Unify -->
+  <script  src="{% static '2020/js/components/hs.onscroll-animation.js' %}"></script>
+
+  <!-- JS Plugins Init. -->
+  <script >
+    $(document).ready(function () {
+      // initialization of scroll animation
+      $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+    });
+  </script>
 </body>
 </html>
