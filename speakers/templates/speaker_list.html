@@ -1,92 +1,108 @@
 {% extends "base.html" %}
 {% load i18n static %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Speakers | Ghana Data Science Summit" %}{% endif %}{% endblock %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Speakers | PyCon Africa 2020" %}{% endif %}{% endblock %}
+
 
 
 {% block content %}
 
-
-
-    <!--Banner Inner-->
-    <section>
-        <div class="lgx-banner lgx-banner-inner">
-            <div class="lgx-page-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="lgx-heading-area">
-                                <div class="lgx-heading lgx-heading-white">
-                                    <h2 class="heading">Who’s Speaking</h2>
-                                </div>
-                                <ul class="breadcrumb">
-                                    <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-                                    <li class="active">Speakers</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!--//.ROW-->
-                </div><!-- //.CONTAINER -->
-            </div><!-- //.INNER -->
+      <!-- Section Content -->
+      <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/body1.png' %});">
+        <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
+       
+            <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Speakers</h3>
+            <br>
+            <br>
         </div>
-    </section> <!--//.Banner Inner-->
+
+      </section>
+      <!-- End Section Content -->
+       <!-- body -->
+       <div class="container">
+
+            <div class=" u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
+                
+              
+                <!-- Speakers List Panel -->
+             <div class="card border-0 rounded-0 g-mb-50">
+               <div class="card-block g-pa-0">
+                 <!-- Speakers List -->
+                 <div class="row">
+ 
+                 {% for speaker in speakers %}
+                 {% if speaker.is_visible %}
+                   <div class="col-md-4 g-mb-30 g-mb-0--md">
+                     <!-- Figure -->
+                     <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                       <div class="g-py-40 g-px-20">
+                         <!-- Figure Image -->
+                         <img class="g-width-150 g-height-150 rounded-circle g-mb-20" src="{{ speaker.profile_image.url }}" alt="Image Description">
+                         <!-- Figure Image -->
+ 
+                         <!-- Figure Info -->
+                         <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                         <div class="d-block">
+                           <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.company|truncatechars:20 }}</em>
+                         </div>
+                         <!-- End Figure Info -->
+                       </div>
+ 
+                       <hr class="g-brd-gray-light-v4 g-my-0">
+ 
+                       <!-- Figure List -->
+                       <ul class="row list-inline g-py-20 g-ma-0">
+                         <li class="col g-brd-right g-brd-gray-light-v4">
+                           <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover" title="{{ speaker.speaker_name }}'s Profile" href="{% url 'speaker_detail' speaker.slug %}">
+                             <i class="icon-user"></i>
+                           </a>
+                         </li>
+ 
+                         <li class="col g-brd-right g-brd-gray-light-v4">
+                           <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover" title="{{ speaker.speaker_name }}'s " href="#">
+                             <i class="icon-speech"></i>
+                           </a>
+                         </li>
+                         
+                         
+                        
+ 
+                         {% if speaker.twitter %}
+                         <li class="col">
+                             <a class="u-icon-v1 g-color-primary g-color-twitter--hover g-mr-15 g-mb-20" title="{{ speaker.speaker_name }}'s twitter account" href="https://www.twitter.com/{{ speaker.twitter }}" target="/">
+                               <i class="icon-social-twitter"></i>
+                             </a>
+                         </li>                   
+                         {% else %}
+                         
+                         {% endif %}
+                       </ul>
+                       <!-- End Figure List -->
+                     </figure>
+                     <!-- End Figure -->
+                   </div> 
+                 {% else %}
+ 
+                 {% endif %}
+                 {% endfor %} 
+ 
+                 </div>
+                 <!-- End Speakers List -->
+               </div>
+               
+             </div>
+             <!-- End Speakers List Panel -->
+ 
+ 
+ 
+               </div>
+
+        
+      </div>
+    <!-- End body -->
 
 
-    <main>
-        <div class="lgx-page-wrapper">
-            <section>
-                <div class="container">
 
+    {% include 'footer.html' %}
 
-                    <div class="row">
-                        <div class="col-xs-12">
-
-                            {% for speaker in speakers %}
-                            {% if speaker.is_visible %}
-                            <div class="lgx-col4 lgx-single-speaker2">
-                                <figure>
-                                    <a class="profile-img" href="{% url 'speaker_detail' speaker.slug %}" align="middle"><img  src="{{ speaker.profile_image.url }}" width="310"
-                                        height="320" alt="{{ speaker.speaker_name }}"/></a>
-                                    <figcaption>
-                                        <div class="social-group">
-                                            {% if speaker.twitter %}
-                                            <a class="sp-tw" href="https://www.twitter.com/{{ speaker.twitter }}" target="/"><i class="fa fa-twitter"></i></a>
-                                            {% else %}
-                                            <p></p>
-                                            {% endif %}
-
-                                            {% if speaker.linkedin %}
-                                            <a class="sp-in" href="https://www.linkedin.com/{{ speaker.linkedin }}" target="/"><i class="fa fa-linkedin"></i></a>
-                                            {% else %}
-                                            <p></p>
-                                            {% endif %}
-
-                                            </div>
-                                        <div class="speaker-info">
-                                            <h3 class="title"><a href="{% url 'speaker_detail' speaker.slug %}">{{ speaker.speaker_name|truncatechars:20 }}</a></h3>
-                                            <h4 class="subtitle">{{ speaker.position|truncatechars:20 }}</h4>
-                                            <h5 class="subtitle"> {{ speaker.company|truncatechars:20 }}</h5>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            {% else %}
-
-                            {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-
-
-                   <br><br>
-                    <h3 class="subheading">More Speakers would be annouced!</h3>
-
-                </div><!-- //.CONTAINER -->
-
-            </section>
-        </div>
-    </main>
-
-
-    {% include 'footerO.html' %}
 
 {% endblock %}

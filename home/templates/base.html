@@ -200,5 +200,22 @@
       $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
     });
   </script>
+
+  <!-- JS Unify -->
+  <script  src="{% static '2020/js/components/hs.tabs.js' %}"></script>
+
+  <!-- JS Plugins Init. -->
+  <script >
+    $(document).on('ready', function () {
+      // initialization of tabs
+      $.HSCore.components.HSTabs.init('[role="tablist"]');
+    });
+
+    $(window).on('resize', function () {
+      setTimeout(function () {
+        $.HSCore.components.HSTabs.init('[role="tablist"]');
+      }, 200);
+    });
+  </script>
 </body>
 </html>

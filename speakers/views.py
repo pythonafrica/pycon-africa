@@ -3,15 +3,21 @@ from django.utils import timezone
 from django.views.generic import ListView
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
-from .models import Speaker
+from .models import *
 from .forms import SpeakerForm
 from hitcount.views import HitCountDetailView
 
-
 class SpeakerListView(ListView):
-   model = Speaker
-   template_name = 'speaker_list.html'
-   context_object_name = 'speakers'
+    context_object_name = {"speakers": "active"}
+    template_name = 'speaker_list.html'
+    queryset = Speaker.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(SpeakerListView, self).get_context_data(**kwargs)
+        context['talks'] = Talk.objects.all()
+        context['speakers'] = self.queryset
+        return context
+
 
 class SpeakerDetailView(HitCountDetailView):
     model = Speaker
@@ -25,6 +31,22 @@ class SpeakerDetailView(HitCountDetailView):
         context = super(SpeakerDetailView, self).get_context_data(**kwargs)
         context.update({
         'popular_speakers': Speaker.objects.order_by('-hit_count_generic__hits')[:3],
+        })
+        return context
+
+
+class TalkView(HitCountDetailView):
+    model = Talk
+    template_name = 'talk_details.html'
+    context_object_name = 'talk'
+    slug_field = 'slug'
+    # set to True to count the hit
+    count_hit = True
+
+    def get_context_data(self, **kwargs):
+        context = super(TalkView, self).get_context_data(**kwargs)
+        context.update({
+        'popular_talks': Talk.objects.order_by('-hit_count_generic__hits')[:3],
         })
         return context
 

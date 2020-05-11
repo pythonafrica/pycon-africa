@@ -15,30 +15,21 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 @python_2_unicode_compatible
  
+
+
+
+ 
 class Speaker(models.Model):
-    TALK_TYPES = (
-        ('Talk', "Talk"),
-        ('Tutorial', "Tutorial"),
-    )
-
-
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     speaker_name = models.CharField(max_length=200)
-    talk_title = models.CharField(max_length=200, default=" ", null=True, blank=True,)
-    talk_type = models.CharField(choices=TALK_TYPES, max_length=20,default=" ")
-    talk_description = models.TextField(default=" ")
-    profile_image = ProcessedImageField(upload_to='speakers/',default="speaker.png", processors=[ResizeToFit(600, 600, upscale=False)], format='jpeg', options={'quality': 90})
-    position = models.CharField(max_length=200, help_text="Position of the speaker eg. CEO")
-    company = models.CharField(max_length=200, help_text="Name of Organization speaker is from. eg. Google")
-    biography = models.TextField()
-    bio = models.TextField(null=True, default="", blank=True,)
+    profile_image = ProcessedImageField(upload_to='speakers/',default="default.png", processors=[ResizeToFit(600, 600, upscale=False)], format='jpeg', options={'quality': 90})
+    biography = models.TextField(max_length=600, null=True, default="", help_text="The bio of the speaker")
+    company = models.CharField(max_length=200, null=True, default="", blank=True, help_text="Name of Organization speaker is from. eg. Google")
     twitter = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
-    linkedin = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg. in/mawy7 ", default="", blank=True,)
-    website = models.CharField(max_length=100, null=True, default="", blank=True,)
     created_date = models.DateTimeField(default=timezone.now)
-    updated = models.DateTimeField(auto_now=True)
     is_visible = models.BooleanField(default=False)
     published_date = models.DateField(blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(
         populate_from='speaker_name',
         slugify_function=slugify
@@ -52,3 +43,36 @@ class Speaker(models.Model):
         if not self.slug:
             self.slug = slugify(self.speaker_name)
         return super(Speaker, self).save(*args, **kwargs)
+
+
+ 
+class Talk(models.Model):
+    TALK_TYPES = (
+        ('Talk', "Talk"),
+        ('Tutorial', "Tutorial"),
+    )
+    
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    speaker_name = models.ForeignKey(Speaker, on_delete=models.CASCADE)
+    talk_title = models.CharField(max_length=200, default="", null=True, blank=True,)
+    talk_type = models.CharField(choices=TALK_TYPES, max_length=20,default="")
+    talk_abstract = models.TextField(default="")
+    talk_description = models.TextField(default="")
+    created_date = models.DateTimeField(default=timezone.now)
+    is_visible = models.BooleanField(default=False)
+    published_date = models.DateField(blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
+    slug = AutoSlugField(
+        populate_from='talk_title',
+        slugify_function=slugify
+    )
+
+    def __str__(self):
+        return self.talk_title
+        
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.talk_title)
+        return super(Talk, self).save(*args, **kwargs)
+
