@@ -28,8 +28,9 @@
                <div class="card-block g-pa-0">
                  <!-- Speakers List -->
                  <div class="row">
- 
+                 
                  {% for speaker in speakers %}
+                 
                  {% if speaker.is_visible %}
                    <div class="col-md-4 g-mb-30 g-mb-0--md">
                      <!-- Figure -->
@@ -42,7 +43,8 @@
                          <!-- Figure Info -->
                          <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
                          <div class="d-block">
-                           <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.company|truncatechars:20 }}</em>
+                           <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:80 }}</em>
+                           
                          </div>
                          <!-- End Figure Info -->
                        </div>
@@ -52,13 +54,14 @@
                        <!-- Figure List -->
                        <ul class="row list-inline g-py-20 g-ma-0">
                          <li class="col g-brd-right g-brd-gray-light-v4">
-                           <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover" title="{{ speaker.speaker_name }}'s Profile" href="{% url 'speaker_detail' speaker.slug %}">
+                           <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href="{% url 'speaker_detail' speaker.slug %}">
+                             
                              <i class="icon-user"></i>
                            </a>
                          </li>
- 
+                         
                          <li class="col g-brd-right g-brd-gray-light-v4">
-                           <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover" title="{{ speaker.speaker_name }}'s " href="#">
+                           <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ speaker.talk_type }}: {{ speaker.talk_title }}" href="{% url 'speaker_talk' speaker.slug %}">
                              <i class="icon-speech"></i>
                            </a>
                          </li>
@@ -68,7 +71,7 @@
  
                          {% if speaker.twitter %}
                          <li class="col">
-                             <a class="u-icon-v1 g-color-primary g-color-twitter--hover g-mr-15 g-mb-20" title="{{ speaker.speaker_name }}'s twitter account" href="https://www.twitter.com/{{ speaker.twitter }}" target="/">
+                             <a class="u-icon-v1 g-color-primary g-color-twitter--hover g-mr-15 g-mb-20" data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s twitter account" href="https://www.twitter.com/{{ speaker.twitter }}" target="/">
                                <i class="icon-social-twitter"></i>
                              </a>
                          </li>                   
@@ -80,15 +83,19 @@
                      </figure>
                      <!-- End Figure -->
                    </div> 
+                   <p> </p>
                  {% else %}
  
                  {% endif %}
+                 {% empty %} 
+                <h4>There is nothing in this list </h4> 
                  {% endfor %} 
- 
+                   
+
+                 
                  </div>
                  <!-- End Speakers List -->
                </div>
-               
              </div>
              <!-- End Speakers List Panel -->
  

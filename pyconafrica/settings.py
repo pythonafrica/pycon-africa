@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'imagekit',
     'hitcount',
     'django_slugify_processor',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -169,6 +170,7 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 
 #STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SUMMERNOTE_THEME = 'bs4'  # Show summernote with Bootstrap4
 SUMMERNOTE_CONFIG = {

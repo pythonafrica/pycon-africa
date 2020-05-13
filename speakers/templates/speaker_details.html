@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n static %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "{{ speaker.speaker_name }} | PyCon Africa 2020" %}{% endif %}{% endblock %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{{ speaker.speaker_name }}{% trans " Profile | PyCon Africa 2020" %}{% endif %}{% endblock %}
 
 
 {% block content %}
@@ -9,7 +9,7 @@
       <!-- Section Content -->
       <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/body1.png' %});">
         <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
-            <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Speaker</h3>
+            <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Speaker Profile</h3>
             <br>
             <br>
         </div>
@@ -19,58 +19,127 @@
       
 
 
-    <main>
-        <div class="lgx-post-wrapper">
-            <!--News-->
-            <section>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <article>
-                                <header>
-                                    <figure>
-                                        <img src="{{ speaker.profile_image.url }}" alt="{{ speaker.speaker_name }}"/>
-                                    </figure>
-                                    <div class="text-area">
-                                        <div class="speaker-info">
-                                            <h1 class="title"><a href="#">{{ speaker.speaker_name }}</a></h1>
-                                            <h4 class="subtitle"> {{ speaker.position }}</h4>
-                                            <h5 class="subtitle"> {{ speaker.company }}</h5>
-                                        </div>
-                                        <ul class="list-inline lgx-social">
-                                            {% if speaker.twitter %}
-                                            <li><a href="https://www.twitter.com/{{ speaker.twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                            {% else %}
-                                            <p></p>
-                                            {% endif %}
-                                            
-                                            {% if speaker.linkedin %}
-                                            <li><a href="https://www.linkedin.com/{{ speaker.linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                            {% else %}
-                                            <p></p>
-                                            {% endif %}
 
-                                            {% if speaker.website %}
-                                            <li><a href="{{ speaker.website }}"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
-                                            {% else %}
-                                            <p></p>
-                                            {% endif %}
-                                        </ul>
-                                    </div>
-                                </header>
-                                <section>
-                                        {{ speaker.biography }}
-                                        
-                                </section>
-                               
-                            </article>
-                        </div>
-                    </div>
-                </div><!-- //.CONTAINER -->
-            </section>
-            <!--News END-->
+
+       <!-- body -->
+       <div class="container">
+        <div class="row">
+            <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
+                
+              
+               <!-- Speaker Contacts Panel -->
+            <div class="card border-0 rounded-0 g-mb-50">
+             <!-- Speaker Block -->
+            <div class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-40">
+              <div class="row">
+
+                <div class="col-lg-8">
+                  <!-- Speaker Details -->
+                  <div class="d-flex align-items-center justify-content-sm-between g-mb-5">
+                    <h2 class="g-font-weight-300 g-mr-10">{{ speaker.speaker_name }}</h2>
+                    <ul class="list-inline mb-0">
+
+                    {% if speaker.twitter %}
+                      <li class="list-inline-item g-mx-2">
+                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="https://www.twitter.com/{{ speaker.twitter }}" target="/">
+                          <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                          <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                        </a>
+                      </li>
+                    {% else %}
+                        <p></p>
+                    {% endif %}
+
+                    {% if speaker.github %}
+                      <li class="list-inline-item g-mx-2">
+                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="https://www.github.com/{{ speaker.github }}" target="/">
+                          <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-github"></i>
+                          <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-github"></i>
+                        </a>
+                      </li>
+                    {% else %}
+                      <p></p>
+                    {% endif %}
+
+                    {% if speaker.linkedin %}
+                      <li class="list-inline-item g-mx-2">
+                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="https://www.linkedin.com/{{ speaker.linkedin }}" target="/">
+                          <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
+                          <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
+                        </a>
+                      </li>
+                    {% else %}
+                        <p></p>
+                    {% endif %}
+                    </ul>
+                  </div>
+                  <!-- End Speaker Details -->
+
+                  <!-- Speaker Position -->
+                  <h4 class="h6 g-font-weight-300 g-mb-10">
+                    <i class="icon-badge g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v5"></i> Engineer.
+                      <i class="icon-badge g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v5"></i> {{ speaker.company }}.
+                    </h4>
+                  <!-- End Speaker Position -->
+
+                  <!-- Speaker Info -->
+                  <ul class="list-inline g-font-weight-300">
+                    <li class="list-inline-item g-mr-20">
+                      <i class="icon-location-pin g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i> London, UK
+                    </li>
+                  </ul>
+                  <!-- End Speaker Info -->
+
+                  <hr class="g-brd-gray-light-v4 g-my-20">
+
+                {% if speaker.talk_title %}
+                  <li class="list-inline-item g-mr-20">
+                    <i class="icon-check g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i> Talk:
+                  </li>
+                  <p class=" g-color-black lead g-line-height-1_8">{{ speaker.talk_title }}</p>
+
+                    <a class="align-items-center btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="{% url 'speaker_talk' speaker.slug %}">View</a>
+                {% else %}
+                    <p></p>
+                {% endif %}
+
+                </div>
+
+                <div class="col-lg-4 text-center align-items-center g-mb-40 g-mb-0--lg ">
+                  <!-- Speaker Image -->
+                  <div class="g-mb-20 align-items-center">
+                    <img class="g-width-200 g-height-200 rounded-circle g-mb-20" src="{{ speaker.profile_image.url }}" alt="{{ speaker.speaker_name }}">
+                  
+                  </div>
+                  <!-- Speaker Image -->
+                
+                </div>
+
+              </div>
+            </div>
+            <!-- End Speaker Block -->
+
+              <!-- Panel Body -->
+              <div class="card-block g-pa-0">
+                <!-- Speaker Contacts -->
+                <div class="row">
+                    <p class="g-color-black g-font-size-16">
+                        {{ speaker.biography|safe }}
+                    </p>
+                </div>
+                <!-- End Speaker Contacts -->
+              </div>
+              <!-- End Panel Body -->
+            </div>
+            <!-- End Speaker Contacts Panel -->
+
+
+
+              </div>
+
         </div>
-    </main>
+      </div>
+
 
 
     {% include 'footer.html' %}

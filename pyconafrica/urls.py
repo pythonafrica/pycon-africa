@@ -26,5 +26,6 @@ urlpatterns = [
     path('speakers', include('speakers.urls')),
     path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
     #path('contact', include('contact_us.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

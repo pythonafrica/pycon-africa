@@ -17,15 +17,28 @@ from imagekit.processors import ResizeToFit
  
 
 
-
  
 class Speaker(models.Model):
+    TALK_TYPES = (
+        ('', ""),
+        ('Talk', "Talk"),
+        ('Tutorial', "Tutorial"),
+    )
+
+
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     speaker_name = models.CharField(max_length=200)
     profile_image = ProcessedImageField(upload_to='speakers/',default="default.png", processors=[ResizeToFit(600, 600, upscale=False)], format='jpeg', options={'quality': 90})
     biography = models.TextField(max_length=600, null=True, default="", help_text="The bio of the speaker")
     company = models.CharField(max_length=200, null=True, default="", blank=True, help_text="Name of Organization speaker is from. eg. Google")
     twitter = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
+    github = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
+    linkdin = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
+    talk_title = models.CharField(max_length=200, default="", null=True)
+    talk_type = models.CharField(choices=TALK_TYPES, max_length=20,default="")
+    talk_description = models.TextField(default="")
+    youtube_vide_url = models.URLField(default="", blank=True, help_text='Link to Talk on youtube Video')
+    youtube_iframe_url = models.URLField(default="", blank=True, help_text='Link to Youtube Iframe')
     created_date = models.DateTimeField(default=timezone.now)
     is_visible = models.BooleanField(default=False)
     published_date = models.DateField(blank=True, null=True)
@@ -46,33 +59,3 @@ class Speaker(models.Model):
 
 
  
-class Talk(models.Model):
-    TALK_TYPES = (
-        ('Talk', "Talk"),
-        ('Tutorial', "Tutorial"),
-    )
-    
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    speaker_name = models.ForeignKey(Speaker, on_delete=models.CASCADE)
-    talk_title = models.CharField(max_length=200, default="", null=True, blank=True,)
-    talk_type = models.CharField(choices=TALK_TYPES, max_length=20,default="")
-    talk_abstract = models.TextField(default="")
-    talk_description = models.TextField(default="")
-    created_date = models.DateTimeField(default=timezone.now)
-    is_visible = models.BooleanField(default=False)
-    published_date = models.DateField(blank=True, null=True)
-    updated = models.DateTimeField(auto_now=True)
-    slug = AutoSlugField(
-        populate_from='talk_title',
-        slugify_function=slugify
-    )
-
-    def __str__(self):
-        return self.talk_title
-        
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.talk_title)
-        return super(Talk, self).save(*args, **kwargs)
-
