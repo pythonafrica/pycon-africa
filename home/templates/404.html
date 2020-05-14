@@ -6,49 +6,30 @@
 
 {% block content %}
 
-      <!-- Section Content -->
-      <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/body1.png' %});">
-        <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
-       
-            <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Sorry!</h3>
-            <br>
-            <br>
-        </div>
 
-      </section>
-      <!-- End Section Content -->
-       <!-- body -->
-       <div class="container">
-
-            <div class=" u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
-                
-              
-                <!-- Speakers List Panel -->
-             <div class="card border-0 rounded-0 g-mb-50">
-               <div class="card-block g-pa-0">
-                 <!-- Speakers List -->
-                 <div class="row">
-             
+<div class="text-center g-flex-centered-item g-position-rel">
  
-                 
-                 </div>
-                 <!-- End Speakers List -->
-               </div>
-               
-             </div>
-             <!-- End Speakers List Panel -->
+  <div class="g-absolute-centered">
+    
+    <div class=" u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
+            
+          
+      <div class="card border-0 rounded-0 g-mb-50">
+       <img class="g-width-384 g-height-299" src="{% static '2020/img/404.png' %}" alt="404">
+      
+       <br>
+       <p class="g-color-black g-font-size-16">
+        Sorry! Seems the page you might be looking does not exist
+       </p>
+       <a class="btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="/" target="/" disabled><b>GO BACK HOME</b></a>
  
- 
- 
-               </div>
-
         
       </div>
-    <!-- End body -->
-
-
-
-    {% include 'footer.html' %}
-
+ 
+ 
+ 
+        </div>
+  </div>
+</div>
 
 {% endblock %}
