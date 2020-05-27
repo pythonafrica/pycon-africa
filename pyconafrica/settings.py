@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'hitcount',
     'django_slugify_processor',
     'django_summernote',
+    "sponsors",
 ]
 
 MIDDLEWARE = [

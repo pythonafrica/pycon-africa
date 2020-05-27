@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.views.generic import ListView
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
-from .models import Speaker
+from .models import *
 from .forms import SpeakerForm
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -13,7 +13,7 @@ class Speakers(ListView):
     model = Speaker
     template_name = 'speaker_list.html'
     speaker_list = Speaker.objects.all()
-    paginator = Paginator(speaker_list, 10)
+    
     def get_context_data(self, **kwargs):
         context = super(Speakers, self).get_context_data(**kwargs)
         context['speakers'] = Speaker.objects.all()
@@ -30,6 +30,7 @@ class SpeakerDetailView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SpeakerDetailView, self).get_context_data(**kwargs)
+        context['talk'] = Talk.objects.all()
         context.update({
         'popular_speakers': Speaker.objects.order_by('-hit_count_generic__hits')[:3],
         })
@@ -38,7 +39,7 @@ class SpeakerDetailView(HitCountDetailView):
 
 
 class TalkDetailView(HitCountDetailView):
-    model = Speaker
+    model = Talk
     template_name = 'speaker_talk.html'
     context_object_name = 'talk'
     slug_field = 'slug'
@@ -48,7 +49,7 @@ class TalkDetailView(HitCountDetailView):
     def get_context_data(self, **kwargs):
         context = super(TalkDetailView, self).get_context_data(**kwargs)
         context.update({
-        'popular_talks': Speaker.objects.order_by('-hit_count_generic__hits')[:3],
+        'popular_talks': Talk.objects.order_by('-hit_count_generic__hits')[:3],
         })
         return context
 
