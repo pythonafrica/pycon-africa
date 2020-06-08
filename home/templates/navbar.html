@@ -37,9 +37,26 @@ data-header-fix-moment-classes="dark-theme u-shadow-v18 g-bg-white-opacity-0_9">
       <li class="nav-item g-ml-15--lg {{ coc }}">
         <a href="/coc" class="nav-link p-0">Code of Conduct <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item g-ml-15--lg {{ sponsor }}">
-        <a href="/sponsor" class="nav-link p-0">Sponsor Us</a>
+      {% if user.is_authenticated %}
+      <div class="dropdown nav-item g-ml-15--lg">
+        <a href="#" class="dropbtn nav-link p-0">
+          <span>
+            Sponsor
+            <i class="g-color-yellow fa fa-chevron-circle-down g-mr-3"></i>
+          </span>
+        </a>
+        <div class="dropdown-content">
+          <a href="/sponsor" class="nav-link p-0 {{ sponsor }}">Sponsor Us</a>
+          <a href="/sponsors" class="nav-link p-0 {{ sponsor }}">Our Sponsors</a>
+        </div>
+      </div> 
+
+      {% else %}
+      <li class="nav-item g-ml-15--lg {{ sponsor}}">
+        <a href="/sponsor" class="nav-link p-0">Sponsor Us<span class="sr-only">(current)</span></a>
       </li>
+      {% endif %}
+
       <li class="nav-item g-ml-15--lg ">
         <a href="/2019/report" class="nav-link p-0" target="/">2019</a>
       </li>
@@ -66,3 +83,47 @@ data-header-fix-moment-classes="dark-theme u-shadow-v18 g-bg-white-opacity-0_9">
 </div>
 </header>
 <!-- End Header v1 -->
+
+
+<style>
+   /* Dropdown Button */
+.dropbtn {
+  padding: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #9b9badfe;
+  padding: 16px 18px;
+  font-size: 12px;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 16px 18px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #fee11bfc;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #090955fe;} 
+</style>

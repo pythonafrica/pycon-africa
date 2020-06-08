@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Our Sponsors | PyCon Africa 2020" %}{% endif %}{% endblock %}
+
+ 
+{% block content %}
+{% include 'navbar.html' %}
+
+
+
+
+
+
+
+{% include 'footer.html' %}
+
+{% endblock %}
