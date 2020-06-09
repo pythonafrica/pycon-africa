@@ -52,9 +52,18 @@ data-header-fix-moment-classes="dark-theme u-shadow-v18 g-bg-white-opacity-0_9">
       </div> 
 
       {% else %}
-      <li class="nav-item g-ml-15--lg {{ sponsor}}">
-        <a href="/sponsor" class="nav-link p-0">Sponsor Us<span class="sr-only">(current)</span></a>
-      </li>
+      <div class="dropdown nav-item g-ml-15--lg">
+        <a href="#" class="dropbtn nav-link p-0">
+          <span>
+            Sponsor
+            <i class="g-color-yellow fa fa-chevron-circle-down g-mr-3"></i>
+          </span>
+        </a>
+        <div class="dropdown-content">
+          <a href="/sponsor" class="nav-link p-0 {{ sponsor }}">Sponsor Us</a>
+          <a href="/sponsors" class="nav-link p-0 {{ sponsor }}">Our Sponsors</a>
+        </div>
+      </div> 
       {% endif %}
 
       <li class="nav-item g-ml-15--lg ">
