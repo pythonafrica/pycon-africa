@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     "home",
+    "our_sponsors",
     "pyconafrica2019",
     "speakers",
     "schedule",
@@ -52,7 +53,6 @@ INSTALLED_APPS = [
     'hitcount',
     'django_slugify_processor',
     'django_summernote',
-    "sponsors",
 ]
 
 MIDDLEWARE = [

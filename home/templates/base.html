@@ -177,12 +177,21 @@
                     <!-- JS Plugins Init. -->
                     <script >
                       $(document).on('ready', function () {
+                        // initialization of popups
+                        $.HSCore.components.HSModalWindow.init('[data-modal-target]');
+                      });
+                    </script>
+
+
+                    <script >
+                      $(document).on('ready', function () {
                         // initialization of autonomous popups
                         $.HSCore.components.HSModalWindow.init('.js-autonomous-popup', {
                           autonomous: true
                         });
                       });
                     </script>
+ 
 
 
  <script  src="{% static '2020/vendor/popper.js/popper.min.js' %}"></script>

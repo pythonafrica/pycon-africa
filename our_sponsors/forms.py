@@ -1,6 +1,5 @@
 from django import forms
-from .models import Sponsor
-
+from .models import *
 
 class SponsorForm(forms.ModelForm):
 
