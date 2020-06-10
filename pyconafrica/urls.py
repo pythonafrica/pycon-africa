@@ -23,8 +23,8 @@ from pyconafrica2019 import views
 
 urlpatterns = [
     path('', include('home.urls', namespace='home')),
-    path('speakers', include('speakers.urls')),
-    path('sponsors', include('our_sponsors.urls', namespace='our_sponsors')),
+    path('speakers/', include('speakers.urls')),
+    path('our-sponsors/', include('our_sponsors.urls', namespace='our_sponsors')),
     path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
     path('summernote/', include('django_summernote.urls')),
     path('admin/', admin.site.urls),

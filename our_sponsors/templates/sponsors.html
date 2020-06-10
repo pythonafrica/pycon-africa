@@ -80,7 +80,7 @@
                             
                                               {% if sponsor.twitter %}
                                                 <li class="list-inline-item g-mx-2">
-                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
+                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
                                                     <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                                                     <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
                                                   </a>
@@ -92,7 +92,7 @@
                                               
                                               {% if sponsor.linkedin %}
                                               <li class="list-inline-item g-mx-2">
-                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
+                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
                                                   <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                                                   <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
                                                 </a>
@@ -154,7 +154,7 @@
                       
                               {% for sponsor in gold %}
                               {% if sponsor.is_visible %}
-                                <div class="col-md-4 g-mb-30">
+                                <div class="col-md-6 g-mb-10">
                                   {% if sponsor.show_biography %}
                                   <a  href="#{{ sponsor.name }}" data-modal-target="#{{ sponsor.name }}" data-modal-effect="blur" >
                                     <img class='img-responsive'  style="width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
@@ -180,7 +180,7 @@
                                   </button>
                                   
                                   <div class="g-line-height-2 g-pa-40 g-mb-30 " role="alert">
-                                    <div class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-40">
+                                    <div class="g-brd-around g-brd-yellow g-pa-20 g-mb-40">
                                       <div class="row">
                             
                                         <div class="col-lg-4 text-center align-items-center g-mb-40 g-mb-0--lg ">
@@ -196,12 +196,12 @@
                                         <div class="col-lg-8">
                                           <!-- Speaker Details -->
                                           <div class="d-flex align-items-center justify-content-sm-between g-mb-5">
-                                            <h2 class="g-font-weight-300 g-mr-10">{{ sponsor.name }}</h2>
+                                            <h2 class="g-font-weight-400 g-mr-10">{{ sponsor.name }}</h2>
                                             <ul class="list-inline mb-0">
                             
                                               {% if sponsor.twitter %}
                                                 <li class="list-inline-item g-mx-2">
-                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
+                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
                                                     <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                                                     <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
                                                   </a>
@@ -212,7 +212,7 @@
                                               
                                               {% if sponsor.linkedin %}
                                               <li class="list-inline-item g-mx-2">
-                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
+                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
                                                   <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                                                   <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
                                                 </a>
@@ -231,12 +231,12 @@
                                         </h4>
                                       <!-- End Speaker Position -->
                             
-                                          <hr class="g-brd-gray-light-v4 g-my-20">
+                                          <hr class="g-brd-yellow g-my-20">
                                          
-                                          <p class="g-color-black g-font-size-16">
+                                          <p class="g-color-black">
                                             {{ sponsor.description }}
                                           </p>
-                                          <hr class="g-brd-gray-light-v4 g-my-20">
+                                          <hr class="g-brd-yellow g-my-20">
                                             <a class="align-items-center btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="{{ sponsor.website }}" target="/"><b>Visit our Website</b></a>
                                         </div>
                             
@@ -249,13 +249,7 @@
                                 </div>
                                 <!-- End Sponsor modal window -->
                                 {% endfor %}
-                      
-                                <div class="col-md-3 g-mb-30">
-                                  <a  href="#" >
-                                    <img class="img-fluid" src="{% static '2020/img/sponsors/blank.png' %}" alt="{{ sponsor.name }}">
-                                  </a>
-                                </div>
-                      
+                    
                               
                               </div>
                             </li>
@@ -321,7 +315,7 @@
                             
                                               {% if sponsor.twitter %}
                                                 <li class="list-inline-item g-mx-2">
-                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
+                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
                                                     <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                                                     <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
                                                   </a>
@@ -332,7 +326,7 @@
                                               
                                               {% if sponsor.linkedin %}
                                               <li class="list-inline-item g-mx-2">
-                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
+                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
                                                   <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                                                   <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
                                                 </a>
@@ -388,7 +382,7 @@
                         <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;"  role="alert">
                
                             <ul class="list-unstyled align-self-lg-center">
-                              <img class="g-height-30 " src="{% static '2020/img/sponsors/bronze.png' %}" alt="{{ sponsor.name }}">
+                              <img class="img-responsive g-height-30 " src="{% static '2020/img/sponsors/bronze.png' %}" alt="{{ sponsor.name }}">
                               <br>
                               <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-brown-left rounded g-pa-20 g-mb-200">
                                 <div class="row">
@@ -421,7 +415,7 @@
                                     </button>
                                     
                                     <div class="g-line-height-2 g-pa-40 g-mb-30 " role="alert">
-                                      <div class="g-brd-around g-brd-brown g-pa-20 g-mb-40">
+                                      <div class="g-brd-around g-brd-brown g-pa-30 g-mb-40">
                                         <div class="row">
                               
                                           <div class="col-lg-4 text-center align-items-center g-mb-40 g-mb-0--lg ">
@@ -442,7 +436,7 @@
                               
                                                 {% if sponsor.twitter %}
                                                   <li class="list-inline-item g-mx-2">
-                                                    <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
+                                                    <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
                                                       <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                                                       <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
                                                     </a>
@@ -453,7 +447,7 @@
                                                 
                                                 {% if sponsor.linkedin %}
                                                 <li class="list-inline-item g-mx-2">
-                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
+                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
                                                     <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                                                     <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
                                                   </a>
@@ -474,7 +468,7 @@
                               
                                             <hr class="g-brd-brown g-my-20">
                                            
-                                            <p class="g-color-black g-font-size-16">
+                                            <p class="g-color-black">
                                               {{ sponsor.description }}  
                                             </p>
                                             <hr class="g-brd-brown g-my-20">
@@ -490,14 +484,19 @@
                                   </div>
                                   <!-- End Sponsor modal window -->
                                   {% endfor %}
+         
 
-                                  <div class="col-md-3 g-mb-30">
-                                    <a  href="#" >
-                                      <img class="img-fluid" src="{% static '2020/img/sponsors/blank.png' %}" alt="{{ sponsor.name }}">
-                                    </a>
-                                  </div>
-              
-                                
+
+
+                      <div class="col-md-2 g-mb-30">
+                        <a  href="#" >
+                          <img class="img-fluid" src="{% static '2020/img/sponsors/blank.png' %}" alt="{{ sponsor.name }}">
+                        </a>
+                      </div>
+
+
+
+
                                 </div>
                               </li>
                             </ul>
@@ -524,21 +523,6 @@
                       {% endfor %}
                     
 
-                      <div class="col-md-2 g-mb-30">
-                        <a  href="#" >
-                          <img class="img-fluid" src="{% static '2020/img/sponsors/blank.png' %}" alt="{{ sponsor.name }}">
-                        </a>
-                      </div>
-                      <div class="col-md-2 g-mb-30">
-                        <a  href="#" >
-                          <img class="img-fluid" src="{% static '2020/img/sponsors/blank.png' %}" alt="{{ sponsor.name }}">
-                        </a>
-                      </div>
-                      <div class="col-md-2 g-mb-30">
-                        <a  href="#" >
-                          <img class="img-fluid" src="{% static '2020/img/sponsors/blank.png' %}" alt="{{ sponsor.name }}">
-                        </a>
-                      </div>
   
                     </div>
                   </li>
