@@ -41,7 +41,7 @@ class SpeakerDetailView(HitCountDetailView):
 class TalkDetailView(HitCountDetailView):
     model = Talk
     template_name = 'speaker_talk.html'
-    context_object_name = 'talk'
+    context_object_name = 'speaker'
     slug_field = 'slug'
     # set to True to count the hit
     count_hit = True

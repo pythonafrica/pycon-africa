@@ -40,7 +40,7 @@ class Talktype(models.Model):
   
 class Speaker(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    speaker_name = models.CharField(max_length=200)
+    speaker_name = models.CharField(default="", max_length=200)
     profile_image = ProcessedImageField(upload_to='speakers/',default="default.png", processors=[ResizeToFit(600, 600, upscale=False)], format='jpeg', options={'quality': 90})
     biography = models.TextField(max_length=600, null=True, default="", help_text="The bio of the speaker")
     company = models.CharField(max_length=200, null=True, default="", blank=True, help_text="Name of Organization speaker is from. eg. Google")
@@ -70,7 +70,7 @@ class Speaker(models.Model):
  
 class Talk(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    speaker_name = models.ForeignKey(Speaker, on_delete=models.CASCADE)
+    speaker_name = models.ForeignKey(Speaker, default="", on_delete=models.CASCADE)
     talk_title = models.CharField(max_length=200, default="", null=True)
     talk_type = models.ForeignKey(Talktype, on_delete=models.CASCADE)
     talk_description = models.TextField(default="")
