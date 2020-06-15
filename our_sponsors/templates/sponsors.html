@@ -101,6 +101,17 @@
                                               {% else %}
                                                   <p></p>
                                               {% endif %}
+
+                                              {% if sponsor.youtube %}
+                                              <li class="list-inline-item g-mx-2">
+                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-youtube--hover rounded-circle" href="{{ sponsor.youtube }}" target="/">
+                                                  <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-youtube"></i>
+                                                  <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-youtube"></i>
+                                                </a>
+                                              </li>
+                                              {% else %}
+                                                  <p></p>
+                                              {% endif %}
                       
                                             </ul>
                                           </div>
@@ -158,7 +169,7 @@
                       
                               {% for sponsor in gold %}
                               {% if sponsor.is_visible %}
-                                <div class="col-md-6 g-mb-10">
+                                <div class="col-md-4 g-mb-30">
                                   {% if sponsor.show_biography %}
                                   <a  href="#{{ sponsor.name }}" data-modal-target="#{{ sponsor.name }}" data-modal-effect="blur" >
                                     <img class='img-responsive'  style="width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
@@ -212,7 +223,7 @@
                                                 </li>
                                               {% else %}
                                                   <p></p>
-                                              {% endif %}
+                                              {% endif %}      
                                               
                                               {% if sponsor.linkedin %}
                                               <li class="list-inline-item g-mx-2">
@@ -224,6 +235,19 @@
                                               {% else %}
                                                   <p></p>
                                               {% endif %}
+
+                                              {% if sponsor.youtube %}
+                                              <li class="list-inline-item g-mx-2">
+                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-youtube--hover rounded-circle" href="{{ sponsor.youtube }}" target="/">
+                                                  <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-youtube"></i>
+                                                  <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-youtube"></i>
+                                                </a>
+                                              </li>
+                                              {% else %}
+                                                  <p></p>
+                                              {% endif %}
+
+                                              
                       
                                             </ul>
                                           </div>
@@ -336,6 +360,17 @@
                                                 <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
                                                   <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
                                                   <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
+                                                </a>
+                                              </li>
+                                              {% else %}
+                                                  <p></p>
+                                              {% endif %}
+
+                                              {% if sponsor.youtube %}
+                                              <li class="list-inline-item g-mx-2">
+                                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-youtube--hover rounded-circle" href="{{ sponsor.youtube }}" target="/">
+                                                  <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-youtube"></i>
+                                                  <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-youtube"></i>
                                                 </a>
                                               </li>
                                               {% else %}

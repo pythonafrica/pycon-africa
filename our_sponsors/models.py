@@ -40,6 +40,7 @@ class Sponsor(models.Model):
     website = models.URLField(default='', help_text='Link to Sponsor website', blank=True,)
     twitter = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
     linkedin = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
+    youtube = models.URLField(max_length=100, null=True, help_text="Please enter organization youtube channel link' ", default="", blank=True,)
     description = models.TextField(default='', help_text = "Description of the Sponsor", blank=True, null=True
                              )
     created_date = models.DateTimeField(default=timezone.now)
