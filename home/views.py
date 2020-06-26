@@ -42,9 +42,9 @@ def sponsor(request):
 
 
 
-def cfp(request):
-    context = {"cfp": "active"}
-    template = 'cfp.html'
+def tickets(request):
+    context = {"tickets": "active"}
+    template = 'tickets.html'
     return render(request, template, context)
 
 

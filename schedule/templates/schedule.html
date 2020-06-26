@@ -1,20 +1,377 @@
-{% extends "base2.html" %}
-{% load i18n %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | Pycon Ghana 2018" %}{% endif %}{% endblock %}
-
+{% extends "base.html" %}
+{% load i18n static %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | Pycon Africa 2020" %}{% endif %}{% endblock %}
 
 
 {% block content %}
 {% include 'navbar.html' %}
-<header id="top" class="sub-header">
-        <div class="container">
-        </div>
-        <!-- end .container -->
-    </header><br><br>
-    <!-- end .sub-header -->
+
+
+   <!-- Section Content -->
+   <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/body1.png' %});">
+    <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
+      <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Schedule </h3>
+        <br>
+        <br>
+    </div>
+  </section>
+  <!-- End Section Content -->
+ 
+
+
     <!--
      Our Schedule
      ====================================== -->
+     <div class="container">
+        <div class="row">
+            <div class="u-shadow-v1-5 g-line-height-2 g-pa-30 g-mb-20 " role="alert">
+                
+        
+
+
+              <!-- Nav tabs -->
+              <ul class="nav text-center nav-justified u-nav-v7-1" role="tablist" data-target="nav-7-1-accordion-hor-left-big-icons" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--1" role="tab">
+                    <i class="icon-christmas-037 d-block g-font-size-25 u-tab-line-icon-pro"></i>
+                    Day 1
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--2" role="tab">
+                    <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
+                    Day 2
+                  </a>
+                </li>
+               
+              
+               
+              </ul>
+              <!-- End Nav tabs -->
+
+              <!-- Tab panes -->
+              <div id="nav-7-1-accordion-hor-left-big-icons" class="tab-content g-pt-20--md">
+                <div class="tab-pane fade show active" id="nav-7-1-accordion-hor-left-big-icons--1" role="tabpanel">
+                  
+                    {% for talks in schedule_one %}
+
+
+
+
+            <!-- Timeline Box -->
+            <ul class="row u-timeline-v2-wrap list-unstyled">
+
+              <li class="col-md-12 g-mb-40">
+                <div class="row">
+                  <!-- Timeline Date -->
+                  <div class="col-md-3 text-md-right g-pt-20--md g-pr-40--md g-mb-20">
+                    <h5 class="h6 g-font-weight-700 mb-0">Talk</h5>
+                    <h4 class="h4 g-font-weight-300">{{ talks.start_time.time }} - {{ talks.end_time.time }}</h4>
+                  </div>
+                  <!-- End Timeline Date -->
+
+                  <!-- Timeline Content -->
+                  <div class="col-md-9 g-orientation-left g-pl-40--md">
+                    <!-- Timeline Dot -->
+                    <div class="g-hidden-sm-down u-timeline-v2__icon g-top-35">
+                      <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                    </div>
+                    <!-- End Timeline Dot -->
+
+                    <article class="g-pos-rel g-bg-gray-light-v5 g-pa-30">
+                      <!-- Timeline Arrow -->
+                      <div class="g-hidden-sm-down u-triangle-inclusive-v1--right g-top-30 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--right__back g-brd-gray-light-v5-right"></div>
+                      </div>
+                      <div class="g-hidden-md-up u-triangle-inclusive-v1--top g-left-20 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--top__back g-brd-gray-light-v5-bottom"></div>
+                      </div>
+                      <!-- End Timeline Arrow -->
+
+                    
+
+
+
+                       <!-- Panel Body -->
+                <div class="media">
+                  <img class="d-flex g-width-50 g-height-50 rounded-circle g-mt-2 g-mr-20" src="{{ talks.talk.speaker.profile_image.url }}" alt="img">
+                  
+                  
+                  <div class="media-body">
+                    <div class="d-sm-flex justify-content-sm-between align-items-sm-center g-mb-15 g-mb-10--sm">
+                      <header class="g-mb-5 g-mb-0--sm">
+                            <h5 class="h6 g-font-weight-600 g-color-black g-mb-3">
+                                <span class="g-mr-5">{{ talks.talk.speaker_name }}</span>
+                            </h5>
+                        <div class="js-rating g-color-yellow" data-rating="5"></div>
+                      </header>
+                      <div class="align-self-center ml-auto">
+                        <span class="u-label u-label--sm g-bg-blue g-rounded-20 g-px-10"><b>{{ talks.talk.talk_type }}</b></span>
+                        <span class="u-label u-label--sm g-bg-green g-rounded-20 g-px-10"><b>{{ talks.room }}</b></span>
+                      </div>
+                    </div>
+                    <div class="d-block">
+                      <em class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                <hr class="g-brd-gray-light-v4 g-my-20">
+                 
+
+
+              <!-- End Panel Body -->
+                    
+                    
+                    
+                    
+                    
+                    </article>
+                  </div>
+                  <!-- End Timeline Content -->
+                </div>
+              </li>
+
+            </ul>
+            <!-- End Timeline Box -->
+            {% endfor %}
+                </div>
+                
+                
+                <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--2" role="tabpanel">
+                    
+
+            <!-- Timeline Box -->
+            <ul class="row u-timeline-v2-wrap list-unstyled">
+              <li class="col-md-12 g-mb-40">
+                <div class="row">
+                  <!-- Timeline Date -->
+                  <div class="col-md-3 text-md-right g-pt-20--md g-pr-40--md g-mb-20">
+                    <h5 class="h6 g-font-weight-700 mb-0">2012</h5>
+                    <h4 class="h4 g-font-weight-300">Founded</h4>
+                  </div>
+                  <!-- End Timeline Date -->
+
+                  <!-- Timeline Content -->
+                  <div class="col-md-9 g-orientation-left g-pl-40--md">
+                    <!-- Timeline Dot -->
+                    <div class="g-hidden-sm-down u-timeline-v2__icon g-top-35">
+                      <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                    </div>
+                    <!-- End Timeline Dot -->
+
+                    <article class="g-pos-rel g-bg-gray-light-v5 g-pa-30">
+                      <!-- Timeline Arrow -->
+                      <div class="g-hidden-sm-down u-triangle-inclusive-v1--right g-top-30 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--right__back g-brd-gray-light-v5-right"></div>
+                      </div>
+                      <div class="g-hidden-md-up u-triangle-inclusive-v1--top g-left-20 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--top__back g-brd-gray-light-v5-bottom"></div>
+                      </div>
+                      <!-- End Timeline Arrow -->
+
+                      <header class="g-brd-bottom g-brd-gray-light-v4 g-pb-10 g-mb-25">
+                        <h3 class="g-font-weight-300">Our First Step</h3>
+                      </header>
+
+                      <p class="lead g-mb-25">Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress cress avocado grape.</p>
+                      <img class="g-height-120 g-width-120 g-mb-25 g-mr-20" src="../../assets/img-temp/100x100/img11.jpg" alt="Image description">
+                      <img class="g-height-120 g-width-120 g-mb-25 g-mr-20" src="../../assets/img-temp/100x100/img12.jpg" alt="Image description">
+                      <img class="g-height-120 g-width-120 g-mb-25" src="../../assets/img-temp/100x100/img13.jpg" alt="Image description">
+                      <p class="lead mb-0">Pea cress potato sprouts wattle seed rutabaga okra yarrow green bean cucumber watercress cress avocado grape. Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok choy squash cress potato.</p>
+                    </article>
+                  </div>
+                  <!-- End Timeline Content -->
+                </div>
+              </li>
+
+              <li class="col-md-12 g-mb-40">
+                <div class="row">
+                  <!-- Timeline Date -->
+                  <div class="col-md-3 text-md-right g-pt-20--md g-pr-40--md g-mb-20">
+                    <h5 class="h6 g-font-weight-700 mb-0">2015</h5>
+                    <h4 class="h4 g-font-weight-300">Achievements</h4>
+                  </div>
+                  <!-- End Timeline Date -->
+
+                  <!-- Timeline Content -->
+                  <div class="col-md-9 g-orientation-left g-pl-40--md">
+                    <!-- Timeline Dot -->
+                    <div class="g-hidden-sm-down u-timeline-v2__icon g-top-35">
+                      <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                    </div>
+                    <!-- End Timeline Dot -->
+
+                    <article class="g-pos-rel g-bg-gray-light-v5 g-pa-30">
+                      <!-- Timeline Arrow -->
+                      <div class="g-hidden-sm-down u-triangle-inclusive-v1--right g-top-30 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--right__back g-brd-gray-light-v5-right"></div>
+                      </div>
+                      <div class="g-hidden-md-up u-triangle-inclusive-v1--top g-left-20 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--top__back g-brd-gray-light-v5-bottom"></div>
+                      </div>
+                      <!-- End Timeline Arrow -->
+
+                      <header class="g-brd-bottom g-brd-gray-light-v3 g-pb-10 g-mb-25">
+                        <h3 class="g-font-weight-300">Our Achievements</h3>
+                      </header>
+
+                      <p class="lead g-mb-25">Sprouts wattle seed pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea cress potato sprouts wattle seed rutabaga okra yarrow cress avocado grape.</p>
+                      <div class="row g-mb-15">
+                        <div class="col-md-5 g-mb-25 g-mb-0--md">
+                          <img class="img-fluid w-100" src="../../assets/img-temp/400x270/img9.jpg" alt="Image description">
+                        </div>
+                        <div class="col-md-7">
+                          <ul class="list-unstyled g-color-gray-dark-v4 g-mb-0">
+                            <li class="d-flex g-mb-10">
+                              <i class="icon-check g-color-primary g-mt-5 g-mr-10"></i> Based on Botostrap 4
+                            </li>
+                            <li class="d-flex g-mb-10">
+                              <i class="icon-check g-color-primary g-mt-5 g-mr-10"></i> Responsive Bootstrap Template
+                            </li>
+                            <li class="d-flex g-mb-10">
+                              <i class="icon-check g-color-primary g-mt-5 g-mr-10"></i> Semantic HTML5/CSS3 Codes
+                            </li>
+                            <li class="d-flex g-mb-10">
+                              <i class="icon-check g-color-primary g-mt-5 g-mr-10"></i> Great SASS Architecture
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <p class="lead mb-0">Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok choy squash cress potato.</p>
+                    </article>
+                  </div>
+                  <!-- End Timeline Content -->
+                </div>
+              </li>
+
+              <li class="col-md-12">
+                <div class="row">
+                  <!-- Timeline Date -->
+                  <div class="col-md-3 text-md-right g-pt-20--md g-pr-40--md g-mb-20">
+                    <h5 class="h6 g-font-weight-700 mb-0">2017</h5>
+                    <h4 class="h4 g-font-weight-300">Our Products</h4>
+                  </div>
+                  <!-- End Timeline Date -->
+
+                  <!-- Timeline Content -->
+                  <div class="col-md-9 g-orientation-left g-pl-40--md">
+                    <!-- Timeline Dot -->
+                    <div class="g-hidden-sm-down u-timeline-v2__icon g-top-35">
+                      <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                    </div>
+                    <!-- End Timeline Dot -->
+
+                    <article class="g-pos-rel g-bg-gray-light-v5 g-pa-30">
+                      <!-- Timeline Arrow -->
+                      <div class="g-hidden-sm-down u-triangle-inclusive-v1--right g-top-30 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--right__back g-brd-gray-light-v5-right"></div>
+                      </div>
+                      <div class="g-hidden-md-up u-triangle-inclusive-v1--top g-left-20 g-z-index-2">
+                        <div class="u-triangle-inclusive-v1--top__back g-brd-gray-light-v5-bottom"></div>
+                      </div>
+                      <!-- End Timeline Arrow -->
+
+                      <header class="g-brd-bottom g-brd-gray-light-v3 g-pb-10 g-mb-25">
+                        <h3 class="g-font-weight-300">Premium &amp; Freebie Products</h3>
+                      </header>
+
+                      <p class="lead g-mb-20">Sprouts wattle seed pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea cress potato sprouts wattle seed rutabaga okra yarrow cress avocado grape.</p>
+
+                      <div class="row">
+                        <div class="col-sm-6 g-mb-20">
+                          <div class="d-flex">
+                            <span class="u-icon-v3 g-bg-teal g-color-white g-mt-2 g-mr-15">
+                                <i class="icon-directions"></i>
+                              </span>
+
+                            <div class="g-line-height-1">
+                              <h4 class="h5 g-font-weight-300">Overal Visits</h4>
+                              <div class="js-counter g-color-gray-dark-v4 g-font-size-18" data-comma-separated="true">52147</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6 g-mb-20">
+                          <div class="d-flex">
+                            <span class="u-icon-v3 g-bg-pink g-color-white g-mt-2 g-mr-15">
+                                <i class="icon-layers"></i>
+                              </span>
+
+                            <div class="g-line-height-1">
+                              <h4 class="h5 g-font-weight-300">Layouts</h4>
+                              <div class="js-counter g-color-gray-dark-v4 g-font-size-18" data-comma-separated="true">324056</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6 g-mb-20 g-mb-0--sm">
+                          <div class="d-flex">
+                            <span class="u-icon-v3 g-bg-aqua g-color-white g-mt-2 g-mr-15">
+                                <i class="icon-trophy"></i>
+                              </span>
+
+                            <div class="g-line-height-1">
+                              <h4 class="h5 g-font-weight-300">New Features</h4>
+                              <div class="js-counter g-color-gray-dark-v4 g-font-size-18" data-comma-separated="true">15147</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                          <div class="d-flex">
+                            <span class="u-icon-v3 g-bg-purple g-color-white g-mt-2 g-mr-15">
+                                <i class="icon-badge"></i>
+                              </span>
+
+                            <div class="g-line-height-1">
+                              <h4 class="h5 g-font-weight-300">Messages</h4>
+                              <div class="js-counter g-color-gray-dark-v4 g-font-size-18" data-comma-separated="true">37283</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                  <!-- End Timeline Content -->
+                </div>
+              </li>
+            </ul>
+            <!-- End Timeline Box -->
+  
+                </div>
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+
+        </div>
+      </div>
+      </div>
+
+
+
+
+
+
 
     <section class="schedule" id="schedule">
         <div class="col-md-12">
@@ -48,8 +405,8 @@
                                     <!-- timeline-bullet -->
 
                                     <div class="timeline-content">
-                                        <h2 class="wow flipInX" data-wow-delay="0.3s">{{ talks.talk.title }}</h2>
-                                        <p class="wow flipInX" data-wow-delay="0.3s">by <b>{{ talks.talk.user.first_name }} {{ talks.talk.user.last_name }}</b><br><p style="color:darkred ">{{ talks.talk.talk_type }}</p></p>
+                                        <h2 class="wow flipInX" data-wow-delay="0.3s">{{ talks.talk.talk_title }}</h2>
+                                        <p class="wow flipInX" data-wow-delay="0.3s">by <b>{{ talks.talk.speaker_name }}</b><br><p style="color:darkred ">{{ talks.talk.talk_type }}</p></p>
                                         <span class="date wow flipInX" data-wow-delay="0.3s">{{ talks.start_time.time }} - {{ talks.end_time.time }}<br>Venue: {{ talks.room }}</span>
                                     </div>
                                     <!-- timeline-content -->

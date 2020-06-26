@@ -11,6 +11,6 @@ urlpatterns = [
     path('coc/guidelines', view=views.guidelines, name='guidelines'),
     path('sponsor-us/', view=views.sponsor, name='sponsor'),
     path('sponsor/', view=views.sponsor, name='sponsor'),
-    path('cfp/', view=views.cfp, name='cfp'),
+    path('tickets/', view=views.tickets, name='tickets'),
     
 ]

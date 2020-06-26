@@ -67,7 +67,7 @@ class Speaker(models.Model):
 
 
  
- 
+  
 class Talk(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     speaker_name = models.ForeignKey(Speaker, default="", on_delete=models.CASCADE)

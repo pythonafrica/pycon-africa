@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.views.generic import ListView
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
-from .models import *
+from .models import Speaker, Talk
 from .forms import SpeakerForm
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -17,6 +17,7 @@ class Speakers(ListView):
     def get_context_data(self, **kwargs):
         context = super(Speakers, self).get_context_data(**kwargs)
         context['speakers'] = Speaker.objects.all()
+        context['talk'] = Talk.objects.all()
         return context
 
 
