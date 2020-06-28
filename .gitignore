@@ -1,11 +1,14 @@
 *.pyc
-*.pyo
-*.db
+*~
+__pycache__
+myvenv
+db.sqlite3
 .DS_Store
-.coverage
-local_settings.py
 secrets.py
 #static
+media
+
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
