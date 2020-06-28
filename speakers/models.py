@@ -36,7 +36,7 @@ class Speaker(models.Model):
     profile_image = ProcessedImageField(upload_to='speakers/',default="speakers/speaker.png", processors=[ResizeToFit(600, 600, upscale=False)], format='jpeg', options={'quality': 90})
     profession = models.CharField(max_length=200, null=True, default="", blank=True, help_text="Speaker's profession. eg. Software Developer")
     country = models.CharField(max_length=100, null=True, default="", blank=True, help_text="City and Country the speaker is from eg. Accra, Ghana")
-    biography = models.TextField(max_length=600, null=True, default="", help_text="The bio of the speaker")
+    biography = models.TextField(null=True, default="", help_text="The bio of the speaker")
     twitter = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
     github = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
     linkedin = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'/mawy_7' ", default="", blank=True,)
