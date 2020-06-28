@@ -74,6 +74,7 @@
               </div>
             </div>
 
+
           </div>
         </div>
 
@@ -236,7 +237,29 @@
       </section>
       <!-- End Timeline -->
 
-
+      {% if user.is_authenticated %}
+      <section class=" g-color-white g-py-40 g-px-30">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 align-self-lg-center">
+              <img class="img-fluid w-100 g-mb-30 g-mb-0--lg" src="{% static '2020/img/Wcfp.png' %}" alt="Image description">
+            </div>
+      
+            <div class="text-center g-color-primary col-lg-7 align-self-lg-center">
+              <h2 class="h2 g-font-weight-700 g-color-primary text-uppercase g-font-weight-300">Registaions are open!</h2>
+          <p class="g-color-black g-font-size-16"> 
+            Pycon Africa is going virtual in August 2020! 
+            You can now get your spot!
+          </p>
+          <br>
+          <a class="btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13 g-font-size-20" href="/tickets" ><b>Register now!</b></a>
+  
+        </div>
+      
+          </div>
+        </div>
+      </section>
+      {% else %}
       <section class=" g-color-white g-py-40 g-px-30">
         <div class="container">
           <div class="row">
@@ -259,6 +282,9 @@
         </div>
       </section>
 
+      {% endif %}
+
+     
 
       <section class="g-pt-20 g-pb-90 g-pb-170--md">
         <div class="text-center g-mb-70">

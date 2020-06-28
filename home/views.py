@@ -41,6 +41,13 @@ def sponsor(request):
 
 
 
+def speakers(request):
+    context = {"speakers": "active"}
+    template = 'speaker_list.html'
+    return render(request, template, context)
+
+
+
 
 def tickets(request):
     context = {"tickets": "active"}

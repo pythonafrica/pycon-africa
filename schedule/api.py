@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .serializers import DaySerializer, TalkScheduleSerializer, TalkSerializer, EventSerializer, SpeakerSerializer
 from .models import Day, TalkSchedule, Event
-from speakers.models import Talk, Speaker
+from speakers.models import Speaker
 
 
  

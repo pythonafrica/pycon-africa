@@ -44,9 +44,11 @@
                          <!-- Figure Info -->
                          <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
                          <div class="d-block">
-                           <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:80 }}</em>
+                           <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
                            
                          </div>
+                         <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+            
                          <!-- End Figure Info -->
                        </div>
  

@@ -22,6 +22,75 @@ data-header-fix-moment-classes="dark-theme u-shadow-v18 g-bg-white-opacity-0_9">
         data-header-fix-moment-classes="d-block">
  </a>
  <!-- End Logo -->
+ {% if user.is_authenticated %}
+
+  <!-- Navigation -->
+  <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar" data-mobile-scroll-hide="true">
+    <ul class="navbar-nav text-uppercase g-font-weight-700 g-font-size-11 g-pt-20 g-pt-5--lg ml-auto">
+      <li class="nav-item g-mr-15--lg g-mb-7 g-mb-0--lg {{ home }}">
+        <a href="/" class="nav-link p-0">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+      <!-- 
+      <div class="dropdown nav-item g-ml-15--lg {{ about }}">
+        <a href="#" class="dropbtn nav-link p-0">
+          <span>
+            About
+            <i class="g-color-yellow fa fa-chevron-circle-down g-mr-3"></i>
+          </span>
+        </a>
+        <div class="dropdown-content">
+          <a href="/about" class="nav-link p-0 {{ sponsor }}">About Us<span class="sr-only">(current)</span></a>
+          <a href="/team" class="nav-link p-0 {{ sponsor }}">Team<span class="sr-only">(current)</span></a>
+        </div>
+      </div> 
+     -->
+
+      <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg {{ about }}">
+        <a href="/about" class="nav-link p-0">About <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg {{ speakers }}">
+        <a href="/speakers" class="nav-link p-0">Speakers <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg {{ schedule }}">
+        <a href="/schedule" class="nav-link p-0">Schedule <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item g-mx-15--lg g-mb-7 g-mb-0--lg ">
+        <a href="https://pyconafrica.blogspot.com/" target="/" class="nav-link p-0">Blog</a>
+      </li>
+      <li class="nav-item g-ml-15--lg {{ coc }}">
+        <a href="/coc" class="nav-link p-0">Code of Conduct <span class="sr-only">(current)</span></a>
+      </li>
+      <div class="dropdown nav-item g-ml-15--lg {{ sponsors }}">
+        <a href="#" class="dropbtn nav-link p-0">
+          <span>
+            Sponsor
+            <i class="g-color-yellow fa fa-chevron-circle-down g-mr-3"></i>
+          </span>
+        </a>
+        <div class="dropdown-content">
+          <a href="/sponsor-us" class="nav-link p-0 {{ sponsor }}">Sponsor Us<span class="sr-only">(current)</span></a>
+          <a href="/our-sponsors" class="nav-link p-0 {{ sponsor }}">Our Sponsors<span class="sr-only">(current)</span></a>
+        </div>
+      </div> 
+     
+      <li class="nav-item g-ml-15--lg ">
+        <a href="/2019/report" class="nav-link p-0" target="/">2019</a>
+      </li>
+
+      <li class="nav-item g-ml-15--lg ">
+        <a href="/tickets" class="btn btn-sm u-btn-yellow g-color-primary g-mr-10 g-mb-15"><b>Register</b></a>
+      </li>
+
+
+    </ul>
+  </div>
+  <!-- End Navigation -->
+      
+ {% else %}
+ 
+ 
   <!-- Navigation -->
   <div class="collapse navbar-collapse align-items-center flex-sm-row" id="navBar" data-mobile-scroll-hide="true">
     <ul class="navbar-nav text-uppercase g-font-weight-700 g-font-size-11 g-pt-20 g-pt-5--lg ml-auto">
@@ -37,7 +106,6 @@ data-header-fix-moment-classes="dark-theme u-shadow-v18 g-bg-white-opacity-0_9">
       <li class="nav-item g-ml-15--lg {{ coc }}">
         <a href="/coc" class="nav-link p-0">Code of Conduct <span class="sr-only">(current)</span></a>
       </li>
-      {% if user.is_authenticated %}
       <div class="dropdown nav-item g-ml-15--lg">
         <a href="#" class="dropbtn nav-link p-0">
           <span>
@@ -50,28 +118,15 @@ data-header-fix-moment-classes="dark-theme u-shadow-v18 g-bg-white-opacity-0_9">
           <a href="/our-sponsors" class="nav-link p-0 {{ sponsor }}">Our Sponsors</a>
         </div>
       </div> 
-
-      {% else %}
-      <div class="dropdown nav-item g-ml-15--lg">
-        <a href="#" class="dropbtn nav-link p-0">
-          <span>
-            Sponsor
-            <i class="g-color-yellow fa fa-chevron-circle-down g-mr-3"></i>
-          </span>
-        </a>
-        <div class="dropdown-content">
-          <a href="/sponsor-us" class="nav-link p-0 {{ sponsor }}">Sponsor Us</a>
-          <a href="/our-sponsors" class="nav-link p-0 {{ sponsor }}">Our Sponsors</a>
-        </div>
-      </div> 
-      {% endif %}
-
+     
       <li class="nav-item g-ml-15--lg ">
         <a href="/2019/report" class="nav-link p-0" target="/">2019</a>
       </li>
     </ul>
   </div>
   <!-- End Navigation -->
+
+  {% endif %}
 
  <!-- Responsive Toggle Button -->
  <button class="navbar-toggler btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-15 g-right-0" type="button"
