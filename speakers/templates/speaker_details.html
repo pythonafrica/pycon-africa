@@ -163,23 +163,26 @@
                   <p></p>
                     {% endif %}
 
-                    <span class="u-icon-v2 g-color-lightred g-mr-15 g-mb-15">
-                      <i class="fa fa-group"></i>
-                    </span>
                     {% if speaker.beginner_level %}
-                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15">Beginner</span>                  
+                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i> Beginner</span>                  
                     {% else %}
                   <p></p>
                     {% endif %}
 
                     {% if speaker.intermediate_level %}
-                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15">Intermediate</span>                  
+                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i> Intermediate</span>                  
                     {% else %}
                   <p></p>
                     {% endif %}
 
                     {% if speaker.expert_level %}
-                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15">Expert</span>                  
+                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i> Expert</span>                  
+                    {% else %}
+                  <p></p>
+                    {% endif %}
+
+                    {% if speaker.all_level %}
+                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i> All</span>                  
                     {% else %}
                   <p></p>
                     {% endif %}

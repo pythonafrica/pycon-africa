@@ -46,6 +46,7 @@ class Speaker(models.Model):
     beginner_level = models.BooleanField(default=False)
     intermediate_level = models.BooleanField(default=False)
     expert_level = models.BooleanField(default=False)
+    all_level = models.BooleanField(default=False)
     youtube_vide_url = models.URLField(default="", blank=True, help_text='Link to Talk on youtube Video')
     youtube_iframe_url = models.URLField(max_length=300,default="", blank=True, help_text='Link to Youtube Iframe')
     created_date = models.DateTimeField(default=timezone.now)
