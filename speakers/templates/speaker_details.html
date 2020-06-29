@@ -42,13 +42,12 @@
 
                       {% if speaker.twitter %}
                       <li class="list-inline-item g-mx-2">
-                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
+                        <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ speaker.twitter }}" target="/">
                           <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
                           <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
                         </a>
                       </li>
                     {% else %}
-                        <p></p>
                     {% endif %}
 
                     {% if speaker.github %}
@@ -59,7 +58,6 @@
                         </a>
                       </li>
                     {% else %}
-                      <p></p>
                     {% endif %}
 
                     {% if speaker.linkedin %}
@@ -70,7 +68,6 @@
                         </a>
                       </li>
                     {% else %}
-                        <p></p>
                     {% endif %}
                     </ul>
                   </div>
@@ -78,7 +75,7 @@
 
                   <!-- Speaker Position -->
                   <h4 class="h6 g-font-weight-300 g-mb-10">
-                      <i class="icon-badge g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v5"></i> {{ speaker.profession }}
+                      <i class="icon-organization g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v5"></i> {{ speaker.profession }}
                     </h4>
                   <!-- End Speaker Position -->
 
@@ -107,7 +104,7 @@
                 <div class="col-lg-4 text-center align-items-center g-mb-40 g-mb-0--lg ">
                   <!-- Speaker Image -->
                   <div class="g-mb-20 align-items-center">
-                    <img class="g-width-200 g-height-200 rounded-circle g-mb-20" src="{{ speaker.profile_image.url }}" alt="{{ speaker.speaker_name }}">
+                    <img class="g-width-200 g-height-200 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{{ speaker.profile_image.url }}" alt="{{ speaker.speaker_name }}">
                   
                   </div>
                   <!-- Speaker Image -->

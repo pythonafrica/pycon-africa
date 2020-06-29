@@ -11,8 +11,8 @@ class TalktypeAdmin(admin.ModelAdmin):
 
 
 class SpeakerAdmin(SummernoteModelAdmin):
-    list_display = ("speaker_name", "talk_title", "created_date", "updated")
-    list_filter = ("speaker_name", "talk_title", "created_date", "updated")
+    list_display = ("speaker_name", "talk_title", "talk_type", "created_date", "updated")
+    list_filter = ("speaker_name", "talk_title", "talk_type", "created_date", "updated")
     summernote_fields = '__all__'
 
 
