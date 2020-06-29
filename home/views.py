@@ -56,5 +56,11 @@ def tickets(request):
 
 
 
+def team(request):
+    context = {"about": "active"}
+    template = 'team.html'
+    return render(request, template, context)
+
+
 def handler404(request, exception):
     return render(request, '404.html', locals())
