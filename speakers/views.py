@@ -6,8 +6,8 @@ from django.views.generic.detail import DetailView
 from .forms import SpeakerForm
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
+from next_prev import next_in_order, prev_in_order
+ 
 from .models import *
 from .models import Speaker
 
@@ -25,6 +25,7 @@ class SpeakerDetailView(HitCountDetailView):
     slug_field = 'slug'
     # set to True to count the hit
     count_hit = True
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super(SpeakerDetailView, self).get_context_data(**kwargs)
@@ -62,3 +63,18 @@ def speaker_edit(request, pk):
     else:
         form = SpeakerForm(instance=speaker)
     return render(request, 'speaker_edit.html', {'form': form})
+
+
+
+
+# default ordering
+first = Speaker.objects.first()
+second = next_in_order(first)
+prev_in_order(second) == first # True
+last = prev_in_order(first, loop=True)
+
+# custom ordering
+qs = Speaker.objects.all().order_by('-created_date')
+newest = qs.first()
+second_newest = next_in_order(newest, qs=qs)
+oldest = prev_in_order(newest, qs=qs, loop=True)

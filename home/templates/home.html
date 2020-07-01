@@ -116,44 +116,62 @@
       <!-- End Section Content -->
 
       <!-- Timeline -->
-      <section class="g-pt-150 g-pb-90 g-pb-170--md">
+      <section class="g-pt-150 g-pb-90 g-pb-170--md ">
         <div class="container">
-          <div class="text-center g-mb-70">
+          <div class="text-center g-mb-70 align-self-center">
             <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">Important
               <span class="g-font-weight-400 g-font-size-40">|</span>
               <span class="g-color-primary">Timelines</span></h2>
 
               
-          <div class="row">
+          <div class="row justify-content-center">
 
-            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+            <div class="col-sm-8 col-md-2 text-center text-md-left g-mb-30 g-mb-0--md">
               <div class="media">
                 <div class="media-left d-flex align-self-center g-hidden-sm-down g-color-black g-mr-20">
                   <i class="fa fa-calendar g-font-size-27 "></i>
                 </div>
 
                 <div class="media-body text-uppercase">
-                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">CFP Opens</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">14<sup>th</sup> May</h3>
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 1</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">4<sup>th</sup> August</h3>
                
                </div>
               </div>
             </div>
            
-            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+            <div class="col-sm-8 col-md-2 text-center text-md-left g-mb-30 g-mb-0--md">
               <div class="media">
                 <div class="media-body text-uppercase">
-                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">CFP Closes</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">5<sup>th</sup> June</h3>
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 2</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">5<sup>th</sup> August</h3>
                   </div>
               </div>
             </div>
            
-            <div class="col-sm-8 col-md-4 text-center text-md-left g-mb-30 g-mb-0--md">
+            <div class="col-sm-8 col-md-2 text-center text-md-left g-mb-30 g-mb-0--md">
               <div class="media">
                 <div class="media-body text-uppercase">
-                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Accepted talks announced</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">15<sup>th</sup> June</h3>
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 3</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">6<sup>th</sup> August</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-8 col-md-2 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 4</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">7<sup>th</sup> August</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-8 col-md-2 text-center text-md-left g-mb-30 g-mb-0--md">
+              <div class="media">
+                <div class="media-body text-uppercase">
+                  <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 5</strong></p>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">8<sup>th</sup> August</h3>
                 </div>
               </div>
             </div>
@@ -238,27 +256,103 @@
       <!-- End Timeline -->
 
       {% if user.is_authenticated %}
+
+       <!-- Register Section Content -->
       <section class=" g-color-white g-py-40 g-px-30">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 align-self-lg-center">
-              <img class="img-fluid w-100 g-mb-30 g-mb-0--lg" src="{% static '2020/img/Wcfp.png' %}" alt="Image description">
+              <img class="img-fluid w-100 g-mb-30 g-mb-0--lg" src="{% static '2020/img/register.png' %}" alt="Image description">
             </div>
       
             <div class="text-center g-color-primary col-lg-7 align-self-lg-center">
-              <h2 class="h2 g-font-weight-700 g-color-primary text-uppercase g-font-weight-300">Registaions are open!</h2>
+              <h2 class="h2 g-font-weight-700 g-color-primary text-uppercase g-font-weight-300">Registations are open!</h2>
           <p class="g-color-black g-font-size-16"> 
             Pycon Africa is going virtual in August 2020! 
             You can now get your spot!
           </p>
           <br>
-          <a class="btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13 g-font-size-20" href="/tickets" ><b>Register now!</b></a>
-  
+          <a href="/tickets" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-outline-primary g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15"> 
+            Register now!
+            <i class="fa fa-ticket g-ml-3"></i>
+          </a>
         </div>
-      
+       
           </div>
         </div>
       </section>
+      <!-- End Register Section Content -->
+
+
+      <!-- Speakers Section Content -->
+      <section  class=" g-py-100">
+        <div class="container">
+          <div class="text-center g-mb-70">
+            <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">Our
+              <span class="g-font-weight-400 g-font-size-40">|</span>
+              <span class="g-color-primary">Speakers</span></h2>
+          </div>
+
+          <div class="masonry-grid row">
+            <div class="masonry-grid-sizer col-sm-1"></div>
+
+
+            {% for keynote in keynotes %}
+             
+            <div class="masonry-grid-item col-sm-3 col-6 text-center">
+              <article class="g-bg-white">
+                <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ keynote.profile_image.url }}" alt="Image description">
+
+                <div class="u-shadow-v24 g-pa-30">
+                  <header class="g-mb-20">
+                    <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-14 mb-0">
+                      {{ keynote.speaker_name }}
+                    </h3>
+                    <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
+                    
+                  </header>
+                   <!-- Figure List -->
+                 <ul class="row list-inline g-py-20 g-ma-0">
+                  <li class="col g-brd-right g-brd-gray-light-v4">
+                    <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ keynote.speaker_name }}'s Profile" href="{% url 'home:keynote_details' keynote.slug %}">
+                      
+                      <i class="icon-user"></i>
+                    </a>
+                  </li>
+
+                  {% if keynote.linkedin %}
+                  <li class="col g-brd-right g-brd-gray-light-v4">
+                    <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with {{ keynote.speaker_name }}" target="/" href="https://www.linkedin.com/{{ keynote.linkedin }}">
+                      <i class="icon-social-linkedin"></i>
+                    </a>
+                  </li>
+                  {% else %}
+                    {% endif %}
+                </ul>
+                <!-- End Figure List -->
+                </div>
+                
+              </article>
+            </div>
+            
+            {% empty %} 
+            <h4>There is nothing in this list </h4> 
+            {% endfor %} 
+
+          </div>
+
+          <div class="text-center"><br><br> 
+            <a href="/speakers" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-outline-primary g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15"> 
+              View more speakers
+            <i class="fa fa-vcard g-ml-3"></i>
+            </a>
+          </div>
+
+        </div>
+      </section>
+      <!-- End Speakers Section Content -->
+
+
       {% else %}
       <section class=" g-color-white g-py-40 g-px-30">
         <div class="container">
@@ -285,8 +379,9 @@
       {% endif %}
 
      
+      
 
-      <section class="g-pt-20 g-pb-90 g-pb-170--md">
+      <section class="g-pt-20 g-pb-90 g-pb-170--md ">
         <div class="text-center g-mb-70">
           <br>
             <p class="g-color-black g-font-size-16">
