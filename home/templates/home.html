@@ -298,7 +298,7 @@
 
 
             {% for keynote in keynotes %}
-             
+            {% if keynote.is_visible %}
             <div class="masonry-grid-item col-sm-3 col-6 text-center">
               <article class="g-bg-white">
                 <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ keynote.profile_image.url }}" alt="Image description">
@@ -334,7 +334,8 @@
                 
               </article>
             </div>
-            
+            {% else %}
+            {% endif %}
             {% empty %} 
             <h4>There is nothing in this list </h4> 
             {% endfor %} 
