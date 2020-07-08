@@ -16,6 +16,7 @@ class Speakers(ListView):
    model = Speaker
    template_name = 'speaker_list.html'
    context_object_name = 'speakers'
+   ordering = ['created_date']
    
 
 class SpeakerDetailView(HitCountDetailView):

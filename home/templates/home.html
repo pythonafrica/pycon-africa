@@ -134,7 +134,7 @@
 
                 <div class="media-body text-uppercase">
                   <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 1</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">4<sup>th</sup> August</h3>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">4<sup>th</sup> Aug</h3>
                
                </div>
               </div>
@@ -144,7 +144,7 @@
               <div class="media">
                 <div class="media-body text-uppercase">
                   <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 2</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">5<sup>th</sup> August</h3>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">5<sup>th</sup> Aug</h3>
                   </div>
               </div>
             </div>
@@ -153,7 +153,7 @@
               <div class="media">
                 <div class="media-body text-uppercase">
                   <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 3</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">6<sup>th</sup> August</h3>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">6<sup>th</sup> Aug</h3>
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@
               <div class="media">
                 <div class="media-body text-uppercase">
                   <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 4</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">7<sup>th</sup> August</h3>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">7<sup>th</sup> Aug</h3>
                 </div>
               </div>
             </div>
@@ -171,7 +171,7 @@
               <div class="media">
                 <div class="media-body text-uppercase">
                   <p class="g-mb-5"><strong class="g-font-size-12 g-color-black">Day 5</strong></p>
-                  <h3 class="h3 g-font-size-15 g-color-black mb-0">8<sup>th</sup> August</h3>
+                  <h3 class="h3 g-font-size-15 g-color-black mb-0">8<sup>th</sup> Aug</h3>
                 </div>
               </div>
             </div>
@@ -286,72 +286,65 @@
 
       <!-- Speakers Section Content -->
       <section id="keynotes" class=" g-py-100">
-        <div class="container">
-          <div class="text-center g-mb-70">
+          <div class="text-center">
             <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">Our
               <span class="g-font-weight-400 g-font-size-40">|</span>
               <span class="g-color-primary">Speakers</span></h2>
           </div>
 
-          <div class="masonry-grid row">
-            <div class="masonry-grid-sizer col-sm-1"></div>
+            <div class="shortcode-html">
+              <div class="row">
 
-
-            {% for keynote in keynotes %}
-            {% if keynote.is_visible %}
-            <div class="masonry-grid-item col-sm-3 col-6 text-center">
-              <article class="g-bg-white">
-                <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ keynote.profile_image.url }}" alt="Image description">
-
-                <div class="u-shadow-v24 g-pa-30">
-                  <header class="g-mb-20">
-                    <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-14 mb-0">
+                {% for keynote in keynotes %}
+                {% if keynote.is_visible %}
+                <div class="col-lg-3 g-mb-30">
+                  <!-- Testimonials -->
+                  <div class="u-shadow-v19 g-brd-bottom g-brd-3 g-brd-primary-gradient-opacity-v1 g-bg-white text-center g-px-35 g-py-60">
+                    <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ keynote.profile_image.url }}" alt="Image description"><br>
+                    <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-20 mb-0">
                       {{ keynote.speaker_name }}
                     </h3>
-                    <h4 class="g-font-weight-700 g-font-size-10 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
-                    
-                  </header>
-                   <!-- Figure List -->
-                 <ul class="row list-inline g-py-20 g-ma-0">
-                  <li class="col g-brd-right g-brd-gray-light-v4">
-                    <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ keynote.speaker_name }}'s Profile" href="{% url 'home:keynote_details' keynote.slug %}">
-                      
-                      <i class="icon-user"></i>
-                    </a>
-                  </li>
+                    <h4 class="g-font-weight-700 g-font-size-14 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
+                    <hr class="g-brd-gray-light-v4 g-my-15">
+                    <em class="d-block g-color-gray-dark-v4 g-font-style-normal g-font-size-13 g-mb-20"><b>Chair Python Software Foundation</b></em>
+                    <!-- Figure List -->
+                  <ul class="row list-inline g-py-20 g-ma-0">
+                    <li class="col g-brd-right g-brd-gray-light-v4">
+                      <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-primary--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ keynote.speaker_name }}'s Profile" href="{% url 'home:keynote_details' keynote.slug %}">
+                        
+                        <i class="icon-user"></i>
+                      </a>
+                    </li>
 
-                  {% if keynote.linkedin %}
-                  <li class="col g-brd-right g-brd-gray-light-v4">
-                    <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with {{ keynote.speaker_name }}" target="/" href="https://www.linkedin.com/{{ keynote.linkedin }}">
-                      <i class="icon-social-linkedin"></i>
-                    </a>
-                  </li>
-                  {% else %}
-                    {% endif %}
-                </ul>
-                <!-- End Figure List -->
+                    <li class="col g-brd-right g-brd-gray-light-v4">
+                      <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with {{ keynote.speaker_name }}" target="/" href="https://www.twitter.com/{{ keynote.twitter }}">
+                        <i class="icon-social-twitter"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- End Figure List -->
+                  </div>
+                  <!-- End Testimonials -->
                 </div>
+                {% else %}
+                {% endif %}
+                {% empty %} 
+                <h4>There is nothing in this list </h4> 
+                {% endfor %} 
+
                 
-              </article>
+              </div>
             </div>
-            {% else %}
-            {% endif %}
-            {% empty %} 
-            <h4>There is nothing in this list </h4> 
-            {% endfor %} 
 
-          </div>
-
-          <div class="text-center"><br><br> 
-            <a href="/speakers" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-outline-primary g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15"> 
-              View more speakers
-            <i class="fa fa-vcard g-ml-3"></i>
-            </a>
-          </div>
-
-        </div>
-      </section>
-      <!-- End Speakers Section Content -->
+            <div class="text-center"><br><br> 
+              <a href="/speakers" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-outline-primary g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15"> 
+                View more speakers
+              <i class="fa fa-vcard g-ml-3"></i>
+              </a>
+            </div>
+  
+        </section>
+        <!-- End Speakers Section Content -->
 
 
       {% else %}
