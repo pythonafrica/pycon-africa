@@ -255,6 +255,14 @@
       </section>
       <!-- End Timeline -->
 
+
+
+
+
+
+
+
+
       {% if user.is_authenticated %}
 
        <!-- Register Section Content -->
@@ -282,6 +290,33 @@
         </div>
       </section>
       <!-- End Register Section Content -->
+
+
+      {% else %}
+      <section class=" g-color-white g-py-40 g-px-30">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 align-self-lg-center">
+              <img class="img-fluid w-100 g-mb-30 g-mb-0--lg" src="{% static '2020/img/Wcfp.png' %}" alt="Image description">
+            </div>
+      
+            <div class="text-center g-color-primary col-lg-7 align-self-lg-center">
+              <h2 class="h2 g-font-weight-700 g-color-primary text-uppercase g-font-weight-300">Our CFP is closed!</h2>
+          <p class="g-color-black g-font-size-16"> 
+            Pycon Africa is going virtual in August 2020! <br>Please note that the call for proposals closed on 5<sup>th</sup> June 2020. 
+          
+          </p>
+          <br>
+          <a class="btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="https://www.papercall.io/pyconafrica2020" target="/" disabled><b>Submit a proposal</b></a>
+  
+        </div>
+      
+          </div>
+        </div>
+      </section>
+
+      {% endif %}
+
 
 
       <!-- Speakers Section Content -->
@@ -335,42 +370,19 @@
                 
               </div>
             </div>
-
+ <!--
             <div class="text-center"><br><br> 
               <a href="/speakers" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-outline-primary g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15"> 
                 View more speakers
               <i class="fa fa-vcard g-ml-3"></i>
               </a>
             </div>
-  
+   -->
         </section>
         <!-- End Speakers Section Content -->
 
 
-      {% else %}
-      <section class=" g-color-white g-py-40 g-px-30">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 align-self-lg-center">
-              <img class="img-fluid w-100 g-mb-30 g-mb-0--lg" src="{% static '2020/img/Wcfp.png' %}" alt="Image description">
-            </div>
-      
-            <div class="text-center g-color-primary col-lg-7 align-self-lg-center">
-              <h2 class="h2 g-font-weight-700 g-color-primary text-uppercase g-font-weight-300">Our CFP is closed!</h2>
-          <p class="g-color-black g-font-size-16"> 
-            Pycon Africa is going virtual in August 2020! <br>Please note that the call for proposals closed on 5<sup>th</sup> June 2020. 
-          
-          </p>
-          <br>
-          <a class="btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="https://www.papercall.io/pyconafrica2020" target="/" disabled><b>Submit a proposal</b></a>
-  
-        </div>
-      
-          </div>
-        </div>
-      </section>
-
-      {% endif %}
+     
 
      
       
