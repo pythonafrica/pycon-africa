@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'hitcount',
     'django_slugify_processor',
     'django_summernote',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -201,4 +202,30 @@ SUMMERNOTE_CONFIG = {
     # If you want to initialize summernote at the bottom of page, set this as True
     # and call `initSummernote()` on your page.
     'lazy': True,
+}
+
+TINYMCE_DEFAULT_CONFIG = {
+    "content_css": 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': 'link image preview codesample contextmenu table code lists',
+    'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
+               '| bullist numlist | outdent indent | table | link image | forecolor |backcolor | codesample | preview code',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'inline': False,
+    'statusbar': True,
+    'width': 'auto',
+    'height': 360,
+}
+TINYMCE_COMPRESSOR = True
+TINYMCE_EXTRA_MEDIA = {
+    'css': {
+        'all': [
+            ...
+        ],
+    },
+    'js': [
+        ...
+    ],
 }

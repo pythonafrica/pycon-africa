@@ -1,6 +1,6 @@
 from  django.contrib import admin
 from  .models import *
-from django_summernote.admin import SummernoteModelAdmin
+
 
 
 
@@ -10,10 +10,11 @@ class TalktypeAdmin(admin.ModelAdmin):
 
 
 
-class SpeakerAdmin(SummernoteModelAdmin):
+class SpeakerAdmin(admin.ModelAdmin):
     list_display = ("speaker_name", "talk_title", "talk_type", "created_date", "updated")
     list_filter = ("speaker_name", "talk_title", "talk_type", "created_date", "updated")
-    summernote_fields = '__all__'
+    search_fields = ('speaker_name',)
+    
 
 
 
