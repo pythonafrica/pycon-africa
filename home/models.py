@@ -11,6 +11,7 @@ from django_slugify_processor.text import slugify
 from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.encoding import python_2_unicode_compatible
 
+from tinymce import HTMLField
 
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
@@ -24,7 +25,7 @@ class KeynoteSpeaker(models.Model):
     profession = models.CharField(max_length=200, null=True, default="", blank=True, help_text="KeynoteSpeaker's profession. eg. Software Developer")
     organization = models.CharField(max_length=200, null=True, default="", blank=True, help_text="KeynoteSpeaker's Organization. eg. Google")
     country = models.CharField(max_length=100, null=True, default="", blank=True, help_text="City and Country the speaker is from eg. Accra, Ghana")
-    biography = models.TextField(null=True, default="", help_text="The bio of the speaker")
+    biography = HTMLField('Biography', null=True, default="", help_text="The bio of the speaker")
     twitter = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
     github = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
     linkedin = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'/mawy_7' ", default="", blank=True,)
