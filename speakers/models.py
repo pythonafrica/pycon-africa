@@ -33,7 +33,7 @@ class Talktype(models.Model):
 
 class Speaker(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    speaker_name = models.CharField(default="", max_length=200)
+    speaker_name = models.CharField(default="", max_length=200, null=True)
     profile_image = ProcessedImageField(upload_to='speakers/',default="speakers/speaker.png", processors=[ResizeToFit(600, 600, upscale=False)], format='jpeg', options={'quality': 90})
     profession = models.CharField(max_length=200, null=True, default="", blank=True, help_text="Speaker's profession. eg. Software Developer")
     country = models.CharField(max_length=100, null=True, default="", blank=True, help_text="City and Country the speaker is from eg. Accra, Ghana")

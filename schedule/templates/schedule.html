@@ -79,16 +79,21 @@
 
           <div class="u-timeline-v3-wrap">
 
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" >
-              <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-              </div>
+            {% if talks.talk_url %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+            {% else %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
+            {% endif %}
+
+            <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
+              <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+            </div>
 
               <div class="row mx-0">
                 <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
                   <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
 
-                    <span class="text-center g-pos-rel d-block g-width-110 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} - {{ talks.end_time.time }}</small></span>
+                    <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
                   </div>
                 </div>
 
@@ -100,7 +105,7 @@
 
                     <div class="media-body align-self-center">
                       <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                      <em class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                      <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
                       <div class="align-self-center ml-auto">
                         {% if talks.talk.beginner_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
@@ -155,18 +160,23 @@
           
           <div class="u-timeline-v3-wrap">
 
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" >
-              <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-              </div>
+            {% if talks.talk_url %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+            {% else %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
+            {% endif %}
+            <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
+              <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+            </div>
 
               <div class="row mx-0">
                 <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
                   <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
 
-                    <span class="text-center g-pos-rel d-block g-width-110 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} - {{ talks.end_time.time }}</small></span>
+                    <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
                   </div>
                 </div>
+                
 
                 <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
                   <div class="media d-block d-md-flex">
@@ -176,24 +186,26 @@
 
                     <div class="media-body align-self-center">
                       <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                      <em class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                      <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
                       <div class="align-self-center ml-auto">
                         {% if talks.talk.beginner_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.intermediate_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.expert_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
                           {% else %}
-                        <p></p>
+                          {% endif %}
+
+                          {% if talks.talk.all_level %}
+                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
+                          {% else %}
                           {% endif %}
                     </div>
                     </div>
@@ -229,16 +241,20 @@
           
           <div class="u-timeline-v3-wrap">
 
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" >
+            {% if talks.talk_url %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+            {% else %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
+            {% endif %}
               <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
               </div>
 
               <div class="row mx-0">
                 <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
                   <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
 
-                    <span class="text-center g-pos-rel d-block g-width-110 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} - {{ talks.end_time.time }}</small></span>
+                    <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
                   </div>
                 </div>
 
@@ -250,24 +266,26 @@
 
                     <div class="media-body align-self-center">
                       <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                      <em class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                      <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
                       <div class="align-self-center ml-auto">
                         {% if talks.talk.beginner_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.intermediate_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.expert_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
                           {% else %}
-                        <p></p>
+                          {% endif %}
+
+                          {% if talks.talk.all_level %}
+                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
+                          {% else %}
                           {% endif %}
                     </div>
                     </div>
@@ -303,16 +321,20 @@
              
           <div class="u-timeline-v3-wrap">
 
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" >
-              <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-              </div>
+            {% if talks.talk_url %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+            {% else %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
+            {% endif %}
+            <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
+              <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+            </div>
 
               <div class="row mx-0">
                 <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
                   <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
 
-                    <span class="text-center g-pos-rel d-block g-width-110 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} - {{ talks.end_time.time }}</small></span>
+                    <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
                   </div>
                 </div>
 
@@ -324,24 +346,26 @@
 
                     <div class="media-body align-self-center">
                       <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                      <em class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                      <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
                       <div class="align-self-center ml-auto">
                         {% if talks.talk.beginner_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.intermediate_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.expert_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
                           {% else %}
-                        <p></p>
+                          {% endif %}
+
+                          {% if talks.talk.all_level %}
+                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
+                          {% else %}
                           {% endif %}
                     </div>
                     </div>
@@ -376,16 +400,20 @@
            
           <div class="u-timeline-v3-wrap">
 
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" >
-              <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                <i class="d-block g-width-18 g-height-18 g-bg-primary g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-              </div>
+            {% if talks.talk_url %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+            {% else %}
+            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
+            {% endif %}
+            <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
+              <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+            </div>
 
               <div class="row mx-0">
                 <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
                   <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
 
-                    <span class="text-center g-pos-rel d-block g-width-110 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} - {{ talks.end_time.time }}</small></span>
+                    <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
                   </div>
                 </div>
 
@@ -397,24 +425,26 @@
 
                     <div class="media-body align-self-center">
                       <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                      <em class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                      <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
                       <div class="align-self-center ml-auto">
                         {% if talks.talk.beginner_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.intermediate_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
                           {% else %}
-                        <p></p>
                           {% endif %}
   
                           {% if talks.talk.expert_level %}
                           <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
                           {% else %}
-                        <p></p>
+                          {% endif %}
+
+                          {% if talks.talk.all_level %}
+                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
+                          {% else %}
                           {% endif %}
                     </div>
                     </div>
