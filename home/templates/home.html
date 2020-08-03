@@ -349,506 +349,284 @@
 
         {% if user.is_authenticated %}
 
-        <section id="panelist" class=" g-py-100">
+        <section id="panelist" class=" g-py-100  justify-content-center ">
           <div class="text-center">
             <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">Our
               <span class="g-font-weight-400 g-font-size-40">|</span>
               <span class="g-color-primary">Panelist</span></h2>
           </div> 
-   <!-- Speakers List Panel -->
-   <div class="card border-0  g-pa-40 g-mb-30 rounded-0 ">
-    <div class="card-block g-pa-0">
-      <!-- Speakers List -->
-
-
-     
- <!-- Nav tabs -->
- <ul class="nav text-center nav-justified u-nav-v7-1" role="tablist" data-target="nav-7-1-accordion-hor-left-big-icons" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
-   <li class="nav-item">
-     <a class="nav-link active" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--1" role="tab">
-       <i class="icon-christmas-037 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-       <b>Future of Open Source in Africa</b>
-     </a>
-   </li>
-
-   <li class="nav-item">
-     <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--2" role="tab">
-       <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-       <b>Entrepreneurship and Python</b>
-     </a>
-   </li>
-   
- </ul>
- <!-- End Nav tabs -->
-
- <br><br>
-
-
- <!-- Tab panes -->
- <div id="nav-7-1-accordion-hor-left-big-icons" class="tab-content g-pt-20--md">
-   
-   <div class="tab-pane fade show active" id="nav-7-1-accordion-hor-left-big-icons--1" role="tabpanel">
-     
-     <p class="g-color-black g-font-size-16"> 
-      Join us for a panel discussion on the 'Future of Open Source in Africa' hosted by 
-      Samson Goddy, co-founder of Open Source  Community Africa and PyCon Africa's chair Marlene Mhangami
-      
-
-     </p>
-     <br>
-
-<!-- Timeline Box -->
-
-         <!-- Timeline Box -->
-         <div class="row">
-      
           
-          <div class="col-md-3 g-mb-30 g-mb-0--md">
-            <!-- Figure -->
-            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-              <div class="g-py-40 g-px-20">
-                <!-- Figure Image -->
-                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                <!-- Figure Image -->
+         
+          <div class="shortcode-html">
+            <!-- Carousel -->
+            <div id="carouselCus3" class="js-carousel g-mb-50--lg" data-infinite="true" data-fade="true" data-lazy-load="ondemand" data-arrows-classes="u-arrow-v1 g-absolute-centered--y g-width-45 g-height-45 g-font-size-30 g-color-gray-dark-v4 g-color-primary--hover" data-arrow-left-classes="fa fa-angle-left g-left-0 g-left-40--lg" data-arrow-right-classes="fa fa-angle-right g-right-0 g-right-40--lg" data-nav-for="#carouselCus4">
+              <div class="js-slide">
+                <!-- Team -->
+                <div class="row justify-content-center align-items-center no-gutters">
+                  <img class="g-width-200 g-height-200 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/speakers/aniediudo.png' %}" alt="Image Description">
+                   
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="g-px-30 g-px-50--lg g-py-60">
+                      <h3 class="h4 mb-1">Jessica Lisbon</h3>
+                      <span class="d-block mb-4">Support Manager</span>
+                      <p class="mb-4">I've got your front end and back end needs covered. I'm always looking for strategies to make your brand's needs fit with today's development languages.</p>
 
-                <!-- Figure Info -->
-                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                <div class="d-block">
-                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                  
+                      <!-- Social Icons -->
+                      <ul class="list-inline mb-3">
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-blue g-bg-blue-opacity-0_1 g-color-blue--hover rounded-circle" href="https://www.facebook.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://twitter.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-bluegray g-bg-bluegray-opacity-0_1 g-color-bluegray--hover rounded-circle" href="https://github.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-github"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-github"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="https://dribbble.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-dribbble"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-dribbble"></i>
+                          </a>
+                        </li>
+                      </ul>
+                      <!-- End Social Icons -->
+
+                      <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-font-weight-700" href="#">See Projects</a>
+                    </div>
+                  </div>
                 </div>
-                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-   
-                <!-- End Figure Info -->
+                <!-- End Team -->
               </div>
 
-              <hr class="g-brd-gray-light-v4 g-my-0">
+              <div class="js-slide">
+                <!-- Team -->
+                <div class="row justify-content-center align-items-center no-gutters">
+                  <div class="col-sm-6 col-lg-4 g-bg-size-cover g-bg-pos-top-center g-min-height-400" data-bg-img-src="{% static '2020/img/DrMaria.jpg' %}"></div>
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="g-px-30 g-px-50--lg g-py-60">
+                      <h3 class="h4 mb-1">David Case</h3>
+                      <span class="d-block mb-4">Web Developer</span>
+                      <p class="mb-4">I am a 32-year old man from Canada and I am passionate about everything related to web development. I strive to figure out the right solutions for your look to stand out amongst the rest.</p>
 
-              <!-- Figure List -->
-              <ul class="row list-inline g-py-20 g-ma-0">
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                    
-                    <i class="icon-user"></i>
-                  </a>
-                </li>
-                
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                    <i class="icon-speech"></i>
-                  </a>
-                </li>
-              </ul>
-              <!-- End Figure List -->
-            </figure>
-            <!-- End Figure -->
-          </div> 
-          <p> </p>
-          
-          <div class="col-md-3 g-mb-30 g-mb-0--md">
-            <!-- Figure -->
-            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-              <div class="g-py-40 g-px-20">
-                <!-- Figure Image -->
-                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                <!-- Figure Image -->
+                      <!-- Social Icons -->
+                      <ul class="list-inline mb-3">
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-blue g-bg-blue-opacity-0_1 g-color-blue--hover rounded-circle" href="https://www.facebook.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://twitter.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-bluegray g-bg-bluegray-opacity-0_1 g-color-bluegray--hover rounded-circle" href="https://github.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-github"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-github"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="https://dribbble.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-dribbble"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-dribbble"></i>
+                          </a>
+                        </li>
+                      </ul>
+                      <!-- End Social Icons -->
 
-                <!-- Figure Info -->
-                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                <div class="d-block">
-                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                  
+                      <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-font-weight-700" href="#">See Projects</a>
+                    </div>
+                  </div>
                 </div>
-                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-   
-                <!-- End Figure Info -->
+                <!-- End Team -->
               </div>
 
-              <hr class="g-brd-gray-light-v4 g-my-0">
+              <div class="js-slide">
+                <!-- Team -->
+                <div class="row justify-content-center align-items-center no-gutters">
+                  <div class="col-sm-6 col-lg-4 g-bg-size-cover g-bg-pos-top-center g-min-height-400" data-bg-img-src="{% static '2020/img/DrMaria.jpg' %}"></div>
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="g-px-30 g-px-50--lg g-py-60">
+                      <h3 class="h4 mb-1">Maria Olsson</h3>
+                      <span class="d-block mb-4">Technical Director</span>
+                      <p class="mb-4">I am an ambitious workaholic, but apart from that, pretty simple person. Whether it's branding, print, UI + UX I've got you covered.</p>
 
-              <!-- Figure List -->
-              <ul class="row list-inline g-py-20 g-ma-0">
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                    
-                    <i class="icon-user"></i>
-                  </a>
-                </li>
-                
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                    <i class="icon-speech"></i>
-                  </a>
-                </li>
-              </ul>
-              <!-- End Figure List -->
-            </figure>
-            <!-- End Figure -->
-          </div> 
+                      <!-- Social Icons -->
+                      <ul class="list-inline mb-3">
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-blue g-bg-blue-opacity-0_1 g-color-blue--hover rounded-circle" href="https://www.facebook.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://twitter.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-bluegray g-bg-bluegray-opacity-0_1 g-color-bluegray--hover rounded-circle" href="https://github.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-github"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-github"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="https://dribbble.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-dribbble"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-dribbble"></i>
+                          </a>
+                        </li>
+                      </ul>
+                      <!-- End Social Icons -->
 
-          <div class="col-md-3 g-mb-30 g-mb-0--md">
-            <!-- Figure -->
-            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-              <div class="g-py-40 g-px-20">
-                <!-- Figure Image -->
-                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                <!-- Figure Image -->
-
-                <!-- Figure Info -->
-                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                <div class="d-block">
-                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                  
+                      <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-font-weight-700" href="#">See Projects</a>
+                    </div>
+                  </div>
                 </div>
-                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-   
-                <!-- End Figure Info -->
+                <!-- End Team -->
               </div>
 
-              <hr class="g-brd-gray-light-v4 g-my-0">
+              <div class="js-slide">
+                <!-- Team -->
+                <div class="row justify-content-center align-items-center no-gutters">
+                  <div class="col-sm-6 col-lg-4 g-bg-size-cover g-bg-pos-top-center g-min-height-400" data-bg-img-src="{% static '2020/img/DrMaria.jpg' %}"></div>
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="g-px-30 g-px-50--lg g-py-60">
+                      <h3 class="h4 mb-1">Tina Krueger</h3>
+                      <span class="d-block mb-4">Lead Designer</span>
+                      <p class="mb-4">I'm Tina Krueger, an excitable lead designer. I live with an intense passion for web development.</p>
 
-              <!-- Figure List -->
-              <ul class="row list-inline g-py-20 g-ma-0">
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                    
-                    <i class="icon-user"></i>
-                  </a>
-                </li>
-                
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                    <i class="icon-speech"></i>
-                  </a>
-                </li>
-              </ul>
-              <!-- End Figure List -->
-            </figure>
-            <!-- End Figure -->
-          </div> 
+                      <!-- Social Icons -->
+                      <ul class="list-inline mb-3">
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-blue g-bg-blue-opacity-0_1 g-color-blue--hover rounded-circle" href="https://www.facebook.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://twitter.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-bluegray g-bg-bluegray-opacity-0_1 g-color-bluegray--hover rounded-circle" href="https://github.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-github"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-github"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="https://dribbble.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-dribbble"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-dribbble"></i>
+                          </a>
+                        </li>
+                      </ul>
+                      <!-- End Social Icons -->
 
-
-          <div class="col-md-3 g-mb-30 g-mb-0--md">
-            <!-- Figure -->
-            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-              <div class="g-py-40 g-px-20">
-                <!-- Figure Image -->
-                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                <!-- Figure Image -->
-
-                <!-- Figure Info -->
-                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                <div class="d-block">
-                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                  
+                      <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-font-weight-700" href="#">See Projects</a>
+                    </div>
+                  </div>
                 </div>
-                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-   
-                <!-- End Figure Info -->
+                <!-- End Team -->
               </div>
 
-              <hr class="g-brd-gray-light-v4 g-my-0">
+              <div class="js-slide">
+                <!-- Team -->
+                <div class="row justify-content-center align-items-center no-gutters">
+                  <div class="col-sm-6 col-lg-4 g-bg-size-cover g-bg-pos-top-center g-min-height-400" data-bg-img-src="{% static '2020/img/DrMaria.jpg' %}"></div>
+                  <div class="col-sm-6 col-lg-4">
+                    <div class="g-px-30 g-px-50--lg g-py-60">
+                      <h3 class="h4 mb-1">John Watson</h3>
+                      <span class="d-block mb-4">Marketing Manager</span>
+                      <p class="mb-4">Understanding who you are and what you want is my strategy for your brand. I am always figuring out ways to capture your vision, so people can get on board.</p>
 
-              <!-- Figure List -->
-              <ul class="row list-inline g-py-20 g-ma-0">
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                    
-                    <i class="icon-user"></i>
-                  </a>
-                </li>
-                
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                    <i class="icon-speech"></i>
-                  </a>
-                </li>
-              </ul>
-              <!-- End Figure List -->
-            </figure>
-            <!-- End Figure -->
-          </div> 
+                      <!-- Social Icons -->
+                      <ul class="list-inline mb-3">
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-blue g-bg-blue-opacity-0_1 g-color-blue--hover rounded-circle" href="https://www.facebook.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-facebook"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://twitter.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-bluegray g-bg-bluegray-opacity-0_1 g-color-bluegray--hover rounded-circle" href="https://github.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-github"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-github"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item g-mx-2">
+                          <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-red g-bg-red-opacity-0_1 g-color-red--hover rounded-circle" href="https://dribbble.com/htmlstream">
+                            <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-dribbble"></i>
+                            <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-dribbble"></i>
+                          </a>
+                        </li>
+                      </ul>
+                      <!-- End Social Icons -->
 
-          <div class="col-md-3 g-mb-30 g-mb-0--md">
-            <!-- Figure -->
-            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-              <div class="g-py-40 g-px-20">
-                <!-- Figure Image -->
-                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                <!-- Figure Image -->
-
-                <!-- Figure Info -->
-                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                <div class="d-block">
-                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                  
+                      <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-font-weight-700" href="#">See Projects</a>
+                    </div>
+                  </div>
                 </div>
-                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-   
-                <!-- End Figure Info -->
+                <!-- End Team -->
               </div>
 
-              <hr class="g-brd-gray-light-v4 g-my-0">
+            </div>
 
-              <!-- Figure List -->
-              <ul class="row list-inline g-py-20 g-ma-0">
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                    
-                    <i class="icon-user"></i>
-                  </a>
-                </li>
-                
-                <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                    <i class="icon-speech"></i>
-                  </a>
-                </li>
-              </ul>
-              <!-- End Figure List -->
-            </figure>
-            <!-- End Figure -->
-          </div> 
+            <div id="carouselCus4" class="js-carousel text-center u-carousel-v3 g-mx-minus-15 col-md-6  justify-content-center" data-infinite="true" data-center-mode="true" data-slides-show="5" data-is-thumbs="true" data-lazy-load="ondemand" data-nav-for="#carouselCus3">
+              <div class="js-slide g-opacity-1 g-cursor-pointer g-px-15">
+                <img class="g-width-100 g-height-100 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/speakers/aniediudo.png' %}" alt="Image Description">
+                  
+                <h3 class="h6 g-color-gray-dark-v4">Jessica Lisbon</h3>
+              </div>
+
+              <div class="js-slide g-opacity-1 g-cursor-pointer g-px-15">
+                <img class="img-fluid mb-2" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <h3 class="h6 g-color-gray-dark-v4">David Case</h3>
+              </div>
+
+              <div class="js-slide g-opacity-1 g-cursor-pointer g-px-15">
+                <img class="img-fluid mb-2" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <h3 class="h6 g-color-gray-dark-v4">Maria Olsson</h3>
+              </div>
+
+              <div class="js-slide g-opacity-1 g-cursor-pointer g-px-15">
+                <img class="img-fluid mb-2" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <h3 class="h6 g-color-gray-dark-v4">Tina Krueger</h3>
+              </div>
+
+              <div class="js-slide g-opacity-1 g-cursor-pointer g-px-15">
+                <img class="img-fluid mb-2" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <h3 class="h6 g-color-gray-dark-v4">John Watson</h3>
+              </div>
+
+            </div>
+            <!-- End Carousel -->
+          </div>
+
+          </div>
         
-        </div>
-  <!-- End Timeline Box -->
-
-
-<!-- End Timeline Box -->
-
-   </div>
-   
-   
-   <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--2" role="tabpanel">
-     <p class="g-color-black g-font-size-16"> 
-       Meet our Panelist     
-     </p>
-     <br>
-
-         <!-- Timeline Box -->
-         <div class="row">
-      
-          
-             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-               <!-- Figure -->
-               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                 <div class="g-py-40 g-px-20">
-                   <!-- Figure Image -->
-                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                   <!-- Figure Image -->
-
-                   <!-- Figure Info -->
-                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                   <div class="d-block">
-                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                     
-                   </div>
-                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-      
-                   <!-- End Figure Info -->
-                 </div>
-
-                 <hr class="g-brd-gray-light-v4 g-my-0">
-
-                 <!-- Figure List -->
-                 <ul class="row list-inline g-py-20 g-ma-0">
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                       
-                       <i class="icon-user"></i>
-                     </a>
-                   </li>
-                   
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                       <i class="icon-speech"></i>
-                     </a>
-                   </li>
-                 </ul>
-                 <!-- End Figure List -->
-               </figure>
-               <!-- End Figure -->
-             </div> 
-             <p> </p>
-             
-             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-               <!-- Figure -->
-               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                 <div class="g-py-40 g-px-20">
-                   <!-- Figure Image -->
-                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                   <!-- Figure Image -->
-
-                   <!-- Figure Info -->
-                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                   <div class="d-block">
-                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                     
-                   </div>
-                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-      
-                   <!-- End Figure Info -->
-                 </div>
-
-                 <hr class="g-brd-gray-light-v4 g-my-0">
-
-                 <!-- Figure List -->
-                 <ul class="row list-inline g-py-20 g-ma-0">
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                       
-                       <i class="icon-user"></i>
-                     </a>
-                   </li>
-                   
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                       <i class="icon-speech"></i>
-                     </a>
-                   </li>
-                 </ul>
-                 <!-- End Figure List -->
-               </figure>
-               <!-- End Figure -->
-             </div> 
-
-             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-               <!-- Figure -->
-               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                 <div class="g-py-40 g-px-20">
-                   <!-- Figure Image -->
-                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                   <!-- Figure Image -->
-
-                   <!-- Figure Info -->
-                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                   <div class="d-block">
-                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                     
-                   </div>
-                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-      
-                   <!-- End Figure Info -->
-                 </div>
-
-                 <hr class="g-brd-gray-light-v4 g-my-0">
-
-                 <!-- Figure List -->
-                 <ul class="row list-inline g-py-20 g-ma-0">
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                       
-                       <i class="icon-user"></i>
-                     </a>
-                   </li>
-                   
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                       <i class="icon-speech"></i>
-                     </a>
-                   </li>
-                 </ul>
-                 <!-- End Figure List -->
-               </figure>
-               <!-- End Figure -->
-             </div> 
-
-
-             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-               <!-- Figure -->
-               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                 <div class="g-py-40 g-px-20">
-                   <!-- Figure Image -->
-                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                   <!-- Figure Image -->
-
-                   <!-- Figure Info -->
-                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                   <div class="d-block">
-                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                     
-                   </div>
-                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-      
-                   <!-- End Figure Info -->
-                 </div>
-
-                 <hr class="g-brd-gray-light-v4 g-my-0">
-
-                 <!-- Figure List -->
-                 <ul class="row list-inline g-py-20 g-ma-0">
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                       
-                       <i class="icon-user"></i>
-                     </a>
-                   </li>
-                   
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                       <i class="icon-speech"></i>
-                     </a>
-                   </li>
-                 </ul>
-                 <!-- End Figure List -->
-               </figure>
-               <!-- End Figure -->
-             </div> 
-
-             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-               <!-- Figure -->
-               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                 <div class="g-py-40 g-px-20">
-                   <!-- Figure Image -->
-                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-                   <!-- Figure Image -->
-
-                   <!-- Figure Info -->
-                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                   <div class="d-block">
-                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                     
-                   </div>
-                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-      
-                   <!-- End Figure Info -->
-                 </div>
-
-                 <hr class="g-brd-gray-light-v4 g-my-0">
-
-                 <!-- Figure List -->
-                 <ul class="row list-inline g-py-20 g-ma-0">
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
-                       
-                       <i class="icon-user"></i>
-                     </a>
-                   </li>
-                   
-                   <li class="col g-brd-right g-brd-gray-light-v4">
-                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
-                       <i class="icon-speech"></i>
-                     </a>
-                   </li>
-                 </ul>
-                 <!-- End Figure List -->
-               </figure>
-               <!-- End Figure -->
-             </div> 
-           
-           </div>
-     <!-- End Timeline Box -->
-
-   </div>
-
-   </div>
-
-
-
-      <!-- End Speakers List -->
-    </div>
-  </div>
-  <!-- End Speakers List Panel -->
+     
         </section>
      
         {% else %}

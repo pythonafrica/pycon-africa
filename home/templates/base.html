@@ -104,6 +104,17 @@
 
 
 
+    <div class="shortcode-scripts">
+      <!-- JS Unify -->
+      <!-- JS Plugins Init. -->
+      <script >
+        $(document).ready(function () {
+          // initialization of carousel
+          $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+        });
+      </script>
+      
+
     <script  src="{% static '2020/vendor/dzsparallaxer/dzsparallaxer.js' %}"></script>
     <script  src="{% static '2020/vendor/dzsparallaxer/dzsscroller/scroller.js' %}"></script>
     <script  src="{% static '2020/vendor/dzsparallaxer/advancedscroller/plugin.js' %}"></script>
