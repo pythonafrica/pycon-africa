@@ -125,6 +125,7 @@
 
               </div>
               
+ {% if user.is_authenticated %}
               
               <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--2" role="tabpanel">
                 <p class="g-color-black g-font-size-16"> 
@@ -348,6 +349,9 @@
 
               </div>
 
+              {% else %}
+
+              {% endif %}
               </div>
 
 
