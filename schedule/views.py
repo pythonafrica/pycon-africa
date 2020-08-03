@@ -19,7 +19,7 @@ def schedule(request):
     schedule_three = TalkSchedule.objects.filter(conference_day='3').select_related('talk').order_by('start_time')
     schedule_four = TalkSchedule.objects.filter(conference_day='4').select_related('talk').order_by('start_time')
     schedule_five = TalkSchedule.objects.filter(conference_day='5').select_related('talk').order_by('start_time')
-    
+    schedule_six = TalkSchedule.objects.filter(conference_day='6').select_related('talk').order_by('start_time')
 
     return render(
         request,
@@ -33,5 +33,6 @@ def schedule(request):
             'schedule_three': schedule_three,
             'schedule_four': schedule_four,
             'schedule_five': schedule_five,
+            'schedule_six': schedule_six,
         }
     )

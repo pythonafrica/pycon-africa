@@ -343,13 +343,517 @@
               </a>
             </div>
         </section>
+
+
         <!-- End Speakers Section Content -->
 
+        {% if user.is_authenticated %}
+
+        <section id="panelist" class=" g-py-100">
+          <div class="text-center">
+            <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-30 g-mb-30">Our
+              <span class="g-font-weight-400 g-font-size-40">|</span>
+              <span class="g-color-primary">Panelist</span></h2>
+          </div> 
+   <!-- Speakers List Panel -->
+   <div class="card border-0  g-pa-40 g-mb-30 rounded-0 ">
+    <div class="card-block g-pa-0">
+      <!-- Speakers List -->
+
 
      
+ <!-- Nav tabs -->
+ <ul class="nav text-center nav-justified u-nav-v7-1" role="tablist" data-target="nav-7-1-accordion-hor-left-big-icons" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
+   <li class="nav-item">
+     <a class="nav-link active" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--1" role="tab">
+       <i class="icon-christmas-037 d-block g-font-size-25 u-tab-line-icon-pro"></i>
+       <b>Future of Open Source in Africa</b>
+     </a>
+   </li>
 
+   <li class="nav-item">
+     <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--2" role="tab">
+       <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
+       <b>Entrepreneurship and Python</b>
+     </a>
+   </li>
+   
+ </ul>
+ <!-- End Nav tabs -->
+
+ <br><br>
+
+
+ <!-- Tab panes -->
+ <div id="nav-7-1-accordion-hor-left-big-icons" class="tab-content g-pt-20--md">
+   
+   <div class="tab-pane fade show active" id="nav-7-1-accordion-hor-left-big-icons--1" role="tabpanel">
      
+     <p class="g-color-black g-font-size-16"> 
+      Join us for a panel discussion on the 'Future of Open Source in Africa' hosted by 
+      Samson Goddy, co-founder of Open Source  Community Africa and PyCon Africa's chair Marlene Mhangami
       
+
+     </p>
+     <br>
+
+<!-- Timeline Box -->
+
+         <!-- Timeline Box -->
+         <div class="row">
+      
+          
+          <div class="col-md-3 g-mb-30 g-mb-0--md">
+            <!-- Figure -->
+            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+              <div class="g-py-40 g-px-20">
+                <!-- Figure Image -->
+                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <!-- Figure Image -->
+
+                <!-- Figure Info -->
+                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                <div class="d-block">
+                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                  
+                </div>
+                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+   
+                <!-- End Figure Info -->
+              </div>
+
+              <hr class="g-brd-gray-light-v4 g-my-0">
+
+              <!-- Figure List -->
+              <ul class="row list-inline g-py-20 g-ma-0">
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                    
+                    <i class="icon-user"></i>
+                  </a>
+                </li>
+                
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                    <i class="icon-speech"></i>
+                  </a>
+                </li>
+              </ul>
+              <!-- End Figure List -->
+            </figure>
+            <!-- End Figure -->
+          </div> 
+          <p> </p>
+          
+          <div class="col-md-3 g-mb-30 g-mb-0--md">
+            <!-- Figure -->
+            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+              <div class="g-py-40 g-px-20">
+                <!-- Figure Image -->
+                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <!-- Figure Image -->
+
+                <!-- Figure Info -->
+                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                <div class="d-block">
+                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                  
+                </div>
+                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+   
+                <!-- End Figure Info -->
+              </div>
+
+              <hr class="g-brd-gray-light-v4 g-my-0">
+
+              <!-- Figure List -->
+              <ul class="row list-inline g-py-20 g-ma-0">
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                    
+                    <i class="icon-user"></i>
+                  </a>
+                </li>
+                
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                    <i class="icon-speech"></i>
+                  </a>
+                </li>
+              </ul>
+              <!-- End Figure List -->
+            </figure>
+            <!-- End Figure -->
+          </div> 
+
+          <div class="col-md-3 g-mb-30 g-mb-0--md">
+            <!-- Figure -->
+            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+              <div class="g-py-40 g-px-20">
+                <!-- Figure Image -->
+                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <!-- Figure Image -->
+
+                <!-- Figure Info -->
+                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                <div class="d-block">
+                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                  
+                </div>
+                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+   
+                <!-- End Figure Info -->
+              </div>
+
+              <hr class="g-brd-gray-light-v4 g-my-0">
+
+              <!-- Figure List -->
+              <ul class="row list-inline g-py-20 g-ma-0">
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                    
+                    <i class="icon-user"></i>
+                  </a>
+                </li>
+                
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                    <i class="icon-speech"></i>
+                  </a>
+                </li>
+              </ul>
+              <!-- End Figure List -->
+            </figure>
+            <!-- End Figure -->
+          </div> 
+
+
+          <div class="col-md-3 g-mb-30 g-mb-0--md">
+            <!-- Figure -->
+            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+              <div class="g-py-40 g-px-20">
+                <!-- Figure Image -->
+                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <!-- Figure Image -->
+
+                <!-- Figure Info -->
+                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                <div class="d-block">
+                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                  
+                </div>
+                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+   
+                <!-- End Figure Info -->
+              </div>
+
+              <hr class="g-brd-gray-light-v4 g-my-0">
+
+              <!-- Figure List -->
+              <ul class="row list-inline g-py-20 g-ma-0">
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                    
+                    <i class="icon-user"></i>
+                  </a>
+                </li>
+                
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                    <i class="icon-speech"></i>
+                  </a>
+                </li>
+              </ul>
+              <!-- End Figure List -->
+            </figure>
+            <!-- End Figure -->
+          </div> 
+
+          <div class="col-md-3 g-mb-30 g-mb-0--md">
+            <!-- Figure -->
+            <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+              <div class="g-py-40 g-px-20">
+                <!-- Figure Image -->
+                <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                <!-- Figure Image -->
+
+                <!-- Figure Info -->
+                <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                <div class="d-block">
+                  <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                  
+                </div>
+                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+   
+                <!-- End Figure Info -->
+              </div>
+
+              <hr class="g-brd-gray-light-v4 g-my-0">
+
+              <!-- Figure List -->
+              <ul class="row list-inline g-py-20 g-ma-0">
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                    
+                    <i class="icon-user"></i>
+                  </a>
+                </li>
+                
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                    <i class="icon-speech"></i>
+                  </a>
+                </li>
+              </ul>
+              <!-- End Figure List -->
+            </figure>
+            <!-- End Figure -->
+          </div> 
+        
+        </div>
+  <!-- End Timeline Box -->
+
+
+<!-- End Timeline Box -->
+
+   </div>
+   
+   
+   <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--2" role="tabpanel">
+     <p class="g-color-black g-font-size-16"> 
+       Meet our Panelist     
+     </p>
+     <br>
+
+         <!-- Timeline Box -->
+         <div class="row">
+      
+          
+             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+               <!-- Figure -->
+               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                 <div class="g-py-40 g-px-20">
+                   <!-- Figure Image -->
+                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                   <!-- Figure Image -->
+
+                   <!-- Figure Info -->
+                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                   <div class="d-block">
+                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                     
+                   </div>
+                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+      
+                   <!-- End Figure Info -->
+                 </div>
+
+                 <hr class="g-brd-gray-light-v4 g-my-0">
+
+                 <!-- Figure List -->
+                 <ul class="row list-inline g-py-20 g-ma-0">
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                       
+                       <i class="icon-user"></i>
+                     </a>
+                   </li>
+                   
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                       <i class="icon-speech"></i>
+                     </a>
+                   </li>
+                 </ul>
+                 <!-- End Figure List -->
+               </figure>
+               <!-- End Figure -->
+             </div> 
+             <p> </p>
+             
+             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+               <!-- Figure -->
+               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                 <div class="g-py-40 g-px-20">
+                   <!-- Figure Image -->
+                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                   <!-- Figure Image -->
+
+                   <!-- Figure Info -->
+                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                   <div class="d-block">
+                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                     
+                   </div>
+                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+      
+                   <!-- End Figure Info -->
+                 </div>
+
+                 <hr class="g-brd-gray-light-v4 g-my-0">
+
+                 <!-- Figure List -->
+                 <ul class="row list-inline g-py-20 g-ma-0">
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                       
+                       <i class="icon-user"></i>
+                     </a>
+                   </li>
+                   
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                       <i class="icon-speech"></i>
+                     </a>
+                   </li>
+                 </ul>
+                 <!-- End Figure List -->
+               </figure>
+               <!-- End Figure -->
+             </div> 
+
+             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+               <!-- Figure -->
+               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                 <div class="g-py-40 g-px-20">
+                   <!-- Figure Image -->
+                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                   <!-- Figure Image -->
+
+                   <!-- Figure Info -->
+                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                   <div class="d-block">
+                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                     
+                   </div>
+                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+      
+                   <!-- End Figure Info -->
+                 </div>
+
+                 <hr class="g-brd-gray-light-v4 g-my-0">
+
+                 <!-- Figure List -->
+                 <ul class="row list-inline g-py-20 g-ma-0">
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                       
+                       <i class="icon-user"></i>
+                     </a>
+                   </li>
+                   
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                       <i class="icon-speech"></i>
+                     </a>
+                   </li>
+                 </ul>
+                 <!-- End Figure List -->
+               </figure>
+               <!-- End Figure -->
+             </div> 
+
+
+             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+               <!-- Figure -->
+               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                 <div class="g-py-40 g-px-20">
+                   <!-- Figure Image -->
+                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                   <!-- Figure Image -->
+
+                   <!-- Figure Info -->
+                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                   <div class="d-block">
+                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                     
+                   </div>
+                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+      
+                   <!-- End Figure Info -->
+                 </div>
+
+                 <hr class="g-brd-gray-light-v4 g-my-0">
+
+                 <!-- Figure List -->
+                 <ul class="row list-inline g-py-20 g-ma-0">
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                       
+                       <i class="icon-user"></i>
+                     </a>
+                   </li>
+                   
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                       <i class="icon-speech"></i>
+                     </a>
+                   </li>
+                 </ul>
+                 <!-- End Figure List -->
+               </figure>
+               <!-- End Figure -->
+             </div> 
+
+             <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+               <!-- Figure -->
+               <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                 <div class="g-py-40 g-px-20">
+                   <!-- Figure Image -->
+                   <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
+                   <!-- Figure Image -->
+
+                   <!-- Figure Info -->
+                   <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
+                   <div class="d-block">
+                     <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                     
+                   </div>
+                   <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
+      
+                   <!-- End Figure Info -->
+                 </div>
+
+                 <hr class="g-brd-gray-light-v4 g-my-0">
+
+                 <!-- Figure List -->
+                 <ul class="row list-inline g-py-20 g-ma-0">
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href=" ">
+                       
+                       <i class="icon-user"></i>
+                     </a>
+                   </li>
+                   
+                   <li class="col g-brd-right g-brd-gray-light-v4">
+                     <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href=" ">
+                       <i class="icon-speech"></i>
+                     </a>
+                   </li>
+                 </ul>
+                 <!-- End Figure List -->
+               </figure>
+               <!-- End Figure -->
+             </div> 
+           
+           </div>
+     <!-- End Timeline Box -->
+
+   </div>
+
+   </div>
+
+
+
+      <!-- End Speakers List -->
+    </div>
+  </div>
+  <!-- End Speakers List Panel -->
+        </section>
+     
+        {% else %}
+
+        {% endif %}
 
       <section class="g-pt-20 g-pb-90 g-pb-170--md ">
         <div class="text-center g-mb-70">

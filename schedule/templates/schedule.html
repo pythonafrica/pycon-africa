@@ -66,6 +66,12 @@
                   Sat 08/08
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--6" role="tab">
+                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
+                  Sun 09/08
+                </a>
+              </li>
             </ul>
             <!-- End Nav tabs -->
 
@@ -467,6 +473,279 @@
               </div>
        
 
+
+                
+              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--6" role="tabpanel">
+                        
+                <!-- Timeline Box -->
+                {% for talks in schedule_six %}
+                <!-- timeline-block -->
+      
+                
+                <div class="u-timeline-v3-wrap">
+
+                  {% if talks.talk_url %}
+                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+                  {% else %}
+                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
+                  {% endif %}
+                  <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
+                    <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
+                  </div>
+
+                    <div class="row mx-0">
+                      <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
+                        <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
+
+                          <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
+                        </div>
+                      </div>
+
+                      <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
+                        <div class="media d-block d-md-flex">
+                          <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
+                            <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
+                          </div>
+
+                          <div class="media-body align-self-center">
+                            <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
+                            <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
+                            <div class="align-self-center ml-auto">
+                              {% if talks.talk.beginner_level %}
+                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
+                                {% else %}
+                                {% endif %}
+        
+                                {% if talks.talk.intermediate_level %}
+                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
+                                {% else %}
+                                {% endif %}
+        
+                                {% if talks.talk.expert_level %}
+                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
+                                {% else %}
+                                {% endif %}
+
+                                {% if talks.talk.all_level %}
+                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
+                                {% else %}
+                                {% endif %}
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+
+                </div>
+                {% empty %}
+                <div class="col-md-6">
+                  <!-- Warning Alert -->
+                  <div class="alert alert-warning" role="alert">
+                    <strong>Please note!</strong> 
+                    we have no schedule assigned for this day yet
+                  </div>
+                  <!-- End Warning Alert -->
+                </div>
+                {% endfor %}
+                <!-- End Timeline Box -->
+                <p class="g-color-black g-font-size-16"> 
+                  Meet the team.
+                </p>
+                <div class="row text-center align-middle">
+                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+                    <!-- Figure -->
+                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
+                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Sandrine_Pataut.jpg' %}" alt="Image description">
+                        </div>
+                        <!-- Figure Image -->
+     
+                        <!-- Figure Info --><br>
+                        <h4 class="h5 g-mb-5">Sandrine Pataut</h4>
+                        <div class="d-block">
+                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                          
+                        </div>
+                       
+                        <!-- End Figure Info -->
+                      </div>
+     
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+     
+                      <!-- Figure List -->
+                      <ul class="list-inline text-center">
+                       
+                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
+                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/SPataut" target="/">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        
+                      </ul>
+                      <!-- End Figure List -->
+                    </figure>
+                    <!-- End Figure -->
+                  </div> 
+                  
+                  
+                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+                    <!-- Figure -->
+                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
+                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Cheuk_Ting_Ho.jpg' %}" alt="Image description">
+                        </div>
+                        <!-- Figure Image -->
+     
+                        <!-- Figure Info --><br>
+                        <h4 class="h5 g-mb-5">Cheuk Ting Ho</h4>
+                        <div class="d-block">
+                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                          
+                        </div>
+                       
+                        <!-- End Figure Info -->
+                      </div>
+     
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+     
+                      <!-- Figure List -->
+                      <ul class="list-inline text-center">
+                       
+                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
+                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/cheukting_ho" target="/">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        
+                      </ul>
+                      <!-- End Figure List -->
+                    </figure>
+                    <!-- End Figure -->
+                  </div> 
+
+
+                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+                    <!-- Figure -->
+                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
+                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/John.jpg' %}" alt="Image description">
+                        </div>
+                        <!-- Figure Image -->
+     
+                        <!-- Figure Info --><br>
+                        <h4 class="h5 g-mb-5">John Sandall</h4>
+                        <div class="d-block">
+                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                          
+                        </div>
+                       
+                        <!-- End Figure Info -->
+                      </div>
+     
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+     
+                      <!-- Figure List -->
+                      <ul class="list-inline text-center">
+                       
+                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
+                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/John_Sandall" target="/">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        
+                      </ul>
+                      <!-- End Figure List -->
+                    </figure>
+                    <!-- End Figure -->
+                  </div> 
+
+
+
+                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+                    <!-- Figure -->
+                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
+                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Astrid.png' %}" alt="Image description">
+                        </div>
+                        <!-- Figure Image -->
+     
+                        <!-- Figure Info --><br>
+                        <h4 class="h5 g-mb-5">Astrid Verstraete</h4>
+                        <div class="d-block">
+                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                          
+                        </div>
+                       
+                        <!-- End Figure Info -->
+                      </div>
+     
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+     
+                      <!-- Figure List -->
+                      <ul class="list-inline text-center">
+                       
+                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
+                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/AstridMV3" target="/">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        
+                      </ul>
+                      <!-- End Figure List -->
+                    </figure>
+                    <!-- End Figure -->
+                  </div> 
+
+
+
+                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
+                    <!-- Figure -->
+                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
+                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Dani.png' %}" alt="Image description">
+                        </div>
+                        <!-- Figure Image -->
+     
+                        <!-- Figure Info --><br>
+                        <h4 class="h5 g-mb-5">Dani Papamaximou</h4>
+                        <div class="d-block">
+                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
+                          
+                        </div>
+                       
+                        <!-- End Figure Info -->
+                      </div>
+     
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+     
+                      <!-- Figure List -->
+                      <ul class="list-inline text-center">
+                       
+                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
+                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/DaniQuietNow" target="/">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        
+                      </ul>
+                      <!-- End Figure List -->
+                    </figure>
+                    <!-- End Figure -->
+                  </div> 
+              </div> 
+              </div>
+              
             </div>
 
       </div>
