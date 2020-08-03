@@ -77,6 +77,11 @@ def about(request):
     return render(request, template, context)
 
 
+def hopin(request):
+    context = {"about": "active"}
+    template = 'hopin.html'
+    return render(request, template, context)
+
 def coc(request):
     context = {"coc": "active"}
     template = 'coc.html'

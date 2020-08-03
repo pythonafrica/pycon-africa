@@ -13,6 +13,7 @@ urlpatterns = [
     path('<slug:slug>/edit/', views.keynote_edit, name='keynote_edit'),
     path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
     path('about/',  view=views.about, name='about'),
+    path('platform/',  view=views.hopin, name='hopin'),
     path('coc/', view=views.coc, name='coc'),
     path('coc/reporting-guidelines', view=views.reporting, name='reporting'),
     path('coc/guidelines', view=views.guidelines, name='guidelines'),
