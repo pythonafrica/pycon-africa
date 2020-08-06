@@ -363,8 +363,57 @@
           <div class="shortcode-html">
             <!-- Team Block -->
             <div class="u-carousel-v10 g-max-width-800 mx-auto">
-              <div id="js-carousel-sync-for" class="js-carousel" data-slides-show="1" data-slides-scroll="1" data-infinite="true" data-fade="true" data-center-mode="true" data-pagi="true" data-adaptive-height="true" data-nav-for="#js-carousel-sync-nav">
-                <div class="js-slide">
+              <div id="js-carousel-sync-for" class="js-carousel" data-slides-show="1" data-slides-scroll="1" data-infinite="true" 
+              data-fade="true" data-center-mode="true" data-pagi="true" data-adaptive-height="true" data-nav-for="#js-carousel-sync-nav"
+                data-autoplay="true" data-speed="4000" data-pause-hover="true" data-fade="true"
+                   data-open-speed="1000" data-close-speed="1000">
+                
+                
+                   <div class="js-slide">
+                    <!-- Figure -->
+                    <figure class="row">
+                       
+                      <!-- Figure Image -->
+                      <div class="col-sm-5 order-sm-1">
+                        <img class="g-width-200 g-height-200 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{% static '2020/img/speakers/Scott.jpg' %}" alt="Image Description">
+                    
+                      </div>
+                      <!-- End Figure Image -->
+                      <div class="col-sm-6 order-sm-2">
+                        <!-- Figure Info -->
+                        <div class="g-mb-30">
+                          <h4 class="h5 g-color-black g-mb-5">Scott Hanselman</h4>
+                          <em class="d-block u-info-v1-5__item g-color-primary g-font-style-normal g-font-size-11 text-uppercase">Partner Program Manager</em>
+                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15"><b>Session:</b> 
+                            Technical content creation and personal productivity.</span>                  
+                       
+                          <br>
+                        </div>
+                        <p class="mb-5">
+                          Scott Hanselman is a former professor, former Chief Architect in finance, now speaker, consultant, father, diabetic, and Microsoft employee. He is a failed stand-up comic, a cornrower, and a book author.
+                        </p>
+  
+                        <!-- End Figure Info -->
+                        
+                        <!-- Social Icons -->
+                        <ul class="list-inline mb-3">
+                         <li class="list-inline-item g-mx-2">
+                           <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-cyan g-bg-cyan-opacity-0_1 g-color-cyan--hover rounded-circle" href="https://twitter.com/shanselman" target="/">
+                             <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
+                             <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
+                           </a>
+                         </li>
+                       </ul>
+                   <!-- End Social Icons -->
+                      </div>
+                     
+                    </figure>
+                    <!-- End Figure -->
+                  </div>
+  
+                
+                
+                   <div class="js-slide">
                   <!-- Figure -->
                   <figure class="row">
                      
@@ -383,7 +432,7 @@
                      
                         <br>
                       </div>
-                      <p class="mb-5">Aniedi Udo-Obong is a developer, product manager, open source evangelist with over 10 years experience 
+                      <p class="mb-10">Aniedi Udo-Obong is a developer, product manager, open source evangelist with over 10 years experience 
                         working with startups in HR, media, finance, education & logistics.</p>
 
                       <!-- End Figure Info -->
@@ -844,6 +893,11 @@ I worked at Intel as an Applications Engineer. I consult on various Android proj
                 <div class="col-md-6 ml-md-auto">
                   <!-- Carousel Nav -->
                   <div id="js-carousel-sync-nav" class="js-carousel u-carousel-v10-nav" data-slides-show="4" data-slides-scroll="1" data-focus-on-select="true" data-center-mode="true" data-nav-for="#js-carousel-sync-for">
+                    
+                    <div class="js-slide g-mx-3">
+                      <img class="w-100" src="{% static '2020/img/speakers/Scott.jpg' %}" alt="Image Description">
+                    </div>
+                   
                     <div class="js-slide g-mx-3">
                       <img class="w-100" src="{% static '2020/img/speakers/aniediudo.png' %}" alt="Image Description">
                     </div>
