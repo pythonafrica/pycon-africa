@@ -131,3 +131,11 @@ def team(request):
 def handler404(request, exception):
     return render(request, '404.html', locals())
 
+
+
+class Home20(ListView):
+    model = KeynoteSpeaker
+    context = {"home": "active"}
+    template_name = '2020.html'
+    context_object_name = 'keynotes'
+

@@ -8,6 +8,7 @@ from . import views
 app_name = 'home'
 urlpatterns = [
     path('', Home.as_view(), name='keynotes'),
+    path('2020', Home20.as_view(), name='keynotes'),
     path('keynote/<slug:slug>', KeynoteDetailView.as_view(), name='keynote_details'),
     path('new/', views.keynote_new, name='keynote_new'),
     path('<slug:slug>/edit/', views.keynote_edit, name='keynote_edit'),
