@@ -1,9 +1,14 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-from speakers.views import *
+from .views import *
+  
+
+
 
 app_name = 'schedule'
 urlpatterns = [
     path('', views.schedule, name='schedule'),
-    path('<slug:slug>', SpeakerDetailView.as_view(), name='speaker_detail'),
+    path('<slug:slug>', ScheduleDetailView.as_view(), name='schedule_detail'), 
+    #path('<slug:slug>/edit/', views.schedule_edit, name='schedule_edit'),
+    path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
 ]

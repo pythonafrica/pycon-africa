@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n static  markdown_extras crispy_forms_tags %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Proposing a Talk || PyCon Africa" %}{% endif %}{% endblock %}
+ 
+
+{% block content %}
+
+<!-- ========== HEADER ========== -->
+{% include '2024/navbar.html' %}
+<!-- ========== END HEADER ========== -->
+  <!--================ Breadcrumb ================-->
+  <div class="mad-breadcrumb">
+    <div class="container">
+      <h1 class="mad-page-title mad-title-with-line">Proposing a Talk </h1>
+      <nav class="mad-breadcrumb-path"><span><a href="/">Home</a></span>/<span>Proposing a Talk </span>
+      </nav>
+    </div>
+  </div>
+  <!--================ End of Breadcrumb ================-->
+  <div class="mad-content no-pd">
+    <div class="container">
+      <section class="mad-section size-5"> 
+          <div class="mad-col">
+
+            <article class="text-size-medium">
+                <i class="fas fa-presentation" style="font-size:41px;"></i>
+                <div class="mad-icon-box-content markdownx-preview"> 
+
+                    <div class="col-md-12"><br>
+                        <div class="col-md-12">
+                            <h3 class="page-title wow fadeInDown">Proposing a talk<br></h3>
+                            {% if user.is_authenticated %}
+                            Hello {% firstof user.get_short_name user.get_username %}, we are glad you are interested in speaking at PyCon Africa!<br> 
+                            {% else %}
+                            We are glad you are interested in speaking at PyCon Africa!<br> 
+                            {% endif %}
+   
+                            {% for proposing_talk in proposing_talks.all|slice:"0:1" %}  
+                                <p class="markdownx-preview">{{ proposing_talk.content | markdown | safe }}</p>
+                              {{ form.media }} 
+                            {% endfor %} 
+
+                        </div>
+                </div> 
+                </div>
+            </article>
+ 
+          </div>   
+      </section>  
+    </div>
+  </div> <br><br><br>
+
+
+
+ 
+{% endblock %}
+
+ 

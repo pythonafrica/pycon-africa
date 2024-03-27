@@ -1,14 +1,18 @@
 from django.contrib import admin
 
 # Register your models here.
- 
-from .models import TalkSchedule, Event, Day
 
-class TalkScheduleAdmin(admin.ModelAdmin):
-    list_display = ("talk", "conference_day")
-    list_filter = ("talk", "conference_day")
+from .models import TalkSchedule, Room, Event, Day
+
+
+
+class TalkScheduleAdmin(admin.ModelAdmin): 
+    list_display = ('talk', 'event', 'allocated_room', 'conference_day', "concurrent_talk", "is_a_keynote_speaker", "is_a_panel", 'start_time', 'end_time')  
+    ordering = ['-start_time', ]  
+    list_editable = ["concurrent_talk", "is_a_keynote_speaker", "is_a_panel",]  
 
 
 admin.site.register(TalkSchedule, TalkScheduleAdmin)
+admin.site.register(Room)
 admin.site.register(Event)
 admin.site.register(Day)

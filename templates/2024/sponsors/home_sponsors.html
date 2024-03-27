@@ -1,0 +1,52 @@
+{% load static  %} 
+
+ 
+ 
+ <!--================ Content Section ================-->
+ <section class="mad-section size-3 mad-section--stretched">
+    <div class="bg-anim-wrap section-type-9">
+      <div class="bg-move mad-colorizer-bg-color" data-bg-image-src="{% static '2022/images/dotsbg5.png' %}"></div>
+    </div>
+    <div class="mad-section-title-wrap align-center">
+      <h2 class="mad-section-title mad-title-with-line">A Big Thank You to Our Sponsors</h2>
+    </div>
+    {% if sponsor_h_home %}
+    <h5 class="sub-title align-center" style="color: rgb(51, 51, 95); text-shadow: 2px 2px 3px #000">Headline</h5>
+    <!--================ Gallery ================-->
+    <ul class="mad-sponsors item-col-4">
+ 
+        {% for sponsor in sponsor_h_home  %} 
+      <li class="mad-grid-item mad-category-platinum">
+        <!--================ Gallery Item ================-->
+        <a href="{{ sponsor.website }}" target="/" class="gallery-item">
+          <img src="{{ sponsor.logo.url }}" alt="">
+        </a>
+        <!--================ End of Gallery Item ================-->
+      </li>   
+      {% endfor %}  
+      
+    </ul> 
+    {% endif %}
+    {% if sponsor_p_home %}
+    <!--================ End of Gallery ================-->
+    <h5 class="sub-title align-center" style="color: #000; text-shadow: 2px 2px 3px #958799">Platinum</h5>
+    <!--================ Gallery ================-->
+    <ul class="mad-sponsors item-col-4"> 
+        {% for sponsor in sponsor_p_home  %}
+         
+      <li class="mad-grid-item mad-category-platinum">
+        <!--================ Gallery Item ================-->
+        <a href="{{ sponsor.website }}" target="/" class="gallery-item">
+          <img src="{{ sponsor.logo.url }}" alt="">
+        </a>
+        <!--================ End of Gallery Item ================-->
+      </li> 
+      {% endfor %}  
+    </ul>
+    {% endif %} 
+    <!--================ End of Gallery ================-->
+    <div class="align-center"><br><br>
+        <a href="/sponsors" class="btn" ><b>View more sponsors.</b></a>
+      </div>
+  </section>
+  <!--================ End of Content Section ================-->

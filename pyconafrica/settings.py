@@ -9,20 +9,26 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-import os
+import os 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from datetime import datetime 
+from pathlib import Path
+
 try:
    from .secrets import *
 except ImportError:
     raise Exception("A secrets.py file is required to run this project, if not provided contact Mannie Young - https://twitter.com/mawy_7")
 
 
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split()
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+  
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-CLOUDINARY_STORAGE = {
-    # other settings, like credentials
-    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, 'my-manifest-directory')
-}
+ 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -32,28 +38,67 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+LOGIN_REDIRECT_URL = '/accounts/profile/'
+SIGNUP_REDIRECT_URL = '/accounts/profile/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [  
+    'grappelli',
     'django.contrib.admin',
+    'cloudinary', 
+    'cloudinary_storage',
+    'gamma_cloudinary', 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary_storage',
-    'cloudinary',
-    "home",
-    "our_sponsors",
-    "pyconafrica2019",
-    "speakers",
-    "schedule",
-    'imagekit',
-    'hitcount',
+ 
+
+# Third party apps
+    'avatar', 
+    'crispy_forms',
+    "crispy_bootstrap5",  
+    'django_recaptcha',
     'django_slugify_processor',
+    'django_countries',
     'django_summernote',
+    'django_extensions',
+    'django_robohash',
+    'embed_video',
+    'imagekit',
+    'import_export',
+    'rest_framework', 
     'tinymce',
+    'sorl.thumbnail',
+    #'newsletter', 
+    'markdownx',
+    #'mdeditor',
+    #'markitup',
+    'hitcount', 
+
+
+    #APPS 
+    'about',
+    'contact',
+    'registration',
+    'coc',
+    'event',
+    'faq',
+    "fin_aid",
+    "health_safety_guideline",
+    "home", 
+    'privacypolicy',
+    "pycon2020",
+    "pyconafrica2019",
+    "schedule", 
+    "speakers", 
+    'sponsors',
+    'sponsor_us',
+    'talks',
+    'tickets',  
 ]
 
 MIDDLEWARE = [
@@ -68,13 +113,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'pyconafrica.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.media',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -84,6 +132,7 @@ TEMPLATES = [
     },
 ]
 
+ 
 WSGI_APPLICATION = 'pyconafrica.wsgi.application'
 
 
@@ -123,7 +172,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Lagos'
+TIME_ZONE = 'Africa/Accra'
 
 USE_I18N = True
 
@@ -150,6 +199,12 @@ STATIC_URL = "/static/"
 STATIC_ROOT=os.path.join(BASE_DIR,"/static/")
 
 
+
+#STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
+#DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
+ 
+
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -172,6 +227,20 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 
 #STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
+
+# Sets the default template pack for the project 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# Registration App account settings
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_EMAIL_SUBJECT_PREFIX = '[PyCon Africa]'
+SEND_ACTIVATION_EMAIL = True
+REGISTRATION_AUTO_LOGIN = False
+  
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -230,3 +299,52 @@ TINYMCE_EXTRA_MEDIA = {
         ...
     ],
 }
+
+
+# Using the new No Captcha reCaptcha
+NOCAPTCHA = True
+
+# Sets the default site
+SITE_ID = 1
+
+AVATAR_MAX_AVATARS_PER_USER = 1
+
+AVATAR_ALLOWED_FILE_EXTS = ('.jpg', '.jpeg', '.png')
+
+HASHIDS_SALT= "some_random_string",
+
+
+MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
+
+## markdownify
+MARKDOWNIFY_WHITELIST_TAGS = [
+  'a',
+  'abbr',
+  'acronym',
+  'b',
+  'blockquote',
+  'em',
+  'i',
+  'li',
+  'ol',
+  'p',
+  'strong',
+  'ul',
+  'pre',
+  'code',
+]
+MARKDOWNIFY_WHITELIST_PROTOCOLS = [
+    'http',
+    'https',
+]
+MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
+MARKDOWNIFY_LINKIFY_PARSE_EMAIL = True
+MARKDOWNX_EDITOR_RESIZABLE = True
+MARKDOWNX_MEDIA_PATH = 'markdownx/'
+MARKDOWNIFY_LINKIFY_SKIP_TAGS = ['pre', 'code', ]
+MARKDOWNIFY_WHITELIST_ATTRS = [
+    'href',
+    'src',
+    'alt',
+    'class',
+]

@@ -1,0 +1,7 @@
+<!-- Template located at templates/emails/proposal_status_changed.html -->
+<html>
+<body>
+    <p>Dear {{ proposal.user.username }},</p>
+    <p>The status of your proposal titled "{{ proposal.title }}" for PyCon Africa has been updated to "{{ proposal.get_status_display }}".</p>
+</body>
+</html>

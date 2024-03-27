@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from schedule.models import TalkSchedule, Event, Day
-from speakers.models import Speaker
+from talks.models import Proposal
 
 
 class DaySerializer(serializers.ModelSerializer):
@@ -18,9 +18,8 @@ class TalkScheduleSerializer(serializers.ModelSerializer):
 
 class TalkSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Speaker
-        exclude = ('youtube_iframe_url')
-
+        model = Proposal
+        exclude = ('notes', 'talk_abstract', 'status')
 
 
 class EventSerializer(serializers.ModelSerializer):

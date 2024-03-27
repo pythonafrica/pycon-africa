@@ -16,18 +16,60 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
-from django.conf.urls import handler404, handler500
+from django.urls import include, path, re_path
+from django.conf.urls import handler404, handler500  
+from django_robohash.views import robohash 
+from django.views.static import serve  
+from django.views.generic import RedirectView 
+
 
 from pyconafrica2019 import views
 
 urlpatterns = [
-    path('', include('home.urls', namespace='home')),
-    path('speakers/', include('speakers.urls')),
-    path('schedule/', include('schedule.urls')),
-    path('our-sponsors/', include('our_sponsors.urls', namespace='our_sponsors')),
+
+#Apps
+    path('', include('home.urls', namespace='homepage')), 
+    path('<int:year>/', include([
+        path('', include('home.urls')),
+        path('about/', include('about.urls')),
+        path('speakers/', include('speakers.urls')),
+        path('schedule/', include('schedule.urls')),
+        path('our-sponsors/', include('sponsors.urls', namespace='sponsors')),
+        path('talks/', include('talks.urls', namespace='talks')),
+        path('coc/', include('coc.urls')),
+        path('sponsor-us/', include('sponsor_us.urls', namespace='sponsor_us')),
+        # Add more apps here following the same pattern
+    ])), 
     path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
+    path('organizers/', admin.site.urls),  
+
+#Thrid party Apps 
     path('summernote/', include('django_summernote.urls')),
     path('tinymce/', include('tinymce.urls')),
-    path('organizers/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('accounts/profile/', include('registration.urls', namespace='profiles')),  
+    path('accounts/', include('registration.backends.default.urls')),
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+    path('robohash/<string>/', robohash, name='robohash'),
+    path('avatar/', include('avatar.urls')),
+    path('markdownx/', include('markdownx.urls')),
+    re_path(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
+
+
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+# Adds ``STATIC_URL`` to the context of error pages, so that error
+# pages can use JS, CSS and images.
+
+handler404 = 'home.views.handler404'
+
+
+
+
+# Modifies default django admin titles and headers with custom app detail.
+admin.site.site_header = "PyCon Africa Admin"
+admin.site.site_title = "PyCon Africa Admin Portal"
+admin.site.index_title = "Welcome to PyCon Africa Portal"

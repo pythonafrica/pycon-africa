@@ -1,9 +1,9 @@
 from django import forms
-from .models import Speaker
 
+from registration.models import Profile
 
 class SpeakerForm(forms.ModelForm):
 
     class Meta:
-        model = Speaker
-        fields = ('speaker_name', 'biography')
+        model = Profile
+        fields = ('name', 'biography')
