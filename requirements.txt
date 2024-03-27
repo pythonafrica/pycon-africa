@@ -19,7 +19,7 @@ defusedxml==0.7.1
 diff-match-patch==20230430
 distlib==0.3.8
 dj3-cloudinary-storage==0.0.6
-Django==5.0.2
+Django==5.0.3
 django-3-jet==1.0.8
 django-anymail==10.2
 django-appconf==1.0.6
