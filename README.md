@@ -8,9 +8,29 @@ Sure! To incorporate the use of `virtualenvwrapper` specifically into the instal
 
 ## Requirements
 
+
 * [Python 3.11.0](https://python.org)
-* [Django 5.0.2](https://www.djangoproject.com/)
-* [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io)
+* [Poetry](https://python-poetry.org/)
+
+
+
+```
+# install dependencies using poetry 
+
+poetry install 
+
+# now open a shell. This is equivalent to activating a virtual environment
+
+poetry shell
+
+# once your shell is active you can use this command to set up your development database
+
+python manage.py migrate 
+
+# then you can use this command to run the application
+
+python manage.py runserver
+```
 
 ## Installation
 
