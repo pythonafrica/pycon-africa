@@ -2,38 +2,50 @@
 
     This is the source code for the https://pycon.africa/ website.
 
+Sure! To incorporate the use of `virtualenvwrapper` specifically into the installation instructions for Python 3.11.0 and Django 5.0.2, we'll focus on the `mkvirtualenv` command for creating a virtual environment. Here's the updated guide including the `virtualenvwrapper` style for creating a virtual environment:
+
 # Running the site locally
 
-## Requirments
+## Requirements
 
-* [Python 3.7](https://python.org)
-* [Django - python web framework](https://www.djangoproject.com/)
+* [Python 3.11.0](https://python.org)
+* [Django 5.0.2](https://www.djangoproject.com/)
 * [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io)
 
 ## Installation
 
-* [Follow the guide here](https://help.github.com/articles/fork-a-repo) on how to clone or fork a repo
-* [Follow the guide here](http://simononsoftware.com/virtualenv-tutorial/) on how to create virtualenv
-* Create a virtualenv (example _myvenv_) and activate it (see Code below).
+1. **Clone or Fork the Repository**: Follow the guide on [GitHub Help - Fork a Repo](https://help.github.com/articles/fork-a-repo) to understand how to clone or fork a repo.
 
-  ```
-  source virtualenvwrapper.sh
+2. **Set Up Virtualenvwrapper**: If you haven't already installed `virtualenvwrapper`, you can do so by following the installation instructions on their [official documentation](https://virtualenvwrapper.readthedocs.io). Ensure it's properly configured to work with your shell.
 
-  mkvirtualenv myvenv --python=/usr/bin/python3.7
+3. **Create and Activate a Virtual Environment**: Using `virtualenvwrapper`, you will create a new virtual environment specifically for the project. Replace `env1` with a name relevant to your project, like `pyconafrica_env`:
 
-  (myvenv) $ pip install -r requirements.txt
+   ```
+   mkvirtualenv pyconafrica_env --python=/usr/bin/python3.11
+   ```
 
-  (myvenv) $ python manage.py migrate
+   This command creates a new virtual environment named `pyconafrica_env` using Python 3.11.0. Once created, `virtualenvwrapper` automatically activates the virtual environment.
 
-  (myvenv) $ python manage.py makemigrations
+4. **Install Dependencies**: Ensure your `requirements.txt` file includes `Django==5.0.2` and any other necessary packages. Install them using `pip`:
 
-  (myvenv) $ python manage.py runserver
-  ```
+   ```
+   (pyconafrica_env) $ pip install -r requirements.txt
+   ```
 
-* Copy the IP address provided once your server has completed building the site. (It will say something like >> Serving at 127.0.0.1....).
-* Open the address in the browser
-* `Note`: It is important that when you create your virtualenv, do not create it in the same folder as the code you downloaded.
+5. **Database Setup and Server Launch**: Execute the following Django management commands to set up your database and start the development server:
+
+   ```
+   (pyconafrica_env) $ python manage.py migrate
+   (pyconafrica_env) $ python manage.py makemigrations
+   (pyconafrica_env) $ python manage.py runserver
+   ```
+
+6. **Access the Site**: After the server starts, copy the IP address provided (typically something like "Serving at 127.0.0.1:8000") and paste it into your web browser to view the site.
+
+`Note`: It's important to avoid creating your virtual environment in the same directory as your project code. `virtualenvwrapper` stores environments in a separate location by default, which helps avoid this issue.
 
 # Contributing
 
-Read our [Contributing Guide](./CONTRIBUTING.md) on how to contribute to the project.
+Interested in contributing? Please read our [Contributing Guide](./CONTRIBUTING.md) for guidelines on how to contribute effectively.
+
+This guide now includes the use of `virtualenvwrapper` for managing your Python virtual environments, providing a clean and efficient workflow for Python development, especially with specific versions like Python 3.11.0 and Django 5.0.2.
