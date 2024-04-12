@@ -1,3 +1,7 @@
+NOTE: This is just here for reference purposes. This is not the actual requirements.txt file.
+
+Rather use poetry to install and manage dependencies.
+
 alabaster==0.7.16
 asgiref==3.7.2
 Babel==2.14.0
