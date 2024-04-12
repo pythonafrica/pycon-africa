@@ -9,7 +9,7 @@ Sure! To incorporate the use of `virtualenvwrapper` specifically into the instal
 ## Requirements
 
 
-* [Python 3.11.0](https://python.org)
+* [Python 3.11.9](https://python.org)
 * [Poetry](https://python-poetry.org/)
 
 
