@@ -35,8 +35,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -99,8 +97,9 @@ INSTALLED_APPS = [
     "tickets",
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [ 
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -192,8 +191,7 @@ PROJECT_ROOT = BASE_DIR = os.path.dirname(PROJECT_APP_PATH)
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = "/static/"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
-
+STATIC_ROOT = os.path.join(BASE_DIR, "/static/") 
 
 # STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
 # DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage'
