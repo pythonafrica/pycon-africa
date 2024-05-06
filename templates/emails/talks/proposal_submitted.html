@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Proposal Submission Confirmation</title>
+</head>
+<body>
+    <h1>Thank You for Your Submission</h1>
+    <p>Dear {{ proposal.user.get_full_name|default:proposal.user.username }}, thank you for submitting your proposal titled "<strong>{{ proposal.title }}</strong>".</p>
+    <p>We have received your submission and will review it shortly. You will be notified about the status of your proposal soon.</p>
+    <p>Best regards,<br>PyCon Africa Programme Team</p>
+</body>
+</html>

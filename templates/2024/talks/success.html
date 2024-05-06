@@ -109,7 +109,7 @@
                       </button>
                       <h4 class="h5">
                         <i class="fa fa-check-circle-o"></i>
-                        Hey {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %}, your talk submission was successful.
+                        Hey {% if request.user.user_profile %}{{ request.user.user_profile.name}}{% else %}@{{ request.user.username }}{% endif %}, your talk submission was successful.
                       </h4>
                       <p>Thank you for submitting your proposal. Our organising team will get back to you.</p> 
                     </div>
@@ -120,7 +120,7 @@
                     <br>  
                     
         <span class="d-inline-block g-font-weight-600 text-uppercase mr-4">You can</span>
-        <a class="btn u-btn-outline-primary g-brd-2 g-font-weight-600 g-font-size-12 text-uppercase g-px-25 g-py-13" href="/talks/talk_list">
+        <a class="btn u-btn-outline-primary g-brd-2 g-font-weight-600 g-font-size-12 text-uppercase g-px-25 g-py-13" href="{% url 'talks:talk_list' year=year %}">
           <i class="fa-solid fa-table-list" style="font-size:21px;"></i>&nbsp;&nbsp; <b>View submitted talk(s)</b>
         </a>
         <span class="d-inline-block g-font-weight-600 text-uppercase mx-4">or</span>

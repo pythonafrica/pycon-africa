@@ -246,6 +246,29 @@
     
   </script>
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Select all label elements in the form and apply inline styles
+      document.querySelectorAll('form label').forEach(function(label) {
+        label.style.fontWeight = 'bold';
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Select all help text elements in the form and apply inline styles
+      document.querySelectorAll('.help-block').forEach(function(helpText) {
+        helpText.style.fontSize = '0.3rem'; // Sets the font size smaller
+      });
+    });
+  </script>
+  <style>
+    /* Targeting help text within form */
+    .form-help-text {
+      font-size: 0.8rem; /* Adjust the font size as needed */
+    }
+  </style>
+  
+  <script>
     function goBack() {
       window.history.back();
     }

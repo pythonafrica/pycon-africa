@@ -86,8 +86,24 @@
                           <span><i class="fa-solid fa-podium g-pos-rel g-top-1 g-mr-8"></i>  Submit a new Talk</span>
                         </a>
                         <!-- End Profile -->
-          
-      
+
+
+                      {% if perms.reviews.add_review %} 
+                        <!-- Review Talks -->
+                        <a href="{% url 'talks:talks_to_review' year=year %}" class="list-group-item list-group-item-action justify-content-between">
+                          <span><i class="fa-solid fa-ballot-check g-pos-rel g-top-1 g-mr-8"></i> Review Proposals</span>
+                        </a>
+                        <!-- End Profile --> 
+                      {% endif %}
+                      
+                      {% if request.user.is_superuser %}
+                     <!-- Review Talks List-->
+                     <a href="{% url 'talks:reviewed_talks_by_category' year=2024 %}" class="list-group-item list-group-item-action justify-content-between">
+                      <span><i class="fa-thin fa-list-check g-pos-rel g-top-1 g-mr-8"></i> Proposals by Category</span>
+                    </a>
+                    <!-- End Profile --> 
+                          {% endif %}
+ 
                 {% else %}
                 
                   <!-- Overall -->
@@ -173,6 +189,8 @@
               <!-- End Info -->
       
     <hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
+                  
+                {% invitation_list %}
 
                 <!-- Projects & Activities Panels -->
                 <div class="row g-mb-40">
@@ -238,7 +256,7 @@
                   <section class="g-brd-around g-brd-gray-light-v4">
                     <div class="container g-py-50--md g-py-20">
                       <h2 class="h2 text-uppercase text-center  g-font-weight-300"> Thanks for Signing up! @{% firstof user.get_short_name user.get_username %} 🥳</h2>
-                      <p class="mb-0   g-mb-25">
+                      <p class="mb-0   g-mb-25"><br>
                         We're thrilled to have you join this vibrant community of Python enthusiasts, developers, 
                         and innovators from across Africa and beyond. To get started, we kindly ask you to create your profile.  
                         Please click on the "Create Profile" button below to begin. <br><br>🥂 Here's to an exciting journey ahead at PyCon Africa 2024!

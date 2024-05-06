@@ -115,6 +115,121 @@
                                             <strong>Talk Type:</strong> {{ talk.talk_type }}
                                             <br><strong>Talk Category</strong>: {{ talk.talk_category }}
                                             <br><strong>Intended Audience</strong>: {{ talk.intended_audience }}
+                                            {% if speakers %} 
+                                            <br><strong>Added Speaker(s)</strong>:
+                                            {% for speaker in speakers %}
+                                              {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }} | 
+                                            {% endfor %}
+                                            {% else %} 
+                                            {% endif %} 
+                                            {% if talk.status == "S" %}
+                                            <li class="btn btn-small u-btn-yellow g-color-black"><b>Status:</b> Currently under Review</li>
+                                            {% elif talk.status == "A" %} 
+                                             <!-- Teal Alert -->
+                                              <div class="alert alert-dismissible fade show g-bg-teal g-color-white rounded-0" role="alert">
+                                                  <button type="button" class="close u-alert-close--light" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">×</span>
+                                                  </button>
+                                          
+                                                  <div class="media">
+                                                  <span class="d-flex g-mr-10 g-mt-5">
+                                                      <i class="icon-check g-font-size-25"></i>
+                                                  </span>
+                                                  <span class="media-body align-self-center">
+                                                      <strong>Congratulations {% if talk.user.user_profile.name %}{{ talk.user.user_profile.name }}{% else %}@{{ talk.user.username|capfirst }}{% endif %}!</strong> This talk has been Accepted.
+                                                  </span>
+                                                  </div>
+                                              </div>
+                                              <!-- End Teal Alert -->         
+                                            {% elif talk.status == "W" %} 
+                                            <li class="btn btn-small  u-btn-aqua g-color-black"><b>Status:</b> On Waitlist</li>                  
+                                            {% elif talk.status == "R" %} 
+                                            <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>                
+                                            {% endif %} 
+                                            
+                                            
+                                        <!-- Trigger/Open The Modal -->
+                                        <a class="btn u-btn-primary" href="#modal1" data-modal-target="#modal1" data-modal-effect="fadein">Add Speakers to This Talk
+                                        </a>
+                                        
+                                        <!-- Demo modal window -->
+                                        <div id="modal1" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20" style="display: none;">
+                                          <button type="button" class="close" onclick="Custombox.modal.close();">
+                                            <i class="hs-icon hs-icon-close"></i>
+                                          </button>
+                                          <h4 class="g-mb-20">Enter the speaker's email address:</h4>
+                                          (Make sure the person you are inviting already have an account on this website.)
+                                          <form action="{% url 'talks:send_speaker_invitation' year=talk.event_year.year pk=talk.pk %}" method="post">
+                                            {% csrf_token %}
+                                            <label for="user_email">Speaker's Email:</label>
+                                            <input type="email" name="user_email" id="user_email" required>
+                                            <button type="submit">Send Invitation</button>
+                                        </form>
+                                        
+                                        </div>
+                                        <!-- End Demo modal window -->
+
+ 
+
+                                        </p>    
+                                        
+                    <hr class="u-divider-db-solid g-brd-gray-light-v3"> <p class="g-color-black"><strong>Talk Preview</strong>: </p>
+                                        {% if talk.link_to_preview_video_url %}
+  
+                                           <!-- Youtube Iframe --> 
+                                            <div class="embed-responsive  u-shadow-v36 g-brd-around g-brd-7 g-brd-white g-rounded-5 mb-4 embed-responsive-16by9 g-mb-30">
+                                                {% video talk.link_to_preview_video_url 'tiny' %}
+                                            </div> 
+                                            <!-- End Youtube Iframe -->
+                                            
+                                         {% else %} 
+                                         <div class="mad-entity-media">
+                                            <p class="mad-entity-link-element mad-ln--independent g-color-gray-dark-v3" style="background-position: 0% 129px;">
+                                                <i class="icon licon-play">
+                                                </i> 
+                                                You are yet to submit the preview video of this talk.
+                                            </p>
+                                          </div>
+                                            
+                                        {% endif %}<br> 
+                                        <p class="g-color-gray-dark-v3"><strong>Elevator Pitch</strong>: {{ talk.elevator_pitch  | markdown | safe  }} </p> 
+                                        
+                                        <p class="g-color-gray-dark-v3"><strong>Abstract</strong>: {{ talk.talk_abstract | markdown | safe  }}</p>
+                                          
+                                        
+                                            
+                    <hr class="u-divider-db-solid g-brd-gray-light-v3"> 
+                                        <div><br<br> <br />
+                                            <a  onclick="goBack()"   class="btn  btn-small  u-btn-outline-darkgray" style="font-size:16px"><i class="licon-undo "></i><span>GO BACK</span></a>
+                                            <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink"><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
+                                          
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        </div>
+                            
+                        </div> 
+                         
+                    {% else %}
+
+                    <div class="panel wow fadeInLeft "> 
+                      <div class="col-md-12">
+                          <div>
+                              <h4 class="page-title wow fadeInDown"><b>{{ talk.title }}</b> will be presented by {% if talk.user.user_profile.name %}{{ talk.user.user_profile.name }} {{ talk.user.user_profile.surname }}{% else %}@{{ talk.user.username|capfirst }}{% endif %}<br></h4>
+                               
+                                <div class="media-body">
+                                  <div class="d-flex justify-content-between">
+                                    <h5 class="h6 g-font-weight-600 g-color-black">You will be joining this session</h5>
+                                    <span class="small text-nowrap g-color-blue"> </span>
+                                  </div>  
+                                  <div class=" ">
+                                    <br>
+                                    <div class="col-md-14">  
+                                        <p class="g-color-gray-dark-v3">
+                                            <strong>Talk Type:</strong> {{ talk.talk_type }}
+                                            <br><strong>Talk Category</strong>: {{ talk.talk_category }}
+                                            <br><strong>Intended Audience</strong>: {{ talk.intended_audience }}
   
                                             {% if talk.status == "S" %}
                                             <li class="btn btn-small u-btn-yellow g-color-black"><b>Status:</b> Currently under Review</li>
@@ -139,9 +254,14 @@
                                             <li class="btn btn-small  u-btn-aqua g-color-black"><b>Status:</b> On Waitlist</li>                  
                                             {% elif talk.status == "R" %} 
                                             <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>                
-                                            {% endif %}  
+                                            {% endif %} 
+                                            
+                                        
+ 
+
                                         </p>    
-                                        <hr><p class="g-color-black"><strong>Talk Preview</strong>: </p>
+                                        
+                    <hr class="u-divider-db-solid g-brd-gray-light-v3"> <p class="g-color-black"><strong>Talk Preview</strong>: </p>
                                         {% if talk.link_to_preview_video_url %}
   
                                            <!-- Youtube Iframe --> 
@@ -165,41 +285,22 @@
                                         <p class="g-color-gray-dark-v3"><strong>Abstract</strong>: {{ talk.talk_abstract | markdown | safe  }}</p>
                                           
                                         
-                                            <hr>
+                                            
+                    <hr class="u-divider-db-solid g-brd-gray-light-v3"> 
                                         <div><br<br> <br />
                                             <a  onclick="goBack()"   class="btn  btn-small  u-btn-outline-darkgray" style="font-size:16px"><i class="licon-undo "></i><span>GO BACK</span></a>
-                                            <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink"><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
-                                          
+                                            
                                         </div>
                                     </div>
                                     
                                 </div>
-                        </div>
-                            
-                        </div> 
-                         
-                    {% else %}
-                    <div class="col-sm-12 col-md-9"> 
-                        <div class="panel wow fadeInLeft  col-md-10"> 
-                            <div class="col-md-12">
-                                <div class="col-md-10">
-                                    <h6 class="page-title wow fadeInDown"><b>{{ talk.title }}</b> will be presented by {% if talk.user.user_profile.name %}{{ talk.user.user_profile.name }} {{ talk.user.user_profile.surname }}{% else %}@{{ talk.user.username|capfirst }}{% endif %}<br></h6>
-                                    
-                                    <div class="col-md-14"> 
-                                        <div role="alert" class="mad-alert-box mad-alert-box--error">
-                                            <div class="mad-alert-box-inner">Oh snap! You are viewing the wrong page 👀<br>
-                                                <small>View the main Talk page <b><a href="/talks/{{talk.proposal_id}}/detail/">here</a></b></small>
-                                              <button type="button" class="mad-alert-box-close">Close</button>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    
                                 </div>
-                        </div>
-                            
-                        </div> 
-                        
-                    </div>
+                                 
+                              
+                          </div>
+                  </div>
+                      
+                  </div> 
                     {% endif %} 
                                     
                   </div>

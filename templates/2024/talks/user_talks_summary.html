@@ -26,6 +26,27 @@
       </li>
       {% endfor %}
 </ul>
+{% elif invited_talks.exists %}
+
+<ul class="list-unstyled">
+  {% for talk in invited_talks %}
+  <li class="d-flex justify-content-start g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-10">
+    <div class="align-self-center g-px-10">
+      <h5 class="h6 g-font-weight-600 g-color-black g-mb-3">
+        <a href="/{{ talk.event_year.year }}/talks/{{ talk.pk }}/talk_details/">{{ talk.title }}</a>
+      </h5>
+      {% if talk.user.user_profile %}
+      <p>You will join {{ talk.user.user_profile.name }} {{ talk.user.user_profile.surname }} in this session</p>
+      {% else %}
+      <p>Session details will be updated soon.</p>
+      {% endif %}
+    </div>
+    <div class="align-self-center ml-auto">
+      <span class="u-label u-label--sm g-bg-{{ talk.status|lower }} g-rounded-20 g-px-10">{{ talk.get_status_display }}</span>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
 {% else %}
 <div class="js-scrollbar card-block  u-info-v1-1 g-bg-white-gradient-v1--after g-height-400 g-pa-0">
     <ul class="list-unstyled">

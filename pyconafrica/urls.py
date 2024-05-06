@@ -41,6 +41,7 @@ urlpatterns = [
         # Add more apps here following the same pattern
     ])), 
     path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
+    path('2020/', include('pycon2020.urls')),
     path('organizers/', admin.site.urls),  
 
 #Thrid party Apps 

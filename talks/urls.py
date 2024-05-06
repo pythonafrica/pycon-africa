@@ -1,11 +1,13 @@
 from rest_framework import routers
 from django.urls import include, path, re_path
+from django.urls import path
 from talks.views import TalkViewsSets 
 from django.contrib.auth.decorators import login_required
 from talks import views
-from .views import *
+from .views import *  
 from django.conf.urls.static import static 
-from django.conf import settings
+from django.conf import settings 
+from django.views.generic import TemplateView
 
 app_name = 'talks'
 router = routers.DefaultRouter()
@@ -45,6 +47,19 @@ urlpatterns = [
     path('uploads', views.home, name='home'), 
     path('uploads_simple', views.simple_upload, name='simple_upload'),
     path('uploads_form', views.model_form_upload, name='model_form_upload'),
+
+    #Added Speaker(s) invitation  
+    path('<str:pk>/invite-speaker/', views.send_speaker_invitation, name='send_speaker_invitation'),
+    path('<str:pk>/accept/', views.accept_invitation, name='accept_invitation'),
+    path('<str:pk>/reject/', views.reject_invitation, name='reject_invitation'),
+
+    #Proposal Review 
+    path('reviews/', views.list_talks_to_review, name='talks_to_review'), 
+    path('review/<str:pk>/', views.review_talk, name='review_talk'),  
+    path('review_talk/success/', views.review_success, name='review_success'),
+    path('reviewed-by-category/', reviewed_talks_by_category, name='reviewed_talks_by_category'),
+    
+
     ]
 
 urlpatterns += router.urls

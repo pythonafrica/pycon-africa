@@ -259,9 +259,11 @@ class UpdateProfileView(UpdateView):
     def form_valid(self, form):
         profile = form.save(commit=False)
         profile.user = self.request.user
+        profile.user.first_name = profile.name
+        profile.user.last_name = profile.surname
+        profile.user.save()
         profile.save()
         return super(UpdateProfileView, self).form_valid(form)
-
 
 
 class UpdateLoginView(EditOwnLoginMixin, UpdateView):

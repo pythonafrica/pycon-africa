@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Proposal Has Been Accepted</title>
+</head>
+<body>
+    <h1>Congratulations {{ proposal.user.get_full_name|default:proposal.user.username }}!</h1>
+    <p>We are pleased to inform you that your proposal titled "<strong>{{ proposal.title }}</strong>" has been accepted for presentation at our conference.</p>
+    <p>Further details about the schedule and arrangements will follow soon. Thank you for your valuable contribution!</p>
+    <p>Best regards,<br>The Conference Team</p>
+</body>
+</html>

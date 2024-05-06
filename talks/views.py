@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView, UpdateView, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail, BadHeaderError
 
@@ -20,15 +19,20 @@ from rest_framework import viewsets
 from .serializers import TalkSerializer
 from .models import *
 from .models import Document
-from .forms import DocumentForm
+from .forms import *
 from .forms import ProposalForm
 from .mixins import EditOwnTalksMixin
- 
-from django.views.generic.detail import DetailView  
+  
+from django.views.generic import ListView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView 
+from django.views.generic import TemplateView, UpdateView, ListView  
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from next_prev import next_in_order, prev_in_order
-
+from django.contrib import messages
 #Sending html emails to user
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -36,8 +40,8 @@ from django.utils.html import strip_tags
 from django.core.mail import EmailMessage 
 from django.http import Http404
 from .resources import ProposalResource
-from home.models import EventYear 
-
+from home.models import EventYear  
+from django.db.models import Avg
 
 
 
@@ -134,66 +138,75 @@ class TalkList(TemplateView):
         return [template_path]
     
      
-
-
 class TalkView(UpdateView):
     form_class = ProposalForm
     model = Proposal
     slug_field = 'slug'
-    # Assuming you have a method or logic within EditOwnTalksMixin that correctly identifies the object
 
     def get_success_url(self):
-        # Dynamically redirect to a success page, potentially including the year
         proposal = self.get_object()
         return reverse_lazy('talks:submitted', kwargs={'year': proposal.event_year.year})
 
     def get_template_names(self):
         proposal = self.get_object()
-        # Dynamically select the template based on the event year of the proposal
         return [f"{proposal.event_year.year}/talks/talk.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         proposal = self.get_object()
-        context['title'] = "Talk Details"
-        context['year'] = proposal.event_year.year  # Use the event year of the proposal
+        context.update({
+            'title': "Talk Details",
+            'year': proposal.event_year.year,
+            'speakers': proposal.speakers.all()  # Include speakers in the context
+        })
         return context
- 
+
+
+
 
 class TalkDetailView(TemplateView):
     def get_template_names(self):
-        proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))  
+        proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))
         event_year = proposal.event_year.year
         return [f"{event_year}/talks/talk_details.html"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk')) 
-        context['title'] = "Accepted Talks"
-        context['year'] = proposal.event_year.year
-        context['talk'] = proposal
+        proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))
+        context.update({
+            'title': "Accepted Talks",
+            'year': proposal.event_year.year,
+            'talk': proposal,
+            'speakers': proposal.speakers.all()  # Include speakers in the context
+        })
         return context
-     
+
+
+
 class TalksDetailView(DetailView):
     model = Proposal
     context_object_name = 'schedule'
     slug_field = 'proposal_id'
-    # Removed static template_name to dynamically set it in get_template_names
-    # Assuming count_hit and paginate_by are handled elsewhere or part of HitCountDetailView specifics
 
     def get_template_names(self):
-        # Assuming the proposal ID is used to fetch the object, not a slug
         proposal = self.get_object()
         proposal_year = proposal.event_year.year
         return [f"{proposal_year}/schedule/talk_details.html"]
 
     def get_context_data(self, **kwargs):
         context = super(TalksDetailView, self).get_context_data(**kwargs)
-        context['title'] = "Talk Detail Details"
-        context['year'] = self.object.event_year.year  # Use the event year from the proposal
-        context['related_talks'] = Proposal.objects.filter(status='A', event_year=self.object.event_year).order_by('?')[:5]
+        proposal = self.get_object()
+        context.update({
+            'title': "Talk Detail Details",
+            'year': proposal.event_year.year,
+            'related_talks': Proposal.objects.filter(status='A', event_year=proposal.event_year).order_by('?')[:5],
+            'speakers': proposal.speakers.all()  # Include speakers in the context
+        })
         return context
- 
+
+
+
+
 class SuccessView(TemplateView):
     def get_template_names(self):
         # Attempt to fetch the event year from URL kwargs
@@ -302,6 +315,219 @@ def proposing(request, year=None):
     template_name = f'{year}/talks/proposing_a_talk.html'
     return render(request, template_name, {'proposing_talks': proposing_talks, 'event_year': event_year})
  
+ 
+@login_required
+def send_speaker_invitation(request, year, pk):
+    if request.method == 'POST':
+        user_email = request.POST.get('user_email')
+        event_year = get_object_or_404(EventYear, year=year)
+        proposal = get_object_or_404(Proposal, pk=pk, event_year=event_year)
+        user = get_object_or_404(User, email=user_email)
+        sender_name = request.user.get_full_name() or request.user.username  
+        invitation, created = SpeakerInvitation.objects.get_or_create(talk=proposal, invitee=user)
+
+        if created:
+            email_body = f"Dear Speaker,\n\nYou have been invited by {sender_name} to join a session titled '{proposal.title}' during  PyCon Africa {event_year.year}. \n\nPlease visit our site (https://africa.pycon.org/) to respond to this invitation.\n\nBest,\nPyCon Africa's Team"
+            send_mail(
+                f'Invitation to Speak at PyCon Africa - {proposal.title}',
+                email_body,
+                'noreply@pycon.africa',
+                [user_email],
+                fail_silently=False,
+            ) 
+        return redirect('talks:talk_details', year=year, pk=pk)
+    else:
+        # Handle the case for GET request or show an error message
+        return render(request, '2024/talks/speaker_invite_error.html', {'error': 'This action requires a POST request.'})
+ 
+
+@login_required
+def accept_invitation(request, year, pk): 
+    proposal = get_object_or_404(Proposal, pk=pk) 
+    invitation = get_object_or_404(SpeakerInvitation, talk=proposal, invitee=request.user)
+    if invitation.status == 'Pending':
+        invitation.status = 'Accepted'
+        invitation.save()
+        proposal.speakers.add(request.user) 
+        return redirect('profiles:profile_home')
+
+@login_required
+def reject_invitation(request, year, pk):
+    proposal = get_object_or_404(Proposal, pk=pk)
+    invitation = get_object_or_404(SpeakerInvitation, talk=proposal, invitee=request.user)
+    if invitation.status == 'Pending':
+        invitation.status = 'Rejected'
+        invitation.save()
+        return redirect('profiles:profile_home')
+
+
+
+
+# function-based 
+@login_required
+@permission_required('talks.view_talk', raise_exception=True) 
+def list_talks_to_review(request, year):
+    try:
+        event_year = EventYear.objects.get(year=year)
+    except EventYear.DoesNotExist:
+        raise Http404("Event year does not exist.")
+
+    try:
+        reviewer = Reviewer.objects.get(user=request.user)
+        # Fetch all reviews by this reviewer for talks in this event year
+        reviewed_talk_ids = Review.objects.filter(reviewer=reviewer, talk__event_year=event_year).values_list('talk__proposal_id', flat=True)
+        # Filter out talks that have been reviewed by this reviewer
+        talks_awaiting_review = Proposal.objects.filter(event_year=event_year, status='S').exclude(proposal_id__in=reviewed_talk_ids).order_by('-created_date')
+
+        talks_reviewed_with_scores = []
+        for talk_id in reviewed_talk_ids:
+            talk = Proposal.objects.get(proposal_id=talk_id)
+            avg_score = Review.objects.filter(talk=talk).aggregate(Avg('score'))['score__avg']
+            talks_reviewed_with_scores.append((talk, avg_score))
+                
+        context = {
+            'talks_awaiting_review': talks_awaiting_review,
+            'talks_reviewed_with_scores': talks_reviewed_with_scores,
+            'year': year
+        }
+
+    except Reviewer.DoesNotExist:
+        # User is not a registered reviewer
+        messages.error(request, "You don't yet have rights to review proposals, contact the admin to give you the rights")
+        context = {
+            'year': year,
+            'no_reviewer_rights': True
+        }
+
+    return render(request, '2024/talks/reviews/talk_list.html', context)
+ 
+
+
+@login_required
+@permission_required('reviews.add_review', raise_exception=True)
+def review_talk(request, year, pk):
+    event_year = get_object_or_404(EventYear, year=year)
+    talk = get_object_or_404(Proposal, pk=pk, event_year=event_year)
+    try:
+        reviewer = Reviewer.objects.get(user=request.user)
+    except Reviewer.DoesNotExist:
+        return HttpResponse("You are not registered as a reviewer.", status=401)
+
+    already_reviewed = Review.objects.filter(talk=talk, reviewer=reviewer).exists()
+
+    if request.method == 'POST' and not already_reviewed:
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.talk = talk
+            review.reviewer = reviewer
+            review.save()
+            return redirect(reverse('talks:review_success', kwargs={'year': year}))
+    else:
+        form = ReviewForm()
+
+    return render(request, '2024/talks/reviews/talk_review.html', {
+        'form': form, 
+        'talk': talk, 
+        'year': year, 
+        'already_reviewed': already_reviewed
+    })
+
+
+@login_required
+def review_success(request, year):
+    try:
+        event_year = EventYear.objects.get(year=year) 
+        return render(request, '2024/talks/reviews/review_success.html', {'year': year})
+    except EventYear.DoesNotExist:
+        return HttpResponse("The specified event year does not exist.", status=404)
+    
+ 
+@login_required
+@permission_required('talks.view_talk', raise_exception=True)
+def reviewed_talks_by_category(request, year):
+    try:
+        event_year = EventYear.objects.get(year=year)
+    except EventYear.DoesNotExist:
+        raise Http404("Event year does not exist.")
+
+    # `Proposal.TALK_CATEGORY` is a tuple of tuples, you need to iterate over it correctly
+    category_talks_scores = []
+    for category_code, category_label in Proposal.TALK_CATEGORY:
+        # Filter talks by each category and compute average scores
+        talks = Proposal.objects.filter(
+            event_year=event_year,
+            talk_category=category_code,  # Use the category code for filtering
+            reviews__isnull=False  # Ensure only reviewed talks are included
+        ).annotate(avg_score=Avg('reviews__score')).order_by('-avg_score')
+
+        if talks.exists():
+            category_talks_scores.append((category_label, talks))
+
+    return render(request, '2024/talks/reviews/reviewed_talks_by_category.html', {
+        'category_talks_scores': category_talks_scores,
+        'year': year
+    })
+
+
+# Class-based
+'''
+@login_required
+@permission_required('reviews.add_review', raise_exception=True) 
+class TalksToReviewListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Proposal
+    template_name = '2024/talks/reviews/talk_list.html'
+    context_object_name = 'talks'
+    permission_required = ('talks.view_talk',)  
+
+    def get_queryset(self):
+        # Filter talks that are submitted and pending review
+        return Proposal.objects.filter(status='Submitted').order_by('-created_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add any additional context if necessary
+        return context
+     
+
+@login_required
+@permission_required('reviews.add_review', raise_exception=True)
+class ReviewTalkView(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = '2024/talks/reviews/talk_review.html'
+    context_object_name = 'review'
+
+    def get_object(self, queryset=None):
+        talk = get_object_or_404(Proposal, pk=self.kwargs.get('pk'))
+        review, created = Review.objects.get_or_create(talk=talk, reviewer=self.request.user)
+        return review
+
+    def form_valid(self, form):
+        response = super().form_valid(form) 
+        return response
+
+    def get_success_url(self):
+        return reverse_lazy('reviews:review_list')  # Redirect to the list of talks after submitting a review
+'''
+
+@login_required
+@permission_required('reviews.add_review', raise_exception=True)
+class TalkReviewDetailView(DetailView):
+    model = Proposal
+    template_name = '2024/talks/reviews/talk_review_detail.html'
+    context_object_name = 'talk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        reviews = self.object.reviews.all()
+        context['reviews'] = reviews
+        if reviews.exists():
+            context['average_score'] = reviews.aggregate(Avg('score'))['score__avg']
+            context['is_accepted'] = context['average_score'] >= 4  # Example criteria (I will have to chnage this)
+        return context
+
+
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:

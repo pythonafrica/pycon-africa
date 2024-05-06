@@ -127,19 +127,58 @@
                         <br><button type="submit" class="btn btn-primary">Submit Proposal</button>
                     </form>
                       {% elif upcoming_period %}
-                          <h2 class="g-mb-20">Upcoming Call for Proposals</h2>
-                          <p>The next call for proposals will start on {{ upcoming_period.start_date }} and end on {{ upcoming_period.end_date }}.</p>
+                          <h2 class="g-mb-20">🌟 Mark your calendars for our CFP! 🌟</h2>
+                          <p>
+                            We can see you are ready to go! <br>Got a Python project, insight, or innovation you're eager to share? This is your moment to shine!
+                            <br><br>
+                            Get ready to ignite your ideas because our Call for Proposals kicks off on <b style="color: darkgreen;">{{ upcoming_period.start_date }}</b> and runs until <b style="color: crimson;">{{ upcoming_period.end_date }}</b>.
+                            <br><br>
+                            So stay tuned and reload this page on the due date. <br>Let's make waves together this year! 🚀
+                          </p>
                       {% else %}
-                          <h2 class="g-mb-20">Call for Proposals Closed</h2> 
-                          <div role="alert" class="mad-alert-box mad-alert-box--info">
-                              <div class="mad-alert-box-inner">
-                                  Hello there!  {% firstof user.get_short_name user.get_username %},<br><br>
-                                  The Call for Proposals for PyCon Africa 2022 is officially closed. 
-                                  The review team will thoroughly examine each proposal and let you know the results through email over the course of the following weeks. 
-                                  <br><br>Thank you.
-                                <button type="button" class="mad-alert-box-close">Close</button>
+                          <h2 class="g-mb-20">🚀 The PyCon Africa's Call for Proposals is now Wrapped Up! 🚀</h3>  
+
+                             <!-- Border Alert -->
+                             <div class="alert fade show g-brd-around g-brd-red rounded-0" role="alert">
+                              <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                              </button>
+
+                              <div class="media">
+                                <div class="d-flex g-mr-10">
+                                  <span class="u-icon-v3 u-icon-size--sm g-bg-lightred g-color-white g-rounded-50x">
+                                    <i class="icon-envelope"></i>
+                                  </span>
+                                </div>
+                                <div class="media-body">
+                                  <div class="d-flex justify-content-between">
+                                    <p class="m-0"><strong>Hello there!  {% firstof user.get_short_name user.get_username %}</strong>
+                                    </p>
+                                    <span class="align-self-center small text-nowrap">Just Now</span>
+                                  </div>
+                                  <p class="m-0 g-font-size-14">
+                                    Hey there, awesome Pythonistas!
+                                    <br><br>
+                                    We've officially closed the doors on this year's Call for Proposals. A huge thank you to everyone who sent in their amazing ideas! 🌟
+                                    <br><br>
+
+                                    Our review team is now diving into the treasure trove of proposals you’ve shared with us. We're buzzing with excitement to uncover the gems and piece together a fantastic program for you all.
+                                    <br><br>
+
+                                    Stay tuned! We’ll be reaching out via email in the next few weeks with updates on your proposals. We can’t wait to share what’s next.
+                                    <br><br>
+
+                                    Thanks a million for making PyCon Africa vibrant and diverse with your contributions. Here's to making this year's conference the most unforgettable one yet! 🎉
+                                    <br><br>
+
+                                    With gratitude and Python vibes,
+                                    <br>
+                                    The PyCon Africa Team
+                                  </p>
+                                </div>
                               </div>
-                            </div> 
+                            </div>
+                            <!-- End Border Alert -->
                       {% endif %}
     
 

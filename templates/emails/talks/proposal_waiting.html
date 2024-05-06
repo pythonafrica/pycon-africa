@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Proposal Is On The Waiting List</title>
+</head>
+<body>
+    <h1>Hello {{ proposal.user.get_full_name|default:proposal.user.username }},</h1>
+    <p>Your proposal titled "<strong>{{ proposal.title }}</strong>" is currently on our waiting list.</p>
+    <p>We will notify you if a spot becomes available. Thank you for your patience and understanding.</p>
+    <p>Best regards,<br>PyCon Africa Programme Team</p>
+</body>
+</html>

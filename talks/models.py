@@ -109,9 +109,9 @@ class Proposal(models.Model):
         ('BGN-L', 'Beginner Level'),
         ('INT-L', 'Intermediate Level'),
         ('EXP-L', 'Expert Level'),
+        ('GEN-L', 'General'),
     )
-
-    email = models.EmailField(help_text="It will be kept secretly from the Public")
+ 
     title = models.CharField(max_length=1024, help_text="Public title. What topic/project is it all about?")
     talk_type = models.CharField(max_length=50, choices=TALK_TYPES)
     talk_category = models.CharField(max_length=50, choices=TALK_CATEGORY)
@@ -123,9 +123,11 @@ class Proposal(models.Model):
     intended_audience = models.CharField(max_length=50, choices=PROGRAMMING_EXPERIENCE, blank=True, null=True)
     link_to_preview_video_url = models.URLField(blank=True, help_text='Link to Preview video on your Youtube or Google drive')
     anything_else_you_want_to_tell_us = MarkdownxField(blank=True, null=True, help_text="Kindly add anything else you want to tell us?")
-    recording_release = models.BooleanField(default=True)
+    special_requirements = MarkdownxField(blank=True, null=True, help_text="If you have any special requirements such as needing travel assistance, accessibility needs, or anything else please let us know here so that we may plan accordingly. (This is not made public nor will the review committee have access to view it.)")
+    recording_release = models.BooleanField(default=True, help_text="By submitting your talk proposal, you agree to give permission to the conference organizers to record, edit, and release audio and/or video of your presentation. If you do not agree to this, please uncheck this box.")
     youtube_video_url = models.URLField(blank=True, help_text='Link to Talk on youtube Video')
     youtube_iframe_url = models.URLField(max_length=300, blank=True, help_text='Link to Youtube Iframe')
+    speakers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='speaking_proposals', blank=True)
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="", related_name='proposals', help_text="The event year this proposal is for")
     
     created_date = models.DateTimeField(default=timezone.now)
@@ -136,6 +138,36 @@ class Proposal(models.Model):
 
     def get_absolute_url(self):
         return reverse("talk_list")
+
+
+
+
+class SpeakerInvitation(models.Model):
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Accepted', 'Accepted'),
+        ('Rejected', 'Rejected'),
+    )
+    talk = models.ForeignKey('Proposal', related_name='invitations', on_delete=models.CASCADE)
+    invitee = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='talk_invitations', on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    invitation_sent = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Invitation to {self.invitee.email} for {self.talk.title}"
+
+
+
+class Reviewer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='reviewer_profile') 
+
+class Review(models.Model):
+    talk = models.ForeignKey(Proposal, on_delete=models.CASCADE, related_name='reviews')
+    reviewer = models.ForeignKey(Reviewer, on_delete=models.CASCADE, related_name='reviews')
+    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])   
+    comments = models.TextField(blank=True) 
+    completed = models.BooleanField(default=False)
+
 
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)

@@ -116,3 +116,11 @@ def travel_advice(request, year):
     template_name = f'{year}/about/travel.html'
     return render(request, template_name, {'travel_advices': travel_advices, 'event_year': event_year})
  
+
+ #2020 
+
+ 
+def hopin(request):
+    context = {"about": "active"}
+    template = '2020/hopin.html'
+    return render(request, template, context)

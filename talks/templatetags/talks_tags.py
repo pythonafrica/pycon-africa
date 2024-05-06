@@ -1,8 +1,7 @@
 from django import template
 from django.utils import timezone
-from talks.models import Proposal, CFPSubmissionPeriod
-from home.models import EventYear
-
+from talks.models import *
+from home.models import EventYear 
 
 register = template.Library()
 
@@ -20,10 +19,21 @@ def user_talks_summary(user):
     
     # Fetch the first 2 or 3 submitted talks for the user
     submitted_talks = Proposal.objects.filter(user=user).order_by('-created_date')[:3]
+    invited_talks = Proposal.objects.filter(speakers=user).distinct().order_by('-created_date')[:3]
+
 
     return {
         'submitted_talks': submitted_talks,
+        'invited_talks': invited_talks,
         'active_period': submission_period is not None and submission_period.start_date <= timezone.now() <= submission_period.end_date,
         'upcoming_period': submission_period and submission_period.start_date > timezone.now(),
         'event_year': event_year
     }
+
+ 
+
+@register.inclusion_tag('2024/talks/invitation_list.html', takes_context=True)
+def invitation_list(context):
+    request = context['request']
+    invitations = SpeakerInvitation.objects.filter(invitee=request.user, status='Pending')
+    return {'invitations': invitations}
