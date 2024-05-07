@@ -84,6 +84,18 @@
                 {{ form.media }}
               </p>  
             </div>  
+
+            {% if about.section_four %}
+            <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 col col-12 col-sm-12  " role="alert"> 
+              
+                <p class="g-color-black g-font-size-16 markdownx-preview">
+                  {{ about.section_four | markdown | safe }} 
+                  {{ form.media }}
+                </p> 
+            </div>
+            {% else %} 
+            {% endif %} 
+
           {% endfor %} 
 
     

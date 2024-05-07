@@ -16,11 +16,18 @@ def Prospectus(request):
 def sponsors(request, year): 
     event_year = get_object_or_404(EventYear, year=year)
     sponsorship_tiers = SponsorshipTier.objects.filter(event_year=event_year).order_by('display_order')
+    
+    no_sponsors = True  # Initialize as True, assuming no sponsors initially
+    
     for tier in sponsorship_tiers:
         tier.sponsors = Sponsor.objects.filter(tier=tier, is_visible=True)
+        if tier.sponsors.exists():
+            no_sponsors = False  # If any tier has visible sponsors, set no_sponsors to False
+
     return render(request, f'{year}/sponsors/sponsors.html', {
         'sponsorship_tiers': sponsorship_tiers,
         'event_year': event_year,
+        'no_sponsors': no_sponsors,  # Pass the no_sponsors variable to the template
     })
 
 

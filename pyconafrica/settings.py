@@ -110,7 +110,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "pyconafrica.urls"
 
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

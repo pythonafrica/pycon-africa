@@ -25,6 +25,8 @@ class About(models.Model):
     section_three_title =  models.CharField(max_length=250, null=False, blank=True, default="THE | TEAM", help_text='About PyCon Africa') 
     section_three = MarkdownxField(default='', help_text = "[Supports Markdown] - About PyCon Africa.", null=False, blank=False
                              )
+    section_four = MarkdownxField(default='', help_text = "[Supports Markdown] - More about PyCon Africa.", null=False, blank=True
+                             )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=True, related_name='about_us', on_delete=models.CASCADE)
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='abouts')
     date_created = models.DateTimeField(auto_now_add=True)
@@ -101,7 +103,7 @@ class IOCMember(models.Model):
     Represents a core team member.
     """ 
     name = models.CharField(max_length=100)
-    groups = models.ManyToManyField(IOCGroup, related_name="iocs") 
+    groups = models.ManyToManyField(IOCGroup, related_name="iocs",blank=True) 
     country = CountryField(default="GH",blank=False, blank_label='(select member country)')
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='ioc_members')
 

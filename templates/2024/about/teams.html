@@ -69,7 +69,8 @@
               <ul>
                 {% for member in ioc_members %}
                     <li>
-                        {{ member.name }} - {{ member.country.name }} | {% for group in member.groups.all %}{% if not forloop.last %}{{ group.name }}, {% else %}{{ group.name }}{% endif %}{% endfor %}
+                      {{ member.name }} - {{ member.country.name }}{% if member.groups.all.exists %} | {% for group in member.groups.all %}{% if not forloop.last %}{{ group.name }}, {% else %}{{ group.name }}{% endif %}{% endfor %}{% endif %}
+
                     </li>
                 {% empty %}
                     <p>No IOC members found for this year.</p>
@@ -99,7 +100,7 @@
                     {% endfor %}
                     </ul><br>
                 {% empty %}
-                    <p>No volunteer groups found for this year.</p>
+                    <p>Volunteer groups will be updated once they become available.</p>
                 {% endfor %}
             </div>
           </article>
