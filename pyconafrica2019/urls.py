@@ -7,11 +7,11 @@ app_name = 'pyconafrica2019'
 urlpatterns = [
     path('', view=views.home19, name='home19'),
     path('about/', view=views.about, name='about'),
-    path('schedule/', view=views.schedule, name='schedule'),
+    path('schedule-19/', view=views.schedule, name='schedule'),
     path('conduct/', view=views.conduct, name='conduct'),
     path('coc/eporting-guidelines/', TemplateView.as_view(template_name='conduct/eporting-guidelines/eporting-guidelines.html')),
     path('coc/guidelines/', TemplateView.as_view(template_name='conduct/guidelines/guidelines.html')),
-    path('sponsor-us/', view=views.sponsor_us, name='sponsor_us'),
+    path('sponsor-us-19/', view=views.sponsor_us, name='sponsor_us'),
     path('our-sponsors/', view=views.sponsors, name='sponsors'),
     path('register/', view=views.register, name='register'),
     path('travel/', view=views.traveladvice, name='traveladvice'),

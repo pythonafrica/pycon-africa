@@ -37,7 +37,7 @@ def eporting(request):
 
 def sponsor_us(request):
     context = {}
-    template = '2019/sponsor/sponsor19.html'
+    template = '2019/sponsor-us/sponsor-us.html'
     return render(request, template, context)
 
 def sponsors(request):
