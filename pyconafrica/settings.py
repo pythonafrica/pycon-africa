@@ -211,7 +211,7 @@ STATICFILES_DIRS = [
    
 
 # STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
-DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
+# DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
   
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
