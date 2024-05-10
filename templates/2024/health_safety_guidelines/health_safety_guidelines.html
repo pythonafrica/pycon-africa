@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n static markdown_extras %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Health and Safety Guidelines|| PyCon Africa" %}{% endif %}{% endblock %}
+
+
+{% block content %}
+
+<!-- ========== HEADER ========== -->
+{% include '2024/navbar.html' %}
+<!-- ========== END HEADER ========== -->
+
+<!-- Breadcrumbs -->
+<section class="g-bg-gray-light-v5 g-py-80 g-pt-150">
+  <div class="row">
+    <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 g-mb-20 col-md-12">
+      <div class="container text-center">
+        <h2 class="h2 g-color-black g-font-weight-600">Health and Safety Guidelines</h2>
+
+        <ul class="u-list-inline">
+          <li class="list-inline-item g-mr-5">
+            <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" href="/2024/">Home</a>
+            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+          </li>
+          <li class="list-inline-item g-color-primary">
+            <span>Health and Safety Guidelines</span>
+          </li>
+        </ul><br>
+        <i class="fa-brands fa-python" style="font-size:41px;"></i>
+      </div>
+
+</section>
+<!-- End Breadcrumbs -->
+<div class="container  g-pt-50">
+
+  <div class="row">
+    <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 g-mb-20 col-md-12">
+      <div class="shortcode-html">
+        <div id="accordion-08" class="u-accordion u-accordion-color-primary" role="tablist" aria-multiselectable="true">
+
+          {% for guideline in health_safety_guideline %}
+          <!-- Card -->
+          <div class="card g-rounded-30 g-overflow-hidden g-brd-none mb-2">
+            <div id="accordion-08-heading-02" class="u-accordion__header g-pa-0" role="tab">
+              <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                <a class="collapsed d-flex g-color-main g-text-underline--none--hover" href="#accordion-08-body-02"
+                  data-toggle="collapse" data-parent="#accordion-08" aria-expanded="false"
+                  aria-controls="accordion-08-body-02">
+                  <span
+                    class="u-accordion__control-icon g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-minus"></i>
+                  </span>
+                  <span class="g-pa-20">
+                    {{ guideline.title }}
+                  </span>
+                </a>
+              </h5>
+            </div>
+            <div id="accordion-08-body-02" class="collapse" role="tabpanel" aria-labelledby="accordion-08-heading-02"
+              data-parent="#accordion-08">
+              <div class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                {{ guideline.health_safety_guideline }}
+              </div>
+            </div>
+          </div>
+          <!-- End Card -->
+          {% empty %}
+          <p>No health safety guidelines found.</p>
+          {% endfor %}
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
