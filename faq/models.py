@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField 
 from django.utils import timezone  
+from home.models import EventYear
 
 
 class FrequentlyAskedQuestion(models.Model):
@@ -12,6 +13,7 @@ class FrequentlyAskedQuestion(models.Model):
                              )
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='faq',default=User) 
+    event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='faqs')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 

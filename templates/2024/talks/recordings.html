@@ -7,17 +7,28 @@
 
 <!-- ========== HEADER ========== -->
 {% include '2024/navbar.html' %}
-<!-- ========== END HEADER ========== -->
-  <!--================ Breadcrumb ================-->
-  <div class="mad-breadcrumb">
-    <div class="container">
-      <h1 class="mad-page-title mad-title-with-line">PyCon Africa Recording Release</h1>
-      <nav class="mad-breadcrumb-path"><span><a href="/">Home</a></span>/<span>Recording Release</span>
-      </nav>
-    </div>
-  </div>
-  <!--================ End of Breadcrumb ================--> 
+<!-- ========== END HEADER ========== --> 
 
+
+    <!-- Breadcrumbs -->
+    <section class="g-bg-gray-light-v5 g-py-80 g-pt-150">
+		<div class="container text-center">
+		  <h2 class="h2 g-color-black g-font-weight-600">Recording Release</h2>
+  
+		  <ul class="u-list-inline">
+			<li class="list-inline-item g-mr-5">
+			  <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover" href="/2024">Home</a>
+			  <i class="g-color-gray-light-v2 g-ml-5">/</i>
+			</li> 
+			<li class="list-inline-item g-color-primary">
+			  <span>Recording Release</span>
+			</li>
+		  </ul><br>
+		  <i class="fas fa-presentation" style="font-size:41px;"></i>
+		</div>
+		
+	  </section>
+	  <!-- End Breadcrumbs --> 
 
   <div class="mad-content no-pd">
     <div class="container">
@@ -33,12 +44,11 @@
 	<div class="mad-icon-box-content markdownx-preview"> 
 
 		<div class="col-xs-12"> <br>
-			<p>Part of the motivation for PyCon Africa is to help with Python education and advocacy in Ghana, and the world at large. Accordingly, we intend to record all PyCon presentations and release the recordings on the web</p>
-			<p>By submitting your talk, you agree to give permission to the Python
-					Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) to record, edit, and release audio and/or video of your presentation.  We also perform interviews with poster presenters and require recording releases to publish them.</p>
+			<p>Part of the motivation for PyCon Africa is to help with Python education and advocacy in Africa, and the world at large. Accordingly, we intend to record all PyCon presentations and release the recordings on the web</p>
+			<p>By submitting your talk, you agree to give permission to the Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) to record, edit, and release audio and/or video of your presentation.  We also perform interviews with poster presenters and require recording releases to publish them.</p>
 			<p>By default, the recording release checkbox is checked when submitting a proposal. If you wish to opt-out, uncheck the release checkbox, note that no recordings of your talk will be made. You cannot opt out of recording for lightning talks.</p>
 			<p>You agree to the following legalese, which certifies that you are the author of your presentation (or otherwise allowed to present it at PyCon Africa), and which allows the Python
-					Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>)<br> 1) to perform the necessary audio and video editing needed to prepare your presentation, and <br>2) to distribute the recordings to other people, including on YouTube, or video sites. It also allows other people to watch the recordings.</p>
+					Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>)<br> 1) to perform the necessary audio and video editing needed to prepare your presentation, and <br>2) to distribute the recordings to other people, including on YouTube, or video sites. It also allows other people to watch the recordings.</p>
 			<br>
 			<div class="panel panel-danger col-xs-12">
 				<div class="headings-showcase">
@@ -46,37 +56,37 @@
 				  </div>
 					<p>I certify that I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, am authorized to license this proposal
 					and its associated presentation (the &quot;User Submission&quot;) to the Python
-					Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) for use in association with PyCon Africa.<br> Specifically,</p>
+					Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) for use in association with PyCon Africa.<br> Specifically,</p>
 					<p>
 					- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, certify that I am either the copyright owner of the
 					User Submission or an authorized licensee of the copyright owner. If I
 					am an authorized licensee of the copyright owner, I certify that I have
 					sublicensable distribution rights.</p>
 					
-					<p>- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, hereby grant the Python Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) a worldwide, royalty-free, fully
+					<p>- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, hereby grant the Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) a worldwide, royalty-free, fully
 					paid-up, non-exclusive, perpetual (for the duration of the applicable
 					copyright), sublicensable and transferable license to exercise the rights
 					in the User Submission as follows:</p>
 					<ul>
-					<li> The Python Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) is granted a license to reproduce the User Submission,
+					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to reproduce the User Submission,
 					to incorporate the User Submission into one or more Collective
 						Works, and to reproduce the User Submission as incorporated in
 						the Collective Works;</li>
 					
-					<li> The Python Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) is granted a license to create and reproduce Derivative
+					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to create and reproduce Derivative
 						Works;</li>
 
-					<li> The Python Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) is granted a license to distribute copies or
+					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to distribute copies or
 						phonorecords of, display publicly, perform publicly, and
 						perform publicly by means of a digital audio transmission the
 						User Submission including as incorporated in Collective Works;
 						and</li>
-					<li> The Python Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) is granted a license to distribute copies or phonorecords of, display publicly, perform publicly, and
+					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to distribute copies or phonorecords of, display publicly, perform publicly, and
 						perform publicly by means of a digital audio transmission
 						Derivative Works.</li>
 					</ul>
 					<p>- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, also hereby grant each person receiving the User
-					Submission distributed by the Python Software Community Ghana (<a href="https://www.pythonghana.org/" target="/">&quot;Python Ghana&quot;</a>) a non-exclusive license to
+					Submission distributed by the Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) a non-exclusive license to
 					 access, use, display, and perform the User Submission in a
 					non-commercial, private context.</p>
 			</div>

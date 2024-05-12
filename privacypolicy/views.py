@@ -14,13 +14,16 @@ from django.views.generic import (
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from functools import reduce
+from home.models import EventYear
 
 # PrivacyPolicy application imports.
 from .models import PrivacyPolicy   
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
  
- 
-def privacypolicy(request):
-	privacypolicies = PrivacyPolicy.objects.all().order_by('-date_created') 
-	return render(request, '2022/privacy/privacy.html', {'privacypolicies': privacypolicies})
-   
+def privacypolicy(request, year):
+    # Ensure the event year exists and is valid
+    event_year = get_object_or_404(EventYear, year=year)
+    # Filter Privacy Policies based on the event year
+    privacypolicies = PrivacyPolicy.objects.filter(event_year=event_year).order_by('-date_created')
+    # Render the template with Privacy Policies specific to the given year
+    return render(request, f'{year}/privacy/privacy.html', {'privacypolicies': privacypolicies})

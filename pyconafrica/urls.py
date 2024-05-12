@@ -39,9 +39,11 @@ urlpatterns = [
         path('coc/', include('coc.urls')),
         path('sponsor-us/', include('sponsor_us.urls', namespace='sponsor_us')),
         # Add more apps here following the same pattern
+        path('h&g/', include('health_safety_guideline.urls', namespace='health_safety_guideline')),
+        path('fin-aid/', include('fin_aid.urls', namespace='fin_aid')),
+        path('privacy-policy/', include('privacypolicy.urls', namespace='privacypolicy')),
+        path('tickets/', include('tickets.urls', namespace='ticket')),
     ])),
-    path('health-safety-guidelines/', include('health_safety_guideline.urls', namespace='health_safety_guideline')),
-    path('fin-aid/', include('fin_aid.urls', namespace='fin_aid')),
     path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
     path('2020/', include('pycon2020.urls')),
     path('organizers/', admin.site.urls),  

@@ -46,8 +46,9 @@
                     {{ form.media }}</p>
                 <!-- Display download prospectus if link available -->
                 {% if sponsor_us_page.prospectus_link %}
-                    <a class="btn u-shadow-v32 g-color-red g-color-primary--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="{{ sponsor_us_page.prospectus_link }}" target="_blank"><b>Download our Prospectus &nbsp;&nbsp; <i class="fa-regular fa-cloud-arrow-down fa-beat-fade"></i></b></a>
-                {% endif %}
+                
+              <a class="btn btn-md u-btn-inset u-btn-outline-darkgray g-brd-4 g-mr-10 g-mb-15" href="{{ sponsor_us_page.prospectus_link }}" target="_blank"><b>Download our Prospectus &nbsp;&nbsp; <i class="fa-regular fa-cloud-arrow-down fa-beat-fade"></i></b></a>
+                    {% endif %}
             </div>
     
             <!-- Loop through each sponsorship tier and display its details and benefits -->
@@ -57,11 +58,7 @@
                 <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
                     <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30">{{ tier.name }}
                       <span class="g-color-primary">${{ tier.amount }}</span></h2>
-                      {% if tier.no_available %}   
-                      <p class="g-color-black g-font-size-16">Total number available: <span style="color: #e74c3c;"><s>{{ tier.no_needed }}</s></span> <strong>({{ tier.no_available }})</strong> </p>
-                      {% else %}  
-                      <p class="g-color-black g-font-size-16">Total number available: {{ tier.no_needed }}</p>
-                      {% endif %} 
+                      
                       <p class="g-color-black g-font-size-16">{{ tier.details | markdown | safe }} 
                     {{ form.media }}</p>
         
@@ -87,8 +84,7 @@
                 <!-- Render other tiers with a different layout -->
                 <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 col col-12 col-sm-12 col-md-6" role="alert">
                   <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30">{{ tier.name }}
-                    <span class="g-color-primary">${{ tier.amount }}</span></h2>
-                    <p class="g-color-black g-font-size-16">Total number available: {{ tier.no_needed }}</p>
+                    <span class="g-color-primary">${{ tier.amount }}</span></h2> 
                     <p class="g-color-black g-font-size-16">{{ tier.details | markdown | safe }}</p>
         
                     <!-- Assuming the same benefits and additional_resources structure applies -->

@@ -29,13 +29,19 @@ from django.http import HttpResponseRedirect
 # Fin_aid application imports.
 from .models import Fin_aid   
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from home.models import EventYear
  
 from fin_aid.mixins import EditOwnFin_aidMixin, EditOwnLoginMixin
 from .forms import Fin_aidForm
  
-def fin_aid(request):
-	fin_aids = Fin_aid.objects.all().order_by('-date_created') 
-	return render(request, '2024/fin_aid/fin_aid.html', {'fin_aids': fin_aids})
+def fin_aid(request, year):
+    # Ensure the event year exists and is valid
+    event_year = get_object_or_404(EventYear, year=year)
+    # Filter financial aid information based on the event year
+    fin_aids = Fin_aid.objects.filter(event_year=event_year).order_by('-date_created')
+    # Render the template with financial aid information specific to the given year
+    return render(request, f'{year}/fin_aid/fin_aid.html', {'fin_aids': fin_aids})
+
 
 
 def fin_aid_edit(request, pk):

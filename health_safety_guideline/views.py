@@ -15,6 +15,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from functools import reduce
 
+from home.models import EventYear
 
 # Included by me (3rd Parties and more) 
 from django.contrib.auth.models import User
@@ -33,10 +34,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from health_safety_guideline.mixins import EditOwnHealth_Safety_GuidelineMixin, EditOwnLoginMixin
 from .forms import Health_Safety_GuidelineForm
  
-def health_safety_guideline(request):
-	health_safety_guidelines = Health_Safety_Guideline.objects.all().order_by('-date_created') 
-	return render(request, '2024/health_safety_guidelines/health_safety_guidelines.html', {'health_safety_guidelines': health_safety_guidelines})
-
+ 
+def health_safety_guideline(request, year):
+    # Ensure the event year exists and is valid
+    event_year = get_object_or_404(EventYear, year=year)
+    # Filter Health and Safety Guidelines based on the event year
+    health_safety_guidelines = Health_Safety_Guideline.objects.filter(event_year=event_year).order_by('-date_created')
+    # Render the template with Health and Safety Guidelines specific to the given year
+    return render(request, f'{year}/health_safety_guidelines/health_safety_guidelines.html', {'health_safety_guidelines': health_safety_guidelines})
 
 def health_safety_guideline_edit(request, pk):
     health_safety_guideline = get_object_or_404(Health_Safety_Guideline, pk=pk)

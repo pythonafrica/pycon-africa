@@ -23,6 +23,26 @@
                 <h2 class="h2 g-color-black g-font-weight-600">Signup</h2>
               </header>
 
+              <!-- Alert with Box Shadow -->
+<div class="alert fade show u-shadow-v1-3 g-pa-20" role="alert">
+  <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+
+  <div class="media">
+    <div class="d-flex g-mr-10">
+      <span class="u-icon-v3 u-icon-size--sm g-bg-cyan g-color-white">
+        <i class="fa-solid fa-exclamation fa-bounce fa-xl" style="color: #ea0b0b;"></i>
+      </span>
+    </div>
+    <div class="media-body">
+      <p class="m-0 g-font-size-14">Please read and agree to our <a href="/2024/coc/" class="g-font-weight-bold g-color-cyan g-text-underline--none--hover"><b>Code of Conduct</b></a> before creating an account to ensure a respectful and safe environment during PyCon Africa.</p>
+    </div>
+  </div>
+</div>
+<!-- End Alert with Box Shadow -->
+
+
               <!-- Form --> 
                 <form novalidate class="g-py-15 mad-contact-form mad-form--fields-white login" method="POST" action="">
                   {% csrf_token %} 
