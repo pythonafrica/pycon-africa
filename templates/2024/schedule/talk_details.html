@@ -2,7 +2,7 @@
 {% load i18n static  avatar_tags crispy_forms_tags markdown_extras embed_video_tags  %}
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | PyCon Africa" %}{% endif %}{% endblock %}
 
-
+ 
 {% block content %} 
 
 {% include '2024/navbar.html' %}
@@ -88,7 +88,12 @@
                         </div> 
                         <!-- Author -->
                         <div class="media align-items-center g-brd-bottom g-brd-gray-light-v4 pb-5 mb-5">
-                          <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{{ talk.user.user_profile.profile_image.url }}" alt="Image Description">
+                          {% if talk.user.user_profile.profile_image %}
+                          <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{{ talk.user.user_profile.profile_image.url }}" alt="Image Description"> 
+                          {% else %}  
+                          <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{% static '/2024/img/speakers/speaker.png' %}" alt="Image Description"> 
+                          {% endif %}
+                         
                           <div class="media-body">
                             <h4 class="h6 g-color-black g-font-weight-600 mb-0">By {{ talk.user.user_profile.name }} {{ talk.user.user_profile.surname }}</h4>
                             <span class="d-block g-color-gray-dark-v1 g-font-size-12">

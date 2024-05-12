@@ -35,7 +35,7 @@ from .forms import Fin_aidForm
  
 def fin_aid(request):
 	fin_aids = Fin_aid.objects.all().order_by('-date_created') 
-	return render(request, '2022/fin_aid/fin_aid.html', {'fin_aids': fin_aids})
+	return render(request, '2024/fin_aid/fin_aid.html', {'fin_aids': fin_aids})
 
 
 def fin_aid_edit(request, pk):

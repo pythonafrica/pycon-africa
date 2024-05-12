@@ -5,6 +5,7 @@
 .coverage
 local_settings.py
 secrets.py
+<<<<<<< HEAD
 static/
 media/
 migrations/
@@ -125,3 +126,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+=======
+#static
+media
+local_settings.py
+>>>>>>> origin/johanan

@@ -35,7 +35,7 @@ from .forms import Health_Safety_GuidelineForm
  
 def health_safety_guideline(request):
 	health_safety_guidelines = Health_Safety_Guideline.objects.all().order_by('-date_created') 
-	return render(request, '2022/health_safety_guidelines/health_safety_guidelines.html', {'health_safety_guidelines': health_safety_guidelines})
+	return render(request, '2024/health_safety_guidelines/health_safety_guidelines.html', {'health_safety_guidelines': health_safety_guidelines})
 
 
 def health_safety_guideline_edit(request, pk):
@@ -50,13 +50,13 @@ def health_safety_guideline_edit(request, pk):
             return redirect('health_safety_guideline:health_safety_guideline_home')
     else:
         form = Health_Safety_GuidelineForm(instance=health_safety_guideline)
-    return render(request, '2022/health_safety_guideline/update_health_safety_guideline.html', {'form': form})
+    return render(request, '2024/health_safety_guideline/update_health_safety_guideline.html', {'form': form})
 
  
 class Health_Safety_GuidelineView(EditOwnHealth_Safety_GuidelineMixin, UpdateView):
     form_class = Health_Safety_GuidelineForm
     model = Health_Safety_Guideline
-    template_name = "2022/health_safety_guideline/update_health_safety_guideline.html"
+    template_name = "2024/health_safety_guideline/update_health_safety_guideline.html"
     success_url = reverse_lazy('health_safety_guideline:health_safety_guideline_home')
 
     def get_context_data(self, **kwargs):
@@ -77,5 +77,5 @@ def health_safety_guideline_update_view(UpdateView):
     context = {
         'form': form
     }
-    return render(UpdateView, "2022/health_safety_guideline/update_health_safety_guideline.html", context)
+    return render(UpdateView, "2024/health_safety_guideline/update_health_safety_guideline.html", context)
 
