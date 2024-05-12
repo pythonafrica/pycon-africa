@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponseRedirect
+from django.http import HttpRequest, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -11,56 +11,92 @@ from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from next_prev import next_in_order, prev_in_order
- 
+from home.models import EventYear
 from registration.models import Profile 
 from talks.models import Proposal
 
 
 from datetime import datetime
 
-from .models import TalkSchedule, Day, Event
+from .models import TalkSchedule, Day
 
-def schedule(request):
-    """Renders the home page."""
+
+def schedule(request, year):
+    """Renders the schedule page for a specific year."""
     assert isinstance(request, HttpRequest)
+    try:
+        event_year = EventYear.objects.get(year=year)
+    except EventYear.DoesNotExist:
+        raise Http404("Event year does not exist.")
 
-    schedule_one = TalkSchedule.objects.filter(conference_day='1').select_related('talk').order_by('start_time')
-    schedule_two = TalkSchedule.objects.filter(conference_day='2').select_related('talk').order_by('start_time')
-    schedule_three = TalkSchedule.objects.filter(conference_day='3').select_related('talk').order_by('start_time')
+    days = Day.objects.all().order_by('conference_day')
+    for day in days:
+        # Fetch schedules along with talk and speaker details
+        day.schedules = TalkSchedule.objects.filter(
+            conference_day=day,
+            talk__event_year=event_year
+        ).select_related('talk', 'talk__user').prefetch_related('talk__speakers').order_by('start_time')
 
     return render(
         request,
-        '2022/schedule/scheduleN.html',
+        f'{year}/schedule/schedule.html',
         {
             'title': 'Schedule',
-            'message': 'Schedule',
-            'year': datetime.now().year,
-            'schedule_one': schedule_one,
-            'schedule_two': schedule_two,
-            'schedule_three': schedule_three,
+            'year': year,
+            'days': days,
         }
     )
 
- 
 
-class ScheduleDetailView(HitCountDetailView):
+
+
+
+
+
+class ScheduleDetailView(DetailView):
     model = TalkSchedule
-    template_name = '2022/schedule/schedule_details.html'
+    context_object_name = 'schedule'
+    slug_field = 'proposal_id'  # Ensure this field matches your model's field
+    template_name_field = 'schedule_details_template'
+
+    def get_template_names(self):
+        # Assuming each TalkSchedule instance can determine its own template
+        if self.object:
+            year = self.object.talk.event_year.year
+            return [f'{year}/talks/{self.get_template_name_field()}.html']
+        return ['schedule/default.html']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['year'] = datetime.now().year  # Add more context as needed
+        return context
+
+    def get_template_name_field(self):
+        return self.template_name_field
+    
+
+    
+class ScheduleDetailView(DetailView):
+    model = TalkSchedule
     context_object_name = 'schedule'
     slug_field = 'proposal_id'
-    # set to True to count the hit
+    # Set to True to count the hit
     count_hit = True
     paginate_by = 3
 
+    def get_template_names(self):
+        year = self.kwargs.get('year')
+        return [f'{year}/schedule/schedule_details.html']
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(ScheduleDetailView, self).get_context_data(**kwargs)
+        year = self.kwargs.get('year')
+        event_year = get_object_or_404(EventYear, year=year)
 
-        context['talks'] = Proposal.objects.filter(status="A",)
-        context['speakers'] = Profile.objects.all()
-        context['schedules'] = TalkSchedule.objects.all()
-         
-
-        return context 
-
-
+        context.update({
+            'talks': Proposal.objects.filter(status="A", event_year=event_year),
+            'speakers': Profile.objects.filter(user__proposals__event_year=event_year).distinct(),
+            'schedules': TalkSchedule.objects.filter(event_year=event_year),
+            'event_year': event_year
+        })
+        return context

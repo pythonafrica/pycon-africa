@@ -1,25 +1,39 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static  avatar_tags crispy_forms_tags markdown_extras embed_video_tags  %}
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Speakers | PyCon Africa" %}{% endif %}{% endblock %}
 
 
 
-{% block content %}
-{% include 'navbar.html' %}
+{% block content %} 
+{% include '2024/navbar.html' %}
 
-      <!-- Section Content -->
-      <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/body1.png' %});">
-        <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
-       
-            <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Speakers</h3>
-            <br>
-            <br>
-        </div>
 
-      </section>
-      <!-- End Section Content -->
+    <!-- Breadcrumbs -->
+    <section class="g-bg-gray-light-v5 g-py-80 g-pt-150">
+      <div class="container text-center">
+        <h2 class="h2 g-color-black g-font-weight-600">Speakers</h2>
+
+        <ul class="u-list-inline">
+          <li class="list-inline-item g-mr-5">
+            <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover" href="/">Home</a>
+            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+          </li>  
+          <li class="list-inline-item g-color-primary">
+            <span>Speakers</span>
+          </li>
+        </ul><br> 
+        <i class="fa-solid fa-podium-star" style="font-size:41px;"></i>
+      </div>
+      
+    </section>
+    <!-- End Breadcrumbs --> 
+ 
+
+
+
+
        <!-- body -->
-       <div class="container">
+    <div class="container  g-pt-50">
 
             <div class=" u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
                 
@@ -30,219 +44,65 @@
                  <!-- Speakers List -->
 
 
-                
-            <!-- Nav tabs -->
-            <ul class="nav text-center nav-justified u-nav-v7-1" role="tablist" data-target="nav-7-1-accordion-hor-left-big-icons" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--1" role="tab">
-                  <i class="icon-christmas-037 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  <b>Speakers</b>
-                </a>
-              </li>
+                 <div class="row g-mx-minus-25 g-mb-40">
 
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--2" role="tab">
-                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  <b>Panelist</b>
-                </a>
-              </li>
-              
-            </ul>
-            <!-- End Nav tabs -->
-
-            <br><br>
-
-
-            <!-- Tab panes -->
-            <div id="nav-7-1-accordion-hor-left-big-icons" class="tab-content g-pt-20--md">
-              
-              <div class="tab-pane fade show active" id="nav-7-1-accordion-hor-left-big-icons--1" role="tabpanel">
-                
-                <p class="g-color-black g-font-size-16"> 
-                  Meet our Speakers 
-                </p>
-                <br>
-
-          <!-- Timeline Box -->
-          <div class="row">
-                 
-            {% for speaker in speakers %}
-            
-            {% if speaker.is_visible %}
-              <div class="col-md-4 g-mb-30 g-mb-0--md">
-                <!-- Figure -->
-                <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                  <div class="g-py-40 g-px-20">
-                    <!-- Figure Image -->
-                    <img class="g-width-150 g-height-150 rounded-circle g-mb-20 img-fluid u-shadow-v2 g-brd-around g-brd-primary" src="{{ speaker.profile_image.url }}" alt="Image Description">
-                    <!-- Figure Image -->
-
-                    <!-- Figure Info -->
-                    <h4 class="h5 g-mb-5">{{ speaker.speaker_name }}</h4>
-                    <div class="d-block">
-                      <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                      
-                    </div>
-                    <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-15 g-px-10"><b>{{ speaker.talk_type }}</b></span>                  
-       
-                    <!-- End Figure Info -->
-                  </div>
-
-                  <hr class="g-brd-gray-light-v4 g-my-0">
-
-                  <!-- Figure List -->
-                  <ul class="row list-inline g-py-20 g-ma-0">
-                    <li class="col g-brd-right g-brd-gray-light-v4">
-                      <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-cyan--hover"  data-toggle="tooltip" data-placement="bottom" title="{{ speaker.speaker_name }}'s Profile" href="{% url 'speaker_detail' speaker.slug %}">
-                        
-                        <i class="icon-user"></i>
-                      </a>
-                    </li>
-                    
-                    <li class="col g-brd-right g-brd-gray-light-v4">
-                      <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="View {{ talks.talk_type }}: {{ speaker.talk_title }}" href="{% url 'speaker_detail' speaker.slug %}#talk">
-                        <i class="icon-speech"></i>
-                      </a>
-                    </li>
-                  </ul>
-                  <!-- End Figure List -->
-                </figure>
-                <!-- End Figure -->
-              </div> 
-              <p> </p>
-            {% else %}
-
-            {% endif %}
-            {% empty %} 
-           <h4>There is nothing in this list </h4> 
-            {% endfor %} 
-              
-
-            
-            </div>
-
-          <!-- End Timeline Box -->
-
-              </div>
-              
- {% if user.is_authenticated %}
-              
-              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--2" role="tabpanel">
-                <p class="g-color-black g-font-size-16"> 
-                  Meet our Panelist     
-                </p>
-                <br>
-
-                    <!-- Timeline Box -->
-                    <div class="row">
-                 
-                     
-          <div class="shortcode-html">
-            <!-- Figure -->
-            <figure class="row flex-md-row align-items-center">
-              <!-- Figure Body -->
-              <div class="col-md-3 px-0">
-                <div class="u-ns-bg-v1-bottom u-ns-bg-v1-right--md g-bg-white g-py-30 g-px-50">
-                  <!-- Figure Info -->
-                  <div class="g-mb-25">
-                    <div class="g-mb-20">
-                      <h4 class="h5 g-color-black g-mb-5">Daniel Wearne</h4>
-                      <em class="d-block g-font-style-normal g-font-size-11 text-uppercase g-color-primary">Co-Founder / CEO</em>
-                    </div>
-                    <p>I am an ambitious workaholic, but apart from that, pretty simple person. Understanding who you are and what you want is my strategy for your brand. I am always figuring out ways to capture your vision, so people can get on board.</p>
-                  </div>
-                  <!-- End Figure Info -->
-
-                  <!-- Figure Social Icons -->
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item g-mx-3">
-                      <a class="u-icon-v2 u-icon-size--xs g-color-main g-bg-gray-light-v5 g-brd-gray-light-v5 g-bg-primary--hover g-color-white--hover rounded-circle" href="#">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item g-mx-3">
-                      <a class="u-icon-v2 u-icon-size--xs g-color-main g-bg-gray-light-v5 g-brd-gray-light-v5 g-bg-primary--hover g-color-white--hover rounded-circle" href="#">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item g-mx-3">
-                      <a class="u-icon-v2 u-icon-size--xs g-color-main g-bg-gray-light-v5 g-brd-gray-light-v5 g-bg-primary--hover g-color-white--hover rounded-circle" href="#">
-                        <i class="fa fa-google-plus"></i>
-                      </a>
-                    </li>
-                  </ul>
-                  <!-- End Figure Social Icons -->
-                </div>
-              </div>
-              <!-- End Figure Body -->
-
-              <!-- Figure Image -->
-              <div class="col-md-3 px-0">
-                <img class="w-100" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-              </div>
-              <!-- End Figure Image -->
-            </figure>
-            <!-- End Figure -->
-
-            <!-- Figure -->
-            <figure class="row flex-md-row align-items-center">
-              <!-- Figure Body -->
-              <div class="col-md-3 order-md-2 px-0">
-                <div class="u-ns-bg-v1-bottom u-ns-bg-v1-left--md g-bg-white g-py-30 g-px-50">
-                  <!-- Figure Info -->
-                  <div class="g-mb-25">
-                    <div class="g-mb-20">
-                      <h4 class="h5 g-color-black g-mb-5">Kate Metu</h4>
-                      <em class="d-block g-font-style-normal g-font-size-11 text-uppercase g-color-primary">Co-Founder / UX Designer</em>
-                    </div>
-                    <p>I am an ambitious workaholic, but apart from that, pretty simple person. Understanding who you are and what you want is my strategy for your brand. I am always figuring out ways to capture your vision, so people can get on board.</p>
-                  </div>
-                  <!-- End Figure Info -->
-
-                  <!-- Figure Social Icons -->
-                  <ul class="list-inline mb-0">
-                    <li class="list-inline-item g-mx-3">
-                      <a class="u-icon-v2 u-icon-size--xs g-color-main g-bg-gray-light-v5 g-brd-gray-light-v5 g-bg-primary--hover g-color-white--hover rounded-circle" href="#">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item g-mx-3">
-                      <a class="u-icon-v2 u-icon-size--xs g-color-main g-bg-gray-light-v5 g-brd-gray-light-v5 g-bg-primary--hover g-color-white--hover rounded-circle" href="#">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item g-mx-3">
-                      <a class="u-icon-v2 u-icon-size--xs g-color-main g-bg-gray-light-v5 g-brd-gray-light-v5 g-bg-primary--hover g-color-white--hover rounded-circle" href="#">
-                        <i class="fa fa-google-plus"></i>
-                      </a>
-                    </li>
-                  </ul>
-                  <!-- End Figure Social Icons -->
-                </div>
-              </div>
-              <!-- End Figure Body -->
-
-              <!-- Figure Image -->
-              <div class="col-md-6 order-md-1 px-0">
-                <img class="w-100" src="{% static '2020/img/DrMaria.jpg' %}" alt="Image Description">
-              </div>
-              <!-- End Figure Image -->
-            </figure>
-            <!-- End Figure -->
-          </div>
         
+                  {% for speaker in keynote_speakers %}
+                  <div class="col-lg-3 col-sm-6 g-mb-30">
+                    <!-- Figure -->
+                    <figure class="g-color-gray-dark-v2">
+                      <!-- Figure Image -->
+                      {% if speaker.profile_image %}
+                      <img class="w-100 g-mb-30" src="{{ speaker.profile_image.url }}" alt="Image Description">
+                      {% else %}  
+                      <img class="w-100 g-mb-30" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.profile_image }}">
+                      {% endif %}
+                      <!-- End Figure Image -->
+                
+                      <!-- Figure Info -->
+                      <em class="d-block g-font-style-normal g-font-size-11 text-uppercase g-color-primary g-mb-5">Keynote Speaker</em>
+                      <h4 class="h5 g-color-black-light-v3 g-mb-5"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></h4>
+                      <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession }}</p>
+                      <!-- End Info -->
+                
+                      <hr class="g-brd-gray-light-v4 g-my-15">
+                 
+                    </figure>
+                    <!-- End Figure -->
+                  </div> 
+                  {% empty %}
+                  <p>No speakers at this time.</p>
+                  {% endfor %} 
+                </div>
+          
+ 
+                 <div class="row g-mx-minus-25 g-mb-40"> 
+          
+                  {% for speaker in other_speakers %}
+                  <div class="col-6 col-lg-3 g-px-25 g-mb-50">
+                    <!-- Team -->
+                    <div class="text-center">
                       
-                      </div>
-                <!-- End Timeline Box -->
-
-              </div>
-
-              {% else %}
-
-              {% endif %}
-              </div>
-
-
+                      {% if speaker.profile_image %}
+                      <img class="u-shadow-v29 g-width-110 g-height-110 rounded-circle mb-5" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }} Profile Image">
+                    
+                      {% else %} 
+                      <img class="u-shadow-v29 g-width-110 g-height-110 rounded-circle mb-5" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.profile_image }}">
+                      {% endif %}
+                     
+                      <h4 class="h5 g-font-weight-600 mb-1"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></h4>
+                      <span class="d-block g-color-primary">- {{ speaker.profession }}</span>
+                      <hr class="g-brd-gray-light-v4 g-my-15"> 
+                    </div>
+                    <!-- End Team -->
+                  </div> 
+                  {% empty %}
+                  <p>No speakers at this time.</p>
+                  {% endfor %}
+                  
+                </div>
+          
+ 
 
                  <!-- End Speakers List -->
                </div>
@@ -259,8 +119,7 @@
     <!-- End body -->
 
 
-
-    {% include 'footer.html' %}
+ 
 
 
 {% endblock %}

@@ -3,384 +3,148 @@
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | PyCon Africa" %}{% endif %}{% endblock %}
 
 
-{% block content %}
-{% include 'navbar.html' %}
+{% block content %} 
+
+{% include '2024/navbar.html' %}
 
 
-   <!-- Section Content -->
-   <section class="g-bg-img-hero g-pos-rel u-bg-overlay g-bg-darkblue-opacity-0_6--after g-pt-150" style="background-image: url({% static '2020/img/body1.png' %});">
-    <div class="container g-max-width-750 u-bg-overlay__inner g-color-white g-mb-60">
-      <h3 class="text-center text-uppercase h3 g-font-weight-700 g-font-size-20 g-font-size-50--md g-color-primary g-mb-20 g-mb-50--md">Schedule </h3>
-        <br>
-        <br>
-    </div>
-  </section>
-  <!-- End Section Content -->
+    <!-- Breadcrumbs -->
+    <section class="g-bg-gray-light-v5 g-py-80 g-pt-150">
+      <div class="container text-center">
+        <h2 class="h2 g-color-black g-font-weight-600">Schedule</h2>
+
+        <ul class="u-list-inline">
+          <li class="list-inline-item g-mr-5">
+            <a class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover" href="/">Home</a>
+            <i class="g-color-gray-light-v2 g-ml-5">/</i>
+          </li>  
+          <li class="list-inline-item g-color-primary">
+            <span>Schedule</span>
+          </li>
+        </ul><br> 
+        <i class="fa-regular fa-calendar-week" style="font-size:41px;"></i>
+      </div>
+      
+    </section>
+    <!-- End Breadcrumbs --> 
  
+
+
+
+
 
     <!--
      Our Schedule
      ====================================== -->
-     <div class="container">
-      
+    <div class="container  g-pt-50">
+       
+
       <div class="row">
           <div class="u-shadow-v1-5 g-line-height-2 g-pa-30 g-mb-20 col-md-12" role="alert">
-            <p class="g-color-black g-font-size-16"> 
-              Please note that this is our provisional schedule and is subject to change and all times listed are based off <a href="https://www.timeanddate.com/time/zones/wat" target="/"><b>West Africa Time</b></a> zone.
+            <p class="g-color-black g-font-size-16">  
+                This is our provisional schedule and is subject to change and all times listed are based off <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
                
+                <div class="mad-shedule-head">  
+                  <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black"  data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session"><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small> 
+              <small> <li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15"  data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session"><i class="fa-solid fa-keynote" ></i> <b>Keynote</b></li></small> 
+              <small> <li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15"  data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session"> <i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>  
+               </div>  
             </p>
             <br>
       
+ 
 
-
-            <!-- Nav tabs -->
-            <ul class="nav text-center nav-justified u-nav-v7-1" role="tablist" data-target="nav-7-1-accordion-hor-left-big-icons" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-lightgray g-mb-20">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--1" role="tab">
-                  <i class="icon-christmas-037 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  Tue 04/08
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--2" role="tab">
-                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  Wed 05/08
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--3" role="tab">
-                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  Thu 06/08
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--4" role="tab">
-                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  Fri 07/08
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--5" role="tab">
-                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  Sat 08/08
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#nav-7-1-accordion-hor-left-big-icons--6" role="tab">
-                  <i class="icon-communication-025 d-block g-font-size-25 u-tab-line-icon-pro"></i>
-                  Sun 09/08
-                </a>
-              </li>
-            </ul>
-            <!-- End Nav tabs -->
-
-            <!-- Tab panes -->
-            <div id="nav-7-1-accordion-hor-left-big-icons" class="tab-content g-pt-20--md">
-              
-              <div class="tab-pane fade show active" id="nav-7-1-accordion-hor-left-big-icons--1" role="tabpanel">
-                
-
-          <!-- Timeline Box -->
-          {% for talks in schedule_one %}
-          <!-- timeline-block -->
-
-
-          <div class="u-timeline-v3-wrap">
-
-            {% if talks.talk_url %}
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
-            {% else %}
-            <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
-            {% endif %}
-
-            <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-              <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-            </div>
-
-              <div class="row mx-0">
-                <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
-                  <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
-
-                    <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
-                  </div>
-                </div>
-
-                <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
-                  <div class="media d-block d-md-flex">
-                    <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                      <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
-                    </div>
-
-                    <div class="media-body align-self-center">
-                      <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                      <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
-                      <div class="align-self-center ml-auto">
-                        {% if talks.talk.beginner_level %}
-                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
-                          {% else %}
-                          {% endif %}
-  
-                          {% if talks.talk.intermediate_level %}
-                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
-                          {% else %}
-                          {% endif %}
-  
-                          {% if talks.talk.expert_level %}
-                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
-                          {% else %}
-                          {% endif %}
-
-                          {% if talks.talk.all_level %}
-                          <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
-                          {% else %}
-                          {% endif %}
-                    </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-
-          </div>
-
-          
-          {% empty %}
-          <div class="col-md-6">
-            <!-- Warning Alert -->
-            <div class="alert alert-warning" role="alert">
-              <strong>Please note!</strong> 
-              we have no schedule assigned for this day yet
-            </div>
-            <!-- End Warning Alert -->
-          </div>
-         {% endfor %}
-          <!-- End Timeline Box -->
-
-              </div>
-              
-              
-              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--2" role="tabpanel">
-                        
-                    <!-- Timeline Box -->
-                {% for talks in schedule_two %}
-                <!-- timeline-block -->
-
-                
-                <div class="u-timeline-v3-wrap">
-
-                  {% if talks.talk_url %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
-                  {% else %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
-                  {% endif %}
-                  <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                    <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-                  </div>
-
-                    <div class="row mx-0">
-                      <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
-                        <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
-
-                          <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
-                        </div>
-                      </div>
-                      
-
-                      <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
-                        <div class="media d-block d-md-flex">
-                          <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                            <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
-                          </div>
-
-                          <div class="media-body align-self-center">
-                            <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                            <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
-                            <div class="align-self-center ml-auto">
-                              {% if talks.talk.beginner_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.intermediate_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.expert_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
-                                {% else %}
-                                {% endif %}
-
-                                {% if talks.talk.all_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
-                                {% else %}
-                                {% endif %}
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-
-                </div>
-                {% empty %}
-                <div class="col-md-6">
-                  <!-- Warning Alert -->
-                  <div class="alert alert-warning" role="alert">
-                    <strong>Please note!</strong> 
-                    we have no schedule assigned for this day yet
-                  </div>
-                  <!-- End Warning Alert -->
-                </div>
-              {% endfor %}
-                <!-- End Timeline Box -->
-
-              </div>
-             
-
-              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--3" role="tabpanel">
-                        
-                    <!-- Timeline Box -->
-                {% for talks in schedule_three %}
-                <!-- timeline-block -->
-
-                
-                <div class="u-timeline-v3-wrap">
-
-                  {% if talks.talk_url %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
-                  {% else %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
-                  {% endif %}
-                    <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                      <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-                    </div>
-
-                    <div class="row mx-0">
-                      <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
-                        <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
-
-                          <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
-                        <div class="media d-block d-md-flex">
-                          <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                            <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
-                          </div>
-
-                          <div class="media-body align-self-center">
-                            <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                            <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
-                            <div class="align-self-center ml-auto">
-                              {% if talks.talk.beginner_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.intermediate_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.expert_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
-                                {% else %}
-                                {% endif %}
-
-                                {% if talks.talk.all_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
-                                {% else %}
-                                {% endif %}
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-
-                </div>
-
-                {% empty %}
-                <div class="col-md-6">
-                  <!-- Warning Alert -->
-                  <div class="alert alert-warning" role="alert">
-                    <strong>Please note!</strong> 
-                    we have no schedule assigned for this day yet
-                  </div>
-                  <!-- End Warning Alert -->
-                </div>
-              {% endfor %}
-                <!-- End Timeline Box -->
-
-              </div>
-
-
-              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--4" role="tabpanel">
-                        
-                  <!-- Timeline Box -->
-                  {% for talks in schedule_four %}
-                  <!-- timeline-block -->
-        
+                <!-- Nav tabs -->
+                <ul class="nav nav-justified u-nav-v2-1 u-nav-primary u-nav-rounded-5 g-mb-20" role="tablist" data-target="nav-2-1-accordion-primary-hor-justified" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block u-btn-outline-primary g-mb-20">
                   
-                <div class="u-timeline-v3-wrap">
+                  {% for day in days %}
+                  <li class="nav-item">
+                    <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab" href="#nav-2-1-accordion-primary-hor-justified--{{ forloop.counter }}" role="tab">{{ day }}</a>
+                  </li> 
+                  {% endfor %}
+                
+                </ul>
+                <!-- End Nav tabs -->
 
-                  {% if talks.talk_url %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
+                <!-- Tab panes -->
+                <div id="nav-2-1-accordion-primary-hor-justified" class="tab-content">
+                  
+                  {% for day in days %} 
+
+                  <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="nav-2-1-accordion-primary-hor-justified--{{ forloop.counter }}" role="tabpanel">
+                   
+                    {% for schedule in day.schedules %}
+                    {% if schedule.talk.status == "A" or schedule.is_an_event is True %}
+                
+                    <ul class="list-unstyled">
+                    <li class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
+                      <div class="d-flex justify-content-start"> 
+                        <div class="media-body align-self-center">
+                          <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ schedule.start_time.time|time:"h:iA" }} - {{ schedule.end_time.time|time:"h:iA" }}</h4>
+                          
+                    {% if schedule.is_an_event is True %} 
+                    <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10"><a {% if schedule.event_url %} href="/2024/events/{{ schedule.event_url }}"{% elif schedule.external_url %}href="{{ schedule.external_url }}" target="/" {% else %}{% endif %}>{% if schedule.fa_icon %}<i class="{{ schedule.fa_icon }}"></i> {% else %}{% endif %}{{ schedule.event }}</a></h3>
+              
+                    {% else %}
+                    
+                    <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10"><a href="/2024/talks/{{schedule.talk.proposal_id}}/detail/">{{ schedule.talk.title }}</a></h3>
+                 
+                    {% endif %} 
+                          <p class="g-color-gray-dark-v2 mb-0">
+                            {{ schedule.talk.talk_abstract | truncatechars:300 }}
+                          </p><br>
+                        </div>
+                        
+                    
+                    
+                        <span class="ml-auto small g-color-black g-px-10"><b>Room: {{ schedule.allocated_room.room_name }}</b></span>
+                      </div>  
+                      
+                      <div class="d-flex justify-content-between">
+                        <ul class="u-list-inline">
+                          <li class="list-inline-item mr-0">
+                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{{ schedule.talk.user.user_profile.profile_image.url }}" alt="Image Description">
+                          </li> 
+                          {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}
+                        {% if schedule.talk.speakers.all %} 
+                        {% for speaker in schedule.talk.speakers.all %}
+                        
+                        <li class="list-inline-item mr-0">
+                          <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}" src="{{ speaker.user_profile.profile_image.url }}" alt="Image Description">
+                        </li>
+                          {{ speaker.get_full_name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}   
+                        </ul>
+                        <div class="align-self-center"> 
+                          <ul>
+
+                            {% if schedule.concurrent_talk is True %}
+                            <small><li class="btn btn-xs u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This session will run concurrently with another session" ><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i></li></small>
+                            
+                          {% endif %}
+                            {% if schedule.is_a_keynote_speaker is True %}  
+                            <small> <li class="btn btn-xs u-btn-inset u-btn-darkred  g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This will be a Keynote session"><i class="fa-solid fa-keynote"></i></li></small>
+                         
+                            {% endif %}
+                            {% if schedule.is_a_panel is True %}                     
+                            <small> <li class="btn btn-xs u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This Panel Discussion session"> <i class="fa-solid fa-users-line"></i></li></small> 
+                            
+                            {% endif %}
+                          </ul>
+                        </div>
+                      </div>
+                    </li> 
+                  </ul>
+
                   {% else %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
-                  {% endif %}
-                  <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                    <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-                  </div>
+                  {% endif %} 
 
-                    <div class="row mx-0">
-                      <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
-                        <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
-
-                          <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
-                        <div class="media d-block d-md-flex">
-                          <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                            <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
-                          </div>
-
-                          <div class="media-body align-self-center">
-                            <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                            <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
-                            <div class="align-self-center ml-auto">
-                              {% if talks.talk.beginner_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.intermediate_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.expert_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
-                                {% else %}
-                                {% endif %}
-
-                                {% if talks.talk.all_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
-                                {% else %}
-                                {% endif %}
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-
-                </div>
                   {% empty %}
+
+
+
                   <div class="col-md-6">
                     <!-- Warning Alert -->
                     <div class="alert alert-warning" role="alert">
@@ -390,362 +154,12 @@
                     <!-- End Warning Alert -->
                   </div>
                   {% endfor %}
-                  <!-- End Timeline Box -->
-              </div>
-         
+                  </div>  
 
-              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--5" role="tabpanel">
-                        
-                <!-- Timeline Box -->
-                {% for talks in schedule_five %}
-                <!-- timeline-block -->
-      
+                  {% endfor %}
+                </div>
+                <!-- End Tab panes -->
                 
-                <div class="u-timeline-v3-wrap">
-
-                  {% if talks.talk_url %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
-                  {% else %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
-                  {% endif %}
-                  <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                    <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-                  </div>
-
-                    <div class="row mx-0">
-                      <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
-                        <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
-
-                          <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
-                        <div class="media d-block d-md-flex">
-                          <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                            <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
-                          </div>
-
-                          <div class="media-body align-self-center">
-                            <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                            <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
-                            <div class="align-self-center ml-auto">
-                              {% if talks.talk.beginner_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.intermediate_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.expert_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
-                                {% else %}
-                                {% endif %}
-
-                                {% if talks.talk.all_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
-                                {% else %}
-                                {% endif %}
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-
-                </div>
-                {% empty %}
-                <div class="col-md-6">
-                  <!-- Warning Alert -->
-                  <div class="alert alert-warning" role="alert">
-                    <strong>Please note!</strong> 
-                    we have no schedule assigned for this day yet
-                  </div>
-                  <!-- End Warning Alert -->
-                </div>
-                {% endfor %}
-                <!-- End Timeline Box -->
-
-              </div>
-       
-
-
-                
-              <div class="tab-pane fade" id="nav-7-1-accordion-hor-left-big-icons--6" role="tabpanel">
-                        
-                <!-- Timeline Box -->
-                {% for talks in schedule_six %}
-                <!-- timeline-block -->
-      
-                
-                <div class="u-timeline-v3-wrap">
-
-                  {% if talks.talk_url %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50" href="{{ talks.talk_url }}">
-                  {% else %}
-                  <a class="u-timeline-v3 d-block text-center text-md-left g-parent u-link-v5 g-mb-50">
-                  {% endif %}
-                  <div class="g-hidden-sm-down u-timeline-v3__icon g-absolute-centered--y g-z-index-3 g-line-height-0 g-width-16 g-height-16 g-ml-minus-8">
-                    <i class="d-block g-width-18 g-height-18 g-bg-{{talks.track_colour}} g-brd-around g-brd-4 g-brd-gray-light-v4 rounded-circle"></i>
-                  </div>
-
-                    <div class="row mx-0">
-                      <div class="col-md-3 g-order-2 g-order-1--sm d-flex align-self-center px-0">
-                        <div class="u-heading-v1-4 g-brd-gray-light-v2 w-100">
-
-                          <span class="text-center g-pos-rel d-block g-width-180 g-line-height-1_6 g-font-weight-600 g-color-white g-font-size-14 g-bg-gray-dark-v1 g-bg-primary--parent-hover g-py-5 g-px-10 mx-auto g-ml-0--md g-transition-0_2 g-transition--ease-in g-mb-10 g-mb-0--md">{{ talks.talk.talk_type }} <br> <small>{{ talks.start_time.time }} <b>WAT</b></small></span>
-                        </div>
-                      </div>
-
-                      <div class="col-md-9 g-order-1 g-order-2--sm px-0 g-mb-15 g-mb-0--md">
-                        <div class="media d-block d-md-flex">
-                          <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-darkblue-opacity-0_7--after g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                            <img class="img-fluid g-rounded-50x" src="{{ talks.talk.profile_image.url }}" alt="Image description">
-                          </div>
-
-                          <div class="media-body align-self-center">
-                            <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">{{ talks.talk.speaker_name }}</h4>
-                            <em  class="h5 g-font-weight-600 g-color-primary g-font-style-normal ">{{ talks.talk.talk_title }}</em>
-                            <div class="align-self-center ml-auto">
-                              {% if talks.talk.beginner_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Beginner</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.intermediate_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Intermediate</span>                  
-                                {% else %}
-                                {% endif %}
-        
-                                {% if talks.talk.expert_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  Expert</span>                  
-                                {% else %}
-                                {% endif %}
-
-                                {% if talks.talk.all_level %}
-                                <span class="u-label u-label--sm g-bg-gray-light-v4 g-color-primary g-rounded-20 g-px-15"><i class="fa fa-group"></i>  All</span>                  
-                                {% else %}
-                                {% endif %}
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-
-                </div>
-                {% empty %}
-                <div class="col-md-6">
-                  <!-- Warning Alert -->
-                  <div class="alert alert-warning" role="alert">
-                    <strong>Please note!</strong> 
-                    we have no schedule assigned for this day yet
-                  </div>
-                  <!-- End Warning Alert -->
-                </div>
-                {% endfor %}
-                <!-- End Timeline Box -->
-                <p class="g-color-black g-font-size-16"> 
-                  Meet the team.
-                </p>
-                <div class="row text-center align-middle">
-                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-                    <!-- Figure -->
-                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                      <div class="g-py-40 g-px-20">
-                        <!-- Figure Image -->
-                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Sandrine_Pataut.JPG' %}" alt="Image description">
-                        </div>
-                        <!-- Figure Image -->
-     
-                        <!-- Figure Info --><br>
-                        <h4 class="h5 g-mb-5">Sandrine Pataut</h4>
-                        <div class="d-block">
-                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                          
-                        </div>
-                       
-                        <!-- End Figure Info -->
-                      </div>
-     
-                      <hr class="g-brd-gray-light-v4 g-my-0">
-     
-                      <!-- Figure List -->
-                      <ul class="list-inline text-center">
-                       
-                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
-                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/SPataut" target="/">
-                            <i class="fa fa-twitter"></i>
-                          </a>
-                        </li>
-                        
-                      </ul>
-                      <!-- End Figure List -->
-                    </figure>
-                    <!-- End Figure -->
-                  </div> 
-                  
-                  
-                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-                    <!-- Figure -->
-                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                      <div class="g-py-40 g-px-20">
-                        <!-- Figure Image -->
-                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Cheuk_Ting_Ho.JPG' %}" alt="Image description">
-                        </div>
-                        <!-- Figure Image -->
-     
-                        <!-- Figure Info --><br>
-                        <h4 class="h5 g-mb-5">Cheuk Ting Ho</h4>
-                        <div class="d-block">
-                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                          
-                        </div>
-                       
-                        <!-- End Figure Info -->
-                      </div>
-     
-                      <hr class="g-brd-gray-light-v4 g-my-0">
-     
-                      <!-- Figure List -->
-                      <ul class="list-inline text-center">
-                       
-                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
-                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/cheukting_ho" target="/">
-                            <i class="fa fa-twitter"></i>
-                          </a>
-                        </li>
-                        
-                      </ul>
-                      <!-- End Figure List -->
-                    </figure>
-                    <!-- End Figure -->
-                  </div> 
-
-
-                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-                    <!-- Figure -->
-                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                      <div class="g-py-40 g-px-20">
-                        <!-- Figure Image -->
-                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/John.jpg' %}" alt="Image description">
-                        </div>
-                        <!-- Figure Image -->
-     
-                        <!-- Figure Info --><br>
-                        <h4 class="h5 g-mb-5">John Sandall</h4>
-                        <div class="d-block">
-                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                          
-                        </div>
-                       
-                        <!-- End Figure Info -->
-                      </div>
-     
-                      <hr class="g-brd-gray-light-v4 g-my-0">
-     
-                      <!-- Figure List -->
-                      <ul class="list-inline text-center">
-                       
-                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
-                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/John_Sandall" target="/">
-                            <i class="fa fa-twitter"></i>
-                          </a>
-                        </li>
-                        
-                      </ul>
-                      <!-- End Figure List -->
-                    </figure>
-                    <!-- End Figure -->
-                  </div> 
-
-
-
-                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-                    <!-- Figure -->
-                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                      <div class="g-py-40 g-px-20">
-                        <!-- Figure Image -->
-                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Astrid.png' %}" alt="Image description">
-                        </div>
-                        <!-- Figure Image -->
-     
-                        <!-- Figure Info --><br>
-                        <h4 class="h5 g-mb-5">Astrid Verstraete</h4>
-                        <div class="d-block">
-                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                          
-                        </div>
-                       
-                        <!-- End Figure Info -->
-                      </div>
-     
-                      <hr class="g-brd-gray-light-v4 g-my-0">
-     
-                      <!-- Figure List -->
-                      <ul class="list-inline text-center">
-                       
-                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
-                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/AstridMV3" target="/">
-                            <i class="fa fa-twitter"></i>
-                          </a>
-                        </li>
-                        
-                      </ul>
-                      <!-- End Figure List -->
-                    </figure>
-                    <!-- End Figure -->
-                  </div> 
-
-
-
-                  <div class="col-md-2.5 g-mb-30 g-mb-0--md">
-                    <!-- Figure -->
-                    <figure class="g-bg-white g-brd-around g-brd-gray-light-v4 g-brd-primary--hover g-transition-0_2 text-center">
-                      <div class="g-py-40 g-px-20">
-                        <!-- Figure Image -->
-                        <div class="d-md-flex u-bg-overlay g-width-140 g-width-140--md g-height-140 g-height-140--md  g-bg-white-opacity-0--after--parent-hover g-overflow-hidden g-rounded-50x g-mr-30--md mx-auto g-mb-15 g-mb-0--md g-transition-0_2 g-transition--ease-in">
-                          <img class="img-fluid g-rounded-50x" src="{% static '2020/img/speakers/Dani.png' %}" alt="Image description">
-                        </div>
-                        <!-- Figure Image -->
-     
-                        <!-- Figure Info --><br>
-                        <h4 class="h5 g-mb-5">Dani Papamaximou</h4>
-                        <div class="d-block">
-                          <em class="g-color-gray-dark-v4 g-font-style-normal g-font-size-default">{{ speaker.talk_title|truncatechars:35 }}</em>
-                          
-                        </div>
-                       
-                        <!-- End Figure Info -->
-                      </div>
-     
-                      <hr class="g-brd-gray-light-v4 g-my-0">
-     
-                      <!-- Figure List -->
-                      <ul class="list-inline text-center">
-                       
-                        <li class="list-inline-item align-middle u-shadow-v18 g-mx-3">
-                          <a class="u-icon-v2 u-icon-size--xs g-color-primary g-color-yellow--hover g-bg-white--hover rounded-circle" href="https://www.twitter.com/DaniQuietNow" target="/">
-                            <i class="fa fa-twitter"></i>
-                          </a>
-                        </li>
-                        
-                      </ul>
-                      <!-- End Figure List -->
-                    </figure>
-                    <!-- End Figure -->
-                  </div> 
-              </div> 
-              </div>
-              
-            </div>
 
       </div>
     </div>
@@ -759,6 +173,5 @@
 
     <!-- end section.schedule -->
 
-
-    {% include 'footer.html' %}
+ 
 {% endblock %}

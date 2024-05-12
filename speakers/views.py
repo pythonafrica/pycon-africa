@@ -16,102 +16,66 @@ from registration.models import Profile
 from talks.models import Proposal
 from schedule.models import TalkSchedule
 
+from home.models import EventYear  
 from event.models import Event
-
+from django.db.models import Q, Exists, OuterRef
 
 class Speakers(ListView):
-   model = Profile
-   template_name = '2022/speakers/speaker_list.html'
-   context_object_name = 'speakers'
-   ordering = ['date_created']
+    model = Profile
+    context_object_name = 'speakers'
+    ordering = ['date_created']
 
-'''
+    def get_template_names(self):
+        year = self.kwargs.get('year', 'default')
+        return [f'{year}/speakers/speaker_list.html']
 
-def speakers(request):
-    template_name = '2022/speakers/speaker_list.html' 
-    speakers = Profile.objects.all()
-    talks = Proposal.objects.all()
-    context = {
-        'nbar': 'resources',
-        'Speakers': speakers,
-        'Talks': talks,
-        }
-    return render(request, template_name, context)
-'''
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(
+            Q(user__proposals__status='A') | Q(user__speaking_proposals__status='A')
+        ).distinct().annotate(
+            is_keynote_speaker=Exists(
+                Proposal.objects.filter(
+                    user=OuterRef('user'),
+                    talk_type="Keynote Speaker",
+                    status='A'
+                )
+            )
+        )
+        return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        speakers = context['speakers']
+        keynote_speakers = speakers.filter(is_keynote_speaker=True)
+        other_speakers = speakers.exclude(is_keynote_speaker=True)
+        context.update({
+            'keynote_speakers': keynote_speakers,
+            'other_speakers': other_speakers
+        })
+        return context
 
 class SpeakerDetailView(HitCountDetailView):
     model = Profile
-    template_name = '2022/speakers/speaker_details.html'
     context_object_name = 'speaker'
-    slug_field = 'slug'
-    # set to True to count the hit
-    count_hit = True
-    paginate_by = 3
+    slug_field = 'profile_id'  # Correct if you are using slug to lookup
+    pk_url_kwarg = 'profile_id'  # This is the key part to add
+    count_hit = True  # Set to True to count the hit
 
+    def get_template_names(self):
+        year = self.kwargs.get('year', 'default')
+        return [f'{year}/speakers/speaker_details.html']
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(SpeakerDetailView, self).get_context_data(**kwargs)
+        year = self.kwargs.get('year')
+        event_year = get_object_or_404(EventYear, year=year)
 
-        context['talks'] = Proposal.objects.filter(user=self.object.user, status="A", 
-                                                       )
-        
-        context['events'] = Event.objects.all()
-        
-        context['speakers'] = Profile.objects.all()
-        context['shedule'] = TalkSchedule.objects.all()
-         
-        context['related_speakers'] = \
-            Profile.objects.filter(is_visible=True,).order_by('?')[:10]
-
-        return context 
-
-
-
-
-
-def speaker_new(request):
-    if request.method == "POST":
-        form = SpeakerForm(request.POST)
-        if form.is_valid():
-            speaker = form.save(commit=False)
-            speaker.author = request.user
-            speaker.published_date = timezone.now()
-            speaker.save()
-            return redirect('2022/speakers/speaker_detail', speaker)
-    else:
-        form = SpeakerForm()
-    return render(request, '2022/speakers/speaker_edit.html', {'form': form})
-
-
-def speaker_edit(request, pk):
-    speaker = get_object_or_404(Profile, slug)
-    if request.method == "POST":
-        form = SpeakerForm(request.POST, instance=speaker)
-        if form.is_valid():
-            speaker = form.save(commit=False)
-            speaker.author = request.user
-            speaker.published_date = timezone.now()
-            speaker.save()
-            return redirect('2022/speakers/speaker_detail', speaker)
-    else:
-        form = SpeakerForm(instance=speaker)
-    return render(request, '2022/speakers/speaker_edit.html', {'form': form})
-
-
-
-
-'''
-# default ordering
-first = Profile.objects.first()
-second = next_in_order(first)
-prev_in_order(second) == first # True
-last = prev_in_order(first, loop=True)
-
-# custom ordering
-qs = Profile.objects.all().order_by('-date_created')
-newest = qs.first()
-second_newest = next_in_order(newest, qs=qs)
-oldest = prev_in_order(newest, qs=qs, loop=True)
-
-'''
+        context.update({
+            'talks': Proposal.objects.filter(user=self.object.user, status="A", event_year=event_year),
+            'events': Event.objects.all(),
+            'speakers': Profile.objects.all(),
+            'schedule': TalkSchedule.objects.all(),
+            'related_speakers': Profile.objects.filter(is_visible=True).order_by('?')[:10]
+        })
+        return context

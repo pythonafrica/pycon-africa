@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import TalkSchedule, Room, Event, Day
+from .models import TalkSchedule, Room, Day
 
 
 
@@ -13,6 +13,5 @@ class TalkScheduleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(TalkSchedule, TalkScheduleAdmin)
-admin.site.register(Room)
-admin.site.register(Event)
+admin.site.register(Room) 
 admin.site.register(Day)

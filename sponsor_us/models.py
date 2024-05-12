@@ -22,9 +22,9 @@ class SponsorUsPage(models.Model):
 
 
 class SponsorshipBenefit(models.Model):
-    description = models.CharField(max_length=255)
-    tier = models.ForeignKey('SponsorshipTier', on_delete=models.CASCADE, related_name='benefits')
-
+    description = MarkdownxField(default='', help_text = "[Supports Markdown] - Full Benefit in .md", null=False, blank=False)
+    tier = models.ForeignKey('SponsorshipTier', on_delete=models.CASCADE, related_name='benefits')  
+    
     def __str__(self):
         return self.description
 

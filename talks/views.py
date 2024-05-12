@@ -182,28 +182,26 @@ class TalkDetailView(TemplateView):
         return context
 
 
-
 class TalksDetailView(DetailView):
     model = Proposal
-    context_object_name = 'schedule'
+    context_object_name = 'talk'
     slug_field = 'proposal_id'
+    slug_url_kwarg = 'proposal_id'
 
     def get_template_names(self):
         proposal = self.get_object()
-        proposal_year = proposal.event_year.year
-        return [f"{proposal_year}/schedule/talk_details.html"]
+        return [f"{proposal.event_year.year}/schedule/talk_details.html"]
 
     def get_context_data(self, **kwargs):
         context = super(TalksDetailView, self).get_context_data(**kwargs)
         proposal = self.get_object()
         context.update({
-            'title': "Talk Detail Details",
+            'title': "Talk Details",
             'year': proposal.event_year.year,
             'related_talks': Proposal.objects.filter(status='A', event_year=proposal.event_year).order_by('?')[:5],
-            'speakers': proposal.speakers.all()  # Include speakers in the context
+            'speakers': [proposal.user] + list(proposal.speakers.all())  # Include main and additional speakers
         })
         return context
-
 
 
 
