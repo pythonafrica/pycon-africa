@@ -67,11 +67,11 @@
         
                       {% if tier.benefits.exists %}
                           <p class="g-color-black g-font-size-16"><strong>Highlights of this package:</strong></p>
-                          <ul class="g-color-black g-font-size-16">
+                          
                               {% for benefit in tier.benefits.all %}
-                                  <li>{{ benefit.description | markdown | safe }}</li> 
+                                  <p class="g-color-black g-font-size-16">{{ benefit.description | markdown | safe }}</p> 
                               {% endfor %}
-                          </ul>
+                          
                       {% endif %}
                       
                       {% if tier.additional_resources.exists %}
@@ -93,12 +93,10 @@
         
                     <!-- Assuming the same benefits and additional_resources structure applies -->
                     {% if tier.benefits.exists %}
-                        <p class="g-color-black g-font-size-16"><strong>Highlights of this package:</strong></p>
-                        <ul class="g-color-black g-font-size-16">
+                        <p class="g-color-black g-font-size-16"><strong>Highlights of this package:</strong></p> 
                             {% for benefit in tier.benefits.all %}
-                                <li>{{ benefit.description | markdown | safe }}</li>
-                            {% endfor %}
-                        </ul>
+                            <p class="g-color-black g-font-size-16">{{ benefit.description | markdown | safe }}</p> 
+                            {% endfor %} 
                     {% endif %}
         
                     {% if tier.additional_resources.exists %}
