@@ -31,9 +31,7 @@ class SponsorshipBenefit(models.Model):
 
 class SponsorshipTier(models.Model):
     name = models.CharField(max_length=100, help_text="Sponsorship Tier name. eg, Gold, Silver")
-    amount = models.IntegerField(help_text="Sponsorship Tier Amount eg, 1000.00")
-    no_needed = models.IntegerField(help_text="Number of sponsorships needed.", blank=True,)
-    no_available = models.IntegerField(null=True, blank=True, help_text="Number of sponsorships available.")
+    amount = models.IntegerField(help_text="Sponsorship Tier Amount eg, 1000.00")  
     colour = models.CharField(max_length=25, default="primary", help_text="Colour for tier eg, yellow, gray, primary etc")
     hex = models.CharField(max_length=25, default="#000", help_text="Hex colour for tier eg, #cd7f32")
     details = MarkdownxField(help_text="[Supports Markdown] - Detailed description of the tier.")
