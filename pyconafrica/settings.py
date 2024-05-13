@@ -46,10 +46,10 @@ LOGOUT_REDIRECT_URL = "/"
 
 INSTALLED_APPS = [
     "grappelli",
-    "django.contrib.admin",
     "cloudinary",
     "cloudinary_storage",
     "gamma_cloudinary",
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -210,8 +210,8 @@ STATICFILES_DIRS = [
 ]
    
 
-# STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
-# DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
+STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
   
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.

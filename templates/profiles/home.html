@@ -187,7 +187,7 @@
                   {{ form.media }} 
               </div>
               <!-- End Info -->
-      
+       
     <hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
                   
                 {% invitation_list %}
@@ -213,10 +213,12 @@
                               <div class="d-flex justify-content-between">
                                 <h5 class="h6 g-font-weight-600 g-color-black">What it takes to speak at PyCon Africa</h5> 
                               </div>
-                              <p>We are seeking speakers of all experience levels and backgrounds to ...</p>
+                              <p>We are inviting speakers of all experience levels and backgrounds to contribute to our conference program at PyCon Africa 2024! ...</p>
                               
                               <p><a href="/2024/talks/speaking"class="btn btn-sm u-btn-outline-darkgray g-rounded-50 g-mr-10 g-mb-15"><b>Read more...</b></a></p>
                                     
+                              
+                                   
                                 
                             </div>
                           </li> 
@@ -234,6 +236,7 @@
                         <h3 class="h6 mb-0">
                           <i class="fa-light fa-podium g-color-black" style="font-size:21px;"></i> &nbsp;&nbsp; My Talks
                           </h3> 
+                           <a href="{% url 'talks:submit_talk' year=year %}"class="btn btn-sm u-btn-outline-darkgray g-rounded-50  "> <i class="fa-solid fa-exclamation fa-bounce"></i> <b>Submit a Talk</b></a>
                       </div>
 
                       <div class="my-talks-summary">

@@ -776,7 +776,7 @@ class Profile(models.Model, HitCountMixin):
     biography = MarkdownxField(help_text="[Supports Markdown] - Give us a brief biography about yourself", default="", blank=False)
     city = models.CharField(max_length=100, default="", blank=False, help_text="City the speaker is from eg. Accra") 
     country = CountryField(default="GH",blank=False, blank_label='(select country)')
-    contact_number = models.CharField(max_length=50, help_text="Please include your country code (233).", default="", blank=False, null=True)
+    contact_number = models.CharField(max_length=50, help_text="Please include your country code (233).", default="", blank=True, null=True)
     website = models.URLField(max_length=200, help_text="Your website/blog URL.", null=True, blank=True)#made this optional
     twitter_handle = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,) #made this optional
     github_username = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
