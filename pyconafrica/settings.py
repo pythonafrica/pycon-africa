@@ -210,7 +210,7 @@ STATICFILES_DIRS = [
 ]
    
 
-STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
+#STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
 DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
   
 
