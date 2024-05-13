@@ -105,7 +105,7 @@ class IOCMember(models.Model):
     name = models.CharField(max_length=100)
     groups = models.ManyToManyField(IOCGroup, related_name="iocs",blank=True) 
     country = CountryField(default="GH",blank=False, blank_label='(select member contributing country)')
-    country_2 = CountryField(default="",blank=True, blank_label='(select member"s 2nd contributing country if any)')
+    country_2 = models.CharField(max_length=50, default="",blank=True, help_text='(enter member"s 2nd contributing country if any)')
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='ioc_members')
 
     def __str__(self):

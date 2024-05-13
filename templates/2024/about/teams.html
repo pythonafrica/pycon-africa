@@ -69,7 +69,7 @@
               <ul>
                 {% for member in ioc_members %}
                     <li>
-                      {{ member.name }} - {{ member.country.name }}{% if member.groups.all.exists %} | {% for group in member.groups.all %}{% if not forloop.last %}{{ group.name }}, {% else %}{{ group.name }}{% endif %}{% endfor %}{% endif %}
+                      {{ member.name }} - {{ member.country.name }} {% if member.country_2 %}/ {{ member.country_2 }}{% else %}{% endif %} {% if member.groups.all.exists %} | {% for group in member.groups.all %}{% if not forloop.last %}{{ group.name }}, {% else %}{{ group.name }}{% endif %}{% endfor %}{% endif %}
 
                     </li>
                 {% empty %}
