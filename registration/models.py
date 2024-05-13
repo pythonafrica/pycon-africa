@@ -795,24 +795,11 @@ class Profile(models.Model, HitCountMixin):
    
     def __str__(self):
         return str(self.name) 
-    
+      
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name) if not self.slug else self.slug
-        super(Profile, self).save(*args, **kwargs)
-        if hasattr(self.user, 'profile'):
-            self.user.first_name = self.name
-            self.user.last_name = self.surname
-            self.user.save()
-
-
-
-
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance) 
-    instance.user_profile.save()
-
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super(Profile, self).save(*args, **kwargs)
 
 
 
