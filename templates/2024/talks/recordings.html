@@ -30,88 +30,31 @@
 	  </section>
 	  <!-- End Breadcrumbs --> 
 
-  <div class="mad-content no-pd">
-    <div class="container">
-      <section class="mad-section size-5"> 
-          <div class="mad-col">
-
-		
- 
-  <!--================ Icon Box ================-->
-  <article class="text-size-medium">
-	<i class="fas fa-album-collection" style="font-size:41px;"></i>
-	 
-	<div class="mad-icon-box-content markdownx-preview"> 
-
-		<div class="col-xs-12"> <br>
-			<p>Part of the motivation for PyCon Africa is to help with Python education and advocacy in Africa, and the world at large. Accordingly, we intend to record all PyCon presentations and release the recordings on the web</p>
-			<p>By submitting your talk, you agree to give permission to the Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) to record, edit, and release audio and/or video of your presentation.  We also perform interviews with poster presenters and require recording releases to publish them.</p>
-			<p>By default, the recording release checkbox is checked when submitting a proposal. If you wish to opt-out, uncheck the release checkbox, note that no recordings of your talk will be made. You cannot opt out of recording for lightning talks.</p>
-			<p>You agree to the following legalese, which certifies that you are the author of your presentation (or otherwise allowed to present it at PyCon Africa), and which allows the Python
-					Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>)<br> 1) to perform the necessary audio and video editing needed to prepare your presentation, and <br>2) to distribute the recordings to other people, including on YouTube, or video sites. It also allows other people to watch the recordings.</p>
-			<br>
-			<div class="panel panel-danger col-xs-12">
-				<div class="headings-showcase">
-					<h3>Legalese:</h3>
-				  </div>
-					<p>I certify that I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, am authorized to license this proposal
-					and its associated presentation (the &quot;User Submission&quot;) to the Python
-					Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) for use in association with PyCon Africa.<br> Specifically,</p>
-					<p>
-					- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, certify that I am either the copyright owner of the
-					User Submission or an authorized licensee of the copyright owner. If I
-					am an authorized licensee of the copyright owner, I certify that I have
-					sublicensable distribution rights.</p>
-					
-					<p>- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, hereby grant the Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) a worldwide, royalty-free, fully
-					paid-up, non-exclusive, perpetual (for the duration of the applicable
-					copyright), sublicensable and transferable license to exercise the rights
-					in the User Submission as follows:</p>
-					<ul>
-					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to reproduce the User Submission,
-					to incorporate the User Submission into one or more Collective
-						Works, and to reproduce the User Submission as incorporated in
-						the Collective Works;</li>
-					
-					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to create and reproduce Derivative
-						Works;</li>
-
-					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to distribute copies or
-						phonorecords of, display publicly, perform publicly, and
-						perform publicly by means of a digital audio transmission the
-						User Submission including as incorporated in Collective Works;
-						and</li>
-					<li> The Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) is granted a license to distribute copies or phonorecords of, display publicly, perform publicly, and
-						perform publicly by means of a digital audio transmission
-						Derivative Works.</li>
-					</ul>
-					<p>- I,{% if user.is_authenticated %} {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} {% else %} {% endif %} the Submitter, also hereby grant each person receiving the User
-					Submission distributed by the Python Software Community Africa (<a href="https://africa.python.org/" target="/">&quot;Python Africa&quot;</a>) a non-exclusive license to
-					 access, use, display, and perform the User Submission in a
-					non-commercial, private context.</p>
-			</div>
-			</div>
-
-	</div>
-  </article>
-  <!--================ End of Icon Box ================--> 
 
 
-            
-            {% for coc in cocs.all|slice:"0:1" %}
+    <!-- body -->
+    <div class="container  g-pt-50">
+        <div class="row">  
+          <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" > 
+            {% for recording in recordings.all|slice:"0:1" %}<br><br>
+            <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30">  
+              <span class="g-color-primary">{{ recording.title }}</span> 
+            </h2>
             <!--================ Icon Box ================-->
-            <article class="text-size-medium">
-              <i class="fa-solid fa-scale-balanced" style="font-size:41px;"></i>
+            <article class="text-size-medium"> 
               <div class="mad-icon-box-content markdownx-preview"> 
-                <p class="markdownx-preview">{{ coc.code_of_conduct | markdown | safe }}</p>
+                <p class="markdownx-preview">{{ recording.content | markdown | safe }}</p>
               {{ form.media }}
               </div>
             </article>
             <!--================ End of Icon Box ================--> 
-            {% endfor %} 
-          </div>   
-      </section>
+            {% endfor %}
+          </div> 
+      </div> 
     </div>
-  </div> 
+    <!-- End body -->
+ 
+
+ 
 
 {% endblock %} 

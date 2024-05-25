@@ -31,21 +31,24 @@ from .models import Fin_aid
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from home.models import EventYear
  
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from fin_aid.mixins import EditOwnFin_aidMixin, EditOwnLoginMixin
 from .forms import Fin_aidForm
- 
+
+
 def fin_aid(request, year):
-    # Ensure the event year exists and is valid
     event_year = get_object_or_404(EventYear, year=year)
-    # Filter financial aid information based on the event year
     fin_aids = Fin_aid.objects.filter(event_year=event_year).order_by('-date_created')
-    # Render the template with financial aid information specific to the given year
-    return render(request, f'{year}/fin_aid/fin_aid.html', {'fin_aids': fin_aids})
+    for fin_aid in fin_aids:
+        fin_aid.is_form_open = fin_aid.is_form_open()
+        fin_aid.form_status_message = fin_aid.get_form_status_message()
+    return render(request, f'{year}/fin_aid/fin_aid.html', {'fin_aids': fin_aids, 'year': year})
 
-
-
-def fin_aid_edit(request, pk):
+@login_required
+def fin_aid_edit(request, year, pk):
     fin_aid = get_object_or_404(Fin_aid, pk=pk)
+    if not request.user.has_perm('fin_aid.can_edit_fin_aid'):
+        return redirect('fin_aid', year=year)
     if request.method == "POST":
         form = Fin_aidForm(request.POST, instance=fin_aid)
         if form.is_valid():
@@ -53,35 +56,45 @@ def fin_aid_edit(request, pk):
             fin_aid.user = request.user
             fin_aid.date_updated = timezone.now()
             fin_aid.save()
-            return redirect('fin_aid:fin_aid_home')
+            return redirect('fin_aid', year=year)
     else:
         form = Fin_aidForm(instance=fin_aid)
-    return render(request, '2022/fin_aid/update_fin_aid.html', {'form': form})
+    return render(request, f'{year}/fin_aid/update_fin_aid.html', {'form': form, 'year': year})
 
- 
-class Fin_aidView(EditOwnFin_aidMixin, UpdateView):
+class Fin_aidView(PermissionRequiredMixin, UpdateView):
     form_class = Fin_aidForm
     model = Fin_aid
-    template_name = "2022/fin_aid/update_fin_aid.html"
-    success_url = reverse_lazy('fin_aid:fin_aid_home')
+    template_name = "fin_aid/update_fin_aid.html"
+    permission_required = 'fin_aid.can_edit_fin_aid'
+
+    def get_success_url(self):
+        return reverse_lazy('fin_aid', kwargs={'year': self.object.event_year.year})
 
     def get_context_data(self, **kwargs):
-        context = super(UpdateView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['title'] = 'Fin_aid'
-        context['year'] = datetime.now().year
-        try:
-            context['fin_aid'] = Fin_aid()
-        except Fin_aid.DoesNotExist:
-            context['fin_aid'] = ''
+        context['year'] = timezone.now().year
+        context['fin_aid'] = self.object
+        context['is_form_open'] = self.object.is_form_open()
+        context['form_status_message'] = self.object.get_form_status_message()
         return context
 
-def fin_aid_update_view(UpdateView):
+@login_required
+def fin_aid_update_view(request, year, id):
     obj = get_object_or_404(Fin_aid, id=id)
-    form = Fin_aidForm(UpdateView.POST or None, instance=obj)
-    if form.is_valid():
-        form.save()
+    if not request.user.has_perm('fin_aid.can_edit_fin_aid'):
+        return redirect('fin_aid', year=year)
+    if request.method == "POST":
+        form = Fin_aidForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect('fin_aid', year=year)
+    else:
+        form = Fin_aidForm(instance=obj)
     context = {
-        'form': form
+        'form': form,
+        'is_form_open': obj.is_form_open(),
+        'form_status_message': obj.get_form_status_message(),
+        'year': year
     }
-    return render(UpdateView, "2022/fin_aid/update_fin_aid.html", context)
-
+    return render(request, f'{year}/fin_aid/update_fin_aid.html', context)
