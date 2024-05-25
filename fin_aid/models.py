@@ -32,12 +32,18 @@ class Fin_aid(models.Model):
         now = timezone.now()
         return self.fin_open_date <= now <= self.fin_close_date
 
-    def get_form_status_message(self):
+    def is_form_closed(self):
         now = timezone.now()
-        if now < self.fin_open_date:
+        return now > self.fin_close_date
+
+    def is_form_not_open_yet(self):
+        now = timezone.now()
+        return now < self.fin_open_date
+
+    def get_form_status_message(self):
+        if self.is_form_not_open_yet():
             return "The financial aid application form will open on {}".format(self.fin_open_date.strftime("%Y-%m-%d %H:%M:%S"))
-        elif now > self.fin_close_date:
+        elif self.is_form_closed():
             return "The financial aid application form closed on {}".format(self.fin_close_date.strftime("%Y-%m-%d %H:%M:%S"))
         else:
             return "The financial aid application form is currently open."
- 

@@ -40,7 +40,9 @@ def fin_aid(request, year):
     event_year = get_object_or_404(EventYear, year=year)
     fin_aids = Fin_aid.objects.filter(event_year=event_year).order_by('-date_created')
     for fin_aid in fin_aids:
-        fin_aid.is_form_open = fin_aid.is_form_open()
+        fin_aid.is_open = fin_aid.is_form_open()
+        fin_aid.is_closed = fin_aid.is_form_closed()
+        fin_aid.not_open_yet = fin_aid.is_form_not_open_yet()
         fin_aid.form_status_message = fin_aid.get_form_status_message()
     return render(request, f'{year}/fin_aid/fin_aid.html', {'fin_aids': fin_aids, 'year': year})
 
@@ -75,7 +77,9 @@ class Fin_aidView(PermissionRequiredMixin, UpdateView):
         context['title'] = 'Fin_aid'
         context['year'] = timezone.now().year
         context['fin_aid'] = self.object
-        context['is_form_open'] = self.object.is_form_open()
+        context['is_open'] = self.object.is_form_open()
+        context['is_closed'] = self.object.is_form_closed()
+        context['not_open_yet'] = self.object.is_form_not_open_yet()
         context['form_status_message'] = self.object.get_form_status_message()
         return context
 
@@ -93,7 +97,9 @@ def fin_aid_update_view(request, year, id):
         form = Fin_aidForm(instance=obj)
     context = {
         'form': form,
-        'is_form_open': obj.is_form_open(),
+        'is_open': obj.is_form_open(),
+        'is_closed': obj.is_form_closed(),
+        'not_open_yet': obj.is_form_not_open_yet(),
         'form_status_message': obj.get_form_status_message(),
         'year': year
     }
