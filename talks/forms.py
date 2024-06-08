@@ -33,8 +33,6 @@ class ProposalForm(forms.ModelForm):
  
 
 
-
-
 class UpdateForm(forms.ModelForm):
     captcha = ReCaptchaField()
 

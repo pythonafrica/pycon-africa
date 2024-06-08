@@ -42,24 +42,7 @@ from django.http import Http404
 from .resources import ProposalResource
 from home.models import EventYear  
 from django.db.models import Avg
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.core.mail import EmailMultiAlternatives
 
-
-def test_email():
-    subject = "Test Email"
-    message = "This is a test email."
-    from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ['your-email@example.com']
-
-    try:
-        send_mail(subject, message, from_email, recipient_list)
-        print("Email sent successfully")
-    except Exception as e:
-        print(f"Error: {str(e)}")
 
 
 @login_required
@@ -82,11 +65,10 @@ def submit_talk(request, year):
             'year': year,
             'active_period': active_period,
             'upcoming_period': upcoming_period,
-            'form': ProposalForm()
         }
 
         if request.method == "POST" and active_period:
-            form = ProposalForm(request.POST)
+            form = ProposalForm(request.POST, user=request.user)
             if form.is_valid():
                 proposal = form.save(commit=False)
                 proposal.user = request.user
@@ -97,27 +79,23 @@ def submit_talk(request, year):
                 subject = 'Talk Submission Confirmation'
                 html_content = render_to_string('emails/talks/submission_confirmation.html', {'user': request.user, 'proposal': proposal})
                 text_content = strip_tags(html_content)
-                
-                try:
-                    email = EmailMultiAlternatives(subject, text_content, to=[request.user.email])
-                    email.attach_alternative(html_content, "text/html")
-                    email.send()
-                except BadHeaderError:
-                    return HttpResponse('Invalid header found.')
-                except Exception as e:
-                    return HttpResponse(f'Error: {str(e)}')
+                email = EmailMultiAlternatives(subject, text_content, to=[request.user.email])
+                email.attach_alternative(html_content, "text/html")
+                email.send()
 
                 return redirect('talks:submitted', year=event_year.year)
             else:
                 context['form'] = form
+        else:
+            context['form'] = ProposalForm(user=request.user)  # Pass the user to the form
+
     except EventYear.DoesNotExist:
         return redirect(reverse_lazy('talks:no_event_year_error'))
 
     template_path = f"{year}/talks/talk_form.html"
     return render(request, template_path, context)
 
-
- 
+  
 
 @login_required
 def edit_talk(request, year, pk):
