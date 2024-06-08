@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField 
 from django.utils import timezone
 from  embed_video.fields  import  EmbedVideoField
-
+from django.core.exceptions import ValidationError
 from hashids import Hashids
 from django.conf import settings 
 from hashid_field import HashidAutoField
@@ -80,7 +80,6 @@ class Recording(models.Model):
         return reverse("recording")
  
 
-
 class Proposal(models.Model):
     TALK_TYPES = (
         ('Lightning Talk', "Lightning Talk - 5 mins"),
@@ -138,8 +137,7 @@ class Proposal(models.Model):
 
     def get_absolute_url(self):
         return reverse("talk_list")
-
-
+ 
 
 
 class SpeakerInvitation(models.Model):

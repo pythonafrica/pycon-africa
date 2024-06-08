@@ -12,15 +12,27 @@ class ProposalForm(forms.ModelForm):
 
     class Meta:
         model = Proposal
-        fields = ('title', 'talk_type', 'talk_category', 'intended_audience', 'elevator_pitch',  'talk_abstract',  'anything_else_you_want_to_tell_us', 'special_requirements', 'recording_release',)
+        fields = ('title', 'talk_type', 'talk_category', 'intended_audience', 'elevator_pitch', 'talk_abstract', 'anything_else_you_want_to_tell_us', 'special_requirements', 'recording_release')
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
         super(ProposalForm, self).__init__(*args, **kwargs)
+        
+        if user and not user.is_staff:
+            self.fields['talk_type'].choices = [
+                ('Lightning Talk', "Lightning Talk - 5 mins"),
+                ('Short Talk', "Short Talk - 30 mins"),
+                ('Long Talk', "Long Talk - 45 mins"),
+                ('Tutorial', "Tutorial - 2 hours"),
+            ]
 
         self.helper = FormHelper()
         self.helper.form_id = 'id-Crispy_ProposalForm'
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('submit', 'Submit'))
+ 
+
+
 
 
 class UpdateForm(forms.ModelForm):
