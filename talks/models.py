@@ -136,8 +136,8 @@ class Proposal(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("talk_list")
- 
+        return reverse("talk_list") 
+   
     def average_review_score(self):
         reviews = self.reviews.all()
         if not reviews.exists():
@@ -159,18 +159,27 @@ class SpeakerInvitation(models.Model):
 
     def __str__(self):
         return f"Invitation to {self.invitee.email} for {self.talk.title}"
+ 
+
+class Reviewer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='reviewer_profile') 
 
 
 class SubScore(models.Model):
     review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='sub_scores')
-    name = models.CharField(max_length=100)
-    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
+    speaker_expertise = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=1)
+    depth_of_topic = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=1)
+    relevancy = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=1)
+    value_or_impact = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=1)
 
     def __str__(self):
-        return f"{self.name}: {self.score}"
+        return f"SubScores for {self.review}"
 
-class Reviewer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='reviewer_profile') 
+    def average_score(self):
+        total = self.speaker_expertise + self.depth_of_topic + self.relevancy + self.value_or_impact
+        return total / 4
+
+
 
 class Review(models.Model):
     talk = models.ForeignKey(Proposal, on_delete=models.CASCADE, related_name='reviews')
@@ -185,8 +194,10 @@ class Review(models.Model):
         sub_scores = self.sub_scores.all()
         if not sub_scores.exists():
             return 0  # or handle the case where there are no sub-scores
-        total_score = sum(sub_score.score for sub_score in sub_scores)
+        total_score = sum(sub_score.average_score() for sub_score in sub_scores)
         return total_score / sub_scores.count()
+
+ 
 
 
 class Document(models.Model):

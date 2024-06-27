@@ -171,17 +171,7 @@
                                                
                         </div> 
                      </form>
-
-                     <form method="post">
-                      {% csrf_token %}
-                      {{ form.as_p }}
-                      {{ formset.management_form }}
-                      {% for form in formset %}
-                          {{ form.as_p }}
-                      {% endfor %}
-                      <button type="submit">Submit Review</button>
-                  </form>
-   
+ 
   
                 </div>
                 </section> 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Proposal, CFPSubmissionPeriod, Speak, SpeakerInvitation, Proposing_talk, Reviewer, Review, Recording
+from .models import *
 from import_export.admin import ImportExportModelAdmin
 from .forms import ReviewForm
 from markdownx.admin import MarkdownxModelAdmin
@@ -57,8 +57,16 @@ class ReviewerAdmin(admin.ModelAdmin):
 
 admin.site.register(Reviewer, ReviewerAdmin)
 
+
+class SubScoreInline(admin.TabularInline):
+    model = SubScore
+    fields = ['speaker_expertise', 'depth_of_topic', 'relevancy', 'value_or_impact']
+    readonly_fields = ['speaker_expertise', 'depth_of_topic', 'relevancy', 'value_or_impact']
+    can_delete = False
+    extra = 0
+
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['talk', 'get_reviewer_name', 'score', 'get_hashid', 'short_comment']
+    list_display = ['talk', 'get_reviewer_name', 'average_score', 'get_hashid', 'short_comment']
 
     def get_reviewer_name(self, obj):
         return obj.reviewer.user.get_full_name() or obj.reviewer.user.username
@@ -74,12 +82,15 @@ class ReviewAdmin(admin.ModelAdmin):
         return obj.comments[:50] + '...' if len(obj.comments) > 50 else obj.comments
     short_comment.short_description = 'Comments'
 
-    def score(self, obj):
-        return obj.score  # Assuming 'score' is a field in the Review model
-    score.admin_order_field = 'score'  # Allows column order sorting
-    score.short_description = 'Score'
+    def average_score(self, obj):
+        return obj.average_score()  # Assuming 'average_score' is a method on the Review model
+    average_score.admin_order_field = 'average_score'  # Allows column order sorting
+    average_score.short_description = 'Average Score'
+
+    inlines = [SubScoreInline]
 
 admin.site.register(Review, ReviewAdmin)
+
 
 class RecordingAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_created')  

@@ -361,9 +361,8 @@ def reject_invitation(request, year, pk):
 
 
 
-# function-based 
 @login_required
-@permission_required('talks.view_talk', raise_exception=True) 
+@permission_required('talks.view_talk', raise_exception=True)
 def list_talks_to_review(request, year):
     try:
         event_year = EventYear.objects.get(year=year)
@@ -380,9 +379,19 @@ def list_talks_to_review(request, year):
         talks_reviewed_with_scores = []
         for talk_id in reviewed_talk_ids:
             talk = Proposal.objects.get(proposal_id=talk_id)
-            avg_score = Review.objects.filter(talk=talk).aggregate(Avg('score'))['score__avg']
+            avg_score_dict = Review.objects.filter(talk=talk).aggregate(
+                avg_speaker_expertise=Avg('sub_scores__speaker_expertise'),
+                avg_depth_of_topic=Avg('sub_scores__depth_of_topic'),
+                avg_relevancy=Avg('sub_scores__relevancy'),
+                avg_value_or_impact=Avg('sub_scores__value_or_impact')
+            )
+            avg_speaker_expertise = avg_score_dict['avg_speaker_expertise'] or 0
+            avg_depth_of_topic = avg_score_dict['avg_depth_of_topic'] or 0
+            avg_relevancy = avg_score_dict['avg_relevancy'] or 0
+            avg_value_or_impact = avg_score_dict['avg_value_or_impact'] or 0
+            avg_score = (avg_speaker_expertise + avg_depth_of_topic + avg_relevancy + avg_value_or_impact) / 4
             talks_reviewed_with_scores.append((talk, avg_score))
-                
+
         context = {
             'talks_awaiting_review': talks_awaiting_review,
             'talks_reviewed_with_scores': talks_reviewed_with_scores,
@@ -400,7 +409,6 @@ def list_talks_to_review(request, year):
     return render(request, '2024/talks/reviews/talk_list.html', context)
  
 
-
 @login_required
 @permission_required('reviews.add_review', raise_exception=True)
 def review_talk(request, year, pk):
@@ -415,24 +423,26 @@ def review_talk(request, year, pk):
 
     if request.method == 'POST' and not already_reviewed:
         form = ReviewForm(request.POST)
-        formset = SubScoreFormSet(request.POST)
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid():
             review = form.save(commit=False)
             review.talk = talk
             review.reviewer = reviewer
             review.save()
-            sub_scores = formset.save(commit=False)
-            for sub_score in sub_scores:
-                sub_score.review = review
-                sub_score.save()
+            # Save sub-scores
+            sub_score = SubScore(
+                review=review,
+                speaker_expertise=form.cleaned_data['speaker_expertise'],
+                depth_of_topic=form.cleaned_data['depth_of_topic'],
+                relevancy=form.cleaned_data['relevancy'],
+                value_or_impact=form.cleaned_data['value_or_impact']
+            )
+            sub_score.save()
             return redirect(reverse('talks:review_success', kwargs={'year': year}))
     else:
         form = ReviewForm()
-        formset = SubScoreFormSet()
 
     return render(request, '2024/talks/reviews/talk_review.html', {
         'form': form,
-        'formset': formset,
         'talk': talk,
         'year': year,
         'already_reviewed': already_reviewed

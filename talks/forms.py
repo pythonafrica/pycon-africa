@@ -50,15 +50,17 @@ class UpdateForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    SCORE_CHOICES = [(i, i) for i in range(1, 6)]
+
+    speaker_expertise = forms.ChoiceField(choices=SCORE_CHOICES, label="Speaker Expertise")
+    depth_of_topic = forms.ChoiceField(choices=SCORE_CHOICES, label="Depth of Topic")
+    relevancy = forms.ChoiceField(choices=SCORE_CHOICES, label="Relevancy")
+    value_or_impact = forms.ChoiceField(choices=SCORE_CHOICES, label="Value or Impact")
+
     class Meta:
         model = Review
-        fields = ['comments']
+        fields = ['speaker_expertise', 'depth_of_topic', 'relevancy', 'value_or_impact', 'comments']
 
-    sub_scores = forms.ModelMultipleChoiceField(
-        queryset=SubScore.objects.none(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False
-    )
 
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
@@ -66,30 +68,31 @@ class ReviewForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
             Row(
+                Column('speaker_expertise', css_class='form-control form-control-md form-control-lg rounded-0 g-mb-25'),
+                Column('depth_of_topic', css_class='form-control form-control-md form-control-lg rounded-0 g-mb-25'),
+                Column('relevancy', css_class='form-control form-control-md form-control-lg rounded-0 g-mb-25'),
+                Column('value_or_impact', css_class='form-control form-control-md form-control-lg rounded-0 g-mb-25'),
+                css_class='form-row'
+            ),
+            Row(
                 Column('comments', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
-            'sub_scores',
             Submit('submit', 'Submit Review')
         )
-        if self.instance.pk:
-            self.fields['sub_scores'].queryset = self.instance.sub_scores.all()
 
     def save(self, commit=True):
         instance = super(ReviewForm, self).save(commit=False)
         if commit:
             instance.save()
-            self.save_m2m()
+            SubScore.objects.create(
+                review=instance,
+                speaker_expertise=self.cleaned_data['speaker_expertise'],
+                depth_of_topic=self.cleaned_data['depth_of_topic'],
+                relevancy=self.cleaned_data['relevancy'],
+                value_or_impact=self.cleaned_data['value_or_impact']
+            )
         return instance
-
-
-class SubScoreForm(forms.ModelForm):
-    class Meta:
-        model = SubScore
-        fields = ['name', 'score']
-
-SubScoreFormSet = forms.inlineformset_factory(Review, SubScore, form=SubScoreForm, extra=1, can_delete=True)
-
 
 class DocumentForm(forms.ModelForm):
     captcha = ReCaptchaField()
