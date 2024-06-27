@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import *
+from .models import Proposal, CFPSubmissionPeriod, Speak, SpeakerInvitation, Proposing_talk, Reviewer, Review, Recording
 from import_export.admin import ImportExportModelAdmin
-from django.contrib import admin
 from .forms import ReviewForm
-
 from markdownx.admin import MarkdownxModelAdmin
 
 class TalkAdmin(ImportExportModelAdmin):
@@ -16,8 +14,6 @@ class TalkAdmin(ImportExportModelAdmin):
     list_speakers.short_description = 'Speakers'
 
 admin.site.register(Proposal, TalkAdmin)
- 
- 
 
 class CFPSubmissionPeriodAdmin(admin.ModelAdmin):
     list_display = ('event_year', 'start_date', 'end_date', 'is_active_period')
@@ -32,32 +28,23 @@ class CFPSubmissionPeriodAdmin(admin.ModelAdmin):
 
 admin.site.register(CFPSubmissionPeriod, CFPSubmissionPeriodAdmin)
 
-
 class SpeakAdmin(admin.ModelAdmin):
-
     list_display = ('title', 'date_created')  
-    ordering = ['-date_created', ]   
+    ordering = ['-date_created']
 
-# Registers the Cocmodel at the admin backend.
 admin.site.register(Speak, SpeakAdmin)
 
 class SpeakerInvitationAdmin(admin.ModelAdmin):
-
     list_display = ('talk', 'invitee', 'status', 'invitation_sent')  
-    ordering = ['-invitation_sent', ]   
+    ordering = ['-invitation_sent']
 
-# Registers the Cocmodel at the admin backend.
 admin.site.register(SpeakerInvitation, SpeakerInvitationAdmin)
 
-
-class Proposing_talkAdmin(admin.ModelAdmin):
-
+class ProposingTalkAdmin(admin.ModelAdmin):
     list_display = ('title', 'date_created')  
-    ordering = ['-date_created', ]   
+    ordering = ['-date_created']
 
-# Registers the Cocmodel at the admin backend.
-admin.site.register(Proposing_talk, Proposing_talkAdmin)
-
+admin.site.register(Proposing_talk, ProposingTalkAdmin)
 
 class ReviewerAdmin(admin.ModelAdmin):
     list_display = ['user', 'get_email']
@@ -87,13 +74,15 @@ class ReviewAdmin(admin.ModelAdmin):
         return obj.comments[:50] + '...' if len(obj.comments) > 50 else obj.comments
     short_comment.short_description = 'Comments'
 
+    def score(self, obj):
+        return obj.score  # Assuming 'score' is a field in the Review model
+    score.admin_order_field = 'score'  # Allows column order sorting
+    score.short_description = 'Score'
+
 admin.site.register(Review, ReviewAdmin)
 
-
 class RecordingAdmin(admin.ModelAdmin):
-
     list_display = ('title', 'date_created')  
-    ordering = ['-date_created', ]   
+    ordering = ['-date_created']
 
-# Registers the Cocmodel at the admin backend.
 admin.site.register(Recording, RecordingAdmin)

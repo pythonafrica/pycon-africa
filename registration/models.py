@@ -764,42 +764,55 @@ class SupervisedRegistrationProfile(RegistrationProfile):
   
   
 
-class Profile(models.Model, HitCountMixin): 
-    profile_id = HashidAutoField(primary_key=True, salt=f"user_profile{settings.HASHID_FIELD_SALT}", default=None)   
+class Profile(models.Model, HitCountMixin):
+    profile_id = HashidAutoField(primary_key=True, salt=f"user_profile{settings.HASHID_FIELD_SALT}", default=None)
     profile_image = models.ImageField(upload_to='speakers/', default="", blank=True)
     name = models.CharField(max_length=100, default='', blank=False)
     surname = models.CharField(max_length=100, default='', blank=False)
-    link_to_speaker_image = models.URLField(default="", blank=True, help_text="A link to your professional profile picture to be used when making speaker's announcements")  
+    link_to_speaker_image = models.URLField(default="", blank=True, help_text="A link to your professional profile picture to be used when making speaker's announcements")
     profession = models.CharField(max_length=200, null=True, default="", blank=False, help_text="Speaker's profession. eg. Software Developer")
     organization = models.CharField(max_length=200, null=True, default="", blank=True, help_text="Organization/Institution")
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
     biography = MarkdownxField(help_text="[Supports Markdown] - Give us a brief biography about yourself", default="", blank=False)
-    city = models.CharField(max_length=100, default="", blank=False, help_text="City the speaker is from eg. Accra") 
-    country = CountryField(default="GH",blank=False, blank_label='(select country)')
+    city = models.CharField(max_length=100, default="", blank=False, help_text="City the speaker is from eg. Accra")
+    country = CountryField(default="GH", blank=False, blank_label='(select country)')
     contact_number = models.CharField(max_length=50, help_text="Please include your country code (233).", default="", blank=True, null=True)
-    website = models.URLField(max_length=200, help_text="Your website/blog URL.", null=True, blank=True)#made this optional
-    twitter_handle = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,) #made this optional
-    github_username = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True,)
-    linkedin = models.CharField(max_length=100, null=True, help_text="Please your LinkedIn link ", default="", blank=True,) 
-    date_created = models.DateTimeField(default=timezone.now) 
-    updated = models.DateTimeField(auto_now=True)    
+    website = models.URLField(max_length=200, help_text="Your website/blog URL.", null=True, blank=True)
+    twitter_handle = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True)
+    github_username = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True)
+    linkedin = models.CharField(max_length=100, null=True, help_text="Please your LinkedIn link ", default="", blank=True)
+    date_created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
     is_visible = models.BooleanField(default=False)
-    published_date = models.DateField(blank=True, null=True) 
+    published_date = models.DateField(blank=True, null=True)
     slug = AutoSlugField(
         populate_from='name',
+        unique=True,
         slugify_function=slugify
     )
     hit_count_generic = GenericRelation(
-        MODEL_HITCOUNT, object_id_field='object_pk',
+        HitCount, object_id_field='object_pk',
         related_query_name='hit_count_generic_relation')
-   
+
     def __str__(self):
-        return str(self.name) 
-      
+        return str(self.name)
+
     def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super(Profile, self).save(*args, **kwargs)
+        if not self.slug or Profile.objects.filter(slug=self.slug).exists():
+            self.slug = self.create_unique_slug()
+        super(Profile, self).save(*args, **kwargs)
+
+    def create_unique_slug(self):
+        original_slug = slugify(self.name)
+        queryset = Profile.objects.filter(slug__startswith=original_slug).order_by('profile_id')
+        slug = original_slug
+        counter = 1
+        while queryset.filter(slug=slug).exists():
+            slug = f"{original_slug}-{counter}"
+            counter += 1
+            if counter > 100:
+                raise RuntimeError(f'max slug attempts for {original_slug} exceeded (100)')
+        return slug
 
 
 

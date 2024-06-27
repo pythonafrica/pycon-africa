@@ -52,7 +52,13 @@ class UpdateForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['score', 'comments']
+        fields = ['comments']
+
+    sub_scores = forms.ModelMultipleChoiceField(
+        queryset=SubScore.objects.none(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
 
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
@@ -60,12 +66,29 @@ class ReviewForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
             Row(
-                Column('score', css_class='form-group col-md-6 mb-0'),
-                Column('comments', css_class='form-group col-md-6 mb-0'),
+                Column('comments', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
+            'sub_scores',
             Submit('submit', 'Submit Review')
         )
+        if self.instance.pk:
+            self.fields['sub_scores'].queryset = self.instance.sub_scores.all()
+
+    def save(self, commit=True):
+        instance = super(ReviewForm, self).save(commit=False)
+        if commit:
+            instance.save()
+            self.save_m2m()
+        return instance
+
+
+class SubScoreForm(forms.ModelForm):
+    class Meta:
+        model = SubScore
+        fields = ['name', 'score']
+
+SubScoreFormSet = forms.inlineformset_factory(Review, SubScore, form=SubScoreForm, extra=1, can_delete=True)
 
 
 class DocumentForm(forms.ModelForm):

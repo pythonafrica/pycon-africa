@@ -138,6 +138,12 @@ class Proposal(models.Model):
     def get_absolute_url(self):
         return reverse("talk_list")
  
+    def average_review_score(self):
+        reviews = self.reviews.all()
+        if not reviews.exists():
+            return 0  # or handle the case where there are no reviews
+        total_score = sum(review.average_score() for review in reviews)
+        return total_score / reviews.count()
 
 
 class SpeakerInvitation(models.Model):
@@ -155,6 +161,13 @@ class SpeakerInvitation(models.Model):
         return f"Invitation to {self.invitee.email} for {self.talk.title}"
 
 
+class SubScore(models.Model):
+    review = models.ForeignKey('Review', on_delete=models.CASCADE, related_name='sub_scores')
+    name = models.CharField(max_length=100)
+    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
+
+    def __str__(self):
+        return f"{self.name}: {self.score}"
 
 class Reviewer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='reviewer_profile') 
@@ -162,9 +175,18 @@ class Reviewer(models.Model):
 class Review(models.Model):
     talk = models.ForeignKey(Proposal, on_delete=models.CASCADE, related_name='reviews')
     reviewer = models.ForeignKey(Reviewer, on_delete=models.CASCADE, related_name='reviews')
-    score = models.IntegerField(choices=[(i, i) for i in range(1, 6)])   
-    comments = models.TextField(blank=True) 
+    comments = models.TextField(blank=True)
     completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Review by {self.reviewer.user.username} for {self.talk.title}"
+
+    def average_score(self):
+        sub_scores = self.sub_scores.all()
+        if not sub_scores.exists():
+            return 0  # or handle the case where there are no sub-scores
+        total_score = sum(sub_score.score for sub_score in sub_scores)
+        return total_score / sub_scores.count()
 
 
 class Document(models.Model):

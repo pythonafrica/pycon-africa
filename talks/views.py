@@ -415,19 +415,26 @@ def review_talk(request, year, pk):
 
     if request.method == 'POST' and not already_reviewed:
         form = ReviewForm(request.POST)
-        if form.is_valid():
+        formset = SubScoreFormSet(request.POST)
+        if form.is_valid() and formset.is_valid():
             review = form.save(commit=False)
             review.talk = talk
             review.reviewer = reviewer
             review.save()
+            sub_scores = formset.save(commit=False)
+            for sub_score in sub_scores:
+                sub_score.review = review
+                sub_score.save()
             return redirect(reverse('talks:review_success', kwargs={'year': year}))
     else:
         form = ReviewForm()
+        formset = SubScoreFormSet()
 
     return render(request, '2024/talks/reviews/talk_review.html', {
-        'form': form, 
-        'talk': talk, 
-        'year': year, 
+        'form': form,
+        'formset': formset,
+        'talk': talk,
+        'year': year,
         'already_reviewed': already_reviewed
     })
 
