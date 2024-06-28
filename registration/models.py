@@ -764,6 +764,8 @@ class SupervisedRegistrationProfile(RegistrationProfile):
   
   
 
+
+
 class Profile(models.Model, HitCountMixin):
     profile_id = HashidAutoField(primary_key=True, salt=f"user_profile{settings.HASHID_FIELD_SALT}", default=None)
     profile_image = models.ImageField(upload_to='speakers/', default="", blank=True)
@@ -778,9 +780,9 @@ class Profile(models.Model, HitCountMixin):
     country = CountryField(default="GH", blank=False, blank_label='(select country)')
     contact_number = models.CharField(max_length=50, help_text="Please include your country code (233).", default="", blank=True, null=True)
     website = models.URLField(max_length=200, help_text="Your website/blog URL.", null=True, blank=True)
-    twitter_handle = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True)
-    github_username = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7' ", default="", blank=True)
-    linkedin = models.CharField(max_length=100, null=True, help_text="Please your LinkedIn link ", default="", blank=True)
+    twitter_handle = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7'", default="", blank=True)
+    github_username = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7'", default="", blank=True)
+    linkedin = models.CharField(max_length=100, null=True, help_text="Please your LinkedIn link", default="", blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     is_visible = models.BooleanField(default=False)
@@ -813,8 +815,7 @@ class Profile(models.Model, HitCountMixin):
             if counter > 100:
                 raise RuntimeError(f'max slug attempts for {original_slug} exceeded (100)')
         return slug
-
-
+ 
 
 
 

@@ -40,13 +40,19 @@ from django.utils.html import strip_tags
 from django.core.mail import EmailMessage 
 from django.http import Http404
 from .resources import ProposalResource
-from home.models import EventYear  
-from django.db.models import Avg
-
+from home.models import EventYear   
+from registration.models import Profile   
+from django.db.models import Avg, F
 
 
 @login_required
 def submit_talk(request, year):
+    # Check if the user has a profile
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        return redirect(reverse('profiles:create_profile'))
+
     try:
         event_year = EventYear.objects.get(year=year)
         submission_periods = CFPSubmissionPeriod.objects.filter(event_year=event_year).order_by('start_date')
@@ -87,14 +93,13 @@ def submit_talk(request, year):
             else:
                 context['form'] = form
         else:
-            context['form'] = ProposalForm(user=request.user)  # Pass the user to the form
+            context['form'] = ProposalForm(user=request.user)
 
     except EventYear.DoesNotExist:
         return redirect(reverse_lazy('talks:no_event_year_error'))
 
     template_path = f"{year}/talks/talk_form.html"
     return render(request, template_path, context)
-
   
 
 @login_required
@@ -456,8 +461,7 @@ def review_success(request, year):
         return render(request, '2024/talks/reviews/review_success.html', {'year': year})
     except EventYear.DoesNotExist:
         return HttpResponse("The specified event year does not exist.", status=404)
-    
- 
+     
 @login_required
 @permission_required('talks.view_talk', raise_exception=True)
 def reviewed_talks_by_category(request, year):
@@ -466,15 +470,22 @@ def reviewed_talks_by_category(request, year):
     except EventYear.DoesNotExist:
         raise Http404("Event year does not exist.")
 
-    # `Proposal.TALK_CATEGORY` is a tuple of tuples, you need to iterate over it correctly
     category_talks_scores = []
     for category_code, category_label in Proposal.TALK_CATEGORY:
-        # Filter talks by each category and compute average scores
         talks = Proposal.objects.filter(
             event_year=event_year,
-            talk_category=category_code,  # Use the category code for filtering
-            reviews__isnull=False  # Ensure only reviewed talks are included
-        ).annotate(avg_score=Avg('reviews__score')).order_by('-avg_score')
+            talk_category=category_code,
+            reviews__isnull=False
+        ).annotate(
+            avg_speaker_expertise=Avg('reviews__sub_scores__speaker_expertise'),
+            avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
+            avg_relevancy=Avg('reviews__sub_scores__relevancy'),
+            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact')
+        ).annotate(
+            avg_score=(
+                F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
+            ) / 4
+        ).order_by('-avg_score')
 
         if talks.exists():
             category_talks_scores.append((category_label, talks))
@@ -483,7 +494,6 @@ def reviewed_talks_by_category(request, year):
         'category_talks_scores': category_talks_scores,
         'year': year
     })
-
 
 # Class-based
 '''

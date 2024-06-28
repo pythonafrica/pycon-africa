@@ -223,7 +223,7 @@
                             {% for talk, avg_score in talks_reviewed_with_scores %}
                             <tr>
                             <td>
-                                <a href="{% url 'talks:review_talk' year=year pk=talk.pk %}"> <small>{{ talk.title }}</small> </a>
+                                 <small>{{ talk.title }}</small>  
                             </td>
                             <td> 
                                 <small>{{ talk.talk_type }}</small>
