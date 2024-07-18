@@ -40,8 +40,16 @@ from tickets.mixins import EditOwnTicketMixin, EditOwnLoginMixin
 def ticket(request, year):
     event_year = get_object_or_404(EventYear, year=year)
     tickets = Ticket.objects.filter(event_year=event_year).order_by('-date_created')
+    context = {
+        'tickets': tickets,
+        'event_year': event_year,
+        'meta_title': f"Tickets for PyCon Africa {year}",
+        'meta_description': "Join us at PyCon Africa! Get your tickets for this year's event and don't miss out.",
+        'meta_author': "PyCon Africa",
+        'meta_og_image': tickets[0].thumbnail if tickets else 'default_image_url',
+    }
     template_name = f'{year}/tickets/tickets.html'  # Dynamically set based on the year
-    return render(request, template_name, {'tickets': tickets, 'event_year': event_year})
+    return render(request, template_name, context)
 
 
 def ticket_edit(request, pk):

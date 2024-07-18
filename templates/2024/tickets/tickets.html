@@ -59,8 +59,10 @@
             <p class="markdownx-preview">{{ ticket.section_two | markdown | safe }}</p>
             {{ form.media }}
            <br><br>
-        <div class="shortcode-html">
-          <div class="row no-gutters align-items-center justify-content-center">
+       
+           <div class="shortcode-html">
+          <div class="row no-gutters align-items-center justify-content-center"> 
+            {% if ticket.donation_link %}
             <div class="col-md-6 col-lg-4 g-mb-30 g-z-index-2">
               <!-- Article -->
               <article class="text-center g-bg-white u-shadow-v24 g-color-gray-dark-v1 g-px-50 g-py-80">
@@ -89,9 +91,19 @@
                 </article>
               <!-- End Article -->
             </div>
+            {% else %}
+            <div class="col-md-6 col-lg-8 g-mb-30 g-z-index-2">
+              <!-- Article -->
+              <article class="text-center g-bg-white u-shadow-v24 g-color-gray-dark-v1 g-px-50 g-py-80">
+                <p class="markdownx-preview">{{ ticket.embedded_codes | markdown | safe }}</p>
+            {{ form.media }}
+              </article>
+              <!-- End Article -->
+            </div>
+            {% endif %}
+
           </div>
-        </div>
-      
+        </div> 
 
         </div>
 

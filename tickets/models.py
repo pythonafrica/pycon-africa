@@ -9,7 +9,11 @@ from markdownx.models import MarkdownxField
 from django.utils import timezone  
 from home.models import EventYear
 from PIL import Image
+from io import BytesIO
 import os
+from django.core.files.base import ContentFile
+ 
+
 
 class Ticket(models.Model):
     ticket_title = models.CharField(max_length=250, null=True, blank=False, help_text='Ticket PyCon Africa')
@@ -35,37 +39,47 @@ class Ticket(models.Model):
     def create_thumbnail(self):
         if not self.ticket_image_one:
             return
-        
-        image = Image.open(self.ticket_image_one.path)
-        image.thumbnail((300, 300), Image.ANTIALIAS)
 
-        thumb_name, thumb_extension = os.path.splitext(self.ticket_image_one.name)
-        thumb_extension = thumb_extension.lower()
+        try:
+            # Open the original image using PIL
+            image = Image.open(self.ticket_image_one)
+            image.thumbnail((300, 300), Image.ANTIALIAS)
 
-        thumb_filename = thumb_name + '_thumb' + thumb_extension
+            thumb_name, thumb_extension = os.path.splitext(self.ticket_image_one.name)
+            thumb_extension = thumb_extension.lower()
 
-        # Save the thumbnail in the same location as the original image
-        thumb_path = os.path.join(settings.MEDIA_ROOT, 'ticket_page', thumb_filename)
+            thumb_filename = thumb_name + '_thumb' + thumb_extension
 
-        if thumb_extension in ['.jpg', '.jpeg']:
-            FTYPE = 'JPEG'
-        elif thumb_extension == '.gif':
-            FTYPE = 'GIF'
-        elif thumb_extension == '.png':
-            FTYPE = 'PNG'
-        else:
-            return  # Unrecognized file type
+            # Save the thumbnail to a BytesIO object
+            thumb_io = BytesIO()
+            if thumb_extension in ['.jpg', '.jpeg']:
+                FTYPE = 'JPEG'
+            elif thumb_extension == '.gif':
+                FTYPE = 'GIF'
+            elif thumb_extension == '.png':
+                FTYPE = 'PNG'
+            else:
+                return  # Unrecognized file type
 
-        # Save thumbnail
-        image.save(thumb_path, FTYPE)
+            # Save thumbnail in memory
+            image.save(thumb_io, FTYPE)
+            thumb_io.seek(0)
 
-        # Save the thumbnail URL in the model
-        self.thumbnail_url = os.path.join('ticket_page', thumb_filename)
-        super(Ticket, self).save()
-    
+            # Save the thumbnail in the same storage backend
+            self.ticket_image_one.storage.save(
+                os.path.join('ticket_page', thumb_filename),
+                ContentFile(thumb_io.read())
+            )
+
+            # Save the thumbnail URL in the model
+            self.thumbnail_url = os.path.join('ticket_page', thumb_filename)
+            super(Ticket, self).save()
+
+        except Exception as e:
+            print(f"Error creating thumbnail: {e}")
+
     @property
     def thumbnail(self):
         if self.thumbnail_url:
             return os.path.join(settings.MEDIA_URL, self.thumbnail_url)
         return os.path.join(settings.STATIC_URL, 'default_image.png')
- 
