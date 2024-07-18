@@ -42,7 +42,7 @@ def ticket(request, year):
     tickets = Ticket.objects.filter(event_year=event_year).order_by('-date_created')
     if tickets.exists():
         first_ticket = tickets.first()
-        meta_og_image = first_ticket.thumbnail if first_ticket.thumbnail_url else 'default_image_url'
+        meta_og_image = first_ticket.image_url
     else:
         meta_og_image = 'default_image_url'
 

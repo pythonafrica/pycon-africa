@@ -15,9 +15,10 @@ from django.core.files.base import ContentFile
  
 
 
+
 class Ticket(models.Model):
     ticket_title = models.CharField(max_length=250, null=True, blank=False, help_text='Ticket PyCon Africa')
-    ticket_image_one = models.ImageField(help_text="Upload your cover image or leave blank to use our default image", default="tickets.png", null=True, blank=True, upload_to='ticket_page') 
+    ticket_image_one = models.ImageField(help_text="Upload your cover image or leave blank to use our default image", default="tickets.png", null=True, blank=True, upload_to='ticket_page')
     section_one = MarkdownxField(default='', help_text = "[Supports Markdown] - Section One.", null=True, blank=True)
     section_two = MarkdownxField(default='', help_text = "[Supports Markdown] - Section Two", null=True, blank=True)
     embedded_codes = MarkdownxField(default='', help_text = "[Supports Markdown] - If the Ticket Platform allows you to embed the tickets into your site.", null=True, blank=True)
@@ -26,60 +27,15 @@ class Ticket(models.Model):
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='tickets')
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
-    thumbnail_url = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.ticket_title
 
-    def save(self, *args, **kwargs):
-        super(Ticket, self).save(*args, **kwargs)
-        if self.ticket_image_one:
-            self.create_thumbnail()
-
-    def create_thumbnail(self):
-        if not self.ticket_image_one:
-            return
-
-        try:
-            # Open the original image using PIL
-            image = Image.open(self.ticket_image_one)
-            image.thumbnail((300, 300), Image.ANTIALIAS)
-
-            thumb_name, thumb_extension = os.path.splitext(self.ticket_image_one.name)
-            thumb_extension = thumb_extension.lower()
-
-            thumb_filename = thumb_name + '_thumb' + thumb_extension
-
-            # Save the thumbnail to a BytesIO object
-            thumb_io = BytesIO()
-            if thumb_extension in ['.jpg', '.jpeg']:
-                FTYPE = 'JPEG'
-            elif thumb_extension == '.gif':
-                FTYPE = 'GIF'
-            elif thumb_extension == '.png':
-                FTYPE = 'PNG'
-            else:
-                return  # Unrecognized file type
-
-            # Save thumbnail in memory
-            image.save(thumb_io, FTYPE)
-            thumb_io.seek(0)
-
-            # Save the thumbnail in the same storage backend
-            self.ticket_image_one.storage.save(
-                os.path.join('ticket_page', thumb_filename),
-                ContentFile(thumb_io.read())
-            )
-
-            # Save the thumbnail URL in the model
-            self.thumbnail_url = os.path.join('ticket_page', thumb_filename)
-            super(Ticket, self).save()
-
-        except Exception as e:
-            print(f"Error creating thumbnail: {e}")
+    def get_absolute_url(self):
+        return reverse("ticket_detail", kwargs={"year": self.event_year.year, "pk": self.pk})
 
     @property
-    def thumbnail(self):
-        if self.thumbnail_url:
-            return os.path.join(settings.MEDIA_URL, self.thumbnail_url)
+    def image_url(self):
+        if self.ticket_image_one:
+            return self.ticket_image_one.url
         return os.path.join(settings.STATIC_URL, 'default_image.png')
