@@ -3,69 +3,70 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Title -->
-    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
-    
-    <!-- Required Meta Tags Always Come First -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+<head>
+  <!-- Title -->
+  <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+  
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'fav/favicon.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'fav/site.webmanifest' %}">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'fav/favicon.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fav/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'fav/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'fav/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'fav/site.webmanifest' %}">
 
-    <!-- Open Graph Metadata -->
-    <meta property="og:title" content="{% block og_title %}Default OG Title{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Default OG Description{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ STATIC_URL }}default_image.png{% endblock %}">
-    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
-    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-    <meta property="og:site_name" content="{% block og_site_name %}PyCon Africa{% endblock %}">
+  <!-- Open Graph Metadata -->
+  <meta property="og:title" content="{% block og_title %}Default OG Title{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Default OG Description{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{{ STATIC_URL }}default_image.png{% endblock %}">
+  <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:site_name" content="{% block og_site_name %}PyCon Africa{% endblock %}">
 
-    <!-- Twitter Cards Metadata -->
-    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
-    <meta name="twitter:title" content="{% block twitter_title %}Default Twitter Title{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Default Twitter Description{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{{ STATIC_URL }}default_image.png{% endblock %}">
-    <meta name="twitter:site" content="{% block twitter_site %}@PyConAfrica{% endblock %}">
+  <!-- Twitter Cards Metadata -->
+  <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+  <meta name="twitter:title" content="{% block twitter_title %}Default Twitter Title{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Default Twitter Description{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{{ STATIC_URL }}default_image.png{% endblock %}">
+  <meta name="twitter:site" content="{% block twitter_site %}@PyConAfrica{% endblock %}">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block extra_meta %}{% endblock %}
-    
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700,800">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block extra_meta %}{% endblock %}
+  
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,500,600,700,800">
 
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/bootstrap/bootstrap.min.css' %}">
+  <!-- CSS Global Compulsory -->
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/bootstrap/bootstrap.min.css' %}">
 
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/icon-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/icon-line/css/simple-line-icons.css' %}">
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/icon-hs/style.css' %}">
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/hamburgers/hamburgers.min.css' %}">
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/animate.css' %}">
-    <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
-    <link rel="stylesheet" type="text/css"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/slick-carousel/slick/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'uni-theme/vendor/fancybox/jquery.fancybox.css' %}">
-    <link  rel="stylesheet" href="{% static 'uni-theme/vendor/animate.css' %}">
-    <link  rel="stylesheet" href="{% static 'uni-theme/vendor/custombox/custombox.min.css' %}">
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/icon-awesome/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/icon-line/css/simple-line-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/icon-hs/style.css' %}">
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/hamburgers/hamburgers.min.css' %}">
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+  <link rel="stylesheet" type="text/css"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/slick-carousel/slick/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'uni-theme/vendor/fancybox/jquery.fancybox.css' %}">
+  <link  rel="stylesheet" href="{% static 'uni-theme/vendor/animate.css' %}">
+  <link  rel="stylesheet" href="{% static 'uni-theme/vendor/custombox/custombox.min.css' %}">
 
-    <link  rel="stylesheet" href="{% static 'uni-theme/vendor/dzsparallaxer/dzsparallaxer.css' %}">
-    <link  rel="stylesheet" href="{% static 'uni-theme/vendor/dzsparallaxer/dzsscroller/scroller.css' %}">
-    <link  rel="stylesheet" href="{% static 'uni-theme/vendor/dzsparallaxer/advancedscroller/plugin.css' %}">
-    <link  rel="stylesheet" href="{% static 'uni-theme/vendor/slick-carousel/slick/slick.css' %}">
-    <!-- CSS Template -->
-    <link rel="stylesheet" href="{% static '2024/css/styles-24.css' %}">
+  <link  rel="stylesheet" href="{% static 'uni-theme/vendor/dzsparallaxer/dzsparallaxer.css' %}">
+  <link  rel="stylesheet" href="{% static 'uni-theme/vendor/dzsparallaxer/dzsscroller/scroller.css' %}">
+  <link  rel="stylesheet" href="{% static 'uni-theme/vendor/dzsparallaxer/advancedscroller/plugin.css' %}">
+  <link  rel="stylesheet" href="{% static 'uni-theme/vendor/slick-carousel/slick/slick.css' %}">
+  <!-- CSS Template -->
+  <link rel="stylesheet" href="{% static '2024/css/styles-24.css' %}">
 
-    <!-- CSS Customization -->
-    <!--<link rel="stylesheet" href="{% static '2024/css/custom.css' %}">-->
-  </head>
+  <!-- CSS Customization -->
+  <!--<link rel="stylesheet" href="{% static '2024/css/custom.css' %}">-->
+</head>
 
   <body>
 
