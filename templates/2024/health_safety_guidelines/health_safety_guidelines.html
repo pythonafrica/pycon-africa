@@ -33,7 +33,7 @@
     <div class="container  g-pt-50">
       <div class="row">  
         <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" > 
-          {% for guideline in privacypolicies.all|slice:"0:1" %}<br><br>
+          {% for guideline in health_safety_guidelines.all|slice:"0:1" %}<br><br>
           <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30"> 
             <span class="g-color-primary">{{ guideline.title }}</span>
           </h2>

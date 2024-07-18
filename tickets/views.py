@@ -31,15 +31,19 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
 from django.views import generic
-from django.http import HttpResponseRedirect 
-
+from django.http import HttpResponseRedirect  
+from home.models import EventYear
 from tickets.mixins import EditOwnTicketMixin, EditOwnLoginMixin
  
-# Create your views here.
-def ticket(request):
-	tickets = Ticket.objects.all().order_by('-date_created') 
-	return render(request, '2022/ticket/ticket.html', {'tickets': tickets})
- 
+# Create your views here. 
+
+def ticket(request, year):
+    event_year = get_object_or_404(EventYear, year=year)
+    tickets = Ticket.objects.filter(event_year=event_year).order_by('-date_created')
+    template_name = f'{year}/tickets/tickets.html'  # Dynamically set based on the year
+    return render(request, template_name, {'tickets': tickets, 'event_year': event_year})
+
+
 def ticket_edit(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
     if request.method == "POST":
