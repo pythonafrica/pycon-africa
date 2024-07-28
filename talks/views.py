@@ -22,7 +22,7 @@ from .models import Document
 from .forms import *
 from .forms import ProposalForm
 from .mixins import EditOwnTalksMixin
-  
+import logging
 from django.views.generic import ListView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView 
@@ -42,8 +42,9 @@ from django.http import Http404
 from .resources import ProposalResource
 from home.models import EventYear   
 from registration.models import Profile   
-from django.db.models import Avg, F
+from django.db.models import Avg, F, Q, Count 
 
+logger = logging.getLogger(__name__)
 
 @login_required
 def submit_talk(request, year):
@@ -366,6 +367,7 @@ def reject_invitation(request, year, pk):
 
 
 
+
 @login_required
 @permission_required('talks.view_talk', raise_exception=True)
 def list_talks_to_review(request, year):
@@ -379,8 +381,16 @@ def list_talks_to_review(request, year):
         # Fetch all reviews by this reviewer for talks in this event year
         reviewed_talk_ids = Review.objects.filter(reviewer=reviewer, talk__event_year=event_year).values_list('talk__proposal_id', flat=True)
         # Filter out talks that have been reviewed by this reviewer
-        talks_awaiting_review = Proposal.objects.filter(event_year=event_year, status='S').exclude(proposal_id__in=reviewed_talk_ids).order_by('-created_date')
+        talks_awaiting_review = Proposal.objects.filter(event_year=event_year, status='S').exclude(proposal_id__in=reviewed_talk_ids).order_by('talk_type')
 
+        # Group talks by talk type
+        talks_by_type = {}
+        for talk in talks_awaiting_review:
+            if talk.talk_type not in talks_by_type:
+                talks_by_type[talk.talk_type] = []
+            talks_by_type[talk.talk_type].append(talk)
+
+        # Fetch reviewed talks with their scores
         talks_reviewed_with_scores = []
         for talk_id in reviewed_talk_ids:
             talk = Proposal.objects.get(proposal_id=talk_id)
@@ -398,13 +408,13 @@ def list_talks_to_review(request, year):
             talks_reviewed_with_scores.append((talk, avg_score))
 
         context = {
-            'talks_awaiting_review': talks_awaiting_review,
+            'talks_by_type': talks_by_type,
             'talks_reviewed_with_scores': talks_reviewed_with_scores,
             'year': year
         }
 
     except Reviewer.DoesNotExist:
-        # User is not a registered reviewer
+        logger.error(f"Reviewer does not exist for user {request.user}")
         messages.error(request, "You don't yet have rights to review proposals, contact the admin to give you the rights")
         context = {
             'year': year,
@@ -419,6 +429,7 @@ def list_talks_to_review(request, year):
 def review_talk(request, year, pk):
     event_year = get_object_or_404(EventYear, year=year)
     talk = get_object_or_404(Proposal, pk=pk, event_year=event_year)
+    
     try:
         reviewer = Reviewer.objects.get(user=request.user)
     except Reviewer.DoesNotExist:
@@ -446,11 +457,30 @@ def review_talk(request, year, pk):
     else:
         form = ReviewForm()
 
+    talks_by_type = {}
+    for talk_type, _ in Proposal.TALK_TYPES:
+        talks_by_type[talk_type] = Proposal.objects.filter(event_year=event_year, talk_type=talk_type, reviews__isnull=False).annotate(
+            avg_speaker_expertise=Avg('reviews__sub_scores__speaker_expertise'),
+            avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
+            avg_relevancy=Avg('reviews__sub_scores__relevancy'),
+            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact')
+        ).annotate(
+            avg_score=(
+                F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
+            ) / 4,
+            submission_count=Count('user__proposals', filter=F('event_year_id') == event_year.id)
+        ).order_by('-avg_score')
+
+        # Calculate the rank for each talk
+        for i, talk in enumerate(talks_by_type[talk_type]):
+            talk.rank = i + 1
+
     return render(request, '2024/talks/reviews/talk_review.html', {
         'form': form,
         'talk': talk,
         'year': year,
-        'already_reviewed': already_reviewed
+        'already_reviewed': already_reviewed,
+        'talks_by_type': talks_by_type
     })
 
 
@@ -462,6 +492,9 @@ def review_success(request, year):
     except EventYear.DoesNotExist:
         return HttpResponse("The specified event year does not exist.", status=404)
      
+     
+
+
 @login_required
 @permission_required('talks.view_talk', raise_exception=True)
 def reviewed_talks_by_category(request, year):
@@ -480,12 +513,16 @@ def reviewed_talks_by_category(request, year):
             avg_speaker_expertise=Avg('reviews__sub_scores__speaker_expertise'),
             avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
             avg_relevancy=Avg('reviews__sub_scores__relevancy'),
-            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact')
-        ).annotate(
+            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact'),
             avg_score=(
                 F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
-            ) / 4
+            ) / 4,
+            submission_count=Count('user__proposals', filter=F('event_year_id') == event_year.id)
         ).order_by('-avg_score')
+
+        # Calculate the rank for each talk
+        for i, talk in enumerate(talks):
+            talk.rank = i + 1
 
         if talks.exists():
             category_talks_scores.append((category_label, talks))
@@ -494,6 +531,50 @@ def reviewed_talks_by_category(request, year):
         'category_talks_scores': category_talks_scores,
         'year': year
     })
+
+
+
+
+@login_required
+@permission_required('talks.view_talk', raise_exception=True)
+def reviewed_talks_by_type(request, year):
+    try:
+        event_year = EventYear.objects.get(year=year)
+    except EventYear.DoesNotExist:
+        raise Http404("Event year does not exist.")
+
+    type_talks_scores = []
+    for talk_type, _ in Proposal.TALK_TYPES:
+        talks = Proposal.objects.filter(
+            event_year=event_year,
+            talk_type=talk_type,
+            reviews__isnull=False
+        ).annotate(
+            avg_speaker_expertise=Avg('reviews__sub_scores__speaker_expertise'),
+            avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
+            avg_relevancy=Avg('reviews__sub_scores__relevancy'),
+            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact')
+        ).annotate(
+            avg_score=(
+                F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
+            ) / 4
+        ).order_by('-avg_score')
+
+        # Calculate the rank for each talk
+        for i, talk in enumerate(talks):
+            talk.rank = i + 1
+
+        if talks.exists():
+            type_talks_scores.append((talk_type, talks))
+
+    return render(request, '2024/talks/reviews/reviewed_talks_by_type.html', {
+        'type_talks_scores': type_talks_scores,
+        'year': year
+    })
+
+
+
+
 
 # Class-based
 '''

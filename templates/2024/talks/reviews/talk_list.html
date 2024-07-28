@@ -130,60 +130,57 @@
              
                 {% if not no_reviewer_rights %}
                 <h4 class="g-mb-20">Proposals Awaiting Review</h4>  
-                <div class="shortcode-html">
-                    <!-- Hover Rows -->
-                    <div class="card g-brd-primary rounded-0 g-mb-30">
-                    <h3 class="card-header g-bg-primary g-brd-transparent g-color-white g-font-size-16 rounded-0 mb-0">
-                        <i class="fa-light fa-ballot-check g-mr-5"></i>
-                        
-                    </h3>
-                    
+                
+             
+<ul class="nav u-nav-v1-2 u-nav-primary u-nav-rounded-5 g-brd-bottom--md g-brd-primary g-mb-20" role="tablist"> 
+{% for category, talks in talks_by_type.items %}
+    <li class="nav-item">
+        <a class="nav-link{% if forloop.first %} active{% endif %} g-rounded-bottom-0 g-brd-bottom-none" data-toggle="tab" href="#category-{{ forloop.counter }}" role="tab"><b>{{ category }}</b></a>
+    </li> 
+{% endfor %}
+</ul>
 
+<div class="tab-content">      
+  {% for category, talks in talks_by_type.items %}                      
+    <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="category-{{ forloop.counter }}" role="tabpanel">
+        <div class="table-responsive">
+            <table class="table table-hover u-table--v1 mb-0">
+                {% if talks %}
+                    <thead>
+                        <tr>
+                            <th style="color: #161515;"><p>Title</p></th>
+                            <th style="color: #161515;"><p>Session</p></th>
+                            <th style="color: #161515;"><p>Audience</p></th> 
+                            <th style="color: #161515;"><p>Actions</p></th>
+                        </tr>
+                    </thead>
 
-
-                    <div class="table-responsive">
-                        <table class="table table-hover u-table--v1 mb-0">
-                            {% if talks_awaiting_review %}
-                        <thead>
+                    <tbody>
+                        {% for talk in talks %}
                             <tr>
-                            <th  style="color: #161515;"><p >Title
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                            </p></th>
-                            <th style="color: #161515;"><p >Session</p></th>
-                            <th style="color: #161515;"><p >Audience</p></th> 
-                            <th style="color: #161515;"><p >Actions</p></th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {% for talk in talks_awaiting_review %}
-                            <tr>
-                            <td>
-                                <a href="{% url 'talks:review_talk' year=year pk=talk.pk %}"> <small>{{ talk.title }}</small> </a>
-                            </td>
-                            <td> 
-                                <small>{{ talk.talk_type }}</small>
-                            </td>
-                            <td class="hidden-sm">
-                                <small>{{ talk.intended_audience }}</small>
-                            </td> 
-                            <td>    
-                                <a href="{% url 'talks:review_talk' year=year pk=talk.pk %}" style="font-size:12px" class="btn btn-xs   u-btn-outline-purple" disabled="">Review <i class="fa fa-edit"></i></a>  
-                                 
-                            </td>
+                                <td>
+                                    <a href="{% url 'talks:review_talk' year=year pk=talk.pk %}"> <small>{{ talk.title }}</small> </a>
+                                </td>
+                                <td> 
+                                    <small>{{ talk.talk_type }}</small>
+                                </td>
+                                <td class="hidden-sm">
+                                    <small>{{ talk.intended_audience }}</small>
+                                </td> 
+                                <td>    
+                                    <a href="{% url 'talks:review_talk' year=year pk=talk.pk %}" style="font-size:12px" class="btn btn-xs u-btn-outline-purple">Review <i class="fa fa-edit"></i></a>  
+                                </td>
                             </tr>   
-                            {% endfor %} 
-                        </tbody>
-                        
-                        {% else %}
-                        <p>&nbsp;&nbsp; There are no proposals pending review.</p>
-                        {% endif %}
-                        </table>
-                    </div>
-                    </div>
-                    <!-- End Hover Rows -->
-                </div>
+                        {% endfor %}
+                    </tbody>
+                {% else %}
+                    <p>&nbsp;&nbsp; There are no proposals pending review.</p>
+                {% endif %}
+            </table>
+        </div>             
+    </div>
+    {% endfor %}
+</div>
   
                 
 

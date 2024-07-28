@@ -58,6 +58,8 @@ urlpatterns = [
     path('review/<str:pk>/', views.review_talk, name='review_talk'),  
     path('review_talk/success/', views.review_success, name='review_success'),
     path('reviewed-by-category/', reviewed_talks_by_category, name='reviewed_talks_by_category'),
+    path('reviewed_by_type/', views.reviewed_talks_by_type, name='reviewed_talks_by_type'),
+   
     
 
     ]

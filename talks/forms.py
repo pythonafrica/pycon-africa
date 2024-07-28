@@ -100,3 +100,57 @@ class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ('description', 'document', )
+
+
+
+class ExportFieldsForm(forms.Form):
+    EXPORT_FIELDS_CHOICES = [
+        ('title', 'Title'),
+        ('talk_type', 'Talk Type'),
+        ('talk_category', 'Talk Category'),
+        ('elevator_pitch', 'Elevator Pitch'),
+        ('talk_abstract', 'Talk Abstract'),
+        ('user_email', 'Email'),
+        ('user_first_name', 'First Name'),
+        ('user_last_name', 'Last Name'),
+        ('user_username', 'Username'),
+        ('status', 'Status'),
+        ('intended_audience', 'Intended Audience'),
+        ('link_to_preview_video_url', 'Link to Preview Video'),
+        ('anything_else_you_want_to_tell_us', 'Anything Else'),
+        ('special_requirements', 'Special Requirements'),
+        ('recording_release', 'Recording Release'),
+        ('youtube_video_url', 'YouTube Video URL'),
+        ('youtube_iframe_url', 'YouTube IFrame URL'),
+        ('created_date', 'Created Date'),
+        ('date_updated', 'Date Updated'),
+        ('event_year', 'Event Year'),
+        ('multiple_submissions', 'Multiple Submissions'),
+    ]
+
+    EXPORT_FORMAT_CHOICES = [
+        ('csv', 'CSV'),
+        ('xls', 'Excel (XLS)'),
+        ('xlsx', 'Excel (XLSX)'),
+        ('json', 'JSON'),
+        ('yaml', 'YAML'),
+    ]
+
+    TALK_TYPE_CHOICES = Proposal.TALK_TYPES
+
+    fields_to_export = forms.MultipleChoiceField(
+        choices=EXPORT_FIELDS_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        required=True
+    )
+    export_format = forms.ChoiceField(
+        choices=EXPORT_FORMAT_CHOICES,
+        required=True,
+        widget=forms.RadioSelect
+    )
+    talk_types = forms.MultipleChoiceField(
+        choices=TALK_TYPE_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label='Filter by Talk Type'
+    )

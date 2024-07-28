@@ -105,14 +105,13 @@
                       
                       {% if request.user.is_superuser %}
                      <!-- Review Talks List-->
-                      <a href="{% url 'talks:reviewed_talks_by_category' year=2024 %}" class="list-group-item list-group-item-action justify-content-between active">
-                      <span><i class="fa-solid fa-fade fa-list-check g-pos-rel g-top-1 g-mr-8"></i> Proposals by Category</span>
+                      <a href="{% url 'talks:reviewed_talks_by_category' year=2024 %}" class="list-group-item list-group-item-action justify-content-between ">
+                      <span><i class="fa-solid fa-list-check g-pos-rel g-top-1 g-mr-8"></i> Proposals by Category</span>
                     </a>
-                    <a href="{% url 'talks:reviewed_talks_by_type' year=year %}" class="list-group-item list-group-item-action justify-content-between ">
-                     <span><i class="fa-solid fa-list-check g-pos-rel g-top-1 g-mr-8"></i> Proposals by Type</span>
-                   </a> 
+                    <a href="{% url 'talks:reviewed_talks_by_type' year=year %}" class="list-group-item list-group-item-action justify-content-between active">
+                     <span><i class="fa-solid fa-fade fa-list-check g-pos-rel g-top-1 g-mr-8"></i> Proposals by Type</span>
+                   </a>
                     <!-- End Profile --> 
- 
                           {% endif %}
                     </div>
                     <!-- End Sidebar Navigation -->  
@@ -125,16 +124,16 @@
                   <div class="container g-py-50--md g-py-20">
                     
    
-                    <h2>Reviewed Proposals based on Category</h2>  
+                    <h2>Reviewed Proposals based on Talk Type</h2>  
                     
                     <hr class="u-divider-db-solid g-brd-gray-light-v3">  
    
                         
                         <!-- Nav tabs -->
                         <ul class="nav u-nav-v1-2 u-nav-primary u-nav-rounded-5 g-brd-bottom--md g-brd-primary g-mb-20" role="tablist">
-                            {% for category, talks in category_talks_scores %}
+                            {% for talk_type, talks in type_talks_scores %}
                             <li class="nav-item">
-                            <a class="nav-link{% if forloop.first %} active{% endif %} g-rounded-bottom-0 g-brd-bottom-none" data-toggle="tab" href="#category-{{ forloop.counter }}" role="tab"><b>{{ category }}</b></a>
+                            <a class="nav-link{% if forloop.first %} active{% endif %} g-rounded-bottom-0 g-brd-bottom-none" data-toggle="tab" href="#type-{{ forloop.counter }}" role="tab"><b>{{ talk_type }}</b></a>
                             </li>
                             {% endfor %}
                         </ul>
@@ -142,8 +141,8 @@
                         
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            {% for category, talks in category_talks_scores %}
-                            <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="category-{{ forloop.counter }}" role="tabpanel">
+                            {% for talk_type, talks in type_talks_scores %}
+                            <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="type-{{ forloop.counter }}" role="tabpanel">
                              
                             <div class="table-responsive">
                                 <table class="table table-hover u-table--v1 mb-0"> 
@@ -204,6 +203,3 @@
  
     
 {% endblock %}
-
- 
- 
