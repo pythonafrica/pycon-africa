@@ -544,28 +544,29 @@ def reviewed_talks_by_type(request, year):
         raise Http404("Event year does not exist.")
 
     type_talks_scores = []
-    for talk_type, _ in Proposal.TALK_TYPES:
+    # Grouping by talk_type and calculating the average score
+    for talk_type_code, talk_type_label in Proposal.TALK_TYPES:
         talks = Proposal.objects.filter(
             event_year=event_year,
-            talk_type=talk_type,
+            talk_type=talk_type_code,
             reviews__isnull=False
         ).annotate(
             avg_speaker_expertise=Avg('reviews__sub_scores__speaker_expertise'),
             avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
             avg_relevancy=Avg('reviews__sub_scores__relevancy'),
-            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact')
+            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact'),
+            submission_count=Count('user__proposals')
         ).annotate(
             avg_score=(
                 F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
             ) / 4
         ).order_by('-avg_score')
 
-        # Calculate the rank for each talk
-        for i, talk in enumerate(talks):
-            talk.rank = i + 1
-
         if talks.exists():
-            type_talks_scores.append((talk_type, talks))
+            # Adding rank to each talk
+            for rank, talk in enumerate(talks, start=1):
+                talk.rank = rank
+            type_talks_scores.append((talk_type_label, talks))
 
     return render(request, '2024/talks/reviews/reviewed_talks_by_type.html', {
         'type_talks_scores': type_talks_scores,
