@@ -155,27 +155,29 @@
                                     <th style="color: #161515;"><p >Audience</p></th> 
                                     <th style="color: #161515;"><p >Current Average Score</p></th>
                                     <th style="color: #161515;"><p >Multiple Submissions</p></th>
+                                    <th style="color: #161515;"><p>Name</p></th>
                                     </tr>
                                 </thead>
         
                                 <tbody>
                                     {% for talk in talks %}
                                     <tr>
-                                    <td>{{ talk.rank }}</td>
-                                    <td>
-                                       <small>{{ talk.title }}</small> 
-                                    </td>
-                                    <td> 
-                                        <small>{{ talk.talk_type }}</small>
-                                    </td>
-                                    <td class="hidden-sm">
-                                        <small>{{ talk.intended_audience }}</small>
-                                    </td> 
-                                    <td>  
-                                    <small>{{ talk.avg_score|floatformat:2 }}</small>
-                                        
-                                    </td> 
-                                    <td>{% if talk.submission_count > 1 %}Yes{% else %}No{% endif %} ({{ talk.submission_count }})</td>
+                                      <td>{{ talk.rank }}</td>
+                                      <td>
+                                        <small>{{ talk.title }}</small> 
+                                      </td>
+                                      <td> 
+                                          <small>{{ talk.talk_type }}</small>
+                                      </td>
+                                      <td class="hidden-sm">
+                                          <small>{{ talk.intended_audience }}</small>
+                                      </td> 
+                                      <td>  
+                                      <small>{{ talk.avg_score|floatformat:2 }}</small>
+                                          
+                                      </td> 
+                                      <td>{% if talk.submission_count > 1 %}Yes{% else %}No{% endif %} ({{ talk.submission_count }})</td>
+                                      <td><small>{{ talk.user.user_profile.name }} {{ talk.user.user_profile.surname }}</small></td>
                                     </tr>  
                                     {% empty %}
                                     <p>&nbsp;&nbsp; You are yet to review a proposal.</p>

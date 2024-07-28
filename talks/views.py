@@ -492,12 +492,18 @@ def reviewed_talks_by_category(request, year):
             avg_speaker_expertise=Avg('reviews__sub_scores__speaker_expertise'),
             avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
             avg_relevancy=Avg('reviews__sub_scores__relevancy'),
-            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact'), 
+            avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact'),
             avg_score=(
                 F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
             ) / 4,
             submission_count=Count('user__proposals', filter=F('event_year_id') == event_year.id)
         ).order_by('-avg_score')
+
+        # Adding user's name and surname to each talk
+        for talk in talks:
+            user_profile = Profile.objects.get(user=talk.user)
+            talk.user_name = user_profile.name
+            talk.user_surname = user_profile.surname
 
         # Calculate the rank for each talk
         for i, talk in enumerate(talks):
@@ -510,7 +516,6 @@ def reviewed_talks_by_category(request, year):
         'category_talks_scores': category_talks_scores,
         'year': year
     })
-
 
 
 
@@ -534,12 +539,18 @@ def reviewed_talks_by_type(request, year):
             avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
             avg_relevancy=Avg('reviews__sub_scores__relevancy'),
             avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact'),
-            submission_count=Count('user__proposals')   
+            submission_count=Count('user__proposals', filter=F('event_year_id') == event_year.id)
         ).annotate(
             avg_score=(
                 F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
             ) / 4
         ).order_by('-avg_score')
+
+        # Adding user's name and surname to each talk
+        for talk in talks:
+            user_profile = Profile.objects.get(user=talk.user)
+            talk.user_name = user_profile.name
+            talk.user_surname = user_profile.surname
 
         if talks.exists():
             # Adding rank to each talk
@@ -551,8 +562,6 @@ def reviewed_talks_by_type(request, year):
         'type_talks_scores': type_talks_scores,
         'year': year
     })
-
-
 
 
 
