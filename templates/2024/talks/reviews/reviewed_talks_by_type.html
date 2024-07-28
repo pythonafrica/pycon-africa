@@ -174,7 +174,7 @@
                                     <small>{{ talk.avg_score|floatformat:2 }}</small>
                                         
                                     </td> 
-                                    <td>{% if talk.submission_count > 1 %}Yes{% else %}No{% endif %}</td>
+                                    <td>{% if talk.submission_count > 1 %}Yes{% else %}No{% endif %} ({{ talk.submission_count }})</td>
                                     </tr>  
                                     {% empty %}
                                     <p>&nbsp;&nbsp; You are yet to review a proposal.</p>
