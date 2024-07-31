@@ -220,8 +220,12 @@
                     <hr class="u-divider-db-solid g-brd-gray-light-v3"> 
                                         <div><br<br> <br />
                                             <a  onclick="goBack()"   class="btn  btn-small  u-btn-outline-darkgray" style="font-size:16px"><i class="licon-undo "></i><span>GO BACK</span></a>
+                                            {% if active_period %}
                                             <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink"><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
-                                          
+                                            {% else %}
+                                            <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink disabled"  title="You cannot edit the talk because the CFP period is over"><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
+                                           
+                                            {% endif %} 
                                         </div>
                                     </div>
                                     

@@ -125,23 +125,37 @@ def edit_talk(request, year, pk):
     }
     return render(request, template_prefix + 'edit_talk.html', context)
 
+
+
 class TalkList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TalkList, self).get_context_data(**kwargs)
-        # Assuming 'year' is passed as a URL parameter, otherwise default to the current year
         year = self.kwargs.get('year', timezone.now().year)
         context['year'] = year
 
-        # Get all proposals submitted by the user for the specific year
-        context['submitted_talks'] = Proposal.objects.filter(user=self.request.user, event_year__year=year)
-        
+        event_year = get_object_or_404(EventYear, year=year)
+        submission_periods = CFPSubmissionPeriod.objects.filter(event_year=event_year).order_by('start_date')
+
+        active_period = None
+        for period in submission_periods:
+            if period.start_date <= timezone.now() <= period.end_date:
+                active_period = period
+                break
+
+        context.update({
+            'submitted_talks': Proposal.objects.filter(user=self.request.user, event_year__year=year),
+            'submission_periods': submission_periods,
+            'active_period': active_period,
+            'is_editable': active_period is not None
+        })
+
         return context
 
     def get_template_names(self):
-        # Use the year from the context to determine the template path
         year = self.kwargs.get('year', timezone.now().year)
         template_path = f"{year}/talks/talk_list.html"
         return [template_path]
+
     
      
 class TalkView(UpdateView):
@@ -168,8 +182,6 @@ class TalkView(UpdateView):
         return context
 
 
-
-
 class TalkDetailView(TemplateView):
     def get_template_names(self):
         proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))
@@ -179,13 +191,26 @@ class TalkDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))
+        submission_periods = CFPSubmissionPeriod.objects.filter(event_year=proposal.event_year).order_by('start_date')
+
+        active_period = None
+        for period in submission_periods:
+            if period.start_date <= timezone.now() <= period.end_date:
+                active_period = period
+                break
+
         context.update({
             'title': "Accepted Talks",
             'year': proposal.event_year.year,
             'talk': proposal,
-            'speakers': proposal.speakers.all()  # Include speakers in the context
+            'speakers': proposal.speakers.all(),
+            'submission_periods': submission_periods,
+            'active_period': active_period,
+            'is_editable': active_period is not None
         })
         return context
+
+ 
 
 
 class TalksDetailView(DetailView):
