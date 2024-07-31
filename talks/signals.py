@@ -6,6 +6,8 @@ from django.utils.html import strip_tags
 from .models import Proposal 
 from home.models import EventYear  
 from django.db.models.signals import pre_save
+from registration.models import Profile
+from django.urls import reverse
 
 
 @receiver(pre_save, sender=Proposal)
@@ -28,21 +30,35 @@ def send_status_change_email(sender, instance, **kwargs):
                 }
                 subject = subject_templates.get(instance.status, 'PyCon Africa - Your Proposal Status Update')
                 html_template = template_names.get(instance.status, 'talks/emails/proposal_status_changed.html')
-                html_content = render_to_string(html_template, {'proposal': instance, 'user': instance.user})
+
+                # Retrieve the user's profile to get the full name
+                try:
+                    user_profile = Profile.objects.get(user=instance.user)
+                    full_name = user_profile.get_full_name()
+                except Profile.DoesNotExist:
+                    full_name = instance.user.username  # Fallback to username if profile doesn't exist
+
+                # Generate the URL to the talk detail page
+                talk_url = reverse('talks:talk_details', kwargs={
+                    'year': instance.event_year.year,
+                    'pk': instance.proposal_id.hashid
+                })
+
+                html_content = render_to_string(html_template, {
+                    'proposal': instance,
+                    'user': instance.user,
+                    'full_name': full_name,
+                    'talk_url': talk_url
+                })
                 text_content = strip_tags(html_content)
                 
                 email = EmailMultiAlternatives(
                     subject,
                     text_content,
-                    'team@pycon.africa',
+                    'program@pycon.africa',
                     [instance.user.email]
                 )
                 email.attach_alternative(html_content, "text/html")
                 email.send()
         except sender.DoesNotExist:
             pass  # Handle the case where the Proposal does not exist when the email is triggered
-
-
-
-
-

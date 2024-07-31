@@ -815,7 +815,9 @@ class Profile(models.Model, HitCountMixin):
             if counter > 100:
                 raise RuntimeError(f'max slug attempts for {original_slug} exceeded (100)')
         return slug
- 
+
+    def get_full_name(self):
+        return f"{self.name} {self.surname}"
 
 
 
