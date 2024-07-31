@@ -9,7 +9,6 @@ from django.db.models.signals import pre_save
 from registration.models import Profile
 from django.urls import reverse
 
-
 @receiver(pre_save, sender=Proposal)
 def send_status_change_email(sender, instance, **kwargs):
     if instance.pk:
@@ -51,11 +50,14 @@ def send_status_change_email(sender, instance, **kwargs):
                     'talk_url': talk_url
                 })
                 text_content = strip_tags(html_content)
+
+                # Set the sender's name and email address
+                from_email = 'PyCon Africa Program\'s Team <program@pycon.africa>'
                 
                 email = EmailMultiAlternatives(
                     subject,
                     text_content,
-                    'program@pycon.africa',
+                    from_email,  # Use the formatted sender's name and email
                     [instance.user.email]
                 )
                 email.attach_alternative(html_content, "text/html")
