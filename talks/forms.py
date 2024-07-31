@@ -1,11 +1,11 @@
 from talks.models import Proposal
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Row, Column
+from crispy_forms.layout import Layout, Submit, Row, Column, Field
 from .models import Document  
 from django_recaptcha.fields import ReCaptchaField 
 from django_recaptcha.widgets import ReCaptchaV2Invisible  
-from .models import *
+from .models import * 
 
 class ProposalForm(forms.ModelForm):
     captcha = ReCaptchaField()
@@ -94,13 +94,37 @@ class ReviewForm(forms.ModelForm):
             )
         return instance
 
+
 class DocumentForm(forms.ModelForm):
     captcha = ReCaptchaField()
 
     class Meta:
         model = Document
-        fields = ('description', 'document', )
+        fields = ('name', 'document', 'document_type', 'proposal')
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Brief name of the document'}),
+            'document': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'document_type': forms.Select(attrs={'class': 'form-control'}),
+            'proposal': forms.Select(attrs={'class': 'form-control', 'disabled': 'true'}),  # Set to disabled
+        }
 
+    def __init__(self, *args, **kwargs):
+        proposal = kwargs.pop('proposal', None)  # Expecting 'proposal' to be passed as a kwarg
+        super().__init__(*args, **kwargs)
+        if proposal:
+            self.fields['proposal'].initial = proposal
+            self.fields['proposal'].disabled = True  # Make the field read-only
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.form_enctype = 'multipart/form-data'
+        self.helper.layout = Layout(
+            Field('name', css_class='form-control'),
+            Field('document', css_class='form-control-file'),
+            Field('document_type', css_class='form-control'),
+            Field('proposal', css_class='form-control'),
+            Submit('submit', 'Upload', css_class='btn btn-primary')
+        )
+ 
 
 
 class ExportFieldsForm(forms.Form):

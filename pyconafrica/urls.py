@@ -43,6 +43,10 @@ urlpatterns = [
         path('fin-aid/', include('fin_aid.urls', namespace='fin_aid')),
         path('privacy-policy/', include('privacypolicy.urls', namespace='privacypolicy')),
         path('tickets/', include('tickets.urls', namespace='ticket')),
+
+        
+        #Leave this last to catch all pages
+        path('', include('cms.urls')),   
     ])),
     path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
     path('2020/', include('pycon2020.urls')),

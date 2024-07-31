@@ -182,6 +182,8 @@ class TalkView(UpdateView):
         return context
 
 
+
+
 class TalkDetailView(TemplateView):
     def get_template_names(self):
         proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))
@@ -199,6 +201,18 @@ class TalkDetailView(TemplateView):
                 active_period = period
                 break
 
+        # Determine if the user can upload documents
+        can_upload = proposal.status == 'A'
+        is_primary_speaker = self.request.user == proposal.user
+        is_invited_speaker = self.request.user in proposal.speakers.all()
+        can_upload = can_upload and (is_primary_speaker or is_invited_speaker)
+
+        # Check if a slide has already been uploaded
+        uploaded_documents = Document.objects.filter(proposal=proposal, document_type='Slide')
+        has_uploaded_slide = uploaded_documents.exists()
+        latest_slide = uploaded_documents.latest('uploaded_at') if has_uploaded_slide else None
+
+        # Add the form to the context
         context.update({
             'title': "Accepted Talks",
             'year': proposal.event_year.year,
@@ -206,11 +220,26 @@ class TalkDetailView(TemplateView):
             'speakers': proposal.speakers.all(),
             'submission_periods': submission_periods,
             'active_period': active_period,
-            'is_editable': active_period is not None
+            'is_editable': active_period is not None,
+            'can_upload': can_upload,
+            'has_uploaded_slide': has_uploaded_slide,
+            'latest_slide': latest_slide,
+            'form': DocumentForm(proposal=proposal),  # Pass the proposal instance
         })
         return context
 
- 
+    def post(self, request, *args, **kwargs):
+        proposal = get_object_or_404(Proposal, proposal_id=self.kwargs.get('pk'))
+        form = DocumentForm(request.POST, request.FILES, proposal=proposal)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your slides have been uploaded successfully.')
+            return redirect(reverse('talks:talk_detail', kwargs={'year': proposal.event_year.year, 'pk': proposal.proposal_id.hashid}))
+        # If the form is not valid, re-render the page with form errors
+        context = self.get_context_data(form=form)
+        return self.render_to_response(context)
+
+
 
 
 class TalksDetailView(DetailView):

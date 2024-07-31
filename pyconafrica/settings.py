@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     "sponsor_us",
     "talks",
     "tickets",
+    'cms',
 ]
 
 MIDDLEWARE = [ 

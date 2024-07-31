@@ -34,7 +34,7 @@ def send_status_change_email(sender, instance, **kwargs):
                 email = EmailMultiAlternatives(
                     subject,
                     text_content,
-                    'noreply@pycon.africa',
+                    'team@pycon.africa',
                     [instance.user.email]
                 )
                 email.attach_alternative(html_content, "text/html")

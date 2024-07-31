@@ -187,9 +187,48 @@
                                         
                                         </div>
                                         <!-- End Demo modal window -->
+                                         <br><br>
+                                    {% if can_upload %}
+                                        
+                                        {% if has_uploaded_slide %}
+                                        <!-- Secondary Button -->
+                                        <div class="btn-group g-mr-10 g-mb-15">
+                                          <button type="button" class="btn btn-secondary dropdown-toggle  g-mr-10 g-mb-15" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            My Slides
+                                          </button>
+                                          <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ latest_slide.document.url }}"  target="_blank">View Uploaded Slide</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#modal2" data-modal-target="#modal2" data-modal-effect="fadein">Upload New Slide</a></a> 
+                                          </div>
+                                        </div>
+                                        <!-- End Secondary Button -->  
+                                        
+                                        {% else %}
+                                            
 
- 
+                                        <a class="btn u-btn-darkgray" href="#modal2" data-modal-target="#modal2" data-modal-effect="fadein">Upload Slides
+                                        </a>   
+                                        {% endif %} 
 
+                                    {% else %} 
+                                    {% endif %}
+                                              
+                                      <!-- Demo modal window -->
+                                      <div id="modal2" class="text-left g-max-width-600 g-bg-white g-overflow-y-auto g-pa-20" style="display: none;">
+                                        <button type="button" class="close" onclick="Custombox.modal.close();">
+                                          <i class="hs-icon hs-icon-close"></i>
+                                        </button>
+                                        <h4 class="g-mb-20">Upload Slides</h4>
+                                        <p> 
+                                          <form method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {{ form|crispy }}
+                                            <br><button type="submit" class="btn btn-primary"> Upload Document</button>
+                                        </form>
+                                        </p>
+                                      </div>
+                                      <!-- End Demo modal window -->
                                         </p>    
                                         
                     <hr class="u-divider-db-solid g-brd-gray-light-v3"> <p class="g-color-black"><strong>Talk Preview</strong>: </p>
@@ -223,7 +262,7 @@
                                             {% if active_period %}
                                             <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink"><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
                                             {% else %}
-                                            <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink disabled"  title="You cannot edit the talk because the CFP period is over"><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
+                                            <a href="{% url 'talks:edit_talk' year=year pk=talk.pk %}" style="font-size:16px" class="btn btn-small  u-btn-outline-pink disabled" ><i class="fa fa-edit"  style="font-size:16px;"></i> Edit Talk </a>  
                                            
                                             {% endif %} 
                                         </div>

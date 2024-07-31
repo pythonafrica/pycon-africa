@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Proposal Has Been Accepted</title>
+    <title>Your Proposal Has Been Accepted for PyCon Africa 2024</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .content { max-width: 600px; margin: auto; }
+        .header { background-color: #f7f7f7; padding: 10px; text-align: center; }
+        .details, .next-steps { margin: 20px 0; }
+        .details th, .details td, .next-steps th, .next-steps td { text-align: left; padding: 8px; }
+    </style>
 </head>
 <body>
-    <h1>Congratulations {{ proposal.user.get_full_name|default:proposal.user.username }}!</h1>
-    <p>We are pleased to inform you that your proposal titled "<strong>{{ proposal.title }}</strong>" has been accepted for presentation at our conference.</p>
-    <p>Further details about the schedule and arrangements will follow soon. Thank you for your valuable contribution!</p>
-    <p>Best regards,<br>The Conference Team</p>
+    <div class="content">
+        <div class="header">
+            <h2>Congratulations {{ proposal.user.get_full_name|default:proposal.user.username }}!</h2>
+        </div>
+        <div class="details">
+            <p>We are pleased to inform you that your proposal titled "<strong>{{ proposal.title }}</strong>" has been accepted for PyCon Africa {{ proposal.event_year.year }}.</p>
+        </div>
+        
+        <div class="next-steps">
+            <h3>Next Steps</h3>
+            <p>To prepare for your presentation, please follow these steps:</p>
+            <table>
+                <tr>
+                    <th>Step 1:</th>
+                    <td>Review the <a href="https://docs.pyconafrica.org/presentation-guidelines">Presentation Guidelines</a> to ensure your content meets our standards.</td>
+                </tr>
+                <tr>
+                    <th>Step 2:</th>
+                    <td>Join our <a href="https://discord.gg/MKcMmJawJX">speakers' community channel on Discord</a> to connect with other presenters and share experiences.</td>
+                </tr>
+                <tr>
+                    <th>Step 3:</th>
+                    <td>Submit your final presentation materials by the deadline specified in the <a href="https://docs.pyconafrica.org/schedule"><b>form</b></a>.</td>
+                </tr> 
+            </table>
+            <p>For more detailed instructions, please refer to the <a href="https://docs.pyconafrica.org/welcome">documentation section</a> on our website.</p>
+        </div>
+
+        <p>Thank you for your valuable contribution. We look forward to your presentation and the insights you'll bring to our conference!</p>
+        <p>For any further information or queries, please feel free to reach out to us.</p>
+        <br>
+        <p>Best regards,<br>The PyCon Africa Program Team</p>
+    </div>
 </body>
 </html>

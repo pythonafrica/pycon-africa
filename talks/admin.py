@@ -227,3 +227,22 @@ class RecordingAdmin(admin.ModelAdmin):
     ordering = ['-date_created']
 
 admin.site.register(Recording, RecordingAdmin)
+
+
+
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'document_type', 'proposal', 'uploaded_at')
+    list_filter = ('document_type', 'uploaded_at', 'proposal__event_year')
+    search_fields = ('name', 'proposal__title', 'proposal__user__username')
+    date_hierarchy = 'uploaded_at'
+    ordering = ('-uploaded_at',)
+
+    def proposal_title(self, obj):
+        return obj.proposal.title
+    proposal_title.short_description = 'Proposal Title'
+
+    def proposal_user(self, obj):
+        return obj.proposal.user.username
+    proposal_user.short_description = 'Uploaded By'
+
+admin.site.register(Document, DocumentAdmin)

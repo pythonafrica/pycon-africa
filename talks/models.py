@@ -199,8 +199,21 @@ class Review(models.Model):
 
  
 
-
 class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True)
-    document = models.FileField(upload_to='documents/')
+    DOCUMENT_TYPES = (
+        ('Slide', 'Slide'),
+        ('Handout', 'Handout'),
+        ('Other', 'Other'),
+    )
+
+    name = models.CharField(max_length=255, blank=True, default='', help_text="Brief name/title of the document.")
+    document = models.FileField(upload_to='documents/', default='', help_text="Upload the document file here.")
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    proposal = models.ForeignKey(Proposal, default=1, on_delete=models.CASCADE, related_name='documents', help_text="Associated proposal for which this document is uploaded.")
+    document_type = models.CharField(max_length=50, choices=DOCUMENT_TYPES, default='Slide', help_text="Type of document (e.g., Slide, Handout).")
+
+    def __str__(self):
+        return f"{self.get_document_type_display()} for {self.proposal.title}"
+
+    def get_absolute_url(self):
+        return reverse("document_detail", kwargs={"pk": self.pk})
