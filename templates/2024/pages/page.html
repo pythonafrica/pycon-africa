@@ -1,12 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% load i18n static markdown_extras %}
-{% block meta_title %}
-    {% if page.meta_title %}
-        {{ page.meta_title }}
-    {% else %}
-        {% trans "PyCon Africa" %}  <!-- Default meta title if none is provided -->
-    {% endif %}
-{% endblock %}
+{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Tickets | PyCon Africa" %}{% endif %}{% endblock %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+{% block description %}{{ meta_description }}{% endblock %}
+{% block author %}{{ meta_author }}{% endblock %}
+
+{% block og_title %}{{ meta_title }}{% endblock %}
+{% block og_description %}{{ meta_description }}{% endblock %}
+{% block og_image %}{{ meta_og_image }}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}
+{% block og_type %}website{% endblock %}
+{% block og_site_name %}PyCon Africa{% endblock %}
+
+{% block twitter_title %}{{ meta_title }}{% endblock %}
+{% block twitter_description %}{{ meta_description }}{% endblock %}
+{% block twitter_image %}{{ meta_og_image }}{% endblock %}
+{% block twitter_site %}@PyConAfrica{% endblock %}
 
 {% block content %}
 {% include '2024/navbar.html' %}
