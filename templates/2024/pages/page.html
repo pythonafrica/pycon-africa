@@ -1,6 +1,12 @@
 {% extends "base.html" %} 
-{% load i18n static markdown_extras %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Tickets | PyCon Africa" %}{% endif %}{% endblock %}
+{% load i18n static markdown_extras %}{% block meta_title %}
+{% if page.meta_title %}
+    {{ page.meta_title }}
+{% else %}
+    {{ page.page_name }} | {% trans "PyCon Africa" %}
+{% endif %}
+{% endblock %}
+
 
 {% block title %}{{ meta_title }}{% endblock %}
 {% block description %}{{ meta_description }}{% endblock %}
