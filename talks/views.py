@@ -234,7 +234,7 @@ class TalkDetailView(TemplateView):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your slides have been uploaded successfully.')
-            return redirect(reverse('talks:talk_detail', kwargs={'year': proposal.event_year.year, 'pk': proposal.proposal_id.hashid}))
+            return redirect(reverse('talks:talk_details', kwargs={'year': proposal.event_year.year, 'pk': proposal.proposal_id.hashid}))
         # If the form is not valid, re-render the page with form errors
         context = self.get_context_data(form=form)
         return self.render_to_response(context)
@@ -527,7 +527,7 @@ def review_success(request, year):
      
      
 
-
+ 
 @login_required
 @permission_required('talks.view_talk', raise_exception=True)
 def reviewed_talks_by_category(request, year):
@@ -550,7 +550,7 @@ def reviewed_talks_by_category(request, year):
             avg_score=(
                 F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
             ) / 4,
-            submission_count=Count('user__proposals', filter=F('event_year_id') == event_year.id)
+            submission_count=Count('user__proposals', distinct=True)  # Ensure distinct count
         ).order_by('-avg_score')
 
         # Adding user's name and surname to each talk
@@ -570,7 +570,6 @@ def reviewed_talks_by_category(request, year):
         'category_talks_scores': category_talks_scores,
         'year': year
     })
-
 
 
 @login_required
@@ -593,7 +592,7 @@ def reviewed_talks_by_type(request, year):
             avg_depth_of_topic=Avg('reviews__sub_scores__depth_of_topic'),
             avg_relevancy=Avg('reviews__sub_scores__relevancy'),
             avg_value_or_impact=Avg('reviews__sub_scores__value_or_impact'),
-            submission_count=Count('user__proposals', filter=F('event_year_id') == event_year.id)
+            submission_count=Count('user__proposals', distinct=True)  # Ensure distinct count
         ).annotate(
             avg_score=(
                 F('avg_speaker_expertise') + F('avg_depth_of_topic') + F('avg_relevancy') + F('avg_value_or_impact')
@@ -616,8 +615,6 @@ def reviewed_talks_by_type(request, year):
         'type_talks_scores': type_talks_scores,
         'year': year
     })
-
-
 
 # Class-based
 '''
