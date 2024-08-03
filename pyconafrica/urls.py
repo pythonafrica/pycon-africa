@@ -29,6 +29,8 @@ urlpatterns = [
 
 #Apps
     path('', include('home.urls', namespace='homepage')), 
+    path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
+    path('2020/', include('pycon2020.urls')),
     path('<int:year>/', include([
         path('', include('home.urls')),
         path('about/', include('about.urls')),
@@ -48,8 +50,6 @@ urlpatterns = [
         #Leave this last to catch all pages
         path('', include('cms.urls')),   
     ])),
-    path('2019/', include('pyconafrica2019.urls', namespace='pyconafrica2019')),
-    path('2020/', include('pycon2020.urls')),
     path('organizers/', admin.site.urls),  
 
 #Thrid party Apps 

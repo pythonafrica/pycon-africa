@@ -41,6 +41,7 @@ urlpatterns = [
     path('speaking/', views.speaking, name='speaking_current_year'),
     path('recording/', views.recording, name='recording_current_year'),
     path('proposing_a_talk/', views.proposing, name='proposing_current_year'), 
+    path('proposal/<str:pk>/respond/', respond_to_invitation, name='respond_to_invitation'),
 
 
     path('submitted', login_required(views.SuccessView.as_view()), name='submitted'),

@@ -43,15 +43,18 @@ def send_status_change_email(sender, instance, **kwargs):
                     'pk': instance.proposal_id.hashid
                 })
 
+                # Generate the URL to accept or reject the invitation
+                response_url = reverse('respond_to_invitation', kwargs={'pk': instance.pk})
+
                 html_content = render_to_string(html_template, {
                     'proposal': instance,
                     'user': instance.user,
                     'full_name': full_name,
-                    'talk_url': talk_url
+                    'talk_url': talk_url,
+                    'response_url': response_url
                 })
                 text_content = strip_tags(html_content)
 
-                # Set the sender's name and email address
                 from_email = 'PyCon Africa Program\'s Team <program@pycon.africa>'
                 
                 email = EmailMultiAlternatives(
@@ -64,3 +67,5 @@ def send_status_change_email(sender, instance, **kwargs):
                 email.send()
         except sender.DoesNotExist:
             pass  # Handle the case where the Proposal does not exist when the email is triggered
+
+ 

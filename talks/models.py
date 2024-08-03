@@ -111,6 +111,12 @@ class Proposal(models.Model):
         ('GEN-L', 'General'),
     )
  
+    USER_RESPONSE_CHOICES = [
+        ('P', 'Pending'),   
+        ('A', 'Accepted'),
+        ('R', 'Rejected'),
+    ]
+    
     title = models.CharField(max_length=1024, help_text="Public title. What topic/project is it all about?")
     talk_type = models.CharField(max_length=50, choices=TALK_TYPES)
     talk_category = models.CharField(max_length=50, choices=TALK_CATEGORY)
@@ -128,7 +134,12 @@ class Proposal(models.Model):
     youtube_iframe_url = models.URLField(max_length=300, blank=True, help_text='Link to Youtube Iframe')
     speakers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='speaking_proposals', blank=True)
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="", related_name='proposals', help_text="The event year this proposal is for")
-    
+    user_response = models.CharField(
+        max_length=1,
+        choices=USER_RESPONSE_CHOICES,
+        default='P',
+        help_text="User's response to the invitation to present their proposal."
+    )
     created_date = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
 

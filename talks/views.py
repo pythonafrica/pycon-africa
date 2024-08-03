@@ -698,3 +698,59 @@ def model_form_upload(request):
     return render(request, 'upload/model_form_upload.html', {
         'form': form
     })
+
+
+@login_required
+def respond_to_invitation(request, year, pk):
+    event_year = get_object_or_404(EventYear, year=year)
+    proposal = get_object_or_404(Proposal, pk=pk, event_year=event_year)
+
+    if request.method == 'POST':
+        form = ProposalResponseForm(request.POST, instance=proposal)
+        if form.is_valid():
+            form.save()
+
+            # Send appropriate email based on user response
+            if proposal.user_response == 'A':
+                subject = "Thank You for Accepting to Speak at PyCon Africa"
+                html_template = 'emails/accepted_response.html'
+
+                html_content = render_to_string(html_template, {
+                    'proposal': proposal,
+                    'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
+                })
+                text_content = strip_tags(html_content)
+                email = EmailMultiAlternatives(
+                    subject,
+                    text_content,
+                    'PyCon Africa Program\'s Team <program@pycon.africa>',
+                    [proposal.user.email]
+                )
+                email.attach_alternative(html_content, "text/html")
+                email.send()
+
+            elif proposal.user_response == 'R':
+                subject = "Thank You for Your Response"
+                html_template = 'emails/rejected_response.html'
+
+                html_content = render_to_string(html_template, {
+                    'proposal': proposal,
+                    'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
+                })
+                text_content = strip_tags(html_content)
+                email = EmailMultiAlternatives(
+                    subject,
+                    text_content,
+                    'PyCon Africa Program\'s Team <program@pycon.africa>',
+                    [proposal.user.email]
+                )
+                email.attach_alternative(html_content, "text/html")
+                email.send()
+
+            messages.success(request, 'Your response has been recorded.')
+            return redirect('talks:talk_details', year=year, pk=proposal.pk)
+    else:
+        form = ProposalResponseForm(instance=proposal)
+
+    template_path = f'{event_year.year}/talks/proposal_response_form.html'
+    return render(request, template_path, {'form': form, 'proposal': proposal})

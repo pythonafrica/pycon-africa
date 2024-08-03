@@ -32,6 +32,11 @@ class ProposalForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Submit'))
  
 
+class ProposalResponseForm(forms.ModelForm):
+    class Meta:
+        model = Proposal
+        fields = ['user_response']
+        
 
 class UpdateForm(forms.ModelForm):
     captcha = ReCaptchaField()
