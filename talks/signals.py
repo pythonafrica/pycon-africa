@@ -44,7 +44,9 @@ def send_status_change_email(sender, instance, **kwargs):
                 })
 
                 # Generate the URL to accept or reject the invitation
-                response_url = reverse('respond_to_invitation', kwargs={'pk': instance.pk})
+                response_url = reverse('talks:respond_to_invitation', kwargs={ 
+                    'year': instance.event_year.year,
+                    'pk': instance.proposal_id.hashid})
 
                 html_content = render_to_string(html_template, {
                     'proposal': instance,
