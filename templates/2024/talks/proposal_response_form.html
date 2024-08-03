@@ -129,7 +129,7 @@
                   <form method="post" action="{% url 'talks:respond_to_invitation' year=proposal.event_year.year pk=proposal.pk %}">
                       {% csrf_token %}
                       {{ form|crispy }}
-                      <button type="submit" class="btn btn-success">Accept</button>
+                      <button type="submit" name="user_response" value="A" class="btn btn-success">Accept</button>
                       <button type="submit" name="user_response" value="R" class="btn btn-danger">Reject</button>
                   </form>
               {% else %}
