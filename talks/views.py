@@ -42,7 +42,9 @@ from django.http import Http404
 from .resources import ProposalResource
 from home.models import EventYear   
 from registration.models import Profile   
-from django.db.models import Avg, F, Q, Count 
+from django.db.models import Avg, F, Q, Count  
+from django.contrib.sites.models import Site
+
 
 logger = logging.getLogger(__name__)
 
@@ -714,6 +716,13 @@ def respond_to_invitation(request, year, pk):
         if form.is_valid():
             form.save()
 
+            # Get the current site domain
+            site = Site.objects.get_current()
+            domain = site.domain
+
+            # Generate the URL to the talk detail page
+            talk_url = f"https://{domain}{reverse('talks:talk_details', kwargs={'year': year, 'pk': proposal.proposal_id.hashid})}"
+
             # Send appropriate email based on user response
             if proposal.user_response == 'A':
                 subject = "Thank You for Accepting to Speak at PyCon Africa"
@@ -722,6 +731,7 @@ def respond_to_invitation(request, year, pk):
                 html_content = render_to_string(html_template, {
                     'proposal': proposal,
                     'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
+                    'talk_url': talk_url,  # Include talk_url in context
                 })
                 text_content = strip_tags(html_content)
                 email = EmailMultiAlternatives(
@@ -740,6 +750,7 @@ def respond_to_invitation(request, year, pk):
                 html_content = render_to_string(html_template, {
                     'proposal': proposal,
                     'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
+                    'talk_url': talk_url,  # Include talk_url in context
                 })
                 text_content = strip_tags(html_content)
                 email = EmailMultiAlternatives(
