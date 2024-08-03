@@ -81,13 +81,13 @@
                       <!-- End Profile -->
         
                       <!-- Profile -->
-                      <a href="{% url 'talks:talk_list' year=year %}" class="list-group-item list-group-item-action justify-content-between active">
+                      <a href="{% url 'talks:talk_list' year=2024 %}" class="list-group-item list-group-item-action justify-content-between active">
                         <span><i class="fa-solid fa-podium-star fa-fade g-pos-rel g-top-1 g-mr-8"></i>  My Submitted Talks</span>
                       </a>
                       <!-- End Profile -->
       
                       <!-- My Submitted Talks -->
-                      <a href="{% url 'talks:submit_talk' year=year %}" class="list-group-item list-group-item-action justify-content-between">
+                      <a href="{% url 'talks:submit_talk' year=2024 %}" class="list-group-item list-group-item-action justify-content-between">
                           <span><i class="fa-thin fa-podium g-pos-rel g-top-1 g-mr-8"></i>  Submit a new Talk</span>
                         </a>
                         <!-- End Profile -->
@@ -95,7 +95,7 @@
 
                       {% if perms.reviews.add_review %} 
                         <!-- Review Talks -->
-                        <a href="{% url 'talks:talks_to_review' year=year %}" class="list-group-item list-group-item-action justify-content-between">
+                        <a href="{% url 'talks:talks_to_review' year=2024 %}" class="list-group-item list-group-item-action justify-content-between">
                           <span><i class="fa-thin fa-ballot-check g-pos-rel g-top-1 g-mr-8"></i> Review Proposals</span>
                         </a>
                         <!-- End Profile --> 
@@ -120,12 +120,13 @@
                 <section class="g-brd-around g-brd-gray-light-v4">
                   <div class="container g-py-50--md g-py-20">
                     
-   
-                  <h4 class="g-mb-20"><b>Response to:</b> {{ proposal.title }}</h4> 
-  
+                    <h4 class="g-mb-20"><b>Respond to Your Proposal Invitation</b></h4> 
+                    <p>We are excited to have you participate in PyCon Africa 2024! Please confirm your availability by accepting or rejecting the invitation below. If you accept, you will receive further instructions regarding the next steps and preparation. Should you decide to decline, we appreciate your time and consideration.</p>
+                   
+                    <p><b>Proposal: </b>{{ proposal.title }}</p>
                                   
                   {% if proposal.status == 'A' and proposal.user_response == 'P' %}
-                  <form method="post" action="{% url 'respond_to_invitation' proposal.pk %}">
+                  <form method="post" action="{% url 'talks:respond_to_invitation' year=proposal.event_year.year pk=proposal.pk %}">
                       {% csrf_token %}
                       {{ form|crispy }}
                       <button type="submit" class="btn btn-success">Accept</button>
@@ -134,6 +135,7 @@
               {% else %}
                   <p>Your response: {{ proposal.get_user_response_display }}</p>
               {% endif %}
+              
  
                 </div>
                 </section> 

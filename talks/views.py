@@ -700,8 +700,12 @@ def model_form_upload(request):
     })
 
 
+
+
+
 @login_required
 def respond_to_invitation(request, year, pk):
+    # Get the event year and proposal based on the provided year and proposal ID
     event_year = get_object_or_404(EventYear, year=year)
     proposal = get_object_or_404(Proposal, pk=pk, event_year=event_year)
 
@@ -713,7 +717,7 @@ def respond_to_invitation(request, year, pk):
             # Send appropriate email based on user response
             if proposal.user_response == 'A':
                 subject = "Thank You for Accepting to Speak at PyCon Africa"
-                html_template = 'emails/accepted_response.html'
+                html_template = 'emails/talks/accepted_response.html'
 
                 html_content = render_to_string(html_template, {
                     'proposal': proposal,
@@ -731,7 +735,7 @@ def respond_to_invitation(request, year, pk):
 
             elif proposal.user_response == 'R':
                 subject = "Thank You for Your Response"
-                html_template = 'emails/rejected_response.html'
+                html_template = 'emails/talks/rejected_response.html'
 
                 html_content = render_to_string(html_template, {
                     'proposal': proposal,
@@ -748,7 +752,8 @@ def respond_to_invitation(request, year, pk):
                 email.send()
 
             messages.success(request, 'Your response has been recorded.')
-            return redirect('talks:talk_details', year=year, pk=proposal.pk)
+            # Redirect to the talk details page with the correct year
+            return redirect('talks:talk_details', year=event_year.year, pk=proposal.pk)
     else:
         form = ProposalResponseForm(instance=proposal)
 

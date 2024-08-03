@@ -159,14 +159,22 @@
                                                   </span>
                                                   </div>
                                               </div>
-                                              <!-- End Teal Alert -->         
+                                              <!-- End Teal Alert -->          
                                             {% elif talk.status == "W" %} 
                                             <li class="btn btn-small  u-btn-aqua g-color-black"><b>Status:</b> On Waitlist</li>                  
                                             {% elif talk.status == "R" %} 
                                             <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>                
                                             {% endif %} 
                                             
-                                            
+                                            {% if talk.user_response == "P" %}    
+                                                <a class="btn  u-btn-bluegray g-color-white">Presentation Response Pending</a>
+                                            {% elif talk.user_response == "A" %}  
+                                                <a class="btn  u-btn-teal g-color-white "><b>You've Accepted to Present</b></a> 
+                                            {% elif talk.user_response == "R" %} 
+                                                <a class="btn u-btn-red g-color-white">Rejected to Present</a> 
+                                            {% endif %}
+                                        
+
                                         <!-- Trigger/Open The Modal -->
                                         <a class="btn u-btn-primary" href="#modal1" data-modal-target="#modal1" data-modal-effect="fadein">Add Speakers to This Talk
                                         </a>
@@ -187,6 +195,8 @@
                                         
                                         </div>
                                         <!-- End Demo modal window -->
+                                         
+
                                          <br><br>
                                     {% if can_upload %}
                                         
