@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "cloudinary_storage",
     "gamma_cloudinary",
     "django.contrib.admin",
+    'django.contrib.sites',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
