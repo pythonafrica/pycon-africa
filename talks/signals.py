@@ -8,6 +8,9 @@ from home.models import EventYear
 from django.db.models.signals import pre_save
 from registration.models import Profile
 from django.urls import reverse
+from django.contrib.sites.models import Site
+
+
 
 @receiver(pre_save, sender=Proposal)
 def send_status_change_email(sender, instance, **kwargs):
@@ -37,16 +40,16 @@ def send_status_change_email(sender, instance, **kwargs):
                 except Profile.DoesNotExist:
                     full_name = instance.user.username  # Fallback to username if profile doesn't exist
 
+                # Get the current site
+                site = Site.objects.get_current()
+                domain = site.domain
+
                 # Generate the URL to the talk detail page
-                talk_url = reverse('talks:talk_details', kwargs={
-                    'year': instance.event_year.year,
-                    'pk': instance.proposal_id.hashid
-                })
+                talk_url = f"https://{domain}{reverse('talks:talk_details', kwargs={'year': instance.event_year.year, 'pk': instance.proposal_id.hashid})}"
 
                 # Generate the URL to accept or reject the invitation
-                response_url = reverse('talks:respond_to_invitation', kwargs={ 
-                    'year': instance.event_year.year,
-                    'pk': instance.proposal_id.hashid})
+                response_url = f"https://{domain}{reverse('talks:respond_to_invitation', kwargs={'year': instance.event_year.year, 'pk': instance.proposal_id.hashid})}"
+
 
                 html_content = render_to_string(html_template, {
                     'proposal': instance,
