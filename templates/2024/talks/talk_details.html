@@ -163,7 +163,9 @@
                                             {% elif talk.status == "W" %} 
                                             <li class="btn btn-small  u-btn-aqua g-color-black"><b>Status:</b> On Waitlist</li>                  
                                             {% elif talk.status == "R" %} 
-                                            <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>                
+                                            <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>         
+                                            {% elif talk.status == "RS" %} 
+                                            <li class="btn btn-small  u-btn-indigo g-color-black"><b>Status:</b> Sorry to see you won't be able to join us present your proposal.</li>               
                                             {% endif %} 
                                             
                                             {% if talk.user_response == "P" %}    
@@ -325,7 +327,9 @@
                                             {% elif talk.status == "W" %} 
                                             <li class="btn btn-small  u-btn-aqua g-color-black"><b>Status:</b> On Waitlist</li>                  
                                             {% elif talk.status == "R" %} 
-                                            <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>                
+                                            <li class="btn btn-small u-btn-pink g-color-white"><b>Status:</b> Sorry, You didn't make the cut</li>         
+                                            {% elif talk.status == "RS" %}                
+                                            <li class="btn btn-small u-btn-indigo g-color-white"><b>Status:</b> You rejected to present.</li> 
                                             {% endif %} 
                                             
                                         

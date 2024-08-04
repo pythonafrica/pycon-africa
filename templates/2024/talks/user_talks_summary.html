@@ -20,7 +20,9 @@
           {% elif talk.status == "W" %}  
           <span class="u-label u-label--sm g-bg-aqua  g-rounded-20 g-px-10">{{ talk.get_status_display }}</span>                  
           {% elif talk.status == "R" %}   
-          <span class="u-label u-label--sm g-bg-pink g-rounded-20 g-px-10">{{ talk.get_status_display }}</span>              
+          <span class="u-label u-label--sm g-bg-pink g-rounded-20 g-px-10">{{ talk.get_status_display }}</span>        
+          {% elif talk.status == "RS" %}        
+          <span class="u-label u-label--sm g-bg-indigo g-rounded-20 g-px-10">{{ talk.get_status_display }}</span>             
           {% endif %}  
         </div>
       </li>

@@ -161,7 +161,9 @@
                                         {% elif talk.status == "W" %} 
                                         <span class="u-label u-label-info g-color-white">On Waitlist</span>               
                                         {% elif talk.status == "R" %} 
-                                        <span class="u-label u-label-danger g-color-white">Didn't make the cut</span>                
+                                        <span class="u-label u-label-danger g-color-white">Didn't make the cut</span>        
+                                        {% elif talk.status == "RS" %}        
+                                        <span class="u-label g-bg-indigo g-color-white">You rejected to present</span>                        
                                         {% endif %} 
                                           
                                       </td> 

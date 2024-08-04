@@ -31,7 +31,7 @@ def send_status_change_email(sender, instance, **kwargs):
                     'S': 'emails/talks/proposal_submitted.html'
                 }
                 subject = subject_templates.get(instance.status, 'PyCon Africa - Your Proposal Status Update')
-                html_template = template_names.get(instance.status, 'talks/emails/proposal_status_changed.html')
+                html_template = template_names.get(instance.status, 'emails/talks/proposal_status_changed.html')
 
                 # Retrieve the user's profile to get the full name
                 try:

@@ -102,6 +102,7 @@ class Proposal(models.Model):
         ('A', 'Accepted'),
         ('W', 'Waiting List'),
         ('R', 'Rejected'),
+        ('RS', 'Rejected by Speaker'), 
     )
 
     PROGRAMMING_EXPERIENCE = (
@@ -124,7 +125,7 @@ class Proposal(models.Model):
     elevator_pitch = MarkdownxField(blank=True, null=True, help_text="[Supports Markdown] - Describe your Talk to your targeted audience.")
     talk_abstract = MarkdownxField(blank=True, null=True, help_text="[Supports Markdown] - Your talk_abstract.")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="proposals", on_delete=models.CASCADE)
-    status = models.CharField(max_length=1, choices=STATUS, default='S')
+    status = models.CharField(max_length=2, choices=STATUS, default='S')
     intended_audience = models.CharField(max_length=50, choices=PROGRAMMING_EXPERIENCE, blank=True, null=True)
     link_to_preview_video_url = models.URLField(blank=True, help_text='Link to Preview video on your Youtube or Google drive')
     anything_else_you_want_to_tell_us = MarkdownxField(blank=True, null=True, help_text="Kindly add anything else you want to tell us?")

@@ -714,7 +714,18 @@ def respond_to_invitation(request, year, pk):
     if request.method == 'POST':
         form = ProposalResponseForm(request.POST, instance=proposal)
         if form.is_valid():
-            form.save()
+            # Determine the user's response
+            user_response = form.cleaned_data.get('user_response', '')
+
+            # Update the proposal's status and user_response based on the user's response
+            if user_response == 'A':
+                proposal.user_response = 'A'
+                proposal.status = 'A'  # Set status to 'Accepted' if it wasn't set before
+            elif user_response == 'R':
+                proposal.user_response = 'R'
+                proposal.status = 'RS'  # Set status to 'Rejected by Speaker'
+            
+            proposal.save()  # Save the updated proposal
 
             # Get the current site domain
             site = Site.objects.get_current()
@@ -724,43 +735,30 @@ def respond_to_invitation(request, year, pk):
             talk_url = f"https://{domain}{reverse('talks:talk_details', kwargs={'year': year, 'pk': proposal.proposal_id.hashid})}"
 
             # Send appropriate email based on user response
+            subject = ""
+            html_template = ""
+            
             if proposal.user_response == 'A':
                 subject = "Thank You for Accepting to Speak at PyCon Africa"
                 html_template = 'emails/talks/accepted_response.html'
-
-                html_content = render_to_string(html_template, {
-                    'proposal': proposal,
-                    'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
-                    'talk_url': talk_url,  # Include talk_url in context
-                })
-                text_content = strip_tags(html_content)
-                email = EmailMultiAlternatives(
-                    subject,
-                    text_content,
-                    'PyCon Africa Program\'s Team <program@pycon.africa>',
-                    [proposal.user.email]
-                )
-                email.attach_alternative(html_content, "text/html")
-                email.send()
-
             elif proposal.user_response == 'R':
                 subject = "Thank You for Your Response"
                 html_template = 'emails/talks/rejected_response.html'
-
-                html_content = render_to_string(html_template, {
-                    'proposal': proposal,
-                    'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
-                    'talk_url': talk_url,  # Include talk_url in context
-                })
-                text_content = strip_tags(html_content)
-                email = EmailMultiAlternatives(
-                    subject,
-                    text_content,
-                    'PyCon Africa Program\'s Team <program@pycon.africa>',
-                    [proposal.user.email]
-                )
-                email.attach_alternative(html_content, "text/html")
-                email.send()
+            
+            html_content = render_to_string(html_template, {
+                'proposal': proposal,
+                'full_name': Profile.objects.get(user=proposal.user).get_full_name(),
+                'talk_url': talk_url,  # Include talk_url in context
+            })
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives(
+                subject,
+                text_content,
+                'PyCon Africa Program\'s Team <program@pycon.africa>',
+                [proposal.user.email]
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
 
             messages.success(request, 'Your response has been recorded.')
             # Redirect to the talk details page with the correct year
@@ -770,3 +768,4 @@ def respond_to_invitation(request, year, pk):
 
     template_path = f'{event_year.year}/talks/proposal_response_form.html'
     return render(request, template_path, {'form': form, 'proposal': proposal})
+
