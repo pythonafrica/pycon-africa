@@ -94,7 +94,7 @@
                         <!-- Figure Info -->
                         <h4 class="h5 g-font-weight-600 mb-1"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></h4>
                         <div class="d-block"> 
-                          <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession }}</p>
+                          <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession | truncatechars:30  }}</p>
                         </div>
                         <!-- End Figure Info -->
                       </div>
