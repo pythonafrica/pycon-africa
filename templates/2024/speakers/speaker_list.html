@@ -36,83 +36,108 @@
     <div class="container  g-pt-50">
 
             <div class=" u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert">
-                
-              
-                <!-- Speakers List Panel -->
-             <div class="card border-0 rounded-0 g-mb-50">
-               <div class="card-block g-pa-0">
-                 <!-- Speakers List -->
-
-
-                 <div class="row g-mx-minus-25 g-mb-40">
-
-        
+              <div class="shortcode-html">
+                <!-- Team Block -->
+                <div class="row">
                   {% for speaker in keynote_speakers %}
-                  <div class="col-lg-3 col-sm-6 g-mb-30">
+                  <div class="col-md-3 g-mb-30">
                     <!-- Figure -->
-                    <figure class="g-color-gray-dark-v2">
-                      <!-- Figure Image -->
-                      {% if speaker.profile_image %}
-                      <img class="w-100 g-mb-30" src="{{ speaker.profile_image.url }}" alt="Image Description">
-                      {% else %}  
-                      <img class="w-100 g-mb-30" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.profile_image }}">
-                      {% endif %}
-                      <!-- End Figure Image -->
-                
-                      <!-- Figure Info -->
+                    <figure class="u-info-v7-1 u-info-v7-1__item g-bg-white g-rounded-4 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        {% if speaker.profile_image %}
+                          <img class="u-info-v7-1__item-child-v1 g-width-150 g-height-150 rounded-circle g-mb-20" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}">
+                        {% else %}
+                          <img class="u-info-v7-1__item-child-v1 g-width-150 g-height-150 rounded-circle g-mb-20" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}">
+                        {% endif %}
+                        <!-- Figure Image -->
+              
+                        <!-- Figure Info -->
                       <em class="d-block g-font-style-normal g-font-size-11 text-uppercase g-color-primary g-mb-5">Keynote Speaker</em>
                       <h4 class="h5 g-color-black-light-v3 g-mb-5"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></h4>
+                        <div class="d-block">   
                       <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession }}</p>
                       <!-- End Info -->
-                
-                      <hr class="g-brd-gray-light-v4 g-my-15">
-                 
+                        </div>
+                        <!-- End Figure Info -->
+                      </div>
+              
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+              
+                      <!-- Figure List --> 
+                      <!-- End Figure List -->
                     </figure>
                     <!-- End Figure -->
-                  </div> 
-                  {% empty %}
-                  <p>No Keynote speakers at this time.</p>
-                  {% endfor %} 
-                </div>
-          
+                  </div>
  
-<hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
-
-                 <div class="row g-mx-minus-25 g-mb-40"> 
-          
-                  {% for speaker in other_speakers %}
-                  <div class="col-6 col-lg-3 g-px-25 g-mb-50">
-                    <!-- Team -->
-                    <div class="text-center">
-                      
-                      {% if speaker.profile_image %}
-                      <img class="u-shadow-v29 g-width-110 g-height-110 rounded-circle mb-5" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }} Profile Image">
-                    
-                      {% else %} 
-                      <img class="u-shadow-v29 g-width-110 g-height-110 rounded-circle mb-5" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.profile_image }}">
-                      {% endif %}
-                     
-                      <h4 class="h5 g-font-weight-600 mb-1"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></h4>
-                      <span class="d-block g-color-primary">- {{ speaker.profession }}</span>
-                      <hr class="g-brd-gray-light-v4 g-my-15"> 
-                    </div>
-                    <!-- End Team -->
-                  </div> 
-                  {% empty %}
-                  <p>No speakers at this time.</p>
                   {% endfor %}
-                  
                 </div>
-          
- 
+                <!-- End Team Block --> 
 
-                 <!-- End Speakers List -->
-               </div>
-             </div>
-             <!-- End Speakers List Panel -->
+      <hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
+
+                <!-- structure for regular speakers -->
+                <div class="row">
+                  {% for speaker in other_speakers %}
+                  <div class="col-md-3 g-mb-30">
+                    <!-- Figure -->
+                    <figure class="u-info-v7-1 u-info-v7-1__item g-bg-white g-rounded-4 text-center">
+                      <div class="g-py-40 g-px-20">
+                        <!-- Figure Image -->
+                        {% if speaker.profile_image %}
+                          <img class="u-info-v7-1__item-child-v1 g-width-100 g-height-100 rounded-circle g-mb-20" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}">
+                        {% else %}
+                          <img class="u-info-v7-1__item-child-v1 g-width-100 g-height-100 rounded-circle g-mb-20" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}">
+                        {% endif %}
+                        <!-- Figure Image -->
+              
+                        <!-- Figure Info -->
+                        <h4 class="h5 g-font-weight-600 mb-1"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></h4>
+                        <div class="d-block"> 
+                          <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession }}</p>
+                        </div>
+                        <!-- End Figure Info -->
+                      </div>
+              
+                      <hr class="g-brd-gray-light-v4 g-my-0">
+              
+                      <!-- Figure List  
+                      <ul class="row list-inline g-py-20 g-ma-0">
+                        {% if speaker.twitter_handle %}
+                        <li class="col g-brd-right g-brd-gray-light-v4">
+                          <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-bg-transparent g-color-cyan--hover" href="https://twitter.com/{{ speaker.twitter_handle }}" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                          </a>
+                        </li>
+                        {% endif %}
+                        {% if speaker.github_username %}
+                        <li class="col g-brd-right g-brd-gray-light-v4">
+                          <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-bg-transparent g-color-purple--hover" href="https://github.com/{{ speaker.github_username }}" target="_blank">
+                            <i class="fa fa-github"></i>
+                          </a>
+                        </li>
+                        {% endif %}
+                        {% if speaker.linkedin %}
+                        <li class="col">
+                          <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-bg-transparent g-color-blue--hover" href="https://linkedin.com/in/{{ speaker.linkedin }}" target="_blank">
+                            <i class="fa fa-linkedin"></i>
+                          </a>
+                        </li>
+                        {% endif %}
+                      </ul> 
+                       End Figure List -->
+                    </figure>
+                    <!-- End Figure -->
+                  </div>
+                  {% endfor %}
+                </div>
+                <!-- End Team Block -->
+              </div>
+              
+               
  
  
- 
+          
                </div>
 
              
