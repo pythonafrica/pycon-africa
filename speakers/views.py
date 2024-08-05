@@ -20,6 +20,9 @@ from home.models import EventYear
 from event.models import Event
 from django.db.models import Q, Exists, OuterRef
 
+
+
+
 class Speakers(ListView):
     model = Profile
     context_object_name = 'speakers'
@@ -31,14 +34,18 @@ class Speakers(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        # Filter speakers who have at least one proposal with status 'A' (Accepted)
+        # and user_response is 'A' (Accepted by the user)
         queryset = queryset.filter(
-            Q(user__proposals__status='A') | Q(user__speaking_proposals__status='A')
+            Q(user__proposals__status='A', user__proposals__user_response='A') |
+            Q(user__speaking_proposals__status='A', user__speaking_proposals__user_response='A')
         ).distinct().annotate(
             is_keynote_speaker=Exists(
                 Proposal.objects.filter(
                     user=OuterRef('user'),
                     talk_type="Keynote Speaker",
-                    status='A'
+                    status='A',
+                    user_response='A'
                 )
             )
         )
@@ -54,6 +61,10 @@ class Speakers(ListView):
             'other_speakers': other_speakers
         })
         return context
+
+
+
+
 
 class SpeakerDetailView(HitCountDetailView):
     model = Profile
