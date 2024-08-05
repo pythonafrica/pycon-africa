@@ -1,5 +1,5 @@
 {% extends "2024/base.html" %}
-{% load i18n static  avatar_tags crispy_forms_tags markdown_extras embed_video_tags  %}
+{% load i18n static  avatar_tags crispy_forms_tags markdown_extras  embed_video_tags  %}
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | PyCon Africa" %}{% endif %}{% endblock %}
 
  
@@ -105,11 +105,12 @@
             <!-- End Author -->
 
 
-            <p><strong>Abstract</strong>: {% if talk.talk_abstract %} {{ talk.talk_abstract | markdown | safe  }}{% else %} 
+            <p><strong>Abstract</strong>: {% if talk.talk_abstract %} {{ talk.talk_abstract | markdown | safe }} 
+              {{ form.media }}{% else %} 
               <!--================ Filter ================-->
                 <div role="alert" class="mad-alert-box mad-alert-box--info">
                   <div class="mad-alert-box-inner"><b>{{ talk.user.user_profile.name }}'s</b> abstract will be updated shortly, please check back later.
-                    <button type="button" class="mad-alert-box-close">Close</button>
+                    
                   </div>
                 </div>
                 <!--================ End of Filter ================--> 
