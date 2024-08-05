@@ -17,8 +17,8 @@ from talks.models import Proposal
 from schedule.models import TalkSchedule
 
 from home.models import EventYear  
-from event.models import Event
-from django.db.models import Q, Exists, OuterRef
+from event.models import Event 
+from django.db.models import Q, F, Exists, OuterRef
 
 
 
@@ -69,9 +69,9 @@ class Speakers(ListView):
 class SpeakerDetailView(HitCountDetailView):
     model = Profile
     context_object_name = 'speaker'
-    slug_field = 'profile_id'  # Correct if you are using slug to lookup
-    pk_url_kwarg = 'profile_id'  # This is the key part to add
-    count_hit = True  # Set to True to count the hit
+    slug_field = 'profile_id'
+    pk_url_kwarg = 'profile_id'
+    count_hit = True
 
     def get_template_names(self):
         year = self.kwargs.get('year', 'default')
@@ -82,11 +82,30 @@ class SpeakerDetailView(HitCountDetailView):
         year = self.kwargs.get('year')
         event_year = get_object_or_404(EventYear, year=year)
 
+        # Get accepted talks for the speaker
+        talks = Proposal.objects.filter(user=self.object.user, status="A", event_year=event_year)
+
+        # Collect related speakers without duplication
+        related_speakers = Profile.objects.filter(
+            is_visible=True,
+            user__proposals__status='A',  # Ensure the proposals are accepted
+            user__proposals__event_year=event_year
+        ).annotate(
+            user_accepted=Exists(
+                Proposal.objects.filter(
+                    user=OuterRef('user'),
+                    user_response='A',
+                    status='A',
+                    event_year=event_year
+                )
+            )
+        ).filter(user_accepted=True).exclude(profile_id=self.object.profile_id).distinct()
+
         context.update({
-            'talks': Proposal.objects.filter(user=self.object.user, status="A", event_year=event_year),
+            'talks': talks,
+            'related_speakers': related_speakers,
             'events': Event.objects.all(),
-            'speakers': Profile.objects.all(),
+            'speakers': Profile.objects.filter(is_visible=True),
             'schedule': TalkSchedule.objects.all(),
-            'related_speakers': Profile.objects.filter(is_visible=True).order_by('?')[:10]
         })
         return context

@@ -199,13 +199,27 @@
                   <!-- Publications -->
                   <div class="g-mb-50"> 
                     <h3 class="h5 g-color-black g-font-weight-600 mb-4">Other Speakers</h3>
-                      {% if related_speakers %}
-                      {% for related_speaker in related_speakers %} 
-                      <li><a href="/speakers/{{related_speaker.user.profile.slug}}"><b>{{ related_speaker.user.profile.name }} {{ related_speaker.user.profile.surname }}</b></a></li> 
-                      {% endfor %} 
-                    {% else %}
-                    <li class="alert alert-warning"><b>No Related Speakers</b></li>  
-                    {% endif %} 
+                    {% if related_speakers %}
+                    {% for speaker in related_speakers %}
+                        <li class="d-flex justify-content-start g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-10">
+                            <div class="g-mt-2">
+                                {% if speaker.profile_image %}
+                                    <img class="g-width-50 g-height-50 rounded-circle" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}">
+                                {% else %}
+                                    <img class="g-width-50 g-height-50 rounded-circle" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}">
+                                {% endif %}
+                            </div>
+                            <div class="align-self-center g-px-10">
+                                <h5 class="h6 g-font-weight-600 g-color-black g-mb-3">
+                                    <span class="g-mr-5"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a></span> 
+                                </h5> 
+                                <small class="g-font-size-12 g-color-black">{{ speaker.profession|truncatewords:2 }}</small> <!-- Adjust or remove as needed -->
+                            </div> 
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>No related speakers available.</li>
+                {% endif %}
                   </div>
                   <!-- End Publications -->
   

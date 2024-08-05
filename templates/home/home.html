@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static  keynotes_tag %}
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Home | PyCon Africa 2024" %}{% endif %}{% endblock %}
 
 
@@ -187,10 +187,129 @@
    
       </div>
       </section>
-   <!-- Black Call To Action -->
-   <div class="g-mb-50">
-    {% include '2024/fin_aid/financial-grant.html' %} 
+   <!-- Black Call To Action --> 
+
+
+
     
+<!-- Speakers Section -->
+
+<!-- Speakers Section -->
+    <section class="container g-pt-30 g-pb-70">
+      <!-- Heading -->
+   <div class="row justify-content-center text-center g-mb-50">
+     <div class="col-lg-9">
+       <h2 class="h2 g-color-black g-font-weight-600 mb-2">Our Speakers</h2>
+       <div class="d-inline-block g-width-30 g-height-2 g-bg-primary mb-2"></div>
+       <p class="lead">Meet some of our distinguished speakers for PyCon Africa 2024</p> 
+     </div>
+   </div>
+   <!-- End Heading --> 
+  <div class="container">  
+    <div class="row">
+      {% get_speakers as speakers_list %}
+      {% if speakers_list %}
+        {% with keynote_speakers=speakers_list.0 other_speakers=speakers_list.1 %}
+
+        <!-- Keynote Speakers -->
+        <div class="col-12"> 
+          <div class="row">
+            {% for speaker in keynote_speakers %}
+            
+            <div class="col-lg-6 g-mb-30">
+              <!-- Testimonials -->
+              <div class="u-shadow-v19 g-brd-bottom g-brd-3 g-brd-primary-gradient-opacity-v1 g-bg-white text-center g-px-35 g-py-60">
+                {% if speaker.profile_image %}
+                <img class="g-height-250 img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}"><br> 
+                {% else %}
+                <img class="g-height-250 img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}"><br> 
+                {% endif %}
+                <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-20 mb-0">
+                  {{ speaker.name }} {{ speaker.surname }}
+                </h3>
+                <h4 class="g-font-weight-700 g-font-size-14 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
+                <hr class="g-brd-gray-light-v4 g-my-15">
+                <em class="d-block g-color-gray-dark-v4 g-font-style-normal g-font-size-13 g-mb-20"><b>{{ speaker.organization }}</b></em>
+                <!-- Figure List -->
+              <ul class="row list-inline g-py-20 g-ma-0">
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-primary--hover"  data-toggle="tooltip" data-placement="bottom" title=" {{ speaker.name }}'s Profile" href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">
+                    
+                    <i class="icon-user"></i>
+                  </a>
+                </li>
+
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with  {{ speaker.name }}" target="/" href="https://www.twitter.com/{{ speaker.twitter }}">
+                    <i class="icon-social-twitter"></i>
+                  </a>
+                </li>
+              </ul>
+              <!-- End Figure List -->
+              </div>
+              <!-- End Testimonials -->
+            </div>
+             
+            {% empty %}
+            <div class="col-12 text-center">
+              <p>No keynote speakers announced yet. Stay tuned!</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- End Keynote Speakers -->
+
+      <hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
+
+        <!-- Random Speakers -->
+        <div class="col-12"><br> <br> 
+          <div class="row">
+            {% for speaker in other_speakers %}
+            <div class="col-md-3 g-mb-30">
+              <div class="card text-center">
+                <div class="card-body">
+                  <div class="g-mb-20">
+                    {% if speaker.profile_image %}
+                    <img class="g-width-100 g-height-100 rounded-circle" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}">
+                    {% else %}
+                    <img class="g-width-100 g-height-100 rounded-circle" src="{% static '/2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}">
+                    {% endif %}
+                  </div>
+                  <h4 class="h5 g-mb-5"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}" >{{ speaker.name }} {{ speaker.surname }}</a></h4>
+                  <div class="d-block"> 
+                    <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession | truncatechars:20  }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+              <p>No featured speakers announced yet. Stay tuned!</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- End Random Speakers -->
+
+        <div class="col-12 text-center g-mt-30">
+          <a href="{% url 'speakers:speakers' year=2024 %}" class="btn btn-lg u-btn-outline-darkgray g-rounded-50">See More Speakers</a>
+        </div>
+
+        {% endwith %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+<!-- End Speakers Section -->
+<!-- End Speakers Section -->
+
+
+
+
+{% include '2024/fin_aid/financial-grant.html' %} 
+    
+
+
 
     <!-- Team Blocks -->
     <section class="container g-pt-30 g-pb-70">
