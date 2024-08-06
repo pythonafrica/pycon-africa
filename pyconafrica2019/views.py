@@ -55,6 +55,12 @@ def traveladvice(request):
     template = '2019/travel/travel19.html'
     return render(request, template, context)
 
+def travelguide(request):
+    context = {}
+    template = '2019/travel/guidance-international-visitors/travel-guide.html'
+    return render(request, template, context)
+
+
 def fin_aid(request):
     context = {}
     template = '2019/financial-assistance/fin-aid19.html'
@@ -69,3 +75,4 @@ def report(request):
     context = {}
     template = '2019/report/report19.html'
     return render(request, template, context)
+

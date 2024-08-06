@@ -89,7 +89,12 @@
               {% endif %}
              
               <div class="media-body">
-                <h4 class="h6 g-color-black g-font-weight-600 mb-0">By {{ talk.user.user_profile.name }} {{ talk.user.user_profile.surname }}</h4>
+                <h4 class="h6 g-color-black g-font-weight-600 mb-0">
+                  By  {% for speaker in speakers %} 
+                        <a href="{% url 'speakers:speaker_detail' year=year profile_id=speaker.profile_id %}">
+                          {{ speaker.name }}  {{ speaker.surname }}
+                        </a>
+                      {% endfor %} </h4>
                 <span class="d-block g-color-gray-dark-v1 g-font-size-12">
                   {% if talk.user.user_profile.profession %} 
                   {% if talk.user.user_profile.organization %}

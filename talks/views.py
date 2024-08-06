@@ -243,7 +243,6 @@ class TalkDetailView(TemplateView):
 
 
 
-
 class TalksDetailView(DetailView):
     model = Proposal
     context_object_name = 'talk'
@@ -257,11 +256,16 @@ class TalksDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(TalksDetailView, self).get_context_data(**kwargs)
         proposal = self.get_object()
+        
+        # Fetch the Profile objects for all speakers (main and additional)
+        speakers = [proposal.user] + list(proposal.speakers.all())
+        speaker_profiles = Profile.objects.filter(user__in=speakers)
+
         context.update({
             'title': "Talk Details",
             'year': proposal.event_year.year,
             'related_talks': Proposal.objects.filter(status='A', event_year=proposal.event_year).order_by('?')[:5],
-            'speakers': [proposal.user] + list(proposal.speakers.all())  # Include main and additional speakers
+            'speakers': speaker_profiles  # Pass Profile objects instead of users
         })
         return context
 
@@ -704,7 +708,7 @@ def model_form_upload(request):
 
 
 
-
+ 
 @login_required
 def respond_to_invitation(request, year, pk):
     # Get the event year and proposal based on the provided year and proposal ID
@@ -768,4 +772,3 @@ def respond_to_invitation(request, year, pk):
 
     template_path = f'{event_year.year}/talks/proposal_response_form.html'
     return render(request, template_path, {'form': form, 'proposal': proposal})
-

@@ -28,7 +28,7 @@ urlpatterns = [
 
     # Detail views for talks<int:year>/talks/<int:pk>/talk_details/
     path('<str:pk>/talk_details/', login_required(views.TalkDetailView.as_view()), name='talk_details'), 
-    re_path(r'^(?P<pk>[\w-]+)/detail/$', login_required(views.TalksDetailView.as_view()), name='talk_detail'),
+    re_path(r'^(?P<pk>[\w-]+)/detail/$', (views.TalksDetailView.as_view()), name='talk_detail'),
 
     path('<int:year>/talks/success/', SuccessView.as_view(), name='talks_success'),
 

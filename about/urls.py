@@ -16,6 +16,6 @@ urlpatterns = [
     # Adjusted team, venue, and travel advice URLs to include a year parameter
     path('team/', teams_view, name='team'),
     path('venue/', view=views.venue, name='venue'),
-    path('guidance-international-visitors/', view=views.travel_advice, name='travel_advice'),
+    path('travel-advice/', view=views.travel_advice, name='travel_advice'),
     path('platform/', view=views.hopin, name='hopin'), 
 ]
