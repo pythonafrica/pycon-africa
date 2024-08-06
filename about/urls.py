@@ -13,6 +13,7 @@ urlpatterns = [
     path('', view=views.about, name='about_home'),     
     path('<int:year>/about/update/<int:pk>/edit/', views.about_edit, name='about_edit'),
     
+    
     # Adjusted team, venue, and travel advice URLs to include a year parameter
     path('team/', teams_view, name='team'),
     path('venue/', view=views.venue, name='venue'),
