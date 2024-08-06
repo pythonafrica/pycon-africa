@@ -277,7 +277,16 @@
                   </div>
                   <h4 class="h5 g-mb-5"><a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}" >{{ speaker.name }} {{ speaker.surname }}</a></h4>
                   <div class="d-block"> 
-                    <p class="g-font-size-13 g-color-gray-dark-v4">{{ speaker.profession | truncatechars:20  }}</p>
+                    <ul class="list-unstyled">
+                      <li class="d-block g-font-size-13 g-color-gray-dark-v4 mb-1"> 
+                        {{ speaker.profession | truncatechars:20  }}
+                      </li>
+                      <li class="d-block g-color-gray-dark-v5 g-font-size-13"> 
+                        {% if speaker.organization %}
+                   {{ speaker.organization }}  
+                  {% endif %}
+                      </li>
+                    </ul>   
                   </div>
                 </div>
               </div>
