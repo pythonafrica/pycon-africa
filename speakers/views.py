@@ -86,8 +86,7 @@ class SpeakerDetailView(HitCountDetailView):
         talks = Proposal.objects.filter(user=self.object.user, status="A", event_year=event_year)
 
         # Collect related speakers without duplication
-        related_speakers = Profile.objects.filter(
-            is_visible=True,
+        related_speakers = Profile.objects.filter( 
             user__proposals__status='A',  # Ensure the proposals are accepted
             user__proposals__event_year=event_year
         ).annotate(
