@@ -33,107 +33,104 @@
     <!-- End Breadcrumbs --> 
  
 
- 
-
-
-    <!-- Schedule Background Overlay Blocks -->
-    <div class="container  g-pt-50">
-      <div class=" u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30" role="alert"> 
+    <!-- Schedule Minimal Blocks -->
+    <div class="container g-pt-50"> 
       <div class="row justify-content-between">
         <div class="col-lg-9 g-mb-80">
-          <div class="g-pa-50 g-pt-0  "> 
-            <div class="  g-pos-rel g-z-index-1 g-pl-50 g-pl-0--md g-ml-minus-50--lg mb-4">
-              <h1 class="h2 g-color-black g-font-weight-600">{{ talk.title }}</h1>
-            </div> 
-            <div class="media-body">
-              
-              <span class=""> 
-                {% if talk.talk_category == "GP / Web" %}
-                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15"  ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our General Python, Web/DevOps category"><i class="fa-duotone fa-layer-group"></i> <b>General Python, Web/DevOps</b></li> 
-                {% elif talk.talk_category == "GC" %}             
-                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15"  ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our General Community category"><i class="fa-duotone fa-layer-group"></i> <b>General Community</b></li> 
-                {% elif talk.talk_category == "ET" %}    
-                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our Emerging Technologies category"><i class="fa-duotone fa-layer-group"></i> <b>Emerging Technologies</b></li> 
-                {% elif talk.talk_category == "Education" %} 
-                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our Education category"><i class="fa-duotone fa-layer-group"></i> <b>Education</b></li>        
-                {% elif talk.talk_category == "O" %}   
-                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our Other category"><i class="fa-duotone fa-layer-group"></i> <b>Other</b></li>               
-                {% endif %}  
-
-              </span> 
-                        
-              {% if talk.talk_type %}
-              <span class=" "> 
-              <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is a {{talk.talk_type}}"><i class="fa-sharp fa-solid fa-podium"></i>  {{ talk.talk_type }} </li> 
-              </span>
-              {% else %} 
-              {% endif %}
-
-              {% if talk.intended_audience == "BGN-L" %}
-              <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="Beginners are welcome to attend - {{ talk.title }}"><i class="fa-solid fa-users-between-lines"></i> Beginner </li>
-              {% elif talk.intended_audience == "INT-L" %}
-              <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="{{talk.title}} is okay for intermediate level"><i class="fa-solid fa-users-between-lines"></i> Intermediate </li>              
-              {% elif talk.intended_audience == "EXP-L" %} 
-              <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="{{talk.title}} is for expert level"><i class="fa-solid fa-users-between-lines"></i> Expert </li>                 
-              {% else %} 
-              <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="{{talk.title}} is for expert level"><i class="fa-solid fa-users-between-lines"></i> General </li>                 
-              {% endif %}  
-
-            </div> 
-            <!-- Author -->
-            <div class="media align-items-center g-brd-bottom g-brd-gray-light-v4 pb-5 mb-5">
-              {% if talk.user.user_profile.profile_image %}
-              <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{{ talk.user.user_profile.profile_image.url }}" alt="Image Description"> 
-              {% else %}  
-              <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{% static '/2024/img/speakers/speaker.png' %}" alt="Image Description"> 
-              {% endif %}
-             
-              <div class="media-body">
-                <h4 class="h6 g-color-black g-font-weight-600 mb-0">
-                  By  {% for speaker in speakers %} 
-                        <a href="{% url 'speakers:speaker_detail' year=year profile_id=speaker.profile_id %}">
-                          {{ speaker.name }}  {{ speaker.surname }}
-                        </a>
-                      {% endfor %} </h4>
-                <span class="d-block g-color-gray-dark-v1 g-font-size-12">
-                  {% if talk.user.user_profile.profession %} 
-                  {% if talk.user.user_profile.organization %}
-                  <span>{{ talk.user.user_profile.profession }} at {{ talk.user.user_profile.organization }}</span> 
-                  {% else %}
-                  <span>{{ talk.user.user_profile.profession }}</span> 
-                  {% endif %} 
-              {% else %}
-              {% endif %}  
-                </span>
+          <div class="g-pr-20--lg"> 
+            <div class="g-pa-30 g-pt-0  "> 
+              <div class=" ">
+                <h1 class="h2 g-color-black g-font-weight-600">{{ talk.title }}</h1>
               </div> 
-            </div>
-            <!-- End Author -->
-
-
-            <p><strong>Abstract</strong>: {% if talk.talk_abstract %} {{ talk.talk_abstract | markdown | safe }} 
-              {{ form.media }}{% else %} 
-              <!--================ Filter ================-->
-                <div role="alert" class="mad-alert-box mad-alert-box--info">
-                  <div class="mad-alert-box-inner"><b>{{ talk.user.user_profile.name }}'s</b> abstract will be updated shortly, please check back later.
-                    
+              <div class="media-body">
+                
+                <span class=""> 
+                  {% if talk.talk_category == "GP / Web" %}
+                  <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15"  ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our General Python, Web/DevOps category"><i class="fa-duotone fa-layer-group"></i> <b>General Python, Web/DevOps</b></li> 
+                  {% elif talk.talk_category == "GC" %}             
+                  <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15"  ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our General Community category"><i class="fa-duotone fa-layer-group"></i> <b>General Community</b></li> 
+                  {% elif talk.talk_category == "ET" %}    
+                  <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our Emerging Technologies category"><i class="fa-duotone fa-layer-group"></i> <b>Emerging Technologies</b></li> 
+                  {% elif talk.talk_category == "Education" %} 
+                  <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our Education category"><i class="fa-duotone fa-layer-group"></i> <b>Education</b></li>        
+                  {% elif talk.talk_category == "O" %}   
+                  <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is in our Other category"><i class="fa-duotone fa-layer-group"></i> <b>Other</b></li>               
+                  {% endif %}  
+  
+                </span> 
+                          
+                {% if talk.talk_type %}
+                <span class=" "> 
+                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="This talk is a {{talk.talk_type}}"><i class="fa-sharp fa-solid fa-podium"></i>  {{ talk.talk_type }} </li> 
+                </span>
+                {% else %} 
+                {% endif %}
+  
+                {% if talk.intended_audience == "BGN-L" %}
+                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="Beginners are welcome to attend - {{ talk.title }}"><i class="fa-solid fa-users-between-lines"></i> Beginner </li>
+                {% elif talk.intended_audience == "INT-L" %}
+                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="{{talk.title}} is okay for intermediate level"><i class="fa-solid fa-users-between-lines"></i> Intermediate </li>              
+                {% elif talk.intended_audience == "EXP-L" %} 
+                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="{{talk.title}} is for expert level"><i class="fa-solid fa-users-between-lines"></i> Expert </li>                 
+                {% else %} 
+                <li class="btn btn-xs u-btn-outline-darkgray g-mr-10 g-mb-15" ti  data-toggle="tooltip-show" data-placement="left" title="{{talk.title}} is for expert level"><i class="fa-solid fa-users-between-lines"></i> General </li>                 
+                {% endif %}  
+  
+              </div> 
+              <!-- Author -->
+              <div class="media align-items-center g-brd-bottom g-brd-gray-light-v4 pb-5 mb-5">
+                {% if talk.user.user_profile.profile_image %}
+                <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{{ talk.user.user_profile.profile_image.url }}" alt="Image Description"> 
+                {% else %}  
+                <img class="d-flex img-fluid g-width-40 g-height-40 rounded-circle mr-3" src="{% static '/2024/img/speakers/speaker.png' %}" alt="Image Description"> 
+                {% endif %}
+               
+                <div class="media-body">
+                  <h4 class="h6 g-color-black g-font-weight-600 mb-0">
+                    By  {% for speaker in speakers %} 
+                          <a href="{% url 'speakers:speaker_detail' year=year profile_id=speaker.profile_id %}">
+                            {{ speaker.name }}  {{ speaker.surname }}
+                          </a>
+                        {% endfor %} </h4>
+                  <span class="d-block g-color-gray-dark-v1 g-font-size-12">
+                    {% if talk.user.user_profile.profession %} 
+                    {% if talk.user.user_profile.organization %}
+                    <span>{{ talk.user.user_profile.profession }} at {{ talk.user.user_profile.organization }}</span> 
+                    {% else %}
+                    <span>{{ talk.user.user_profile.profession }}</span> 
+                    {% endif %} 
+                {% else %}
+                {% endif %}  
+                  </span>
+                </div> 
+              </div>
+              <!-- End Author -->
+  
+  
+              <p><strong>Abstract</strong>: {% if talk.talk_abstract %} {{ talk.talk_abstract | markdown | safe }} 
+                {{ form.media }}{% else %} 
+                <!--================ Filter ================-->
+                  <div role="alert" class="mad-alert-box mad-alert-box--info">
+                    <div class="mad-alert-box-inner"><b>{{ talk.user.user_profile.name }}'s</b> abstract will be updated shortly, please check back later.
+                      
+                    </div>
                   </div>
-                </div>
-                <!--================ End of Filter ================--> 
-              {% endif %} 
-            </p>
-            <hr> 
-            <a  onclick="goBack()"  class="btn u-btn-darkgray g-mr-10 g-mb-15 g-color-white"> <i class="fa-sharp fa-solid fa-rotate-left"></i> GO BACK</a>
-        
-          </div> 
+                  <!--================ End of Filter ================--> 
+                {% endif %} 
+              </p>
+              <hr> 
+              <a  onclick="goBack()"  class="btn u-btn-darkgray g-mr-10 g-mb-15 g-color-white"> <i class="fa-sharp fa-solid fa-rotate-left"></i> GO BACK</a>
+          
+            </div> 
+            
+          </div>
         </div>
  
         <div class="col-lg-3 g-brd-left--lg g-brd-gray-light-v4 g-mb-80">
           <div class="g-pl-20--lg"> 
-
-            <hr class="g-brd-gray-light-v4 g-mt-50 mb-0">
-
-            <div id="stickyblock-start">
-              <div class="js-sticky-block g-sticky-block--lg g-pt-50" data-start-point="#stickyblock-start" data-end-point="#stickyblock-end">
+            <hr class="g-brd-gray-light-v4 g-mt-50 mb-0"> 
+              <div id="stickyblock-start" class="js-sticky-block g-sticky-block--lg g-pt-50" data-start-point="#stickyblock-start" data-end-point="#stickyblock-end">
+           
                 <!-- Publications -->
                 <div class="g-mb-50">
                   <h3 class="h5 g-color-black g-font-weight-600 mb-4">Other Talks</h3>
@@ -173,35 +170,30 @@
                     {% endif %}
                   </ul> 
                 </div>
-                <!-- End Publications -->
-
-                <hr class="g-brd-gray-light-v4 g-my-50">
-
-                <!-- Tags -->
-                <div class="g-mb-40">
-                  <h3 class="h5 g-color-black g-font-weight-600 mb-4"> </h3>
-                  <ul>
-
-
-                  </ul>
-                </div>
-                <!-- End Tags -->
-
-                <hr class="g-brd-gray-light-v4 g-my-50">
+                <!-- End Publications --> 
  
               </div>
-            </div>
-          </div>
+            </div> 
         </div>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div> 
     </div>
-    </div>
-    <!-- End Schedule Background Overlay Blocks -->
+    <!-- End Schedule Minimal Blocks -->
 
  
 
-
-
+ 
 
 
   
