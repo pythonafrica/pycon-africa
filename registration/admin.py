@@ -54,8 +54,8 @@ admin.site.register(RegistrationProfile, RegistrationAdmin)
 
 
 class PersonalAdmin(admin.ModelAdmin):
-    list_display = ("user",  'name', 'surname', "is_visible", 'profession', 'organization',  'contact_number',  'city', 'country', 'date_created', 'updated')
-    list_editable = ["is_visible"] 
+    list_display = ("user",  'name', 'surname', "is_visible", 'is_a_sponsor_or_keynote_speaker', 'profession', 'organization',  'contact_number',  'city', 'country', 'date_created', 'updated')
+    list_editable = ["is_visible", 'is_a_sponsor_or_keynote_speaker',] 
     ordering = ['-date_created']   
 
 admin.site.register(Profile, PersonalAdmin)

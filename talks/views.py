@@ -74,36 +74,45 @@ def submit_talk(request, year):
             'year': year,
             'active_period': active_period,
             'upcoming_period': upcoming_period,
+            'is_sponsor_or_keynote': profile.is_a_sponsor_or_keynote_speaker,
         }
 
-        if request.method == "POST" and active_period:
-            form = ProposalForm(request.POST, user=request.user)
-            if form.is_valid():
-                proposal = form.save(commit=False)
-                proposal.user = request.user
-                proposal.event_year = event_year
-                proposal.save()
+        if request.method == "POST":
+            if active_period or profile.is_a_sponsor_or_keynote_speaker:
+                form = ProposalForm(request.POST, user=request.user)
+                if form.is_valid():
+                    proposal = form.save(commit=False)
+                    proposal.user = request.user
+                    proposal.event_year = event_year
+                    proposal.save()
 
-                # Send confirmation email
-                subject = 'Talk Submission Confirmation'
-                html_content = render_to_string('emails/talks/submission_confirmation.html', {'user': request.user, 'proposal': proposal})
-                text_content = strip_tags(html_content)
-                email = EmailMultiAlternatives(subject, text_content, to=[request.user.email])
-                email.attach_alternative(html_content, "text/html")
-                email.send()
+                    # Send confirmation email
+                    subject = 'Talk Submission Confirmation'
+                    html_content = render_to_string('emails/talks/submission_confirmation.html', {'user': request.user, 'proposal': proposal})
+                    text_content = strip_tags(html_content)
+                    email = EmailMultiAlternatives(subject, text_content, to=[request.user.email])
+                    email.attach_alternative(html_content, "text/html")
+                    email.send()
 
-                return redirect('talks:submitted', year=event_year.year)
+                    return redirect('talks:submitted', year=event_year.year)
+                else:
+                    logger.debug(f"Form errors: {form.errors}")
+                    context['form'] = form
             else:
-                context['form'] = form
+                context['form'] = ProposalForm(user=request.user)
         else:
             context['form'] = ProposalForm(user=request.user)
+            logger.debug("Form added to context for GET request.")
 
     except EventYear.DoesNotExist:
         return redirect(reverse_lazy('talks:no_event_year_error'))
 
     template_path = f"{year}/talks/talk_form.html"
+    logger.debug(f"Rendering template: {template_path} with context: {context}")
     return render(request, template_path, context)
-  
+
+
+
 
 @login_required
 def edit_talk(request, year, pk):
@@ -129,6 +138,7 @@ def edit_talk(request, year, pk):
 
 
 
+
 class TalkList(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TalkList, self).get_context_data(**kwargs)
@@ -144,11 +154,15 @@ class TalkList(TemplateView):
                 active_period = period
                 break
 
+        # Get the user's profile to check if they are a sponsor or keynote speaker
+        profile = Profile.objects.get(user=self.request.user)
+
         context.update({
             'submitted_talks': Proposal.objects.filter(user=self.request.user, event_year__year=year),
             'submission_periods': submission_periods,
             'active_period': active_period,
-            'is_editable': active_period is not None
+            'is_editable': active_period is not None or profile.is_a_sponsor_or_keynote_speaker,
+            'is_sponsor_or_keynote': profile.is_a_sponsor_or_keynote_speaker
         })
 
         return context

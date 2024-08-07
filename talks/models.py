@@ -86,6 +86,7 @@ class Proposal(models.Model):
         ('Short Talk', "Short Talk - 30 mins"),
         ('Long Talk', "Long Talk - 45 mins"),
         ('Tutorial', "Tutorial - 2 hours"),
+        ('Sponsored Talk', "Sponsored Talk"),
         ('Keynote Speaker', "Keynote Speaker"),
     )
 

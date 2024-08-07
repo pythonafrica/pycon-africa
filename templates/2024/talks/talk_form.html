@@ -113,115 +113,120 @@
                   <section class="g-brd-around g-brd-gray-light-v4">
                     <div class="container g-py-50--md g-py-20">
                       
-
-                      {% if active_period %}
-                    <h4 class="g-mb-20">Submit Your Talk</h4> 
-
-                         <!-- Display Form Errors -->
-                         {% if form.non_field_errors %}
-                         <div class="alert alert-danger">
-                             <ul>
-                                 {% for error in form.non_field_errors %}
-                                 <li>{{ error }}</li>
-                                 {% endfor %}
-                             </ul>
-                         </div>
-                         {% endif %}
- 
-                         <!-- Display Field Errors -->
-                         {% for field in form %}
-                         {% if field.errors %}
-                         <div class="alert alert-danger">
-                             <strong>{{ field.label }}:</strong>
-                             {{ field.errors|striptags }}
-                         </div>
-                         {% endif %}
-                         {% endfor %}
-
-                         
-                         <!-- Alert Shadow -->
-    <div class="alert fade show u-shadow-v1-3 g-pa-20" role="alert">
-      <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-
-      <div class="media">
-        <div class="d-flex g-mr-15">
-          <span class="u-icon-v3 u-icon-size--sm g-bg-blue g-color-white g-rounded-50x">
-            <i class="icon-info"></i>
-          </span>
-        </div>
-        <div class="media-body">
-          <strong>Note!</strong> The call for proposals is open until <b>{{ active_period.end_date }}</b>. 
-        </div>
-      </div>
-    </div>
-    <!-- End Alert Shadow -->
-                                   
     
-                   
-                      <form method="post">
-                        {% csrf_token %}
-                        {{ form|crispy }}
+                    
+    {% if active_period or is_sponsor_or_keynote %}
+    <h4 class="g-mb-20">Submit Your Talk</h4>
 
-                       
+    {% if is_sponsor_or_keynote %}
+    <div class="alert fade show u-shadow-v1-3 g-pa-20" role="alert">
+        <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="media">
+            <div class="d-flex g-mr-15">
+                <span class="u-icon-v3 u-icon-size--sm g-bg-blue g-color-white g-rounded-50x">
+                    <i class="icon-info"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <strong>Note!</strong><br>This portal is open to you because you are either a Keynote Speaker or a Sponsor.
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-                        <br><button type="submit" class="btn btn-primary">Submit Proposal</button>
-                    </form>
+    {% if active_period %}
+    <div class="alert fade show u-shadow-v1-3 g-pa-20" role="alert">
+        <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="media">
+            <div class="d-flex g-mr-15">
+                <span class="u-icon-v3 u-icon-size--sm g-bg-blue g-color-white g-rounded-50x">
+                    <i class="icon-info"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <strong>Note!</strong> The call for proposals is open until <b>{{ active_period.end_date }}</b>.
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
+    <!-- Display Form Errors -->
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
-                      {% elif upcoming_period %}
-                          <h2 class="g-mb-20">🌟 Mark your calendars for our CFP! 🌟</h2>
-                          <p>
-                            We can see you are ready to go! <br>Got a Python project, insight, or innovation you're eager to share? This is your moment to shine!
-                            <br><br>
-                            Get ready to ignite your ideas because our Call for Proposals kicks off on <b style="color: darkgreen;">{{ upcoming_period.start_date }} (GMT)</b> and runs until <b style="color: crimson;">{{ upcoming_period.end_date }} (GMT)</b>.
-                            <br><br>
-                            So stay tuned and reload this page on the due date. <br>Let's make waves together this year! 🚀
-                          </p>
-                      {% else %}
-                      
-                          <h3 class="g-mb-20">🚀 The PyCon Africa's Call for Proposals is now Wrapped Up! </h3>  
+    <!-- Display Field Errors -->
+    {% for field in form %}
+    {% if field.errors %}
+    <div class="alert alert-danger">
+        <strong>{{ field.label }}:</strong>
+        {{ field.errors|striptags }}
+    </div>
+    {% endif %}
+    {% endfor %}
 
-                             <!-- Border Alert -->
-                             <div class="alert fade show g-brd-around g-brd-red rounded-0" role="alert">
-                              <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                              </button>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button type="submit" class="btn btn-primary">Submit Proposal</button>
+    </form>
 
-                              <div class="media">
-                                <div class="d-flex g-mr-10">
-                                  <span class="u-icon-v3 u-icon-size--sm g-bg-lightred g-color-white g-rounded-50x">
-                                    <i class="icon-envelope"></i>
-                                  </span>
-                                </div>
-                                <div class="media-body">
-                                  <div class="d-flex justify-content-between">
-                                    <p class="m-0"><strong>Hello there!  {% firstof user.get_short_name user.get_username %}</strong>
-                                    </p>
-                                    <span class="align-self-center small text-nowrap">Just Now</span>
-                                  </div>
-                                  <p class="m-0 g-font-size-14">
-                                    <br>
-                                    We've officially closed the doors on this year's Call for Proposals. A huge thank you to everyone who sent in their amazing ideas! 🌟
-                                    <br><br>
+{% elif upcoming_period %}
+    <h2 class="g-mb-20">🌟 Mark your calendars for our CFP! 🌟</h2>
+    <p>
+        We can see you are ready to go! <br>Got a Python project, insight, or innovation you're eager to share? This is your moment to shine!
+        <br><br>
+        Get ready to ignite your ideas because our Call for Proposals kicks off on <b style="color: darkgreen;">{{ upcoming_period.start_date }} (GMT)</b> and runs until <b style="color: crimson;">{{ upcoming_period.end_date }} (GMT)</b>.
+        <br><br>
+        So stay tuned and reload this page on the due date. <br>Let's make waves together this year! 🚀
+    </p>
+{% else %}
+    <h3 class="g-mb-20">🚀 The PyCon Africa's Call for Proposals is now Wrapped Up! </h3>  
 
-                                    Our review team is now diving into the treasure trove of proposals you’ve shared with us. We're buzzing with excitement to uncover the gems and piece together a fantastic program for you all.
-                                    <br><br>
-
-                                    Stay tuned! We’ll be reaching out via email in the next few weeks with updates on your proposals. We can’t wait to share what’s next.
-                                    <br><br>
- 
-
-                                    With gratitude and Python vibes,
-                                    <br>
-                                    The PyCon Africa Team
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- End Border Alert -->
-                      {% endif %}
+    <!-- Border Alert -->
+    <div class="alert fade show g-brd-around g-brd-red rounded-0" role="alert">
+        <button type="button" class="close u-alert-close--light g-ml-10 g-mt-1" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="media">
+            <div class="d-flex g-mr-10">
+                <span class="u-icon-v3 u-icon-size--sm g-bg-lightred g-color-white g-rounded-50x">
+                    <i class="icon-envelope"></i>
+                </span>
+            </div>
+            <div class="media-body">
+                <div class="d-flex justify-content-between">
+                    <p class="m-0"><strong>Hello there!  {% firstof user.get_short_name user.get_username %}</strong></p>
+                    <span class="align-self-center small text-nowrap">Just Now</span>
+                </div>
+                <p class="m-0 g-font-size-14">
+                    <br>
+                    We've officially closed the doors on this year's Call for Proposals. A huge thank you to everyone who sent in their amazing ideas! 🌟
+                    <br><br>
+                    Our review team is now diving into the treasure trove of proposals you’ve shared with us. We're buzzing with excitement to uncover the gems and piece together a fantastic program for you all.
+                    <br><br>
+                    Stay tuned! We’ll be reaching out via email in the next few weeks with updates on your proposals. We can’t wait to share what’s next.
+                    <br><br>
+                    With gratitude and Python vibes,
+                    <br>
+                    The PyCon Africa Team
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- End Border Alert -->
+{% endif %}
     
 
                   </div>

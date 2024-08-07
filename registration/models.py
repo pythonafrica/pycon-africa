@@ -786,6 +786,7 @@ class Profile(models.Model, HitCountMixin):
     date_created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     is_visible = models.BooleanField(default=False)
+    is_a_sponsor_or_keynote_speaker = models.BooleanField(default=False)
     published_date = models.DateField(blank=True, null=True)
     slug = AutoSlugField(
         populate_from='name',
