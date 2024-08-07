@@ -187,7 +187,7 @@
                     <div class="g-mb-50">
                         <h3 class="h5 g-color-black g-font-weight-600 mb-4">Other Speakers</h3>
                         {% if related_speakers %}
-                        {% for speaker in related_speakers %}
+                        {% for speaker in related_speakers.all|slice:"0:5" %}
                         <li class="d-flex justify-content-start g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-10">
                             <div class="g-mt-2">
                                 {% if speaker.profile_image %}
