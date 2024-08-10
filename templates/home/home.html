@@ -257,11 +257,13 @@
             {% endfor %}
           </div>
         </div>
+
+        
         <!-- End Keynote Speakers -->
 
       <hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
 
-        <!-- Random Speakers -->
+        <!-- Random Speakers  
         <div class="col-12"><br> <br> 
           <div class="row">
             {% for speaker in other_speakers %}
@@ -298,11 +300,13 @@
             {% endfor %}
           </div>
         </div>
-        <!-- End Random Speakers -->
 
         <div class="col-12 text-center g-mt-30">
           <a href="{% url 'speakers:speakers' year=2024 %}" class="btn btn-lg u-btn-outline-darkgray g-rounded-50">See More Speakers</a>
         </div>
+
+          End Random Speakers -->
+
 
         {% endwith %}
       {% endif %}
