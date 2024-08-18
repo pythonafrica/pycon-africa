@@ -5,6 +5,7 @@ from markdownx.admin import MarkdownxModelAdmin
 from .models import RegistrationProfile, Profile
 from .users import UsernameField
 from .utils import _
+from django.utils.html import format_html
 
 
 class SpeakerInline(admin.StackedInline):
@@ -54,11 +55,23 @@ admin.site.register(RegistrationProfile, RegistrationAdmin)
 
 
 class PersonalAdmin(admin.ModelAdmin):
-    list_display = ("user",  'name', 'surname', "is_visible", 'is_a_sponsor_or_keynote_speaker', 'profession', 'organization',  'contact_number',  'city', 'country', 'date_created', 'updated')
-    list_editable = ["is_visible", 'is_a_sponsor_or_keynote_speaker',] 
-    ordering = ['-date_created']   
+    list_display = (
+        "profile_picture_thumbnail",  "name", "surname", "user", "is_visible", 
+        'is_a_sponsor_or_keynote_speaker', 'profession', 'organization',  
+        'contact_number', 'city', 'country', 'date_created', 'updated'
+    )
+    list_editable = ["is_visible", 'is_a_sponsor_or_keynote_speaker'] 
+    ordering = ['-date_created']
+
+    def profile_picture_thumbnail(self, obj):
+        if obj.profile_image:
+            return format_html(
+                '<img src="{}" width="40" height="40" style="border-radius:50%;" />',
+                obj.profile_image.url
+            )
+        return "No Image"
+
+    profile_picture_thumbnail.short_description = 'Profile Picture'
 
 admin.site.register(Profile, PersonalAdmin)
-
-
  

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static  avatar_tags crispy_forms_tags markdown_extras embed_video_tags  %}
+{% load i18n static  avatar_tags crispy_forms_tags countries markdown_extras embed_video_tags  %}
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Speakers | PyCon Africa" %}{% endif %}{% endblock %}
 
 
@@ -90,7 +90,7 @@
                                 {% endif %}
                                 {% if speaker.linkedin %}
                                 <li class="list-inline-item g-mx-2">
-                                    <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="https://www.linkedin.com/in/{{ speaker.linkedin }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Connect with {{ speaker.name|capfirst }} on Linkedin">
+                                    <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle" href="{{ speaker.linkedin }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Connect with {{ speaker.name|capfirst }} on Linkedin">
                                         <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fab fa-linkedin"></i>
                                         <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fab fa-linkedin"></i>
                                     </a>

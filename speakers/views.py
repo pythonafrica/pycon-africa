@@ -18,15 +18,12 @@ from schedule.models import TalkSchedule
 
 from home.models import EventYear  
 from event.models import Event 
-from django.db.models import Q, F, Exists, OuterRef
-
-
-
+from django.db.models import Q, F, Exists, OuterRef, Case, When, IntegerField
+ 
 
 class Speakers(ListView):
     model = Profile
     context_object_name = 'speakers'
-    ordering = ['date_created']
 
     def get_template_names(self):
         year = self.kwargs.get('year', 'default')
@@ -34,12 +31,12 @@ class Speakers(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # Filter speakers who have at least one proposal with status 'A' (Accepted)
-        # and user_response is 'A' (Accepted by the user)
+
+        # Filter speakers based on accepted proposals and user response
         queryset = queryset.filter(
             Q(user__proposals__status='A', user__proposals__user_response='A') |
             Q(user__speaking_proposals__status='A', user__speaking_proposals__user_response='A')
-        ).distinct().annotate(
+        ).annotate(
             is_keynote_speaker=Exists(
                 Proposal.objects.filter(
                     user=OuterRef('user'),
@@ -47,15 +44,31 @@ class Speakers(ListView):
                     status='A',
                     user_response='A'
                 )
+            ),
+            sort_priority=Case(
+                When(user__proposals__talk_type="Sponsored Talk", then=1),
+                When(user__proposals__talk_type__in=["Short Talk", "Long Talk"], then=2),
+                When(user__proposals__talk_type="Lightning Talk", then=3),
+                default=4,
+                output_field=IntegerField(),
             )
-        )
-        return queryset
+        ).order_by('sort_priority', 'user', 'date_created')
+
+        # Remove duplicate users manually in Python (since distinct on fields is not supported by the backend)
+        seen_users = set()
+        unique_speakers = []
+        for speaker in queryset:
+            if speaker.user_id not in seen_users:
+                seen_users.add(speaker.user_id)
+                unique_speakers.append(speaker)
+
+        return unique_speakers
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         speakers = context['speakers']
-        keynote_speakers = speakers.filter(is_keynote_speaker=True)
-        other_speakers = speakers.exclude(is_keynote_speaker=True)
+        keynote_speakers = [speaker for speaker in speakers if speaker.is_keynote_speaker]
+        other_speakers = [speaker for speaker in speakers if not speaker.is_keynote_speaker]
         context.update({
             'keynote_speakers': keynote_speakers,
             'other_speakers': other_speakers
