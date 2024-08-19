@@ -53,8 +53,7 @@ class Speakers(ListView):
                 output_field=IntegerField(),
             )
         ).order_by('sort_priority', 'user', 'date_created')
-
-        # Remove duplicate users manually in Python (since distinct on fields is not supported by the backend)
+ 
         seen_users = set()
         unique_speakers = []
         for speaker in queryset:
