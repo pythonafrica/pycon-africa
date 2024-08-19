@@ -1,64 +1,60 @@
 {% extends "base.html" %}
 {% load i18n static  avatar_tags crispy_forms_tags countries markdown_extras embed_video_tags  %}
+
+
+
+
 {% block meta_title %}
     {% if meta_title %}
         {{ meta_title }}
     {% else %}
-        {{ speaker.name|capfirst }} | PyCon Africa
+        Speaker | PyCon Africa
     {% endif %}
+{% endblock %} 
+
+{% block og_title %}
+    {{ meta_title }}
 {% endblock %}
 
-{% block meta_description %}
-    {% if meta_description %}
-        {{ meta_description }}
-    {% else %}
-        {{ speaker.biography|truncatewords:30 }}  <!-- Fallback to a truncated biography -->
-    {% endif %}
+{% block og_description %}
+    {{ meta_description }}
 {% endblock %}
 
-{% block meta_og_image %}
-    {% if meta_og_image %}
-        {{ meta_og_image }}
-    {% else %}
-        {{ speaker.profile_image.url }}  <!-- Fallback to the speaker's profile image -->
-    {% endif %}
+{% block og_image %}
+    {{ meta_og_image }}
 {% endblock %}
 
-{% block meta_og_url %}
+{% block og_url %}
     {{ request.build_absolute_uri }}
 {% endblock %}
 
-{% block meta_og_type %}
+{% block og_type %}
     website
 {% endblock %}
 
-{% block meta_og_site_name %}
+{% block og_site_name %}
     PyCon Africa
 {% endblock %}
 
 {% block twitter_title %}
-    {% if meta_title %}
-        {{ meta_title }}
-    {% else %}
-        {{ speaker.name|capfirst }} | PyCon Africa
-    {% endif %}
+    {{ meta_title }}
 {% endblock %}
 
 {% block twitter_description %}
-    {% if meta_description %}
-        {{ meta_description }}
-    {% else %}
-        {{ speaker.biography|truncatewords:30 }}
-    {% endif %}
+    {{ meta_description }}
 {% endblock %}
 
 {% block twitter_image %}
-    {% if meta_og_image %}
-        {{ meta_og_image }}
-    {% else %}
-        {{ speaker.profile_image.url }}
-    {% endif %}
+    {{ meta_og_image }}
 {% endblock %}
+
+{% block twitter_site %}
+    @PyConAfrica
+{% endblock %}
+
+
+
+
 
 
 

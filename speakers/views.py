@@ -126,7 +126,7 @@ class SpeakerDetailView(HitCountDetailView):
         meta_title = f"{self.object.name} | PyCon Africa {year}"
         meta_description = f"Meet {self.object.name}, a speaker at PyCon Africa {year}. {truncated_biography}"
         meta_author = "PyCon Africa"
-        meta_og_image = self.object.profile_image.url if self.object.profile_image else "default-image-url"
+        meta_og_image = self.object.profile_image.url if self.object.profile_image else "https://res.cloudinary.com/pycon-africa/image/upload/v1722977619/website_storage_location/media/pyconafrica.png"
 
         context.update({
             'talks': talks,
