@@ -1,7 +1,72 @@
 {% extends "2024/base.html" %}
 {% load i18n static  avatar_tags crispy_forms_tags markdown_extras  embed_video_tags  %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | PyCon Africa" %}{% endif %}{% endblock %}
+{% block meta_title %}
+    {% if meta_title %}
+        {{ meta_title }}
+    {% else %}
+        {{ talk.title }} | PyCon Africa
+    {% endif %}
+{% endblock %}
 
+{% block meta_description %}
+    {% if meta_description %}
+        {{ meta_description }}
+    {% else %}
+        {% if speakers %}
+            Join {{ speakers.first.name }} and others for {{ talk.title }} at PyCon Africa {{ year }}.
+        {% else %}
+            Learn more about {{ talk.title }} at PyCon Africa {{ year }}.
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block meta_og_image %}
+    {% if meta_og_image %}
+        {{ meta_og_image }}
+    {% else %}
+        /static/images/default-image-url.jpg  <!-- Replace with your actual default image path -->
+    {% endif %}
+{% endblock %}
+
+{% block meta_og_url %}
+    {{ request.build_absolute_uri }}
+{% endblock %}
+
+{% block meta_og_type %}
+    website
+{% endblock %}
+
+{% block meta_og_site_name %}
+    PyCon Africa
+{% endblock %}
+
+{% block twitter_title %}
+    {% if meta_title %}
+        {{ meta_title }}
+    {% else %}
+        {{ talk.title }} | PyCon Africa
+    {% endif %}
+{% endblock %}
+
+{% block twitter_description %}
+    {% if meta_description %}
+        {{ meta_description }}
+    {% else %}
+        {% if speakers %}
+            Join {{ speakers.first.name }} and others for {{ talk.title }} at PyCon Africa {{ year }}.
+        {% else %}
+            Learn more about {{ talk.title }} at PyCon Africa {{ year }}.
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block twitter_image %}
+    {% if meta_og_image %}
+        {{ meta_og_image }}
+    {% else %}
+        /static/images/default-image-url.jpg  <!-- Replace with your actual default image path -->
+    {% endif %}
+{% endblock %}
  
 {% block content %} 
 

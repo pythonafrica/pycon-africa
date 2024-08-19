@@ -1,6 +1,47 @@
 {% extends "base.html" %}
 {% load i18n static %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Schedule | PyCon Africa" %}{% endif %}{% endblock %}
+
+{% block title %}
+{% if meta_title %}
+    {{ meta_title }}
+{% else %}
+    {% trans "Schedule | PyCon Africa" %}
+{% endif %}
+{% endblock %}
+
+{% block meta_title %}
+{% if meta_title %}
+    {{ meta_title }}
+{% else %}
+    {% trans "Schedule | PyCon Africa" %}
+{% endif %}
+{% endblock %}
+
+{% block og_description %}
+{% if meta_description %}
+    {{ meta_description }}
+{% else %}
+    {% trans "Explore the exciting schedule of PyCon Africa, filled with insightful talks, keynotes, and tutorials." %}
+{% endif %}
+{% endblock %}
+
+{% block twitter_title %}
+{% if meta_title %}
+    {{ meta_title }}
+{% else %}
+    {% trans "Schedule | PyCon Africa" %}
+{% endif %}
+{% endblock %}
+
+{% block twitter_description %}
+{% if meta_description %}
+    {{ meta_description }}
+{% else %}
+    {% trans "Explore the exciting schedule of PyCon Africa, filled with insightful talks, keynotes, and tutorials." %}
+{% endif %}
+{% endblock %}
+
+
 
 
 {% block content %} 

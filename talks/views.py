@@ -256,7 +256,6 @@ class TalkDetailView(TemplateView):
         return self.render_to_response(context)
 
 
-
 class TalksDetailView(DetailView):
     model = Proposal
     context_object_name = 'talk'
@@ -270,18 +269,37 @@ class TalksDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(TalksDetailView, self).get_context_data(**kwargs)
         proposal = self.get_object()
-        
+
         # Fetch the Profile objects for all speakers (main and additional)
         speakers = [proposal.user] + list(proposal.speakers.all())
         speaker_profiles = Profile.objects.filter(user__in=speakers)
+
+        # Determine the image for meta tags
+        primary_speaker = speaker_profiles.first()
+        if primary_speaker and primary_speaker.profile_image:
+            meta_og_image = primary_speaker.profile_image.url
+        else:
+            meta_og_image = 'default-image-url.jpg'  # Replace with your actual default image URL
+
+        # Generate the meta tags dynamically
+        meta_title = f"{proposal.title} | PyCon Africa {proposal.event_year.year}"
+        meta_description = f"Join {', '.join([profile.name for profile in speaker_profiles])} for an insightful session on {proposal.title} at PyCon Africa {proposal.event_year.year}."
 
         context.update({
             'title': "Talk Details",
             'year': proposal.event_year.year,
             'related_talks': Proposal.objects.filter(status='A', event_year=proposal.event_year).order_by('?')[:5],
-            'speakers': speaker_profiles  # Pass Profile objects instead of users
+            'speakers': speaker_profiles,  # Pass Profile objects instead of users
+            'meta_title': meta_title,
+            'meta_description': meta_description,
+            'meta_og_image': meta_og_image,
         })
         return context
+
+
+
+
+
 
 
 

@@ -1,8 +1,43 @@
 {% extends "base.html" %}
-{% load i18n static  avatar_tags crispy_forms_tags markdown_extras embed_video_tags  %}
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Speakers | PyCon Africa" %}{% endif %}{% endblock %}
+{% load i18n static  avatar_tags crispy_forms_tags markdown_extras embed_video_tags  %}{% block og_title %}
+{% if meta_title %}
+    {{ meta_title }}
+{% elif page %}
+    {{ page.meta_title }}
+{% else %}
+    {% trans "Speakers | PyCon Africa" %}
+{% endif %}
+{% endblock %}
 
+{% block og_description %}
+{% if meta_description %}
+    {{ meta_description }}
+{% elif page %}
+    {{ page.meta_description }}
+{% else %}
+    {% trans "Meet the incredible speakers at PyCon Africa." %}
+{% endif %}
+{% endblock %}
 
+{% block twitter_title %}
+{% if meta_title %}
+    {{ meta_title }}
+{% elif page %}
+    {{ page.meta_title }}
+{% else %}
+    {% trans "Speakers | PyCon Africa" %}
+{% endif %}
+{% endblock %}
+
+{% block twitter_description %}
+{% if meta_description %}
+    {{ meta_description }}
+{% elif page %}
+    {{ page.meta_description }}
+{% else %}
+    {% trans "Meet the incredible speakers at PyCon Africa." %}
+{% endif %}
+{% endblock %}
 
 {% block content %} 
 {% include '2024/navbar.html' %}

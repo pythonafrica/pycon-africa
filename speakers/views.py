@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from next_prev import next_in_order, prev_in_order
- 
+from django.utils.text import Truncator
 from registration.models import Profile 
 from talks.models import Proposal
 from schedule.models import TalkSchedule
@@ -20,7 +20,7 @@ from home.models import EventYear
 from event.models import Event 
 from django.db.models import Q, F, Exists, OuterRef, Case, When, IntegerField
  
-
+ 
 class Speakers(ListView):
     model = Profile
     context_object_name = 'speakers'
@@ -53,7 +53,8 @@ class Speakers(ListView):
                 output_field=IntegerField(),
             )
         ).order_by('sort_priority', 'user', 'date_created')
- 
+
+        # Remove duplicate speakers
         seen_users = set()
         unique_speakers = []
         for speaker in queryset:
@@ -68,12 +69,18 @@ class Speakers(ListView):
         speakers = context['speakers']
         keynote_speakers = [speaker for speaker in speakers if speaker.is_keynote_speaker]
         other_speakers = [speaker for speaker in speakers if not speaker.is_keynote_speaker]
+
+        # Meta Information
+        meta_description = "Meet the incredible speakers at PyCon Africa. From keynotes to sponsored talks, our speakers bring a wealth of knowledge and insight to the stage."
+        meta_title = f"Speakers at PyCon Africa {self.kwargs.get('year', 'default')}" if keynote_speakers else f"Speakers at PyCon Africa {self.kwargs.get('year', 'default')}"
+
         context.update({
             'keynote_speakers': keynote_speakers,
-            'other_speakers': other_speakers
+            'other_speakers': other_speakers,
+            'meta_title': meta_title,
+            'meta_description': meta_description,
         })
         return context
-
 
 
 
@@ -99,7 +106,7 @@ class SpeakerDetailView(HitCountDetailView):
 
         # Collect related speakers without duplication
         related_speakers = Profile.objects.filter( 
-            user__proposals__status='A',  # Ensure the proposals are accepted
+            user__proposals__status='A',  
             user__proposals__event_year=event_year
         ).annotate(
             user_accepted=Exists(
@@ -112,11 +119,24 @@ class SpeakerDetailView(HitCountDetailView):
             )
         ).filter(user_accepted=True).exclude(profile_id=self.object.profile_id).distinct()
 
+        # Truncate biography to 30 words
+        truncated_biography = Truncator(self.object.biography).words(30, truncate='...')
+
+        # Meta tags information
+        meta_title = f"{self.object.name} | PyCon Africa {year}"
+        meta_description = f"Meet {self.object.name}, a speaker at PyCon Africa {year}. {truncated_biography}"
+        meta_author = "PyCon Africa"
+        meta_og_image = self.object.profile_image.url if self.object.profile_image else "default-image-url"
+
         context.update({
             'talks': talks,
             'related_speakers': related_speakers,
             'events': Event.objects.all(),
             'speakers': Profile.objects.filter(is_visible=True),
             'schedule': TalkSchedule.objects.all(),
+            'meta_title': meta_title,
+            'meta_description': meta_description,
+            'meta_author': meta_author,
+            'meta_og_image': meta_og_image,
         })
         return context

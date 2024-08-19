@@ -20,7 +20,6 @@ from datetime import datetime
 
 from .models import TalkSchedule, Day
 
-
 def schedule(request, year):
     """Renders the schedule page for a specific year."""
     assert isinstance(request, HttpRequest)
@@ -37,6 +36,11 @@ def schedule(request, year):
             talk__event_year=event_year
         ).select_related('talk', 'talk__user').prefetch_related('talk__speakers').order_by('start_time')
 
+    # Meta information
+    meta_title = f"Schedule | PyCon Africa {year}"
+    meta_description = f"Explore the schedule for PyCon Africa {year}, including keynotes, talks, tutorials, and more. Plan your conference experience with us."
+    meta_og_image = "https://res.cloudinary.com/pycon-africa/image/upload/v1722977619/website_storage_location/media/schedule_og_image.png"  # Replace with a suitable image
+
     return render(
         request,
         f'{year}/schedule/schedule.html',
@@ -44,8 +48,12 @@ def schedule(request, year):
             'title': 'Schedule',
             'year': year,
             'days': days,
+            'meta_title': meta_title,
+            'meta_description': meta_description,
+            'meta_og_image': meta_og_image,
         }
     )
+
 
 
 
