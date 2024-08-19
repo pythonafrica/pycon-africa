@@ -58,3 +58,6 @@ def get_speakers_for_homepage():
         'keynote_speakers': keynote_speakers,
         'final_speakers': final_speakers,
     }
+ 
+
+ 
