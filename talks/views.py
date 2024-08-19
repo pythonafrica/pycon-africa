@@ -44,6 +44,7 @@ from home.models import EventYear
 from registration.models import Profile   
 from django.db.models import Avg, F, Q, Count  
 from django.contrib.sites.models import Site
+from django.utils.text import Truncator
 
 
 logger = logging.getLogger(__name__)
@@ -255,7 +256,6 @@ class TalkDetailView(TemplateView):
         context = self.get_context_data(form=form)
         return self.render_to_response(context)
 
-
 class TalksDetailView(DetailView):
     model = Proposal
     context_object_name = 'talk'
@@ -274,16 +274,10 @@ class TalksDetailView(DetailView):
         speakers = [proposal.user] + list(proposal.speakers.all())
         speaker_profiles = Profile.objects.filter(user__in=speakers)
 
-        # Determine the image for meta tags
-        primary_speaker = speaker_profiles.first()
-        if primary_speaker and primary_speaker.profile_image:
-            meta_og_image = primary_speaker.profile_image.url
-        else:
-            meta_og_image = 'default-image-url.jpg'  # Replace with your actual default image URL
-
         # Generate the meta tags dynamically
         meta_title = f"{proposal.title} | PyCon Africa {proposal.event_year.year}"
-        meta_description = f"Join {', '.join([profile.name for profile in speaker_profiles])} for an insightful session on {proposal.title} at PyCon Africa {proposal.event_year.year}."
+        meta_description = Truncator(proposal.talk_abstract).words(30, truncate='...') if proposal.talk_abstract else "Join us at PyCon Africa for an insightful talk."
+        meta_og_image = speaker_profiles.first().profile_image.url if speaker_profiles.exists() and speaker_profiles.first().profile_image else 'https://res.cloudinary.com/pycon-africa/image/upload/v1722977619/website_storage_location/media/pyconafrica.png' 
 
         context.update({
             'title': "Talk Details",

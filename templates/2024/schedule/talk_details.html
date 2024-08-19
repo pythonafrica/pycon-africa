@@ -1,6 +1,15 @@
-{% extends "2024/base.html" %}
+{% extends "base.html" %}
 {% load i18n static  avatar_tags crispy_forms_tags markdown_extras  embed_video_tags  %}
+
 {% block meta_title %}
+    {% if meta_title %}
+        {{ meta_title }}
+    {% else %}
+        {{ talk.title }} | PyCon Africa
+    {% endif %}
+{% endblock %}
+
+{% block og_title %}
     {% if meta_title %}
         {{ meta_title }}
     {% else %}
@@ -12,11 +21,15 @@
     {% if meta_description %}
         {{ meta_description }}
     {% else %}
-        {% if speakers %}
-            Join {{ speakers.first.name }} and others for {{ talk.title }} at PyCon Africa {{ year }}.
-        {% else %}
-            Learn more about {{ talk.title }} at PyCon Africa {{ year }}.
-        {% endif %}
+        {{ talk.talk_abstract|truncatewords:30 }}  
+    {% endif %}
+{% endblock %}
+
+{% block og_description %}
+    {% if meta_description %}
+        {{ meta_description }}
+    {% else %}
+        {{ talk.talk_abstract|truncatewords:30 }}  
     {% endif %}
 {% endblock %}
 
@@ -24,7 +37,15 @@
     {% if meta_og_image %}
         {{ meta_og_image }}
     {% else %}
-        /static/images/default-image-url.jpg  <!-- Replace with your actual default image path -->
+        /static/images/default-image-url.jpg  
+    {% endif %}
+{% endblock %}
+
+{% block og_image %}
+    {% if meta_og_image %}
+        {{ meta_og_image }}
+    {% else %}
+        /static/images/default-image-url.jpg  
     {% endif %}
 {% endblock %}
 
@@ -32,11 +53,23 @@
     {{ request.build_absolute_uri }}
 {% endblock %}
 
+{% block og_url %}
+    {{ request.build_absolute_uri }}
+{% endblock %}
+
 {% block meta_og_type %}
     website
 {% endblock %}
 
+{% block og_type %}
+    website
+{% endblock %}
+
 {% block meta_og_site_name %}
+    PyCon Africa
+{% endblock %}
+
+{% block og_site_name %}
     PyCon Africa
 {% endblock %}
 
@@ -52,11 +85,7 @@
     {% if meta_description %}
         {{ meta_description }}
     {% else %}
-        {% if speakers %}
-            Join {{ speakers.first.name }} and others for {{ talk.title }} at PyCon Africa {{ year }}.
-        {% else %}
-            Learn more about {{ talk.title }} at PyCon Africa {{ year }}.
-        {% endif %}
+        {{ talk.talk_abstract|truncatewords:30 }}  
     {% endif %}
 {% endblock %}
 
@@ -64,8 +93,16 @@
     {% if meta_og_image %}
         {{ meta_og_image }}
     {% else %}
-        /static/images/default-image-url.jpg  <!-- Replace with your actual default image path -->
+        /static/images/default-image-url.jpg  
     {% endif %}
+{% endblock %}
+
+{% block twitter_card %}
+    summary_large_image
+{% endblock %}
+
+{% block twitter_site %}
+    @PyConAfrica
 {% endblock %}
  
 {% block content %} 
