@@ -120,7 +120,7 @@ class SpeakerDetailView(HitCountDetailView):
         ).filter(user_accepted=True).exclude(profile_id=self.object.profile_id).distinct()
 
         # Truncate biography to 30 words
-        truncated_biography = Truncator(self.object.biography).words(30, truncate='...')
+        truncated_biography = Truncator(self.object.biography).words(50, truncate='...')
 
         # Meta tags information
         meta_title = f"{self.object.name} {self.object.surname} | PyCon Africa {year}"
