@@ -40,18 +40,19 @@ def get_speakers_for_homepage():
     # Separate keynote speakers
     keynote_speakers = [speaker for speaker in unique_speakers if speaker.is_keynote_speaker]
     
-    # Separate Sponsored Talk speakers (sort_priority = 1)
+    # Separate and prioritize Sponsored Talk speakers
     sponsored_speakers = [speaker for speaker in unique_speakers if speaker.sort_priority == 1]
 
-    # Filter out keynote and sponsored speakers, and shuffle the rest
+    # Get remaining speakers, excluding keynote and sponsored talk speakers
     other_speakers = [speaker for speaker in unique_speakers if not speaker.is_keynote_speaker and speaker.sort_priority != 1]
+
+    # Shuffle and select remaining speakers to fill up the 4-speaker limit
+    remaining_slots = max(0, 4 - len(sponsored_speakers))
     random.shuffle(other_speakers)
+    selected_other_speakers = sponsored_speakers + other_speakers[:remaining_slots]
 
-    # Limit other speakers to 4
-    other_speakers = other_speakers[:4]
-
-    # Combine sponsored speakers with the shuffled other speakers
-    final_speakers = sponsored_speakers + other_speakers
+    # Ensure we only return 4 final speakers, prioritizing sponsored talk
+    final_speakers = selected_other_speakers[:4]
 
     return {
         'keynote_speakers': keynote_speakers,
