@@ -238,12 +238,19 @@
                     <i class="icon-user"></i>
                   </a>
                 </li>
-
+                {% if speaker.twitter_handle %}
                 <li class="col g-brd-right g-brd-gray-light-v4">
-                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with  {{ speaker.name }}" target="/" href="https://www.twitter.com/{{ speaker.twitter }}">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with  {{ speaker.name }}" target="/" href="https://www.twitter.com/{{ speaker.twitter_handle }}">
                     <i class="icon-social-twitter"></i>
                   </a>
                 </li>
+                {% else %}
+                <li class="col g-brd-right g-brd-gray-light-v4">
+                  <a class="u-icon-v1 u-icon-size--sm g-color-primary g-bg-transparent g-color-yellow--hover"  data-toggle="tooltip" data-placement="bottom"  title="Connect with  {{ speaker.name }}" target="/" href="{{ speaker.linkedin }}">
+                    <i class="icon-social-linkedin"></i>
+                  </a>
+                </li>
+                {% endif %}
               </ul>
               <!-- End Figure List -->
               </div>
@@ -263,7 +270,7 @@
 
       <hr class="u-divider-linear-gradient u-divider-linear-gradient--gray-light-v2 g-my-50">
 
-        <!-- Random Speakers  
+        <!-- Random Speakers  -->
         <div class="col-12"><br> <br> 
           <div class="row">
             {% for speaker in other_speakers %}
@@ -305,7 +312,7 @@
           <a href="{% url 'speakers:speakers' year=2024 %}" class="btn btn-lg u-btn-outline-darkgray g-rounded-50">See More Speakers</a>
         </div>
 
-          End Random Speakers -->
+         <!-- End Random Speakers -->
 
 
         {% endwith %}
