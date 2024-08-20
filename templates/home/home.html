@@ -221,10 +221,10 @@
                 {% else %}
                 <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{% static '2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}"><br>
                 {% endif %}
-                <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-18 mb-0">
+                <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-16 mb-0">
                   {{ speaker.name }} {{ speaker.surname }}
                 </h3>
-                <h4 class="g-font-weight-700 g-font-size-14 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
+                <h4 class="g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
                 <hr class="g-brd-gray-light-v4 g-my-15">
                 <em class="d-block g-color-gray-dark-v4 g-font-style-normal g-font-size-12 g-mb-20"><b>{{ speaker.profession }}</b> <br>{{ speaker.organization }} </em>
                 <!-- Figure List -->
@@ -278,12 +278,12 @@
                     <img class="g-width-100 g-height-100 rounded-circle" src="{% static '2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}">
                     {% endif %}
                   </div>
-                  <h4 class="h5 g-mb-5">
-                    <a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}">{{ speaker.name }} {{ speaker.surname }}</a>
+                  <h4 class="h5 g-mb-5 g-font-size-16 g-font-weight-600">
+                    <a href="{% url 'speakers:speaker_detail' year=2024 profile_id=speaker.profile_id %}" >{{ speaker.name }} {{ speaker.surname }}</a>
                   </h4>
                   <div class="d-block">
                     <ul class="list-unstyled">
-                      <li class="d-block g-font-size-13 g-color-gray-dark-v4 mb-1">
+                      <li class="d-block g-font-size-13 g-color-gray-dark-v4 mb-1 g-font-weight-600">
                         {{ speaker.profession | truncatechars:20 }}
                       </li>
                       <li class="d-block g-color-gray-dark-v5 g-font-size-13">
