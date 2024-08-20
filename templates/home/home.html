@@ -213,20 +213,20 @@
         <div class="col-12">
           <div class="row">
             {% for speaker in speakers.keynote_speakers %}
-            <div class="col-lg-4 g-mb-30">
+            <div class="col-lg-3 g-mb-30">
               <!-- Testimonials -->
               <div class="u-shadow-v19 g-brd-bottom g-brd-3 g-brd-primary-gradient-opacity-v1 g-bg-white text-center g-px-35 g-py-60">
                 {% if speaker.profile_image %}
-                <img class="g-height-250 img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}"><br>
+                <img class="g-height-200  img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}"><br>
                 {% else %}
-                <img class="g-height-250 img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{% static '2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}"><br>
+                <img class="g-height-200 img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{% static '2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}"><br>
                 {% endif %}
-                <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-20 mb-0">
+                <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-18 mb-0">
                   {{ speaker.name }} {{ speaker.surname }}
                 </h3>
                 <h4 class="g-font-weight-700 g-font-size-14 g-color-primary g-mb-5">KEYNOTE SPEAKER</h4>
                 <hr class="g-brd-gray-light-v4 g-my-15">
-                <em class="d-block g-color-gray-dark-v4 g-font-style-normal g-font-size-13 g-mb-20"><b>{{ speaker.profession }}</b> <br>{{ speaker.organization }} </em>
+                <em class="d-block g-color-gray-dark-v4 g-font-style-normal g-font-size-12 g-mb-20"><b>{{ speaker.profession }}</b> <br>{{ speaker.organization }} </em>
                 <!-- Figure List -->
                 <ul class="row list-inline g-py-20 g-ma-0">
                   <li class="col g-brd-right g-brd-gray-light-v4">
