@@ -139,7 +139,6 @@ class UpdateForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.add_input(Submit('update', 'Update Profile'))
 
-
 class UserForm(forms.ModelForm):
     captcha = ReCaptchaField()
 
@@ -149,7 +148,6 @@ class UserForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-
         self.helper = FormHelper()
         self.helper.form_id = 'id-Crispy_UserForm'
         self.helper.form_class = 'form-horizontal'

@@ -7,7 +7,7 @@ from registration.models import Profile
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'image' )
+        fields = ('name', 'last_name', 'image' )
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,7 +22,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'id',
             'username',
-            'first_name',
+            'name',
             'last_name',
             'post_set',
             'profile'

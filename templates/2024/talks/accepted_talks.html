@@ -37,7 +37,7 @@
         {% if accepted_talks %}
             <p>Attending to PyCon Africa 2018? Here are some of the talks to look forward to:</p>
             {% for talk in accepted_talks %}
-                <p><a href="{% url 'talks:talk_details' pk=talk.pk %}">{{ talk.title }}  - {{ talk.user.first_name }}
+                <p><a href="{% url 'talks:talk_details' pk=talk.pk %}">{{ talk.title }}  - {{ talk.user.name }}
                     {{ talk.user.profile.last_name }}</a></p>
             {% endfor %}
 
