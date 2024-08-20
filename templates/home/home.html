@@ -217,9 +217,9 @@
               <!-- Testimonials -->
               <div class="u-shadow-v19 g-brd-bottom g-brd-3 g-brd-primary-gradient-opacity-v1 g-bg-white text-center g-px-35 g-py-60">
                 {% if speaker.profile_image %}
-                <img class="g-height-200  img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}"><br>
+                <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{{ speaker.profile_image.url }}" alt="{{ speaker.name }}"><br>
                 {% else %}
-                <img class="g-height-200 img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{% static '2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}"><br>
+                <img class="img-fluid img-thumbnail g-brd-primary g-rounded-10" src="{% static '2024/img/speakers/speaker.png' %}" alt="{{ speaker.name }}"><br>
                 {% endif %}
                 <h3 class="text-uppercase g-font-weight-700 g-color-primary- g-font-size-18 mb-0">
                   {{ speaker.name }} {{ speaker.surname }}
