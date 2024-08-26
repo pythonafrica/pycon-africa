@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.urls import reverse
 from sponsor_us.models import SponsorshipTier
 from home.models import EventYear
+from markdownx.models import MarkdownxField 
 
 class Sponsor(models.Model):
     SPONSOR_TYPE = (
@@ -20,7 +21,7 @@ class Sponsor(models.Model):
     website = models.URLField(default='', help_text='Link to Sponsor website', blank=True,) 
     twitter = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7'", default="", blank=True,)
     linkedin = models.CharField(max_length=100, null=True, help_text="Please enter only the user name eg.'mawy_7'", default="", blank=True,) 
-    biography = models.TextField(default='', help_text="Description of the Sponsor", blank=True, null=True)
+    biography = MarkdownxField(default='', help_text="Description of the Sponsor", blank=True, null=True)
     show_biography = models.BooleanField(default=False, help_text="Untick if the company only want their logo displayed on our website. Not all companies want their information on the site.")
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='sponsors')
     slug = models.SlugField(unique=True, blank=True)

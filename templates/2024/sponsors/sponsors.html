@@ -36,140 +36,96 @@
  
       <section>
         <div class="container g-pt-50">
-            {% for tier in sponsorship_tiers %}
-                {% if tier.sponsors.exists %} 
-                <div class="panel panel-danger wow fadeInLeft ">
-                  <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30  align-self-lg-center text-center" role="alert"> 
+          {% for tier in sponsorship_tiers %}
+          {% if tier.sponsors.exists %}
+              {% if tier.name != "Contributing Sponsor" and tier.name != "Partners" %}
+              <!-- Existing Layout for Regular Tiers -->
+              <div class="panel panel-danger wow fadeInLeft">
+                  <div class="g-line-height-2 g-mb-30 align-self-lg-center" role="alert">
                       <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30 text-center" style="color: #000; text-shadow: 2px 2px 1px {{ tier.hex }}">
-                          {{ tier.name }} 
+                          {{ tier.name }}
                       </h2>
                       <hr class="g-brd-{{ tier.colour }} g-my-20">
-                      <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-{{ tier.colour }}-left rounded g-pa-20 g-mb-200">
-                      <div class="row">
-                          {% for sponsor in tier.sponsors %} 
-                              {% if sponsor.show_biography %}
-                              <div class="col-md-3 g-mb-30">
-                                  <a  href="#{{ sponsor.name }}" data-modal-target="#{{ sponsor.name }}" data-modal-effect="blur" >
-                                  <img class='img-responsive'  style="width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
-                                  </a>
-                              </div>   
-                              {% else %}
-                              <div class="col-md-3 g-mb-30"> 
-                                  {% if sponsor.website %}
-                                  <a  href="{{ sponsor.website }}" target="/">  
+                      <li class="media g-brd-around rounded g-pa-20 g-mb-200">
+                          <div class="row">
+                              {% for sponsor in tier.sponsors %}
+                                  {% if sponsor.show_biography %}
+                                  <!-- Section -->
+                                  <section class="container g-pt-50 g-pb-40">
+                                      <div class="row">
+                                          <div class="col-lg-3 g-mb-60">
+                                              <div class=" ">
+                                                  <img class='img-responsive' style="width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                                              </div>
+                                          </div>
+                                          <div class="col-lg-8 g-mb-60">
+                                              <div class="mb-4">
+                                                  <h2 class="h3 text-uppercase mb-3">{{ sponsor.name }}</h2>
+                                                  <div class="g-width-60 g-height-1 g-bg-black"></div>
+                                              </div>
+                                              <div class="mb-5">
+                                                  <p>{{ sponsor.biography | markdown | safe }} {{ form.media }}</p>
+                                              </div>
+                                              {% if sponsor.website %}
+                                              <a class="btn btn-xl u-btn-outline-primary g-font-size-default mr-2" href="{{ sponsor.website }}" target="/">Visit website</a>
+                                              {% endif %}
+                                          </div>
+                                      </div>
+                                  </section>
+                                  <!-- End Section -->
+                                  {% else %}
+                                  <section class="container g-pt-100 g-pb-40">
+                                      <div class="row">
+                                          <div class="col-lg-3 g-mb-60">
+                                              <div class=" ">
+                                                  <img class='img-responsive' style="width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </section>
                                   {% endif %}
-                                  <img class='img-responsive'  style="width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
-                                  </a>
-                              </div>
-                              {% endif %}
-                              
-
-
-                                  <!-- Sponsor modal window -->
-                                  <div id="{{ sponsor.name }}" class="text-left g-max-width-auto g-bg-white g-overflow-y-auto g-pa-20" style="display: none;">
-                                      <button type="button" class="close" onclick="Custombox.modal.close();">
-                                      <i class="hs-icon hs-icon-close"></i>
-                                      </button>
-                                      
-                                      <div class="g-line-height-2 g-pa-40 g-mb-30 " role="alert">
-                                      <div class="g-brd-around g-brd-gray-light-v4 g-pa-20 g-mb-40">
-                                          <div class="row">
-                              
-                                          <div class="col-lg-4 text-center align-items-center g-mb-40 g-mb-0--lg ">
-                                              <!-- Speaker Image -->
-                                              <div class="g-mb-20 align-items-center">
-                                              <img class="img-fluid" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
-                                              </div>
-                                              <!-- Speaker Image -->
-                                          
-                                          </div>
-                              
-                              
-                                          <div class="col-lg-8">
-                                              <!-- Speaker Details -->
-                                              <div class="d-flex align-items-center justify-content-sm-between g-mb-5">
-                                              <h2 class="g-font-weight-300 g-mr-10"><b>{{ sponsor.name }}</b></h2>
-
-                                              <ul class="list-inline mb-0">
-                              
-                                                  {% if sponsor.twitter %}
-                                                  <li class="list-inline-item g-mx-2">
-                                                      <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-twitter--hover rounded-circle" href="https://www.twitter.com/{{ sponsor.twitter }}" target="/">
-                                                      <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-twitter"></i>
-                                                      <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-twitter"></i>
-                                                      </a>
-                                                  </li>
-                                                  
-                                                  {% else %}
-                                                      <p></p>
-                                                  {% endif %}
-                                                  
-                                                  {% if sponsor.linkedin %}
-                                                  <li class="list-inline-item g-mx-2">
-                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-linkedin--hover rounded-circle" href="https://www.linkedin.com/{{ sponsor.linkedin }}" target="/">
-                                                      <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-linkedin"></i>
-                                                      <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-linkedin"></i>
-                                                  </a>
-                                                  </li>
-                                                  {% else %}
-                                                      <p></p>
-                                                  {% endif %}
-
-                                                  {% if sponsor.youtube %}
-                                                  <li class="list-inline-item g-mx-2">
-                                                  <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-primary g-bg-gray-light-v5 g-color-youtube--hover rounded-circle" href="{{ sponsor.youtube }}" target="/">
-                                                      <i class="g-font-size-default g-line-height-1 u-icon__elem-regular fa fa-youtube"></i>
-                                                      <i class="g-font-size-default g-line-height-0_8 u-icon__elem-hover fa fa-youtube"></i>
-                                                  </a>
-                                                  </li>
-                                                  {% else %}
-                                                      <p></p>
-                                                  {% endif %}
-                          
-                                              </ul>
-                                              </div>
-                                              <!-- End Speaker Details -->
-                              
-                                          <!-- Speaker Position -->
-                                          <h4 class="h6 g-font-weight-300 g-mb-10" style="color: #000; text-shadow: 2px 2px 3px {{ tier.hex }}">
-                                              <b>
-                                              <i class="icon-badge g-pos-rel g-top-1 g-mr-5 g-color-gray-dark-v1" ></i>  {{ tier.name }} SPONSOR
-                                              </b>
-                                          </h4>
-                                          <!-- End Speaker Position -->
-                              
-                                              <hr class="g-brd-gray-light-v4 g-my-20">
-                                          
-                                              <p class="g-color-black g-font-size-16">
-                                              {{ sponsor.biography }}
-                                              </p>
-                                              <hr class="g-brd-gray-light-v4 g-my-20">
-                                              <a class="align-items-center btn u-shadow-v32 g-color-primary g-color-yellow--hover g-bg-white g-bg-main--hover g-rounded-30 g-px-35 g-py-13" href="{{ sponsor.website }}" target="/"><b>Visit our Website</b></a>
-                                          </div>
-                              
-                                          
-                                          </div>
-                                      </div>
-                              
-                              
-                                      </div>
-                                  </div>
-                                  <!-- End Sponsor modal window -->
-
-
-                          {% endfor %}
-                      </div>
-                      </li><br>
-                      <img class="d-inline-block g-width-80 g-brd-around g-brd-5 g-brd-white " src="{% static '2020/img/sponsors/thank.png' %}" alt="Image Description">
-    
+                              {% endfor %}
+                          </div>
+                      </li>
                   </div>
               </div>
-                {% endif %}
-            {% endfor %}
+              {% endif %}
+          {% endif %}
+      {% endfor %}
+      
+      <!-- Grid Layout for Contributing Sponsor and Partners at the Bottom -->
+      {% for tier in sponsorship_tiers %}
+          {% if tier.sponsors.exists %}
+              {% if tier.name == "Contributing Sponsor" or tier.name == "Partners" %}
+              <div class="panel panel-danger wow fadeInLeft">
+                  <div class="g-line-height-2 g-mb-30 align-self-lg-center" role="alert">
+                      <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30 text-center" style="color: #000; text-shadow: 2px 2px 1px {{ tier.hex }}">
+                          {{ tier.name }}
+                      </h2>
+                      <hr class="g-brd-{{ tier.colour }} g-my-20">
+                      <div class="row">
+                          {% for sponsor in tier.sponsors %}
+                          <div class="col-md-3 col-sm-6 g-mb-30"> 
+                            {% if sponsor.website %}
+                            <a class="" href="{{ sponsor.website }}" target="/"> 
+                              <img class="img-fluid" style="max-width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                            </a>
+                            {% else %}
+                            <img class="img-fluid" style="max-width: 100%;" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                            {% endif %}
+                          </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+          {% endif %}
+      {% endfor %}
+      
     
             {% if no_sponsors %}
                 <div class="panel panel-danger wow fadeInLeft">
-                    <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" role="alert">
+                    <div class=" g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" role="alert">
                         <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30 text-center" style="color: #000;">
                             Who’s on First in Sponsoring PyCon Africa 2024? It Could Be You!
                         </h2>
@@ -192,7 +148,7 @@
                         <div class="row ">
                                             
                         {% if diamond %}
-                        <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;" role="alert">
+                        <div class=" g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;" role="alert">
                           <ul class="list-unstyled align-self-lg-center">
                             <img class="img-responsive g-height-25 " src="{% static '2020/img/sponsors/diamond.png' %}" alt="{{ sponsor.name }}">
                             <br>
@@ -200,6 +156,8 @@
                               <div class="row">
                               {% for sponsor in diamond %}
                               {% if sponsor.is_visible %}
+ 
+
                                 <div class="col-md-3 g-mb-30">
                                   {% if sponsor.show_biography %}
                                   <a  href="#{{ sponsor.name }}" data-modal-target="#{{ sponsor.name }}" data-modal-effect="blur" >
@@ -326,7 +284,7 @@
 
 
                         {% if gold %}
-                        <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;" role="alert">
+                        <div class=" g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;" role="alert">
                           <ul class="list-unstyled align-self-lg-center">
                             <img class=" img-responsive g-height-25 " src="{% static '2020/img/sponsors/gold.png' %}" alt="{{ sponsor.name }}">
                             <br>
@@ -457,7 +415,7 @@
             
                          
                         {% if silver%}
-                        <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;" role="alert">
+                        <div class=" g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;" role="alert">
                           <ul class="list-unstyled align-self-lg-center">
                             <img class="img-responsive g-height-25 " src="{% static '2020/img/sponsors/silver.png' %}" alt="{{ sponsor.name }}">
                             <br>
@@ -590,7 +548,7 @@
 
                         
                         {% if bronze %}
-                        <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;"  role="alert">
+                        <div class=" g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;"  role="alert">
                
                             <ul class="list-unstyled align-self-lg-center">
                               <img class="img-responsive g-height-25 " src="{% static '2020/img/sponsors/bronze.png' %}" alt="{{ sponsor.name }}">
@@ -713,7 +671,7 @@
               
     
                         {% if other %}
-                        <div class="u-shadow-v1-5 g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;"  role="alert">
+                        <div class=" g-line-height-2 g-pa-40 g-mb-30 align-self-lg-center text-center" style="width: 100%;"  role="alert">
                
                 <ul class="list-unstyled align-self-lg-center">
                   <img class="img-responsive g-height-25 " src="{% static '2020/img/sponsors/others.png' %}" alt="Image Description">
