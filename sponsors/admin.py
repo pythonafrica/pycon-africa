@@ -4,8 +4,8 @@ from sponsor_us.models import SponsorshipTier
 from home.models import EventYear
 
 class SponsorAdmin(admin.ModelAdmin):
-    list_display = ("name", "is_visible", "sponsor_type", "get_tier_display", "get_event_year_display")
-    list_editable = ["is_visible"]
+    list_display = ("name", "is_visible", "show_biography", "sponsor_type", "get_tier_display", "get_event_year_display")
+    list_editable = ["is_visible", "show_biography"]
     list_filter = ["is_visible", "sponsor_type", "tier__name", "event_year__year"]
     search_fields = ['name', 'biography']
     # Removed autocomplete_fields to use dropdowns instead
