@@ -9,6 +9,7 @@ class Sponsor(models.Model):
     SPONSOR_TYPE = (
         ('C', 'Corporate Sponsor'),
         ('S', 'Special Sponsor'),
+        ('G', 'Grant'),
         ('D', 'Diversity'),
         ('I', 'Individual Sponsor'),
     )
@@ -33,12 +34,17 @@ class Sponsor(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Generate slug from name if not already set or if the name has changed
-        if not self.slug or slugify(self.name) != self.slug:
+        if not self.slug:
             self.slug = slugify(self.name)
+            original_slug = self.slug
+            queryset = Sponsor.objects.filter(slug=self.slug)
+            count = 1
+            # Ensure the slug is unique by appending a number if necessary
+            while queryset.exists():
+                self.slug = f'{original_slug}-{count}'
+                count += 1
+                queryset = Sponsor.objects.filter(slug=self.slug)
         super().save(*args, **kwargs)
     
     def get_absolute_url(self):
         return reverse('sponsor_detail', kwargs={'year': self.event_year.year, 'slug': self.slug})
- 
-

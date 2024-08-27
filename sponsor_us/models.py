@@ -36,6 +36,7 @@ class SponsorshipTier(models.Model):
     hex = models.CharField(max_length=25, default="#000", help_text="Hex colour for tier eg, #cd7f32")
     details = MarkdownxField(help_text="[Supports Markdown] - Detailed description of the tier.")
     display_order = models.IntegerField(default=0, help_text="Order in which the tier should be displayed.")
+    show_in_grid = models.BooleanField(default=False, help_text="Tick this if the sponsors in this tier should be displayed in a grid layout.")
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, related_name='sponsorship_tiers', null=True) 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sponsorship_tier_users')
     date_created = models.DateTimeField(auto_now_add=True)

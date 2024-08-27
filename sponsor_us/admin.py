@@ -25,7 +25,8 @@ class SponsorUsPageAdmin(MarkdownxModelAdmin):
 
 @admin.register(SponsorshipTier)
 class SponsorshipTierAdmin(MarkdownxModelAdmin):
-    list_display = ('name', 'display_order', 'amount', 'colour', 'hex', 'date_created', 'date_updated')
+    list_display = ('name', 'show_in_grid', 'display_order', 'amount', 'colour', 'hex', 'date_created', 'date_updated')
+    list_editable = ('show_in_grid',)        
     inlines = [SponsorshipBenefitInline, AdditionalResourceInline]
     search_fields = ['name',]   
     exclude = ('user',)  # Exclude the user field from the admin form 
