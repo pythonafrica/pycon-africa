@@ -85,7 +85,14 @@
                 This is our provisional schedule and is subject to change, and all times listed are based on the 
                 <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
             </p>
-            <br>
+            <br> 
+        {% if request.user.is_superuser  %}                        
+              <a href="{% url 'schedule:create_talk_schedule' year=2024 %}" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
+                <i class="fa fa-check-circle g-mr-3"></i>
+                Create/Add to the Schedule
+              </a>
+              <br> 
+        {% endif  %}    
             <div class="mad-shedule-head">
                 <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session"><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
                 <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session"><i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>

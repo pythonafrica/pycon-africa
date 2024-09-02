@@ -119,13 +119,17 @@ class ScheduleDetailView(DetailView):
         return context
 
 
-def create_talk_schedule(request):
+def create_talk_schedule(request, year):
+    event_year = get_object_or_404(EventYear, year=year)
+
     if request.method == 'POST':
         form = TalkScheduleForm(request.POST)
         if form.is_valid():
-            form.save()
-            # Redirect or render a success page
+            talk_schedule = form.save(commit=False)
+            talk_schedule.talk.event_year = event_year  # Set the event year for the talk
+            talk_schedule.save()
+            return redirect('schedule:schedule', year=year)  # Redirect to a list or success page
     else:
         form = TalkScheduleForm()
-    
-    return render(request, 'your_template.html', {'form': form})
+
+    return render(request, f'{year}/schedule/create_schedule.html', {'form': form, 'year': year})
