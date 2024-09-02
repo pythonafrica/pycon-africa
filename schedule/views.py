@@ -14,20 +14,31 @@ from next_prev import next_in_order, prev_in_order
 from home.models import EventYear
 from registration.models import Profile 
 from talks.models import Proposal
+from .forms import TalkScheduleForm  
+
+from django.contrib.auth.decorators import login_required
+from .models import * 
 
 
 from datetime import datetime
 
 from .models import TalkSchedule, Day
 
+
+
 def schedule(request, year):
     """Renders the schedule page for a specific year."""
     assert isinstance(request, HttpRequest)
-    try:
-        event_year = EventYear.objects.get(year=year)
-    except EventYear.DoesNotExist:
-        raise Http404("Event year does not exist.")
+    
+    # Fetch the event year or raise 404 if not found
+    event_year = get_object_or_404(EventYear, year=year)
 
+    # Check the visibility setting
+    visibility = ScheduleVisibility.objects.first()
+    if visibility is None:
+        visibility = ScheduleVisibility.objects.create(is_live=False)
+
+    # Fetch and order the conference days
     days = Day.objects.all().order_by('conference_day')
     for day in days:
         # Fetch schedules along with talk and speaker details
@@ -36,7 +47,7 @@ def schedule(request, year):
             talk__event_year=event_year
         ).select_related('talk', 'talk__user').prefetch_related('talk__speakers').order_by('start_time')
 
-    # Meta information
+    # Meta information for Open Graph and Twitter Cards
     meta_title = f"Schedule | PyCon Africa {year}"
     meta_description = f"Explore the schedule for PyCon Africa {year}, including keynotes, talks, tutorials, and more. Plan your conference experience with us."
     meta_og_image = "https://res.cloudinary.com/pycon-africa/image/upload/v1722977619/website_storage_location/media/schedule_og_image.png"  # Replace with a suitable image
@@ -48,14 +59,12 @@ def schedule(request, year):
             'title': 'Schedule',
             'year': year,
             'days': days,
+            'is_schedule_live': visibility.is_live or request.user.is_superuser,
             'meta_title': meta_title,
             'meta_description': meta_description,
             'meta_og_image': meta_og_image,
         }
     )
-
-
-
 
 
 
@@ -108,3 +117,15 @@ class ScheduleDetailView(DetailView):
             'event_year': event_year
         })
         return context
+
+
+def create_talk_schedule(request):
+    if request.method == 'POST':
+        form = TalkScheduleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect or render a success page
+    else:
+        form = TalkScheduleForm()
+    
+    return render(request, 'your_template.html', {'form': form})

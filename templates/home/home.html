@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static sponsors_tags keynotes_tag %}
+{% load i18n static sponsors_tags keynotes_tag  schedule_tags %}
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Home | PyCon Africa 2024" %}{% endif %}{% endblock %}
 
 
@@ -399,6 +399,10 @@
 
 <!-- End Speakers Section --> 
 
+ 
+ 
+
+{% schedule_preview 2024 5 %}
 
 
 
