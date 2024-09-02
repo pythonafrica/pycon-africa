@@ -51,8 +51,7 @@
   <link rel="stylesheet" href="{% static 'uni-theme/vendor/hamburgers/hamburgers.min.css' %}">
   <link rel="stylesheet" href="{% static 'uni-theme/vendor/animate.css' %}">
   <link rel="stylesheet" type="text/css" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
-  <link rel="stylesheet" type="text/css"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css">
-  <link rel="stylesheet" href="{% static 'uni-theme/vendor/slick-carousel/slick/slick.css' %}">
+  <link rel="stylesheet" type="text/css"  href="https://site-assets.fontawesome.com/releases/v6.1.2/css/all.css"> 
   <link rel="stylesheet" href="{% static 'uni-theme/vendor/fancybox/jquery.fancybox.css' %}">
   <link  rel="stylesheet" href="{% static 'uni-theme/vendor/animate.css' %}">
   <link  rel="stylesheet" href="{% static 'uni-theme/vendor/custombox/custombox.min.css' %}">
@@ -292,5 +291,12 @@
       window.history.back();
     }
     </script>
+  
+      <script >
+        $(document).on('ready', function () {
+          // initialization of carousel
+          $.HSCore.components.HSCarousel.init('.js-carousel');
+        });
+      </script>
 </body>
 </html>
