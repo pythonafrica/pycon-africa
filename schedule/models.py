@@ -5,6 +5,8 @@ from talks.models import Proposal
 from event.models import *
 from home.models import EventYear 
 from django.utils.dateparse import parse_date
+from django.core.exceptions import ValidationError
+from event.models import Event
 
 
 
@@ -41,9 +43,9 @@ class TalkSchedule(models.Model):
     )
 
     conference_day = models.ForeignKey(Day, on_delete=models.CASCADE)
-    talk = models.ForeignKey(Proposal, on_delete=models.CASCADE, help_text="Select a Talk if it's a Speaker giving a talk")
+    talk = models.ForeignKey(Proposal, on_delete=models.CASCADE, blank=True, null=True, help_text="Select a Talk if it's a Speaker giving a talk")
     is_an_event = models.BooleanField(default=False)
-    event = models.CharField(max_length=250, default="", blank=True, help_text="Name of the event [if it's an event]")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, blank=True, null=True, help_text="Select an Event if it's not a Talk")
     fa_icon = models.CharField(max_length=100, default='', blank=True)
     event_url = models.CharField(max_length=250, default="", blank=True, help_text='URL to the event')
     external_url = models.CharField(max_length=250, default="", blank=True, help_text='External link to the event')
@@ -61,12 +63,22 @@ class TalkSchedule(models.Model):
         verbose_name_plural = "Talk Schedules"
 
     def __str__(self):
-        speakers_names = ', '.join([speaker.profile.name for speaker in self.talk.speakers.all()])
         if self.is_an_event:
             return f"{self.event} in {self.allocated_room}"
+        speakers_names = ', '.join([speaker.profile.name for speaker in self.talk.speakers.all()])
         return f"{self.talk.title} by {speakers_names}"
 
+    def clean(self):
+        # Validation to ensure either a talk or an event is provided, but not both
+        if not self.talk and not self.event:
+            raise ValidationError('Either a talk must be selected or an event name must be provided.')
+        if self.talk and self.event:
+            raise ValidationError('You cannot have both a talk and an event in the same schedule entry.')
+        if self.is_an_event and not self.event:
+            raise ValidationError('You must provide an event name if this is an event.')
+
     def save(self, *args, **kwargs):
+        self.clean()  # Ensure validation is called
         # Ensure conference_day.conference_day is a date object
         if isinstance(self.conference_day.conference_day, str):
             conference_date = parse_date(self.conference_day.conference_day)
@@ -82,7 +94,13 @@ class TalkSchedule(models.Model):
                 timezone.datetime.combine(conference_date, self.end_time.time())
             )
 
+        # If the talk is a special one, you can skip further checks or handle it differently
+        if self.talk and self.talk.id in [talk['id'] for talk in TalkScheduleForm.SPECIAL_TALKS]:
+            self.event = self.talk.title
+            self.talk = None  # Remove the talk since it's not a real proposal
+
         super().save(*args, **kwargs)
+
 
 
  

@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField 
 from django.utils import timezone  
+from home.models import EventYear 
 
 from django.contrib.contenttypes.fields import GenericRelation
 from django_extensions.db.fields import AutoSlugField
@@ -76,6 +77,7 @@ class Event(models.Model):
     have_a_confirmed_time = models.BooleanField(default=False)
     start_time = models.DateTimeField(default=timezone.now, null=True, blank=True) 
     end_time = models.DateTimeField(default=timezone.now, null=True, blank=True)
+    event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="", related_name='events', help_text="The event year this proposal is for")
     date_published = models.DateTimeField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
