@@ -202,27 +202,7 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-
-                {% if events %}
-                <h3>Related Events</h3>
-                <ul class="list-unstyled">
-                    {% for event in events %}
-                    {% if event.speaker == speaker.user %}
-                    <li class="media g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-pink-left g-rounded-3 g-pa-20 g-mb-7">
-                        <div class="media-body">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="h6 g-font-weight-600 g-color-black">
-                                    <a href="/events/{{ event.id }}/">{{ event.title }}</a>
-                                </h5>
-                                <span class="small text-nowrap g-color-pink">{{ event.start_time|time:"h:iA" }}</span>
-                            </div>
-                            <p>{{ event.description|truncatewords:30 }}</p>
-                        </div>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-                {% endif %}
+ 
             </div>
 
             <hr>
