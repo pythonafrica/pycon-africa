@@ -1,38 +1,56 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field, Submit
 from django import forms
+from datetime import datetime
 from .models import TalkSchedule, Proposal
-from event.models import Event
 
 class TalkScheduleForm(forms.ModelForm):
     class Meta:
         model = TalkSchedule
         fields = '__all__'
+        widgets = {
+            'conference_day': forms.Select(attrs={'class': 'form-control'}),
+            'talk': forms.Select(attrs={'class': 'form-control'}),
+            'event': forms.TextInput(attrs={'class': 'form-control'}),
+            'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time', 'step': '60'}),
+            'end_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time', 'step': '60'}),
+            'day_session': forms.Select(attrs={'class': 'form-control'}),
+            'allocated_room': forms.Select(attrs={'class': 'form-control'}),
+            'event_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Enter event URL'}),
+            'external_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Enter external URL'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(TalkScheduleForm, self).__init__(*args, **kwargs)
 
-        # Exclude talks that are already in the schedule
-        scheduled_talks = TalkSchedule.objects.values_list('talk_id', flat=True)
-        self.fields['talk'].queryset = Proposal.objects.filter(status='A', user_response='A').exclude(pk__in=scheduled_talks)
+        # Initialize Crispy Forms helper
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout = Layout(
+            Field('conference_day'),
+            Field('talk'),
+            Field('event'),
+            Field('start_time'),
+            Field('end_time'),
+            Field('day_session'),
+            Field('allocated_room'),
+            Field('event_url'),
+            Field('external_url'),
+            Submit('submit', 'Save Schedule', css_class='btn btn-primary')
+        )
 
-        # Exclude events that are already in the schedule (optional, if needed)
-        scheduled_events = TalkSchedule.objects.values_list('event_id', flat=True)
-        self.fields['event'].queryset = Event.objects.exclude(pk__in=scheduled_events)
- 
+        # Get the talks already scheduled
+        scheduled_talks = TalkSchedule.objects.filter(talk__isnull=False).values_list('talk_id', flat=True)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        is_an_event = cleaned_data.get('is_an_event')
-        event = cleaned_data.get('event')
-        talk = cleaned_data.get('talk')
+        # Filter available talks that haven't been scheduled and are accepted by the speaker
+        available_talks = Proposal.objects.filter(status='A', user_response='A').exclude(pk__in=scheduled_talks)
 
-        # Validate that either an event or a talk is provided, but not both
-        if is_an_event and not event:
-            self.add_error('event', 'This field is required for events.')
+        # Add available talks to the choices (id, title)
+        talk_choices = [(talk.pk, talk.title) for talk in available_talks]
 
-        if not is_an_event and not talk:
-            self.add_error('talk', 'This field is required for talks.')
+        # Set the available talks in the dropdown
+        self.fields['talk'].choices = [('', 'Select a talk')] + talk_choices
 
-        if is_an_event and talk:
-            raise forms.ValidationError('You cannot have both a talk and an event in the same schedule entry.')
-
-        return cleaned_data
+        # Set placeholders and help texts dynamically
+        self.fields['event'].widget.attrs.update({'placeholder': 'Enter event name'})
+        self.fields['talk'].widget.attrs.update({'placeholder': 'Select a talk'})

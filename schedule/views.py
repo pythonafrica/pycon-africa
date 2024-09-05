@@ -15,7 +15,7 @@ from home.models import EventYear
 from registration.models import Profile 
 from talks.models import Proposal
 from .forms import TalkScheduleForm  
-
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
 from .models import * 
 
@@ -29,7 +29,7 @@ from .models import TalkSchedule, Day
 def schedule(request, year):
     """Renders the schedule page for a specific year."""
     assert isinstance(request, HttpRequest)
-    
+
     # Fetch the event year or raise 404 if not found
     event_year = get_object_or_404(EventYear, year=year)
 
@@ -41,10 +41,11 @@ def schedule(request, year):
     # Fetch and order the conference days
     days = Day.objects.all().order_by('conference_day')
     for day in days:
-        # Fetch schedules along with talk and speaker details
+        # Fetch both talks and events for the given day
         day.schedules = TalkSchedule.objects.filter(
-            conference_day=day,
-            talk__event_year=event_year
+            conference_day=day
+        ).filter(
+            models.Q(talk__event_year=event_year) | models.Q(is_an_event=True)
         ).select_related('talk', 'talk__user').prefetch_related('talk__speakers').order_by('start_time')
 
     # Meta information for Open Graph and Twitter Cards
@@ -67,38 +68,11 @@ def schedule(request, year):
     )
 
 
-
-
-
-class ScheduleDetailView(DetailView):
+class ScheduleDetailView(HitCountDetailView):
     model = TalkSchedule
     context_object_name = 'schedule'
     slug_field = 'proposal_id'  # Ensure this field matches your model's field
-    template_name_field = 'schedule_details_template'
-
-    def get_template_names(self):
-        # Assuming each TalkSchedule instance can determine its own template
-        if self.object:
-            year = self.object.talk.event_year.year
-            return [f'{year}/talks/{self.get_template_name_field()}.html']
-        return ['schedule/default.html']
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['year'] = datetime.now().year  # Add more context as needed
-        return context
-
-    def get_template_name_field(self):
-        return self.template_name_field
-    
-
-    
-class ScheduleDetailView(DetailView):
-    model = TalkSchedule
-    context_object_name = 'schedule'
-    slug_field = 'proposal_id'
-    # Set to True to count the hit
-    count_hit = True
+    count_hit = True  # To count hits for hitcount feature
     paginate_by = 3
 
     def get_template_names(self):
@@ -113,12 +87,14 @@ class ScheduleDetailView(DetailView):
         context.update({
             'talks': Proposal.objects.filter(status="A", event_year=event_year),
             'speakers': Profile.objects.filter(user__proposals__event_year=event_year).distinct(),
-            'schedules': TalkSchedule.objects.filter(event_year=event_year),
+            'schedules': TalkSchedule.objects.filter(talk__event_year=event_year),
             'event_year': event_year
         })
         return context
 
 
+@login_required
+@permission_required('schedule.add_talkschedule', raise_exception=True)
 def create_talk_schedule(request, year):
     event_year = get_object_or_404(EventYear, year=year)
 
@@ -126,9 +102,13 @@ def create_talk_schedule(request, year):
         form = TalkScheduleForm(request.POST)
         if form.is_valid():
             talk_schedule = form.save(commit=False)
-            talk_schedule.talk.event_year = event_year  # Set the event year for the talk
+
+            # Check if a talk was selected
+            if talk_schedule.talk:
+                talk_schedule.talk.event_year = event_year  # Only set event_year if a talk is selected
+            
             talk_schedule.save()
-            return redirect('schedule:schedule', year=year)  # Redirect to a list or success page
+            return redirect('schedule:schedule', year=year)
     else:
         form = TalkScheduleForm()
 

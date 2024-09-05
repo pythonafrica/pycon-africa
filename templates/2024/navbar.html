@@ -66,6 +66,10 @@
               <!-- Submenu (Bootstrap) -->
               <ul class="dropdown-menu rounded-0 g-text-transform-none g-brd-none g-brd-top g-brd-primary g-brd-top-2 g-mt-20 g-mt-10--lg--scrolling">
                 <li class="dropdown-item ">
+                  <a class="nav-link g-px-0 g-color-black" href="/2024/speakers/" class="mad-ln--independent">Our Speakers</a> 
+                </li> 
+                <hr>
+                <li class="dropdown-item ">
                   <a class="nav-link g-px-0 g-color-black" href="/2024/talks/speaking/" class="mad-ln--independent">Proposals</a> 
                 </li>
                 <li class="dropdown-item">
@@ -109,7 +113,7 @@
               <!-- End Submenu (Bootstrap) -->
             </li> 
             <li class="nav-item g-ml-15--lg ">
-              <a href="/2024/tickets/" class="btn btn-sm u-btn-yellow g-color-primary g-mr-10 g-mb-15"><b>Get your Tickets &nbsp;<i class="fa-solid fa-tickets fa-beat-fade"></i></b></a>
+              <a href="/2024/tickets/" class="btn btn-sm u-btn-yellow g-color-primary g-mr-10 g-mb-15"><b>Tickets &nbsp;<i class="fa-solid fa-tickets fa-beat-fade"></i></b></a>
             </li>
           </ul>
 
@@ -138,7 +142,7 @@
             <!-- Submenu (Bootstrap) -->
             <ul class="dropdown-menu rounded-0 g-text-transform-none  g-brd-none g-brd-top g-brd-primary g-brd-top-2 g-mt-20 g-mt-10--lg--scrolling">
               <div class="d-flex flex-row align-items-center text-center justify-content-between g-letter-spacing-1 g-mb-15"> 
-                <strong class="g-color-black g-font-weight-600 g-font-size-18"><small  ti  data-toggle="tooltip-show" data-placement="left" title="Glad to have you here {% if request.user.user_profile %}{{ request.user.user_profile.name }} {% else %}@{{ request.user.username }}{% endif %}">&nbsp;&nbsp;&nbsp;&nbsp;{% time_of_day %}</small> </strong>
+                <strong class="g-color-black g-font-weight-600 g-font-size-18"><small  ti  data-toggle="tooltip-show" data-placement="left" title="Glad to have you here {% if request.user.user_profile %}{{ request.user.user_profile.first_name }} {% else %}@{{ request.user.username }}{% endif %}">&nbsp;&nbsp;&nbsp;&nbsp;{% time_of_day %}</small> </strong>
                 </div>
               <li class="dropdown-item  g-color-black"> 
                  <a href="{% url 'profiles:profile_home' %}" class="nav-link g-color-black g-color-dark--hover g-text-underline--none--hover g-font-size-16"><i class="far fa-address-card g-color-black g-font-size-16"></i> My Profile</a>

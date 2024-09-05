@@ -1,18 +1,41 @@
 from django.contrib import admin
-from .models import *
+from .models import TalkSchedule, Room, Day, ScheduleVisibility
 from .forms import TalkScheduleForm
+
 
 class TalkScheduleAdmin(admin.ModelAdmin):
     form = TalkScheduleForm  # Use the custom form
 
-    list_display = ('talk', 'event', 'allocated_room', 'conference_day', "concurrent_talk", "is_a_keynote_speaker", "is_a_panel", 'start_time', 'end_time')
+    list_display = ('talk', 'event', 'allocated_room', 'conference_day', 'concurrent_talk', 'is_an_event', 'is_a_keynote_speaker', 'is_a_panel', 'start_time', 'end_time')
+    list_editable = ['is_an_event', 'concurrent_talk', 'is_a_keynote_speaker', 'is_a_panel']
     ordering = ['-start_time', ]
-    list_editable = ["concurrent_talk", "is_a_keynote_speaker", "is_a_panel"]
+    
+    # Filters to enhance usability
+    list_filter = ['conference_day', 'allocated_room', 'is_a_keynote_speaker', 'is_a_panel', 'concurrent_talk']
+    
+    # Adding search capabilities
+    search_fields = ['talk__title', 'event']
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.select_related('talk', 'allocated_room', 'conference_day')
 
+    # Custom admin actions
+    actions = ['mark_as_keynote', 'mark_as_panel']
+
+    def mark_as_keynote(self, request, queryset):
+        queryset.update(is_a_keynote_speaker=True)
+        self.message_user(request, "Selected talks are now marked as keynote speakers.")
+
+    def mark_as_panel(self, request, queryset):
+        queryset.update(is_a_panel=True)
+        self.message_user(request, "Selected talks are now marked as panels.")
+
+    mark_as_keynote.short_description = "Mark selected talks as keynote speakers"
+    mark_as_panel.short_description = "Mark selected talks as panels"
+
+
+# Register Room and Day models with default admin interface
 admin.site.register(TalkSchedule, TalkScheduleAdmin)
 admin.site.register(Room)
 admin.site.register(Day)
