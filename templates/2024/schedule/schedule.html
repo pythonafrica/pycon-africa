@@ -93,12 +93,7 @@
                         </a>
                         <br> 
                     {% endif %}  
-                      {% if perms.schedule.add_talkschedule or perms.schedule.change_talkschedule %}
-                          <a href="{% url 'schedule:create_talk_schedule' year=2024 %}" class="list-group-item list-group-item-action justify-content-between active">
-                              <span><i class="fa-solid fa-calendar-week g-pos-rel g-top-1 g-mr-8"></i> Create/Add to the Schedule</span>
-                          </a> 
-                      {% endif %}   
-                    
+                    <br>
                     <div class="mad-shedule-head">
                         <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session"><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
                         <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session"><i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>

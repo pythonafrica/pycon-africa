@@ -14,7 +14,7 @@ from next_prev import next_in_order, prev_in_order
 from django.utils.text import Truncator
 from registration.models import Profile 
 from talks.models import Proposal
-from schedule.models import TalkSchedule
+from schedule.models import Schedule
 
 from home.models import EventYear  
 from event.models import Event 
@@ -133,7 +133,7 @@ class SpeakerDetailView(HitCountDetailView):
             'related_speakers': related_speakers,
             'events': Event.objects.all(),
             'speakers': Profile.objects.filter(is_visible=True),
-            'schedule': TalkSchedule.objects.all(),
+            'schedule': Schedule.objects.all(),
             'meta_title': meta_title,
             'meta_description': meta_description,
             'meta_author': meta_author,

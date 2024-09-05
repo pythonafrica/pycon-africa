@@ -22,7 +22,7 @@ from .models import *
 
 from datetime import datetime
 
-from .models import TalkSchedule, Day
+from .models import Schedule, Day
 
 
 
@@ -42,7 +42,7 @@ def schedule(request, year):
     days = Day.objects.all().order_by('conference_day')
     for day in days:
         # Fetch both talks and events for the given day
-        day.schedules = TalkSchedule.objects.filter(
+        day.schedules = Schedule.objects.filter(
             conference_day=day
         ).filter(
             models.Q(talk__event_year=event_year) | models.Q(is_an_event=True)
@@ -69,7 +69,7 @@ def schedule(request, year):
 
 
 class ScheduleDetailView(HitCountDetailView):
-    model = TalkSchedule
+    model = Schedule
     context_object_name = 'schedule'
     slug_field = 'proposal_id'  # Ensure this field matches your model's field
     count_hit = True  # To count hits for hitcount feature
@@ -87,7 +87,7 @@ class ScheduleDetailView(HitCountDetailView):
         context.update({
             'talks': Proposal.objects.filter(status="A", event_year=event_year),
             'speakers': Profile.objects.filter(user__proposals__event_year=event_year).distinct(),
-            'schedules': TalkSchedule.objects.filter(talk__event_year=event_year),
+            'schedules': Schedule.objects.filter(talk__event_year=event_year),
             'event_year': event_year
         })
         return context

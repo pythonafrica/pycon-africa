@@ -4,7 +4,7 @@ register = template.Library()
 from ..models import *
 from registration.models import Profile 
 from talks.models import Proposal
-from schedule.models import TalkSchedule
+from schedule.models import Schedule
 
  
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import TalkSchedule, Room, Day, ScheduleVisibility
+from .models import Schedule, Room, Day, ScheduleVisibility
 from .forms import TalkScheduleForm
 
 
@@ -36,7 +36,7 @@ class TalkScheduleAdmin(admin.ModelAdmin):
 
 
 # Register Room and Day models with default admin interface
-admin.site.register(TalkSchedule, TalkScheduleAdmin)
+admin.site.register(Schedule, TalkScheduleAdmin)
 admin.site.register(Room)
 admin.site.register(Day)
 

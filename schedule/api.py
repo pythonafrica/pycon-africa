@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
 from .serializers import DaySerializer, TalkScheduleSerializer, TalkSerializer, EventSerializer
-from .models import Day, TalkSchedule, Event
+from .models import Day, Schedule, Event
 from talks.models import Proposal
 
 
@@ -11,7 +11,7 @@ class DayViewSet(ModelViewSet):
 
 
 class TalkScheduleViewSet(ModelViewSet):
-    queryset = TalkSchedule.objects.all()
+    queryset = Schedule.objects.all()
     serializer_class = TalkScheduleSerializer
 
 

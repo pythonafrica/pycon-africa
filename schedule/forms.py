@@ -2,11 +2,11 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit
 from django import forms
 from datetime import datetime
-from .models import TalkSchedule, Proposal
+from .models import Schedule, Proposal
 
 class TalkScheduleForm(forms.ModelForm):
     class Meta:
-        model = TalkSchedule
+        model = Schedule
         fields = '__all__'
         widgets = {
             'conference_day': forms.Select(attrs={'class': 'form-control'}),
@@ -40,7 +40,7 @@ class TalkScheduleForm(forms.ModelForm):
         )
 
         # Get the talks already scheduled
-        scheduled_talks = TalkSchedule.objects.filter(talk__isnull=False).values_list('talk_id', flat=True)
+        scheduled_talks = Schedule.objects.filter(talk__isnull=False).values_list('talk_id', flat=True)
 
         # Filter available talks that haven't been scheduled and are accepted by the speaker
         available_talks = Proposal.objects.filter(status='A', user_response='A').exclude(pk__in=scheduled_talks)

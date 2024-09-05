@@ -47,7 +47,7 @@ class Room(models.Model):
 
 
 
-class TalkSchedule(models.Model):
+class Schedule(models.Model):
     DAY_SESSIONS = (
         ('Morning', 'Morning'),
         ('Afternoon', 'Afternoon'),

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from schedule.models import TalkSchedule, Event, Day
+from schedule.models import Schedule, Event, Day
 from talks.models import Proposal
 
 
@@ -12,7 +12,7 @@ class DaySerializer(serializers.ModelSerializer):
 
 class TalkScheduleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TalkSchedule
+        model = Schedule
         fields = all
 
 

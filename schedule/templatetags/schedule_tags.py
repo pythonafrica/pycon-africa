@@ -1,11 +1,11 @@
 from django import template
-from schedule.models import TalkSchedule, Day, ScheduleVisibility
+from schedule.models import Schedule, Day, ScheduleVisibility
 from home.models import EventYear
 from django.template.loader import get_template
 from django.template import TemplateDoesNotExist
 from django import template
 from django.template.loader import get_template, TemplateDoesNotExist
-from schedule.models import ScheduleVisibility, TalkSchedule, Day
+from schedule.models import ScheduleVisibility, Schedule, Day
 
 register = template.Library()
 
@@ -35,7 +35,7 @@ def schedule_preview(context, year, limit=3):
 
     for day in days:
         # Fetch both talks and events for each day, limited to the first `limit` items
-        schedules = TalkSchedule.objects.filter(
+        schedules = Schedule.objects.filter(
             conference_day=day
         ).select_related('talk', 'talk__user').prefetch_related('talk__speakers').order_by('start_time')[:limit]
         
