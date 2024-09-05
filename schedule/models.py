@@ -16,8 +16,9 @@ from django.conf import settings
 
 
 class Day(models.Model):
-    conference_day = models.CharField(max_length=30, unique=True, help_text="The name of the conference day (e.g., Day 1, Day 2).")
-    actual_date = models.DateField(help_text="The actual date of the conference day.")
+    conference_day = models.CharField(max_length=30, unique=True, help_text="The name of the conference day (e.g., Day 1, Day 2).") 
+    actual_date = models.DateField(help_text="The actual date of the conference day.", default='2024-09-09')
+
 
     class Meta:
         verbose_name = "Conference Day"
