@@ -45,7 +45,7 @@ class ProposalResource(resources.ModelResource):
 class TalkAdmin(ImportExportModelAdmin):
     resource_class = ProposalResource
     list_display = ("title", "user", 'list_speakers', "talk_type", "intended_audience", "status",  "user_response", 'created_date', 'date_updated')
-    list_editable = ["status"]
+    list_editable = ["status",  "user_response"]
     list_filter = ("talk_type",  'created_date', "status",  "user_response")
     actions = ['export_selected_action']
 

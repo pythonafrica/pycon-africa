@@ -8,7 +8,7 @@ from django.utils.dateparse import parse_date
 from django.core.exceptions import ValidationError
 from event.models import Event
 from django.conf import settings
-
+import datetime
 
 
  
@@ -17,8 +17,7 @@ from django.conf import settings
 
 class Day(models.Model):
     conference_day = models.CharField(max_length=30, unique=True, help_text="The name of the conference day (e.g., Day 1, Day 2).") 
-    actual_date = models.DateField(help_text="The actual date of the conference day.", default='2024-09-09')
-
+    actual_date = models.DateField(help_text="The actual date of the conference day.", default=datetime.date(2024, 9, 9))
 
     class Meta:
         verbose_name = "Conference Day"
@@ -26,8 +25,7 @@ class Day(models.Model):
         ordering = ['actual_date']
 
     def __str__(self):
-        return self.actual_date.strftime('%Y-%m-%d')  # Customize the date format as needed
-
+        return self.actual_date.strftime('%Y-%m-%d')
 
 
 
