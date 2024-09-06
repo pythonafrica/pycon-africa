@@ -81,19 +81,20 @@
        
         <div class="row">
             <div class="u-shadow-v1-5 g-line-height-2 g-pa-30 g-mb-20 col-md-12" role="alert">
-                {% if request.user.is_superuser or is_schedule_live %}
+                {% if perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}                      
+                <a href="/organizers/conference_schedule/" target="/" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
+                    <i class="fa fa-check-circle g-mr-3"></i>
+                    Hi {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} 😊,  Create/Add to the Schedule
+                </a>
+                <br> 
+            {% endif %}  
+            
+            {% if request.user.is_superuser or is_schedule_live %}
                     <p class="g-color-black g-font-size-16">
                         This is our provisional schedule and is subject to change, and all times listed are based on the 
                         <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
-                    </p>
-                    <br> 
-                    {% if perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}                      
-                        <a href="/organizers/conference_schedule/" target="/" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
-                            <i class="fa fa-check-circle g-mr-3"></i>
-                            Create/Add to the Schedule
-                        </a>
-                        <br> 
-                    {% endif %}  
+                    </p> 
+                
                     <br>
                     <div class="mad-shedule-head">
                         <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session">
