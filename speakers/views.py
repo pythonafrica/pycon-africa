@@ -14,7 +14,7 @@ from next_prev import next_in_order, prev_in_order
 from django.utils.text import Truncator
 from registration.models import Profile 
 from talks.models import Proposal
-from schedule.models import Schedule
+from conference_schedule.models import Schedule
 
 from home.models import EventYear  
 from event.models import Event 

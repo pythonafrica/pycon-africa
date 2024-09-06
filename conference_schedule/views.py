@@ -25,7 +25,6 @@ from datetime import datetime
 from .models import Schedule, Day
 
 
-
 def schedule(request, year):
     """Renders the schedule page for a specific year."""
     assert isinstance(request, HttpRequest)
@@ -94,7 +93,7 @@ class ScheduleDetailView(HitCountDetailView):
 
 
 @login_required
-@permission_required('schedule.add_talkschedule', raise_exception=True)
+@permission_required('conference_schedule.add_schedule', raise_exception=True)   
 def create_talk_schedule(request, year):
     event_year = get_object_or_404(EventYear, year=year)
 
@@ -108,8 +107,58 @@ def create_talk_schedule(request, year):
                 talk_schedule.talk.event_year = event_year  # Only set event_year if a talk is selected
             
             talk_schedule.save()
-            return redirect('schedule:schedule', year=year)
+            return redirect('conference_schedule:schedule', year=year)  # Update this with the correct app namespace
     else:
         form = TalkScheduleForm()
 
     return render(request, f'{year}/schedule/create_schedule.html', {'form': form, 'year': year})
+
+
+ 
+@login_required
+@permission_required('conference_schedule.add_schedule', raise_exception=True)
+def create_new_talk_schedule(request, year):
+    """
+    View to create a new talk or event schedule for a specific event year.
+    """
+    # Get the event year based on the URL parameter
+    event_year = get_object_or_404(EventYear, year=year)
+
+    if request.method == 'POST':
+        form = TalkScheduleForm(request.POST)
+        
+        if form.is_valid():
+            # Get the form instance but don’t save it to the database just yet
+            schedule_instance = form.save(commit=False)
+
+            # Assign the event year to the talk if a talk is selected
+            if schedule_instance.talk:
+                schedule_instance.talk.event_year = event_year
+
+            # Ensure start time is before end time
+            if schedule_instance.start_time and schedule_instance.end_time:
+                if schedule_instance.start_time >= schedule_instance.end_time:
+                    form.add_error('start_time', 'Start time must be before end time.')
+                    form.add_error('end_time', 'End time must be after start time.')
+                    return render(request, f'{year}/schedule/create_schedule.html', {'form': form, 'year': year})
+            
+            # Save the schedule instance after additional checks
+            schedule_instance.save()
+
+            # Success message and redirection to the schedule overview page
+            messages.success(request, 'The talk/event has been successfully scheduled.')
+            return redirect('conference_schedule:schedule', year=year)
+        else:
+            # If form is not valid, render the form again with errors
+            messages.error(request, 'There was an error with your submission. Please check the form and try again.')
+    
+    else:
+        # Create an empty form for GET requests
+        form = TalkScheduleForm()
+
+    # Render the create schedule page with the form
+    return render(request, f'{year}/schedule/new.html', {
+        'form': form,
+        'year': year,
+        'event_year': event_year,
+    })

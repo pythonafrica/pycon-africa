@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from schedule.models import Schedule, Event, Day
+from conference_schedule.models import Schedule, Event, Day
 from talks.models import Proposal
 
 

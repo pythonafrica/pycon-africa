@@ -123,6 +123,7 @@ class Proposal(models.Model):
     talk_type = models.CharField(max_length=50, choices=TALK_TYPES)
     talk_category = models.CharField(max_length=50, choices=TALK_CATEGORY)
     proposal_id = HashidAutoField(primary_key=True, salt=f"talks_proposal{settings.HASHID_FIELD_SALT}", default=None)
+    
     elevator_pitch = MarkdownxField(blank=True, null=True, help_text="[Supports Markdown] - Describe your Talk to your targeted audience.")
     talk_abstract = MarkdownxField(blank=True, null=True, help_text="[Supports Markdown] - Your talk_abstract.")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="proposals", on_delete=models.CASCADE)

@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Schedule, Room, Day, ScheduleVisibility
-from .forms import TalkScheduleForm
-
+from conference_schedule.models import Schedule, Room, Day, ScheduleVisibility   
+from conference_schedule.forms import TalkScheduleForm  
+ 
+from  .models import Schedule   
 
 class TalkScheduleAdmin(admin.ModelAdmin):
     form = TalkScheduleForm  # Use the custom form
@@ -35,7 +36,7 @@ class TalkScheduleAdmin(admin.ModelAdmin):
     mark_as_panel.short_description = "Mark selected talks as panels"
 
 
-# Register Room and Day models with default admin interface
+# Register the new Schedule, Room, and Day models with the admin
 admin.site.register(Schedule, TalkScheduleAdmin)
 admin.site.register(Room)
 admin.site.register(Day)

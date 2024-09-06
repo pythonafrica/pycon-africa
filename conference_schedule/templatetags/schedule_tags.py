@@ -1,11 +1,11 @@
 from django import template
-from conference_schedule.models import Schedule, Day, ScheduleVisibility
+from ..models import Schedule, Day, ScheduleVisibility
 from home.models import EventYear
 from django.template.loader import get_template
 from django.template import TemplateDoesNotExist
 from django import template
 from django.template.loader import get_template, TemplateDoesNotExist
-from conference_schedule.models import ScheduleVisibility, Schedule, Day
+from ..models import ScheduleVisibility, Schedule, Day
 
 register = template.Library()
 

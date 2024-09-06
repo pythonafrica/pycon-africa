@@ -1,12 +1,12 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Submit
+from crispy_forms.layout import Layout, Field, Submit, Div, Row, Column
 from django import forms
-from datetime import datetime
 from .models import Schedule, Proposal
+
 
 class TalkScheduleForm(forms.ModelForm):
     class Meta:
-        model = Schedule
+        model = Schedule  # Ensure this is from the correct app
         fields = '__all__'
         widgets = {
             'conference_day': forms.Select(attrs={'class': 'form-control'}),
@@ -27,28 +27,36 @@ class TalkScheduleForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
-            Field('conference_day'),
-            Field('talk'),
-            Field('event'),
-            Field('start_time'),
-            Field('end_time'),
-            Field('day_session'),
-            Field('allocated_room'),
-            Field('event_url'),
-            Field('external_url'),
+            Row(
+                Column(Field('conference_day'), css_class='form-group col-md-6 mb-0'),
+                Column(Field('talk'), css_class='form-group col-md-6 mb-0'),
+            ),
+            Row(
+                Column(Field('event'), css_class='form-group col-md-12 mb-0'),
+            ),
+            Row(
+                Column(Field('start_time'), css_class='form-group col-md-6 mb-0'),
+                Column(Field('end_time'), css_class='form-group col-md-6 mb-0'),
+            ),
+            Row(
+                Column(Field('day_session'), css_class='form-group col-md-6 mb-0'),
+                Column(Field('allocated_room'), css_class='form-group col-md-6 mb-0'),
+            ),
+            Row(
+                Column(Field('event_url'), css_class='form-group col-md-6 mb-0'),
+                Column(Field('external_url'), css_class='form-group col-md-6 mb-0'),
+            ),
             Submit('submit', 'Save Schedule', css_class='btn btn-primary')
         )
 
-        # Get the talks already scheduled
+        # Fetch talks already scheduled
         scheduled_talks = Schedule.objects.filter(talk__isnull=False).values_list('talk_id', flat=True)
 
-        # Filter available talks that haven't been scheduled and are accepted by the speaker
+        # Filter available talks that haven't been scheduled and are accepted
         available_talks = Proposal.objects.filter(status='A', user_response='A').exclude(pk__in=scheduled_talks)
 
-        # Add available talks to the choices (id, title)
+        # Add available talks to the dropdown
         talk_choices = [(talk.pk, talk.title) for talk in available_talks]
-
-        # Set the available talks in the dropdown
         self.fields['talk'].choices = [('', 'Select a talk')] + talk_choices
 
         # Set placeholders and help texts dynamically

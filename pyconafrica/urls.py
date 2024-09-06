@@ -35,7 +35,7 @@ urlpatterns = [
         path('', include('home.urls')),
         path('about/', include('about.urls')),
         path('speakers/', include('speakers.urls')),
-        path('schedule/', include('schedule.urls')),
+        path('schedule/', include('conference_schedule.urls')),
         path('our-sponsors/', include('sponsors.urls', namespace='sponsors')),
         path('talks/', include('talks.urls', namespace='talks')),
         path('coc/', include('coc.urls')),

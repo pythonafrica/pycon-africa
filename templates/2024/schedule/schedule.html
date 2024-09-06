@@ -78,6 +78,7 @@
      Our Schedule
      ====================================== -->
     <div class="container  g-pt-50"> 
+       
         <div class="row">
             <div class="u-shadow-v1-5 g-line-height-2 g-pa-30 g-mb-20 col-md-12" role="alert">
                 {% if request.user.is_superuser or is_schedule_live %}
@@ -86,8 +87,8 @@
                         <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
                     </p>
                     <br> 
-                    {% if perms.schedule.add_talkschedule or perms.schedule.change_talkschedule %}                      
-                        <a href="{% url 'schedule:create_talk_schedule' year=2024 %}" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
+                    {% if perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}                      
+                        <a href="{% url 'conference_schedule:create_talk_schedule' year=2024 %}" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
                             <i class="fa fa-check-circle g-mr-3"></i>
                             Create/Add to the Schedule
                         </a>
@@ -95,9 +96,12 @@
                     {% endif %}  
                     <br>
                     <div class="mad-shedule-head">
-                        <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session"><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
-                        <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session"><i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>
-                        <small><li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session"><i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>
+                        <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session">
+                            <i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
+                        <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session">
+                            <i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>
+                        <small><li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session">
+                            <i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>
                     </div>
                     <br>
         
@@ -147,9 +151,9 @@
                                             <li class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
                                                 <div class="d-flex justify-content-start">
                                                     <div class="media-body align-self-center">
-                                                    <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">
-                                                        {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }}
-                                                    </h4>
+                                                        <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">
+                                                            {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }}
+                                                        </h4>
                                                         <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10">
                                                             <a href="/2024/talks/{{ schedule.talk.proposal_id }}/detail/">{{ schedule.talk.title }}</a>
                                                         </h3>
@@ -215,7 +219,6 @@
                 {% endif %}
             </div>
         </div>
-        
         
  
     </div>
