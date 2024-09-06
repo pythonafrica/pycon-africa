@@ -88,7 +88,7 @@
                     </p>
                     <br> 
                     {% if perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}                      
-                        <a href="{% url 'conference_schedule:create_talk_schedule' year=2024 %}" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
+                        <a href="/organizers/conference_schedule/" target="/" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
                             <i class="fa fa-check-circle g-mr-3"></i>
                             Create/Add to the Schedule
                         </a>

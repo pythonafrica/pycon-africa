@@ -110,7 +110,7 @@
 
                     
                           {% if perms.schedule.add_talkschedule or perms.schedule.change_talkschedule %}
-                          <a href="{% url 'schedule:create_talk_schedule' year=2024 %}" class="list-group-item list-group-item-action justify-content-between active">
+                          <a href="{% url 'conference_schedule:create_talk_schedule' year=2024 %}" class="list-group-item list-group-item-action justify-content-between active">
                               <span><i class="fa-solid fa-calendar-week g-pos-rel g-top-1 g-mr-8"></i> Create/Add to the Schedule</span>
                           </a> 
                       {% endif %}   
