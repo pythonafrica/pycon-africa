@@ -104,7 +104,7 @@
             </div>
             <br>
 
-            {% if request.user.is_superuser or is_schedule_live %}
+            {% if request.user.is_superuser or is_schedule_live or perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}
                     
                     <!-- Nav tabs -->
                     <ul class="nav nav-justified u-nav-v2-1 u-nav-primary u-nav-rounded-5 g-mb-20" role="tablist" data-target="nav-2-1-accordion-primary-hor-justified" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block u-btn-outline-primary g-mb-20">
