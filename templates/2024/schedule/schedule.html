@@ -88,24 +88,24 @@
                 </a>
                 <br> 
             {% endif %}  
-            
-            {% if request.user.is_superuser or is_schedule_live %}
-                    <p class="g-color-black g-font-size-16">
-                        This is our provisional schedule and is subject to change, and all times listed are based on the 
-                        <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
-                    </p> 
-                
-                    <br>
-                    <div class="mad-shedule-head">
-                        <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session">
-                            <i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
-                        <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session">
-                            <i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>
-                        <small><li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session">
-                            <i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>
-                    </div>
-                    <br>
+            <p class="g-color-black g-font-size-16">
+                This is our provisional schedule and is subject to change, and all times listed are based on the 
+                <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
+            </p> 
         
+            <br>
+            <div class="mad-shedule-head">
+                <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session">
+                    <i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
+                <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session">
+                    <i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>
+                <small><li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session">
+                    <i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>
+            </div>
+            <br>
+
+            {% if request.user.is_superuser or is_schedule_live %}
+                    
                     <!-- Nav tabs -->
                     <ul class="nav nav-justified u-nav-v2-1 u-nav-primary u-nav-rounded-5 g-mb-20" role="tablist" data-target="nav-2-1-accordion-primary-hor-justified" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block u-btn-outline-primary g-mb-20">
                         {% for day in days %}
