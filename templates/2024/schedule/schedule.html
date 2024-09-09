@@ -175,12 +175,28 @@
                                                         </li>
                                                     {% endif %}
                                                     {{ schedule.talk.user.user_profile.name|default:"PyCon Africa" }} {{ schedule.talk.user.user_profile.surname|default:"Speaker" }}
+                                                    
                                                     {% for speaker in schedule.talk.speakers.all %}
                                                         <li class="list-inline-item mr-0">
-                                                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}" src="{{ speaker.user_profile.profile_image.url }}" alt="Image Description">
+                                                            {% if speaker.user_profile.profile_image and speaker.user_profile.profile_image.url %}
+                                                                <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" 
+                                                                    data-toggle="tooltip" 
+                                                                    data-placement="top" 
+                                                                    title="Speaker:  {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}" 
+                                                                    src="{{ speaker.user_profile.profile_image.url }}" 
+                                                                    alt="Image Description">
+                                                            {% else %}
+                                                                <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" 
+                                                                    data-toggle="tooltip" 
+                                                                    data-placement="top" 
+                                                                    title="Speaker:  {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}" 
+                                                                    src="{% static '2024/img/speakers/speaker.png' %}" 
+                                                                    alt="Default Image">
+                                                            {% endif %}
                                                         </li>
                                                         {{ speaker.get_full_name }}{% if not forloop.last %}, {% endif %}
                                                     {% endfor %}
+
                                                 </ul>
                                                 <div class="align-self-center">
                                                     <ul>
