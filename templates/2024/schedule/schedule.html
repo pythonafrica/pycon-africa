@@ -84,135 +84,134 @@
                 {% if perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}                      
                 <a href="/organizers/conference_schedule/" target="/" class="btn btn-md u-btn-inset u-btn-inset--rounded u-btn-lightred g-font-weight-600 g-letter-spacing-0_5 text-uppercase g-brd-2 g-rounded-50 g-mr-10 g-mb-15">
                     <i class="fa fa-check-circle g-mr-3"></i>
-                    Hi {% if request.user.user_profile %}{{ request.user.user_profile.name }}  {% else %}@{{ request.user.username }}{% endif %} 😊,  Create/Add to the Schedule
+                    Hi {% if request.user.user_profile and request.user.user_profile.name %}{{ request.user.user_profile.name }}  {% else %}PyCon Africa{% endif %} 😊,  Create/Add to the Schedule
                 </a>
                 <br> 
-            {% endif %}  
-            <p class="g-color-black g-font-size-16">
-                This is our provisional schedule and is subject to change, and all times listed are based on the 
-                <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
-            </p> 
+                {% endif %}
+                <p class="g-color-black g-font-size-16">
+                    This is our provisional schedule and is subject to change, and all times listed are based on the 
+                    <a href="https://www.timeanddate.com/time/zones/gmt" target="/"><b><u>Greenwich Mean Time (GMT+0)</u></b></a> zone.
+                </p> 
+                <br>
+                <div class="mad-shedule-head">
+                    <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session">
+                        <i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
+                    <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session">
+                        <i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>
+                    <small><li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session">
+                        <i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>
+                </div>
+                <br>
         
-            <br>
-            <div class="mad-shedule-head">
-                <small><li class="btn btn-md u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This indicates the session will run concurrently with another session">
-                    <i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i> <b>Concurrent Sessions</b></li></small>
-                <small><li class="btn btn-md u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Keynote session">
-                    <i class="fa-solid fa-keynote"></i> <b>Keynote</b></li></small>
-                <small><li class="btn btn-md u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This indicates the session will be a Panel Discussion session">
-                    <i class="fa-solid fa-users-line"></i> <b>Panel Discussion</b></li></small>
-            </div>
-            <br>
-
-            {% if request.user.is_superuser or is_schedule_live or perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}
-                    
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-justified u-nav-v2-1 u-nav-primary u-nav-rounded-5 g-mb-20" role="tablist" data-target="nav-2-1-accordion-primary-hor-justified" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block u-btn-outline-primary g-mb-20">
-                        {% for day in days %}
-                            <li class="nav-item">
-                                <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab" href="#nav-2-1-accordion-primary-hor-justified--{{ forloop.counter }}" role="tab">{{ day }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <!-- End Nav tabs -->
+                {% if request.user.is_superuser or is_schedule_live or perms.conference_schedule.add_schedule or perms.conference_schedule.change_schedule %}
+                            
+                <!-- Nav tabs -->
+                <ul class="nav nav-justified u-nav-v2-1 u-nav-primary u-nav-rounded-5 g-mb-20" role="tablist" data-target="nav-2-1-accordion-primary-hor-justified" data-tabs-mobile-type="accordion" data-btn-classes="btn btn-md btn-block u-btn-outline-primary g-mb-20">
+                    {% for day in days %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab" href="#nav-2-1-accordion-primary-hor-justified--{{ forloop.counter }}" role="tab">{{ day }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- End Nav tabs -->
         
-                    <!-- Tab panes -->
-                    <div id="nav-2-1-accordion-primary-hor-justified" class="tab-content">
-                        {% for day in days %}
-                            <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="nav-2-1-accordion-primary-hor-justified--{{ forloop.counter }}" role="tabpanel">
-                                {% for schedule in day.schedules %} 
-                                    {% if schedule.is_an_event %}
-                                        <!-- Render the event title with URL -->
-                                        <ul class="list-unstyled">
-                                            <li class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
-                                                <div class="d-flex justify-content-start">
-                                                    <div class="media-body align-self-center">
-                                                        <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5"> 
-                                                            {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }}
-                                                        </h4>
-                                                        <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10">
-                                                            <a {% if schedule.event_url %} href="/2024/events/{{ schedule.event_url }}"{% elif schedule.external_url %} href="{{ schedule.external_url }}" target="/" {% endif %}>
-                                                                {% if schedule.fa_icon %}<i class="{{ schedule.fa_icon }}"></i> {% endif %}
-                                                                {{ schedule.event }}
-                                                            </a>
-                                                        </h3>
-                                                        {% if schedule.event_description %}
-                                                        <p class="g-color-gray-dark-v2 mb-0">
-                                                            {{ schedule.event_description | truncatechars:300 }}
-                                                        </p>
-                                                        {% endif %}
-                                                    </div>
-                                                    <span class="ml-auto small g-color-black g-px-10"><b>Room: {{ schedule.allocated_room.room_name }}</b></span>
+                <!-- Tab panes -->
+                <div id="nav-2-1-accordion-primary-hor-justified" class="tab-content">
+                    {% for day in days %}
+                        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="nav-2-1-accordion-primary-hor-justified--{{ forloop.counter }}" role="tabpanel">
+                            {% for schedule in day.schedules %}
+                                {% if schedule.is_an_event %}
+                                    <!-- Render the event title with URL -->
+                                    <ul class="list-unstyled">
+                                        <li class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
+                                            <div class="d-flex justify-content-start">
+                                                <div class="media-body align-self-center">
+                                                    <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5"> 
+                                                        {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }}
+                                                    </h4>
+                                                    <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10">
+                                                        <a {% if schedule.event_url %} href="/2024/events/{{ schedule.event_url }}"{% elif schedule.external_url %} href="{{ schedule.external_url }}" target="/" {% endif %}>
+                                                            {% if schedule.fa_icon %}<i class="{{ schedule.fa_icon }}"></i> {% endif %}
+                                                            {{ schedule.event }}
+                                                        </a>
+                                                    </h3>
+                                                    {% if schedule.event_description %}
+                                                    <p class="g-color-gray-dark-v2 mb-0">
+                                                        {{ schedule.event_description | truncatechars:300 }}
+                                                    </p>
+                                                    {% endif %}
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    {% elif schedule.talk and schedule.talk.status == "A" %}
-                                        <!-- Render the talk title -->
-                                        <ul class="list-unstyled">
-                                            <li class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
-                                                <div class="d-flex justify-content-start">
-                                                    <div class="media-body align-self-center">
-                                                        <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">
-                                                            {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }}
-                                                        </h4>
-                                                        <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10">
-                                                            <a href="/2024/talks/{{ schedule.talk.proposal_id }}/detail/">{{ schedule.talk.title }}</a>
-                                                        </h3>
-                                                        <p class="g-color-gray-dark-v2 mb-0">
-                                                            {{ schedule.talk.talk_abstract | markdown | safe | truncatechars:300 }}
-                                                        </p>
-                                                    </div>
-                                                    <span class="ml-auto small g-color-black g-px-10"><b>Room: {{ schedule.allocated_room.room_name }}</b></span>
+                                                <span class="ml-auto small g-color-black g-px-10"><b>Room: {{ schedule.allocated_room.room_name }}</b></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                {% elif schedule.talk and schedule.talk.status == "A" %}
+                                    <!-- Render the talk title -->
+                                    <ul class="list-unstyled">
+                                        <li class="g-brd-around g-brd-gray-light-v4 g-brd-left-3 g-brd-blue-left rounded g-pa-20 g-mb-10">
+                                            <div class="d-flex justify-content-start">
+                                                <div class="media-body align-self-center">
+                                                    <h4 class="text-uppercase g-font-weight-700 g-font-size-12 g-color-primary g-mb-5">
+                                                        {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }}
+                                                    </h4>
+                                                    <h3 class="text-uppercase g-font-weight-700 g-font-size-23 g-mb-10">
+                                                        <a href="/2024/talks/{{ schedule.talk.proposal_id }}/detail/">{{ schedule.talk.title }}</a>
+                                                    </h3>
+                                                    <p class="g-color-gray-dark-v2 mb-0">
+                                                        {{ schedule.talk.talk_abstract | markdown | safe | truncatechars:300 }}
+                                                    </p>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <ul class="u-list-inline">
-                                                        {% if schedule.talk.user.user_profile.profile_image %}
-                                                            <li class="list-inline-item mr-0">
-                                                                <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{{ schedule.talk.user.user_profile.profile_image.url }}" alt="Image Description">
-                                                            </li>
-                                                        {% else %}
-                                                            <li class="list-inline-item mr-0">
-                                                                <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{% static '2024/img/speakers/speaker.png' %}" alt="Image Description">
-                                                            </li>
+                                                <span class="ml-auto small g-color-black g-px-10"><b>Room: {{ schedule.allocated_room.room_name }}</b></span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <ul class="u-list-inline">
+                                                    {% if schedule.talk.user.user_profile.profile_image %}
+                                                        <li class="list-inline-item mr-0">
+                                                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{{ schedule.talk.user.user_profile.profile_image.url }}" alt="Image Description">
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="list-inline-item mr-0">
+                                                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{% static '2024/img/speakers/speaker.png' %}" alt="Image Description">
+                                                        </li>
+                                                    {% endif %}
+                                                    {{ schedule.talk.user.user_profile.name|default:"PyCon Africa" }} {{ schedule.talk.user.user_profile.surname|default:"Speaker" }}
+                                                    {% for speaker in schedule.talk.speakers.all %}
+                                                        <li class="list-inline-item mr-0">
+                                                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}" src="{{ speaker.user_profile.profile_image.url }}" alt="Image Description">
+                                                        </li>
+                                                        {{ speaker.get_full_name }}{% if not forloop.last %}, {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                                <div class="align-self-center">
+                                                    <ul>
+                                                        {% if schedule.concurrent_talk %}
+                                                            <small><li class="btn btn-xs u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This session will run concurrently with another session"><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i></li></small>
                                                         {% endif %}
-                                                        {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}
-                                                        {% for speaker in schedule.talk.speakers.all %}
-                                                            <li class="list-inline-item mr-0">
-                                                                <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}" src="{{ speaker.user_profile.profile_image.url }}" alt="Image Description">
-                                                            </li>
-                                                            {{ speaker.get_full_name }}{% if not forloop.last %}, {% endif %}
-                                                        {% endfor %}
+                                                        {% if schedule.is_a_keynote_speaker %}
+                                                            <small><li class="btn btn-xs u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This will be a Keynote session"><i class="fa-solid fa-keynote"></i></li></small>
+                                                        {% endif %}
+                                                        {% if schedule.is_a_panel %}
+                                                            <small><li class="btn btn-xs u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This Panel Discussion session"><i class="fa-solid fa-users-line"></i></li></small>
+                                                        {% endif %}
                                                     </ul>
-                                                    <div class="align-self-center">
-                                                        <ul>
-                                                            {% if schedule.concurrent_talk %}
-                                                                <small><li class="btn btn-xs u-btn-inset u-btn-yellow g-mr-10 g-mb-15 g-color-black" data-toggle="tooltip" data-placement="top" title="This session will run concurrently with another session"><i class="fa-sharp fa-solid fa-screen-users"></i><i class="fa-regular fa-screen-users"></i></li></small>
-                                                            {% endif %}
-                                                            {% if schedule.is_a_keynote_speaker %}
-                                                                <small><li class="btn btn-xs u-btn-inset u-btn-darkred g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This will be a Keynote session"><i class="fa-solid fa-keynote"></i></li></small>
-                                                            {% endif %}
-                                                            {% if schedule.is_a_panel %}
-                                                                <small><li class="btn btn-xs u-btn-inset u-btn-bluegray g-mr-10 g-mb-15" data-toggle="tooltip" data-placement="top" title="This Panel Discussion session"><i class="fa-solid fa-users-line"></i></li></small>
-                                                            {% endif %}
-                                                        </ul>
-                                                    </div>
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    {% endif %}
-                                {% empty %}
-                                    <div class="col-md-6">
-                                        <!-- Warning Alert -->
-                                        <div class="alert alert-warning" role="alert">
-                                            <strong>Please note!</strong> we have no schedule assigned for this day yet.
-                                        </div>
-                                        <!-- End Warning Alert -->
+                                            </div>
+                                        </li>
+                                    </ul>
+                                {% endif %}
+                            {% empty %}
+                                <div class="col-md-6">
+                                    <!-- Warning Alert -->
+                                    <div class="alert alert-warning" role="alert">
+                                        <strong>Please note!</strong> we have no schedule assigned for this day yet.
                                     </div>
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <!-- End Tab panes -->
+                                    <!-- End Warning Alert -->
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- End Tab panes -->
                 {% else %}
                     <div class="alert alert-warning" role="alert">
                         <strong>Schedule Coming Soon!</strong> The schedule is currently being finalized. Please check back later.
@@ -220,6 +219,7 @@
                 {% endif %}
             </div>
         </div>
+        
         
  
     </div>
