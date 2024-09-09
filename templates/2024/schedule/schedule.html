@@ -164,14 +164,14 @@
                                                 <span class="ml-auto small g-color-black g-px-10"><b>Room: {{ schedule.allocated_room.room_name }}</b></span>
                                             </div>
                                             <div class="d-flex justify-content-between">
-                                                <ul class="u-list-inline">
-                                                    {% if schedule.talk.user.user_profile.profile_image %}
+                                                <ul class="u-list-inline"> 
+                                                    {% if schedule.talk.user.user_profile.profile_image and schedule.talk.user.user_profile.profile_image.url %}
                                                         <li class="list-inline-item mr-0">
                                                             <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{{ schedule.talk.user.user_profile.profile_image.url }}" alt="Image Description">
                                                         </li>
                                                     {% else %}
                                                         <li class="list-inline-item mr-0">
-                                                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{% static '2024/img/speakers/speaker.png' %}" alt="Image Description">
+                                                            <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" data-toggle="tooltip" data-placement="top" title="Speaker:  {{ schedule.talk.user.user_profile.name }} {{ schedule.talk.user.user_profile.surname }}" src="{% static '2024/img/speakers/speaker.png' %}" alt="Default Image">
                                                         </li>
                                                     {% endif %}
                                                     {{ schedule.talk.user.user_profile.name|default:"PyCon Africa" }} {{ schedule.talk.user.user_profile.surname|default:"Speaker" }}
