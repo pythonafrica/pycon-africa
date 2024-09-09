@@ -1,8 +1,15 @@
 from django.db import models
 from django.utils import timezone
-from django.core.exceptions import ValidationError
+from registration.models import Profile
 from talks.models import Proposal
+from event.models import *
+from home.models import EventYear
+from django.utils.dateparse import parse_date
+from django.core.exceptions import ValidationError
+from event.models import Event
+from django.conf import settings
 import datetime
+
 
 
 class Day(models.Model):
@@ -70,11 +77,11 @@ class Schedule(models.Model):
     def __str__(self):
         if self.is_an_event:
             return f"{self.event} in {self.allocated_room}" if self.allocated_room else f"{self.event}"
-
+        
         if self.talk:
             if self.talk.speakers.exists():
-                # Safely handle the retrieval of speaker names or fallback to username
-                speakers_names = ', '.join([getattr(speaker.profile, 'name', speaker.username) for speaker in self.talk.speakers.all()])
+                # Safely retrieve either the profile name or fall back to "PyCon Africa"
+                speakers_names = ', '.join([getattr(speaker.user_profile, 'name', 'PyCon Africa') for speaker in self.talk.speakers.all()])
                 return f"{self.talk.title} by {speakers_names}"
             else:
                 return self.talk.title
@@ -83,7 +90,6 @@ class Schedule(models.Model):
 
     def clean(self):
         super().clean()
-        # Ensure either a talk or an event is provided
         if not self.talk and not self.event:
             raise ValidationError('Either a talk or an event must be selected.')
         if self.talk and self.event:
@@ -96,7 +102,7 @@ class Schedule(models.Model):
             raise ValidationError('The start time must be before the end time.')
 
     def save(self, *args, **kwargs):
-        self.clean()  # Validate before saving
+        self.clean()
         conference_date = self.conference_day.actual_date
         if conference_date and self.start_time and self.end_time:
             start_datetime = timezone.datetime.combine(conference_date, self.start_time)
@@ -109,6 +115,7 @@ class Schedule(models.Model):
             self.end_time = end_datetime
         super().save(*args, **kwargs)
 
+        
 
 class ScheduleVisibility(models.Model):
     is_live = models.BooleanField(default=False, help_text="Indicates if the schedule is live and visible to all users.")
