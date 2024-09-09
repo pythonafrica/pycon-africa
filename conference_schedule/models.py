@@ -1,17 +1,9 @@
 from django.db import models
 from django.utils import timezone
-from registration.models import Profile
-from talks.models import Proposal
-from event.models import *
-from home.models import EventYear
-from django.utils.dateparse import parse_date
 from django.core.exceptions import ValidationError
-from event.models import Event
-from django.conf import settings
+from talks.models import Proposal
 import datetime
 
-
- 
 
 class Day(models.Model):
     conference_day = models.CharField(max_length=30, unique=True, help_text="The name of the conference day (e.g., Day 1, Day 2).") 
@@ -78,16 +70,20 @@ class Schedule(models.Model):
     def __str__(self):
         if self.is_an_event:
             return f"{self.event} in {self.allocated_room}" if self.allocated_room else f"{self.event}"
+
         if self.talk:
             if self.talk.speakers.exists():
-                speakers_names = ', '.join([speaker.profile.name for speaker in self.talk.speakers.all()])
+                # Safely handle the retrieval of speaker names or fallback to username
+                speakers_names = ', '.join([getattr(speaker.profile, 'name', speaker.username) for speaker in self.talk.speakers.all()])
                 return f"{self.talk.title} by {speakers_names}"
             else:
                 return self.talk.title
+
         return "No event or talk assigned"
 
     def clean(self):
         super().clean()
+        # Ensure either a talk or an event is provided
         if not self.talk and not self.event:
             raise ValidationError('Either a talk or an event must be selected.')
         if self.talk and self.event:
@@ -100,7 +96,7 @@ class Schedule(models.Model):
             raise ValidationError('The start time must be before the end time.')
 
     def save(self, *args, **kwargs):
-        self.clean()
+        self.clean()  # Validate before saving
         conference_date = self.conference_day.actual_date
         if conference_date and self.start_time and self.end_time:
             start_datetime = timezone.datetime.combine(conference_date, self.start_time)
