@@ -25,6 +25,7 @@ from datetime import datetime
 from .models import Schedule, Day
 
 
+
 def schedule(request, year):
     """Renders the schedule page for a specific year."""
     assert isinstance(request, HttpRequest)
@@ -38,10 +39,13 @@ def schedule(request, year):
         visibility = ScheduleVisibility.objects.create(is_live=False)
 
     # Fetch and order the conference days
-    days = Day.objects.all().order_by('conference_day')
+    days = Day.objects.all().order_by('actual_date')
+    
+    # Prepare schedules per day
+    schedules = {}
     for day in days:
-        # Fetch both talks and events for the given day
-        day.schedules = Schedule.objects.filter(
+        # Fetch both talks and events for the given day and event year
+        schedules[day] = Schedule.objects.filter(
             conference_day=day
         ).filter(
             models.Q(talk__event_year=event_year) | models.Q(is_an_event=True)
@@ -52,6 +56,7 @@ def schedule(request, year):
     meta_description = f"Explore the schedule for PyCon Africa {year}, including keynotes, talks, tutorials, and more. Plan your conference experience with us."
     meta_og_image = "https://res.cloudinary.com/pycon-africa/image/upload/v1722977619/website_storage_location/media/schedule_og_image.png"  # Replace with a suitable image
 
+    # Render the schedule page with days and their respective schedules
     return render(
         request,
         f'{year}/schedule/schedule.html',
@@ -59,12 +64,14 @@ def schedule(request, year):
             'title': 'Schedule',
             'year': year,
             'days': days,
+            'schedules': schedules,
             'is_schedule_live': visibility.is_live or request.user.is_superuser,
             'meta_title': meta_title,
             'meta_description': meta_description,
             'meta_og_image': meta_og_image,
         }
     )
+
 
 
 class ScheduleDetailView(HitCountDetailView):

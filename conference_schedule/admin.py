@@ -3,13 +3,11 @@ from conference_schedule.models import Schedule, Room, Day, ScheduleVisibility
 from conference_schedule.forms import TalkScheduleForm  
  
 from  .models import Schedule   
-
 class TalkScheduleAdmin(admin.ModelAdmin):
     form = TalkScheduleForm  # Use the custom form
 
-    list_display = ('talk', 'event', 'allocated_room', 'conference_day', 'concurrent_talk', 'is_an_event', 'is_a_keynote_speaker', 'is_a_panel', 'start_time', 'end_time')
+    list_display = ('talk', 'event', 'allocated_room', 'conference_day', 'start_time', 'end_time', 'concurrent_talk', 'is_an_event', 'is_a_keynote_speaker', 'is_a_panel')
     list_editable = ['is_an_event', 'concurrent_talk', 'is_a_keynote_speaker', 'is_a_panel']
-    ordering = ['-start_time', ]
     
     # Filters to enhance usability
     list_filter = ['conference_day', 'allocated_room', 'is_a_keynote_speaker', 'is_a_panel', 'concurrent_talk']
@@ -17,9 +15,12 @@ class TalkScheduleAdmin(admin.ModelAdmin):
     # Adding search capabilities
     search_fields = ['talk__title', 'event']
 
+    # Ensure ordering is by conference day and start time
+    ordering = ['conference_day__actual_date', 'start_time']
+
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        return queryset.select_related('talk', 'allocated_room', 'conference_day')
+        return queryset.select_related('talk', 'allocated_room', 'conference_day').order_by('conference_day__actual_date', 'start_time')
 
     # Custom admin actions
     actions = ['mark_as_keynote', 'mark_as_panel']
@@ -36,8 +37,9 @@ class TalkScheduleAdmin(admin.ModelAdmin):
     mark_as_panel.short_description = "Mark selected talks as panels"
 
 
-# Register the new Schedule, Room, and Day models with the admin
+# Register the Schedule model with the updated admin
 admin.site.register(Schedule, TalkScheduleAdmin)
+
 admin.site.register(Room)
 admin.site.register(Day)
 
