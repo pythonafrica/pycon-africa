@@ -177,10 +177,25 @@
                                         {% endif %}
                                     {% else %}
                                     <h4 class="text-uppercase g-font-weight-700 g-font-size-20 g-mb-10">
+                                        
                                         <a href="/2024/talks/{{ schedule.talk.proposal_id }}/detail/">{{ schedule.talk.title }}</a>
+                                        <!-- Display an Icon Based on Talk Type -->
+                                       |   {% if schedule.talk.talk_type == 'Lightning Talk' or schedule.talk.talk_type == 'Short Talk' or schedule.talk.talk_type == 'Long Talk' %}
+                                       <!-- Image for Speakers (Lightning Talk, Short Talk, Long Talk) -->
+                                       <img class="rounded-circle g-width-30 g-height-30"  title="{{ schedule.talk.talk_type }}"  src="https://res.cloudinary.com/pycon-africa/image/upload/v1722881110/website_storage_location/media/speaker.png" alt="Speaker">
+                                   {% elif schedule.talk.talk_type == 'Tutorial' %}
+                                       <!-- Image for Tutorials -->
+                                       <img class="rounded-circle g-width-30 g-height-30" title="Tutorial  " src="https://res.cloudinary.com/pycon-africa/image/upload/v1722881110/website_storage_location/media/workshop.png" alt="Tutorial">
+                                   {% elif schedule.talk.talk_type == 'Sponsored Talk' %}
+                                       <!-- Image for Sponsored Talks (Use the same speaker image or a different one if available) -->
+                                       <img class="rounded-circle g-width-30 g-height-30" title="Sponsored Talk" src="https://res.cloudinary.com/pycon-africa/image/upload/v1726054543/website_storage_location/media/sponortalk.png" alt="Sponsored Talk">
+                                   {% elif schedule.talk.talk_type == 'Keynote Speaker' %}
+                                       <!-- Image for Keynote Speakers -->
+                                       <img class="rounded-circle g-width-30 g-height-30" title="Keynote Speaker" src="https://res.cloudinary.com/pycon-africa/image/upload/v1722881110/website_storage_location/media/keynote-speaker.png" alt="Keynote Speaker">
+                                   {% endif %}
                                     </h4>
                                         <!-- Speaker Details -->
-                                        <div class="d-flex">
+                                        <div class="d-flex"> 
                                             <ul class="u-list-inline">
                                                 {% if schedule.talk.user.user_profile.profile_image %}
                                                     <li class="list-inline-item mr-0">
