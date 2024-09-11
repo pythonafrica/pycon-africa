@@ -177,6 +177,8 @@
                                             </p>
                                                                                 
                                         <ul class="list-inline my-0">
+                                        {% if schedule.is_an_event %}
+                                        {% else %}
                                             {% if schedule.talk.user.user_profile.profile_image %}
                                             <li class="list-inline-item mr-0">
                                                 <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" 
@@ -186,7 +188,7 @@
                                                      src="{{ schedule.talk.user.user_profile.profile_image.url }}" 
                                                      alt="Speaker Image">
                                             </li>
-                                        {% else %}
+                                            {% else %}
                                             <li class="list-inline-item mr-0">
                                                 <img class="g-brd-around g-brd-gray-light-v3 g-pa-2 g-width-40 g-height-40 rounded" 
                                                      data-toggle="tooltip" 
@@ -195,7 +197,7 @@
                                                      src="{% static '2024/img/speakers/speaker.png' %}" 
                                                      alt="Default Image">
                                             </li>
-                                        {% endif %}
+                                            {% endif %}
                                         
                                         <!-- Speaker's Name -->
                                         <li class="list-inline-item">
@@ -225,7 +227,7 @@
                                                 {{ speaker.user_profile.name }} {{ speaker.user_profile.surname }}{% if not forloop.last %}, {% endif %}
                                             </li>
                                         {% endfor %}
-                                        
+                                        {% endif %}
                                         </ul>
                                         </div>
                 
