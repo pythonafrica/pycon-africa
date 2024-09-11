@@ -7,8 +7,8 @@ class TalkScheduleAdmin(admin.ModelAdmin):
     form = TalkScheduleForm  # Use the custom form
 
     list_display = ('talk', 'event', 'allocated_room', 'conference_day', 'start_time', 'end_time', 'concurrent_talk', 'is_an_event', 'is_a_keynote_speaker', 'is_a_panel')
-    list_editable = ['is_an_event', 'concurrent_talk', 'is_a_keynote_speaker', 'is_a_panel']
-    
+    list_editable = ['conference_day', 'start_time', 'end_time', 'is_an_event', 'concurrent_talk', 'is_a_keynote_speaker', 'is_a_panel']
+
     # Filters to enhance usability
     list_filter = ['conference_day', 'allocated_room', 'is_a_keynote_speaker', 'is_a_panel', 'concurrent_talk']
     
