@@ -137,8 +137,22 @@
           // initialization of carousel
           $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
         });
-      </script>
-      
+      </script> 
+
+               <!-- JS Plugins Init. -->
+               <script >
+                 $(document).on('ready', function () {
+                   // initialization of tabs
+                   $.HSCore.components.HSTabs.init('[role="tablist"]');
+                 });
+
+                 $(window).on('resize', function () {
+                   setTimeout(function () {
+                     $.HSCore.components.HSTabs.init('[role="tablist"]');
+                   }, 200);
+                 });
+               </script>
+             
 
     <script  src="{% static 'uni-theme/vendor/dzsparallaxer/dzsparallaxer.js' %}"></script>
     <script  src="{% static 'uni-theme/vendor/dzsparallaxer/dzsscroller/scroller.js' %}"></script>
