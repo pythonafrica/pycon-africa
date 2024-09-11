@@ -6,9 +6,9 @@ from  .models import Schedule
 class TalkScheduleAdmin(admin.ModelAdmin):
     form = TalkScheduleForm  # Use the custom form
 
-    list_display = ('talk', 'event', 'allocated_room', 'conference_day', 'start_time', 'end_time', 'concurrent_talk', 'is_an_event', 'is_a_keynote_speaker', 'is_a_panel')
-    list_editable = ['conference_day', 'start_time', 'end_time', 'is_an_event', 'concurrent_talk', 'is_a_keynote_speaker', 'is_a_panel']
-
+    list_display = ('get_talk_or_event', 'allocated_room', 'conference_day', 'concurrent_talk', 'start_time', 'end_time', 'is_an_event', 'is_a_keynote_speaker', 'is_a_panel')
+    list_editable = ['allocated_room', 'conference_day', 'start_time', 'end_time', 'is_an_event', 'concurrent_talk', 'is_a_keynote_speaker', 'is_a_panel']
+    
     # Filters to enhance usability
     list_filter = ['conference_day', 'allocated_room', 'is_a_keynote_speaker', 'is_a_panel', 'concurrent_talk']
     
@@ -35,6 +35,16 @@ class TalkScheduleAdmin(admin.ModelAdmin):
 
     mark_as_keynote.short_description = "Mark selected talks as keynote speakers"
     mark_as_panel.short_description = "Mark selected talks as panels"
+
+    # Custom method to display either the talk or event in list_display
+    def get_talk_or_event(self, obj):
+        if obj.is_an_event:
+            return obj.event
+        elif obj.talk:
+            return obj.talk.title
+        return "N/A"
+    
+    get_talk_or_event.short_description = 'Talk/Event'
 
 
 # Register the Schedule model with the updated admin

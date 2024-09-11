@@ -1,7 +1,12 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Submit, Div, Row, Column
 from django import forms
-from .models import Schedule, Proposal
+from .models import Schedule, Proposal 
+from django.db import models
+
+
+
+
 
 
 class TalkScheduleForm(forms.ModelForm):
@@ -49,11 +54,26 @@ class TalkScheduleForm(forms.ModelForm):
             Submit('submit', 'Save Schedule', css_class='btn btn-primary')
         )
 
+        # Fetch the instance being edited
+        instance = kwargs.get('instance')
+        
         # Fetch talks already scheduled
         scheduled_talks = Schedule.objects.filter(talk__isnull=False).values_list('talk_id', flat=True)
 
-        # Filter available talks that haven't been scheduled and are accepted
-        available_talks = Proposal.objects.filter(status='A', user_response='A').exclude(pk__in=scheduled_talks)
+        # If we're editing a schedule, allow the current talk to be in the dropdown
+        if instance and instance.talk:
+            current_talk_id = instance.talk.proposal_id  # Assuming 'proposal_id' is the primary key
+            # Exclude all scheduled talks except the current one
+            available_talks = Proposal.objects.filter(
+                status='A', user_response='A'
+            ).exclude(pk__in=scheduled_talks).union(
+                Proposal.objects.filter(pk=current_talk_id)
+            )
+        else:
+            # Exclude all already scheduled talks
+            available_talks = Proposal.objects.filter(
+                status='A', user_response='A'
+            ).exclude(pk__in=scheduled_talks)
 
         # Add available talks to the dropdown
         talk_choices = [(talk.pk, talk.title) for talk in available_talks]
@@ -62,3 +82,9 @@ class TalkScheduleForm(forms.ModelForm):
         # Set placeholders and help texts dynamically
         self.fields['event'].widget.attrs.update({'placeholder': 'Enter event name'})
         self.fields['talk'].widget.attrs.update({'placeholder': 'Select a talk'})
+
+
+
+
+
+        
