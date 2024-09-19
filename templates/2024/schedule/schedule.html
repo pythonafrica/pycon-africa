@@ -160,10 +160,10 @@
                 
                                             <!-- Time & Room Info -->
                                             <p class="g-color-gray-dark-v2 g-font-size-14 g-font-weight-600">
-                                                <i class="fa-solid fa-clock g-mr-5"></i> {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }} 
+                                                <i class="fa-solid fa-clock g-mr-5"></i>Time: {{ schedule.start_time|time:"h:i A" }} - {{ schedule.end_time|time:"h:i A" }} 
                                                 |
                                                 {% if schedule.allocated_room %}
-                                                    <i class="fa fa-map-marker-alt g-mr-5 "></i>  {{ schedule.allocated_room.room_name }} 
+                                                    <i class="fa fa-map-marker-alt g-mr-5 "></i>Room:  {{ schedule.allocated_room.room_name }} 
                                                 {% endif %}
                                             </p>
                 
