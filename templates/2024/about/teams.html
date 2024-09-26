@@ -60,7 +60,7 @@
             <div class="mad-icon-box-content markdownx-preview">  
               <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30"> 
                 <span class="g-color-primary">
-                  <h2>PyCon Africa {{ event_year.year }} IOC members</h2>
+                  <h2>PyCon Africa {{ event_year.year }} International Organizing Committee members</h2>
                 </span>
               </h2> 
               <p class="g-color-black g-font-size-16">
@@ -78,7 +78,23 @@
                 </ul>
   
                 <p class="g-color-black g-font-size-16">
-                 
+                                      
+                      <!-- Local Organizing Committee (LOC) -->
+                      <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30"> 
+                        <span class="g-color-primary">
+                          <h2>PyCon Africa {{ event_year.year }} Local Organizing Committee members</h2>
+                        </span>
+                      </h2>   
+
+                      {% for group in loc_groups %} 
+                      <ul>
+                      {% for member in group.members.all %}
+                          <li>{{ member.name }} ({{ member.country.name }}) | {{ group.name }}</li>
+                      {% endfor %}
+                      </ul>
+                  {% empty %}
+                      <p>No LOC groups available for this event year.</p>
+                  {% endfor %}
                 </p>
                 <div class="u-divider u-divider-solid u-divider-center g-brd-gray-light-v3 g-my-80"> 
                   <i class="fa-solid fa-hands-holding-heart u-divider__icon u-divider__icon--indented g-bg-gray-light-v4 g-color-gray-light-v1 rounded-circle"></i>

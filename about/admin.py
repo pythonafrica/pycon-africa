@@ -55,6 +55,12 @@ class IOCMemberAdmin(admin.ModelAdmin):
     list_filter = ('event_year', 'groups')
     search_fields = ('name',)
 
+
+from .models import LOCGroup, LOCMember
+
+admin.site.register(LOCGroup)
+admin.site.register(LOCMember)
+
 class VolunteerGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'event_year')
     list_filter = ('event_year',)

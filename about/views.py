@@ -96,6 +96,8 @@ def teams_view(request, year):
     ioc_members = IOCMember.objects.filter(event_year=event_year)
     volunteer_groups = VolunteerGroup.objects.filter(event_year=event_year)
     volunteers = Volunteer.objects.filter(event_year=event_year)
+    loc_groups = LOCGroup.objects.filter(event_year=event_year)
+    loc_members = LOCMember.objects.filter(event_year=event_year)
 
     context = {
         'event_year': event_year,
@@ -103,12 +105,15 @@ def teams_view(request, year):
         'ioc_members': ioc_members,
         'volunteer_groups': volunteer_groups,
         'volunteers': volunteers,
+        'loc_groups': loc_groups,
+        'loc_members': loc_members,
     }
 
     # Dynamically construct the template path based on the event year
     template_name = f'{year}/about/teams.html'
 
     return render(request, template_name, context)
+
 
 def travel_advice(request, year):
     event_year = get_object_or_404(EventYear, year=year)

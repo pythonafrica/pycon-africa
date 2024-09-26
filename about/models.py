@@ -112,6 +112,29 @@ class IOCMember(models.Model):
         return self.name
 
 
+class LOCGroup(models.Model):
+    """
+    Represents a group or category within the Local Organizing Committee.
+    """
+    name = models.CharField(max_length=100)  # e.g., Logistics Team, Venue Coordination
+    event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name="loc_groups")
+
+    def __str__(self):
+        return self.name
+
+class LOCMember(models.Model):
+    """
+    Represents an individual member of the Local Organizing Committee.
+    """
+    name = models.CharField(max_length=100)
+    groups = models.ManyToManyField(LOCGroup, related_name="members", blank=True)
+    country = CountryField(default="GH", blank=False, blank_label='(select member’s country)')
+    event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='loc_members')
+
+    def __str__(self):
+        return self.name
+
+
 class VolunteerGroup(models.Model):
     """
     Represents a group or category of volunteers.
