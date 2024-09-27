@@ -103,6 +103,7 @@ class IOCMember(models.Model):
     Represents a core team member.
     """ 
     name = models.CharField(max_length=100)
+    link = models.CharField(default="",blank=True, max_length=100)
     groups = models.ManyToManyField(IOCGroup, related_name="iocs",blank=True) 
     country = CountryField(default="GH",blank=False, blank_label='(select member contributing country)')
     country_2 = models.CharField(max_length=50, default="",blank=True, help_text='(enter member"s 2nd contributing country if any)')
@@ -127,6 +128,7 @@ class LOCMember(models.Model):
     Represents an individual member of the Local Organizing Committee.
     """
     name = models.CharField(max_length=100)
+    link = models.CharField(default="",blank=True, max_length=100)
     groups = models.ManyToManyField(LOCGroup, related_name="members", blank=True)
     country = CountryField(default="GH", blank=False, blank_label='(select member’s country)')
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='loc_members')
@@ -150,6 +152,7 @@ class Volunteer(models.Model):
     Represents an individual volunteer, associated with one or more groups.
     """
     name = models.CharField(max_length=100)
+    link = models.CharField(default="",blank=True, max_length=100)
     groups = models.ManyToManyField(VolunteerGroup, related_name="volunteers") 
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name="volunteers") 
 
