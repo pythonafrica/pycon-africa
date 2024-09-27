@@ -108,11 +108,11 @@
 
                 {% for group in volunteer_groups %} 
                 <h2 class="text-uppercase g-line-height-1 g-font-weight-700 g-font-size-20 g-mb-30"> 
-                  <span class="g-color-primary">{{ group.name }}</span>
+                  <span class="g-color-primary"></span>
                 </h2> 
                     <ul>
                     {% for volunteer in group.volunteers.all %}
-                        <li>{{ volunteer.name }}</li>
+                        <li>{{ volunteer.name }} | {{ group.name }}</li>
                     {% endfor %}
                     </ul><br>
                 {% empty %}
