@@ -107,17 +107,24 @@ def teams_view(request, year):
         })
 
     # Fetch IOC members not in any group
-    ioc_ungrouped_leads = IOCMember.objects.filter(
+    ioc_ungrouped_members = IOCMember.objects.filter(
         event_year=event_year,
-        is_lead=True,
         groups__isnull=True
     ).order_by('name')
 
-    ioc_ungrouped_non_leads = IOCMember.objects.filter(
-        event_year=event_year,
-        is_lead=False,
-        groups__isnull=True
-    ).order_by('name')
+    if ioc_ungrouped_members.exists():
+        # Separate leads and non-leads
+        ungrouped_leads = ioc_ungrouped_members.filter(is_lead=True)
+        ungrouped_non_leads = ioc_ungrouped_members.filter(is_lead=False)
+
+        # Create a pseudo-group for ungrouped members
+        pseudo_group = IOCGroup(name='Other Committee Members')
+
+        ioc_groups_with_members.append({
+            'group': pseudo_group,
+            'leads': ungrouped_leads,
+            'non_leads': ungrouped_non_leads,
+        })
 
     # Local Organizing Committee
     loc_groups = LOCGroup.objects.filter(event_year=event_year)
@@ -134,17 +141,24 @@ def teams_view(request, year):
         })
 
     # Fetch LOC members not in any group (if applicable)
-    loc_ungrouped_leads = LOCMember.objects.filter(
+    loc_ungrouped_members = LOCMember.objects.filter(
         event_year=event_year,
-        is_lead=True,
         groups__isnull=True
     ).order_by('name')
 
-    loc_ungrouped_non_leads = LOCMember.objects.filter(
-        event_year=event_year,
-        is_lead=False,
-        groups__isnull=True
-    ).order_by('name')
+    if loc_ungrouped_members.exists():
+        # Separate leads and non-leads
+        loc_ungrouped_leads = loc_ungrouped_members.filter(is_lead=True)
+        loc_ungrouped_non_leads = loc_ungrouped_members.filter(is_lead=False)
+
+        # Create a pseudo-group for ungrouped members
+        pseudo_group = LOCGroup(name='Other Committee Members')
+
+        loc_groups_with_members.append({
+            'group': pseudo_group,
+            'leads': loc_ungrouped_leads,
+            'non_leads': loc_ungrouped_non_leads,
+        })
 
     # Volunteers
     volunteer_groups = VolunteerGroup.objects.filter(event_year=event_year)
@@ -153,11 +167,7 @@ def teams_view(request, year):
     context = {
         'event_year': event_year,
         'ioc_groups_with_members': ioc_groups_with_members,
-        'ioc_ungrouped_leads': ioc_ungrouped_leads,
-        'ioc_ungrouped_non_leads': ioc_ungrouped_non_leads,
         'loc_groups_with_members': loc_groups_with_members,
-        'loc_ungrouped_leads': loc_ungrouped_leads,
-        'loc_ungrouped_non_leads': loc_ungrouped_non_leads,
         'volunteer_groups': volunteer_groups,
         'volunteers': volunteers,
     }
