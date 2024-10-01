@@ -92,27 +92,53 @@ def venue(request, year):
 def teams_view(request, year):
     event_year = get_object_or_404(EventYear, year=year)
 
+    # International Organizing Committee
     ioc_groups = IOCGroup.objects.filter(event_year=event_year)
-    ioc_members = IOCMember.objects.filter(event_year=event_year)
-    volunteer_groups = VolunteerGroup.objects.filter(event_year=event_year)
-    volunteers = Volunteer.objects.filter(event_year=event_year)
+
+    # Prepare IOC members per group with leads and non-leads
+    ioc_groups_with_members = []
+    for group in ioc_groups:
+        leads = group.iocs.filter(event_year=event_year, is_lead=True).order_by('name')
+        non_leads = group.iocs.filter(event_year=event_year, is_lead=False).order_by('name')
+        ioc_groups_with_members.append({
+            'group': group,
+            'leads': leads,
+            'non_leads': non_leads,
+        })
+
+    # Local Organizing Committee
     loc_groups = LOCGroup.objects.filter(event_year=event_year)
-    loc_members = LOCMember.objects.filter(event_year=event_year)
+
+    # Prepare LOC members per group with leads and non-leads
+    loc_groups_with_members = []
+    for group in loc_groups:
+        leads = group.members.filter(event_year=event_year, is_lead=True).order_by('name')
+        non_leads = group.members.filter(event_year=event_year, is_lead=False).order_by('name')
+        loc_groups_with_members.append({
+            'group': group,
+            'leads': leads,
+            'non_leads': non_leads,
+        })
+
+    # Volunteers
+    volunteer_groups = VolunteerGroup.objects.filter(event_year=event_year)
+    volunteers = Volunteer.objects.filter(event_year=event_year).order_by('name')
 
     context = {
         'event_year': event_year,
-        'ioc_groups': ioc_groups,
-        'ioc_members': ioc_members,
+        'ioc_groups_with_members': ioc_groups_with_members,
+        'loc_groups_with_members': loc_groups_with_members,
         'volunteer_groups': volunteer_groups,
         'volunteers': volunteers,
-        'loc_groups': loc_groups,
-        'loc_members': loc_members,
     }
 
-    # Dynamically construct the template path based on the event year
     template_name = f'{year}/about/teams.html'
 
     return render(request, template_name, context)
+
+
+
+
 
 
 def travel_advice(request, year):

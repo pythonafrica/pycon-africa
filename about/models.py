@@ -108,6 +108,7 @@ class IOCMember(models.Model):
     country = CountryField(default="GH",blank=False, blank_label='(select member contributing country)')
     country_2 = models.CharField(max_length=50, default="",blank=True, help_text='(enter member"s 2nd contributing country if any)')
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='ioc_members')
+    is_lead = models.BooleanField(default=False, help_text='Indicate if this member is a lead')
 
     def __str__(self):
         return self.name
@@ -132,6 +133,7 @@ class LOCMember(models.Model):
     groups = models.ManyToManyField(LOCGroup, related_name="members", blank=True)
     country = CountryField(default="GH", blank=False, blank_label='(select member’s country)')
     event_year = models.ForeignKey(EventYear, on_delete=models.CASCADE, default="2024", related_name='loc_members')
+    is_lead = models.BooleanField(default=False, help_text='Indicate if this member is a lead')
 
     def __str__(self):
         return self.name
