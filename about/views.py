@@ -106,6 +106,19 @@ def teams_view(request, year):
             'non_leads': non_leads,
         })
 
+    # Fetch IOC members not in any group
+    ioc_ungrouped_leads = IOCMember.objects.filter(
+        event_year=event_year,
+        is_lead=True,
+        groups__isnull=True
+    ).order_by('name')
+
+    ioc_ungrouped_non_leads = IOCMember.objects.filter(
+        event_year=event_year,
+        is_lead=False,
+        groups__isnull=True
+    ).order_by('name')
+
     # Local Organizing Committee
     loc_groups = LOCGroup.objects.filter(event_year=event_year)
 
@@ -120,6 +133,19 @@ def teams_view(request, year):
             'non_leads': non_leads,
         })
 
+    # Fetch LOC members not in any group (if applicable)
+    loc_ungrouped_leads = LOCMember.objects.filter(
+        event_year=event_year,
+        is_lead=True,
+        groups__isnull=True
+    ).order_by('name')
+
+    loc_ungrouped_non_leads = LOCMember.objects.filter(
+        event_year=event_year,
+        is_lead=False,
+        groups__isnull=True
+    ).order_by('name')
+
     # Volunteers
     volunteer_groups = VolunteerGroup.objects.filter(event_year=event_year)
     volunteers = Volunteer.objects.filter(event_year=event_year).order_by('name')
@@ -127,7 +153,11 @@ def teams_view(request, year):
     context = {
         'event_year': event_year,
         'ioc_groups_with_members': ioc_groups_with_members,
+        'ioc_ungrouped_leads': ioc_ungrouped_leads,
+        'ioc_ungrouped_non_leads': ioc_ungrouped_non_leads,
         'loc_groups_with_members': loc_groups_with_members,
+        'loc_ungrouped_leads': loc_ungrouped_leads,
+        'loc_ungrouped_non_leads': loc_ungrouped_non_leads,
         'volunteer_groups': volunteer_groups,
         'volunteers': volunteers,
     }
