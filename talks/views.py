@@ -428,7 +428,7 @@ def send_speaker_invitation(request, year, pk):
         return redirect('talks:talk_details', year=year, pk=pk)
     else:
         # Handle the case for GET request or show an error message
-        return render(request, '2024/talks/speaker_invite_error.html', {'error': 'This action requires a POST request.'})
+        return render(request, '2025/talks/speaker_invite_error.html', {'error': 'This action requires a POST request.'})
  
 
 @login_required
@@ -507,7 +507,7 @@ def list_talks_to_review(request, year):
             'no_reviewer_rights': True
         }
 
-    return render(request, '2024/talks/reviews/talk_list.html', context)
+    return render(request, '2025/talks/reviews/talk_list.html', context)
  
 @login_required
 @permission_required('reviews.add_review', raise_exception=True)
@@ -542,7 +542,7 @@ def review_talk(request, year, pk):
     else:
         form = ReviewForm()
 
-    return render(request, '2024/talks/reviews/talk_review.html', {
+    return render(request, '2025/talks/reviews/talk_review.html', {
         'form': form,
         'talk': talk,
         'year': year,
@@ -553,7 +553,7 @@ def review_talk(request, year, pk):
 def review_success(request, year):
     try:
         event_year = EventYear.objects.get(year=year) 
-        return render(request, '2024/talks/reviews/review_success.html', {'year': year})
+        return render(request, '2025/talks/reviews/review_success.html', {'year': year})
     except EventYear.DoesNotExist:
         return HttpResponse("The specified event year does not exist.", status=404)
      
@@ -598,7 +598,7 @@ def reviewed_talks_by_category(request, year):
         if talks.exists():
             category_talks_scores.append((category_label, talks))
 
-    return render(request, '2024/talks/reviews/reviewed_talks_by_category.html', {
+    return render(request, '2025/talks/reviews/reviewed_talks_by_category.html', {
         'category_talks_scores': category_talks_scores,
         'year': year
     })
@@ -643,7 +643,7 @@ def reviewed_talks_by_type(request, year):
                 talk.rank = rank
             type_talks_scores.append((talk_type_label, talks))
 
-    return render(request, '2024/talks/reviews/reviewed_talks_by_type.html', {
+    return render(request, '2025/talks/reviews/reviewed_talks_by_type.html', {
         'type_talks_scores': type_talks_scores,
         'year': year
     })
@@ -654,7 +654,7 @@ def reviewed_talks_by_type(request, year):
 @permission_required('reviews.add_review', raise_exception=True) 
 class TalksToReviewListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Proposal
-    template_name = '2024/talks/reviews/talk_list.html'
+    template_name = '2025/talks/reviews/talk_list.html'
     context_object_name = 'talks'
     permission_required = ('talks.view_talk',)  
 
@@ -673,7 +673,7 @@ class TalksToReviewListView(LoginRequiredMixin, PermissionRequiredMixin, ListVie
 class ReviewTalkView(UpdateView):
     model = Review
     form_class = ReviewForm
-    template_name = '2024/talks/reviews/talk_review.html'
+    template_name = '2025/talks/reviews/talk_review.html'
     context_object_name = 'review'
 
     def get_object(self, queryset=None):
@@ -693,7 +693,7 @@ class ReviewTalkView(UpdateView):
 @permission_required('reviews.add_review', raise_exception=True)
 class TalkReviewDetailView(DetailView):
     model = Proposal
-    template_name = '2024/talks/reviews/talk_review_detail.html'
+    template_name = '2025/talks/reviews/talk_review_detail.html'
     context_object_name = 'talk'
 
     def get_context_data(self, **kwargs):

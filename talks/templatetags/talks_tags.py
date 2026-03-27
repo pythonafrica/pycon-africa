@@ -5,7 +5,7 @@ from home.models import EventYear
 
 register = template.Library()
 
-@register.inclusion_tag('2024/talks/user_talks_summary.html')
+@register.inclusion_tag('2025/talks/user_talks_summary.html')
 def user_talks_summary(user):
     # Attempt to find the current or next CFP period
     current_year = timezone.now().year
@@ -32,7 +32,7 @@ def user_talks_summary(user):
 
  
 
-@register.inclusion_tag('2024/talks/invitation_list.html', takes_context=True)
+@register.inclusion_tag('2025/talks/invitation_list.html', takes_context=True)
 def invitation_list(context):
     request = context['request']
     invitations = SpeakerInvitation.objects.filter(invitee=request.user, status='Pending')

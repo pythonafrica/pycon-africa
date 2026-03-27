@@ -36,8 +36,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = ["*"]
-
 LOGIN_REDIRECT_URL = "/accounts/profile/"
 SIGNUP_REDIRECT_URL = "/accounts/profile/"
 LOGOUT_REDIRECT_URL = "/"
@@ -213,9 +211,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
    
-
+# if not os.environ.get("DEBUG"):
 #STATICFILES_STORAGE = 'gamma_cloudinary.storage.StaticCloudinaryStorage'
-DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
+# DEFAULT_FILE_STORAGE = 'gamma_cloudinary.storage.CloudinaryStorage' 
   
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.

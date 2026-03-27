@@ -1,11 +1,9 @@
-from avatar.models import Avatar
 import datetime
 import hashlib
 import logging
 import re
 import string
 import warnings
-import magic
 
 from django.utils import timezone
 from django.apps import apps
@@ -26,9 +24,6 @@ from .users import UserModel
 from .users import UserModelString
 from .utils import _
 
-from taggit.managers import TaggableManager
-from django.utils.deconstruct import deconstructible
-from django.template.defaultfilters import filesizeformat
 from markdownx.models import MarkdownxField
 
 logger = logging.getLogger(__name__)
@@ -40,33 +35,16 @@ SHA256_RE = re.compile('^[a-f0-9]{40,64}$')
 from django_extensions.db.fields import AutoSlugField
 from django_slugify_processor.text import slugify
 
-from imagekit.models import ProcessedImageField
-from imagekit.processors import ResizeToFit
-from six import python_2_unicode_compatible 
-
-# Included by me (3rd Parties and more) 
-from django.utils.encoding import smart_str
-from django.contrib.auth import hashers
-
-from PIL import Image, ImageDraw
+from PIL import Image
 cfgDefaultImageResample = Image.BICUBIC # Image.LANCZOS
   
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse 
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from io import BytesIO
 import logging
-from django.core.files.base import ContentFile 
-from django_thumbs.fields import ImageThumbsField 
 
-from simple_history.models import HistoricalRecords
-import os
+
 from django.utils import timezone
-from django.core.validators import MaxLengthValidator
-
-from avatar.models import AvatarField
 
 from django_countries.fields import CountryField
 
@@ -76,13 +54,9 @@ from hitcount.models import HitCount
 from hitcount.views import HitCountMixin
 
 from django.contrib.contenttypes.fields import GenericRelation  
-from django_recaptcha.fields import ReCaptchaField
 
-from hashids import Hashids
 from django.conf import settings 
 from hashid_field import HashidAutoField
-from hashid_field import HashidField
-
 
 
 def get_from_email(site=None):
