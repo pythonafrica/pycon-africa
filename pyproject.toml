@@ -1,10 +1,36 @@
 [tool.poetry]
 name = "pycon-africa"
 version = "0.1.0"
-description = ""
-authors = []
+description = "Backend for the pycon africa website"
 readme = "README.md"
-package-mode = false
+package-mode = true
+authors = [
+    "Mannie Young <mawy7@gmail.com>",
+]
+
+keywords = ["event", "conference", "pycon", "africa", "backend"]
+classifiers = [
+    
+    'Environment :: Web Environment',
+    'Framework :: Django',
+    'Intended Audience :: Developers',
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Topic :: Internet :: WWW/HTTP',
+]
+packages = [{ include = "pyconafrica" }]
+
+exclude = [
+"templates/*",
+"pyconafrica/*",
+"pyconafrica2019/*",
+"pycon2020/*",
+"static/*",
+"media/*",
+"db.sqlite3"
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -39,7 +65,6 @@ django-next-prev = "^1.1.0"
 pytz = "^2024.1"
 setuptools = "<70"
 whitenoise = "^6.0"
-
 
 [build-system]
 requires = ["poetry-core"]
