@@ -7,6 +7,41 @@ We love your input! We want to make contributing to this project as easy and tra
 - Proposing new features
 - Becoming a maintainer
 
+## Setting up locally with venv
+Create virtual environment
+```sh
+python -m venv .venv
+```
+Switch to the virtual environment
+```sh
+source .venv/bin/activate
+```
+- For windows run:
+```sh
+.venv/Scripts/activate
+```
+Install Requirements
+```sh
+pip install dev.requirements.txt
+```
+Create a `secrets.py` file in the `pyconafrica` folder
+ - This will hold all the environment variables
+Run migrations
+```sh
+python manage.py migrate
+```
+Create a superuser account
+```sh
+python manage.py createsuperuser
+```
+Run the server
+```sh
+python manage.py runserver
+```
+Log into the superuser account [http://localhost/accounts/login]
+Access the admin dashboard [http://127.0.0.1:8000/organizers/]
+Add an event year [http://127.0.0.1:8000/organizers/home/eventyear/]
+
 ## We Develop with Github
 We use GitHub to host code, to track issues and feature requests, as well as accept pull requests.
 
